@@ -1,37 +1,24 @@
 package com.pickle.pickleproject;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
-import static com.pickle.pickleproject.R.*;
-import static com.pickle.pickleproject.R.layout.*;
-
-public class MainActivity extends AppCompatActivity {
+public class Unused_goods extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(layout.activity_main);
-        Button Start=(Button) findViewById(id.PickleLogo);
-        Start.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goUnused();
-            }
-        });
-    }
-    private void goUnused(){
-        Intent Unused = new Intent(this, Unused_goods.class);
-        startActivity(Unused);
-
+        setContentView(R.layout.activity_unused_goods);
     }
 
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_unused_goods, menu);
+        return true;
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

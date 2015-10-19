@@ -11,7 +11,7 @@
     <ImageView
         android:layout_width="300px"
         android:layout_height="300px"
-        android:id="@+id/logo"
+        android:id="@+id/PickleLogo"
         android:src="@mipmap/logo"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
