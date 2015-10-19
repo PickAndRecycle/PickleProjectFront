@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(layout.activity_main);
-        Button Start=(Button) findViewById(id.PickleLogo);
+        Button Start=(Button) findViewById(id.start_button);
         Start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
