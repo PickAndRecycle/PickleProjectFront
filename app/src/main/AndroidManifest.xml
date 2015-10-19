@@ -2,9 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.pickle.pickleproject" >
 
-    <application
+    <application>
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/logo"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
@@ -20,6 +20,9 @@
             android:name=".Unused_goods"
             android:label="@string/title_activity_unused_goods" >
         </activity>
-    </application>
-
-</manifest>
+        <activity
+            android:name=".Home"
+            android:label="@string/title_pick"
+            android:theme="@style/AppTheme" />
+        </application>
+    </manifest>
