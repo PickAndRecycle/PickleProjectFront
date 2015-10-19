@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 import static com.pickle.pickleproject.R.*;
+import static com.pickle.pickleproject.R.id.*;
 import static com.pickle.pickleproject.R.layout.*;
 
 public class MainActivity extends AppCompatActivity {
@@ -16,18 +17,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(layout.activity_main);
-        Button Start=(Button) findViewById(id.start_button);
+        setContentView(activity_main);
+        Button Start=(Button) findViewById(start_button);
         Start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goUnused();
+                goToHome();
             }
         });
     }
-    private void goUnused(){
-        Intent Unused = new Intent(this, Unused_goods.class);
-        startActivity(Unused);
+    private void goToHome(){
+        Intent Home = new Intent(this, Home.class);
+        startActivity(Home);
 
     }
 
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == action_settings) {
             return true;
         }
 
