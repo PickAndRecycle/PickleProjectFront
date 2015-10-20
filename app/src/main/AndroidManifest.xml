@@ -24,5 +24,6 @@
             android:name=".Home"
             android:label="@string/title_pick"
             android:theme="@style/AppTheme" />
-        </application>
-    </manifest>
+
+    </application>
+</manifest>
