@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Button;
 import java.io.File;
-import android.widget.Button;
+
 
 public class Home extends Activity {
     int CAM_REQUEST =1;
@@ -69,10 +69,7 @@ public class Home extends Activity {
         String path = "sdcard/Pickle/cam_image.jpg";
     }
     public boolean onTouchEvent(MotionEvent event) {
-        if (gestureDetector.onTouchEvent(event)) {
-            return true;
-        }
-        return super.onTouchEvent(event);
+        return gestureDetector.onTouchEvent(event) || super.onTouchEvent(event);
     }
     private class SwipeGestureDetector
             extends GestureDetector.SimpleOnGestureListener {
@@ -97,7 +94,7 @@ public class Home extends Activity {
                         && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
                     Home.this.changePick();
 
-
+                    // Right swipe
                 } //else if (-diff > SWIPE_MIN_DISTANCE
                     //    && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
                   //  YourActivity.this.onRightSwipe();
