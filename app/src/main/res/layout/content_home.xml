@@ -19,7 +19,7 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageButton"
+            android:id="@+id/Camera_Button"
             android:layout_alignParentBottom="false"
             android:layout_centerInParent="true"
             android:src="@mipmap/camera"
@@ -35,7 +35,7 @@
             android:tint="#d1d1d1"
             android:layout_marginRight="40dp"
             android:layout_marginEnd="40dp"
-            android:layout_alignTop="@+id/imageButton"
+            android:layout_alignTop="@+id/Camera_Button"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
 
@@ -48,28 +48,10 @@
             android:src="@mipmap/flash_off"
             android:background="#00ffffff"
             android:tint="#d1d1d1"
-            android:layout_alignTop="@+id/imageButton"
+            android:layout_alignTop="@+id/Camera_Button"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
-        <Button
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:text="New Button"
-            android:id="@+id/Camera_Button"
-            android:background="#ffffff"
-            android:visibility="invisible"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
-
     </RelativeLayout>
-
-    <ImageView
-        android:layout_width="400dp"
-        android:layout_height="470dp"
-        android:id="@+id/image"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentEnd="false" />
 
 </RelativeLayout>
