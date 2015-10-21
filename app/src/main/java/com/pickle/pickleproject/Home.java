@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import java.io.File;
+import android.widget.Button;
 
 public class Home extends Activity {
     int CAM_REQUEST =1;
