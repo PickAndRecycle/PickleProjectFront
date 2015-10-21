@@ -5,13 +5,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ImageView;
+import android.widget.Button;
 import java.io.File;
 import android.widget.Button;
 
@@ -33,7 +29,8 @@ public class Home extends Activity {
 
             }
         });
-        Button Swipebutton = (Button) findViewById(R.id.swiperightbtn);
+        Button Swipebutton;
+        Swipebutton = (Button) findViewById(R.id.swiperightbtn);
 
         Swipebutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,7 +48,7 @@ public class Home extends Activity {
     }
 
     private File getFile(){
-        File folder = new File("sdcard/Pickle/media/");
+        File folder = new File("sdcard/Pickle");
         if(!folder.exists()){
             folder.mkdir();
         }
@@ -61,7 +58,7 @@ public class Home extends Activity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        String path = "sdcard/Pickle/media/cam_image.jpg";
+        String path = "sdcard/Pickle/cam_image.jpg";
 
 
     }
