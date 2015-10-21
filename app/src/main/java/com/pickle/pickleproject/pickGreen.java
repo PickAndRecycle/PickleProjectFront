@@ -8,16 +8,23 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-public class Unused_goods extends AppCompatActivity {
+public class pickGreen extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_unused_goods);
+        setContentView(R.layout.activity_pick_green);
 
+        Button UnusedButton = (Button) findViewById(R.id.Unusedbtn);
         Button GeneralButton = (Button) findViewById(R.id.Generalbtn);
         Button RecycledButton = (Button) findViewById(R.id.Recycledbtn);
-        Button GreenButton = (Button) findViewById(R.id.Greenbtn);
+
+        UnusedButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeUnused();
+            }
+        });
 
         GeneralButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,38 +40,12 @@ public class Unused_goods extends AppCompatActivity {
             }
         });
 
-        GreenButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                changeGreen();
-            }
-        });
     }
-
-    private void changeGeneral(){
-        Intent intent = new Intent(this, pickList.class);
-
-        startActivity(intent);
-    }
-
-    private void changeRecycled(){
-        Intent intent = new Intent(this, pickRecycled.class);
-
-        startActivity(intent);
-    }
-
-    private void changeGreen(){
-        Intent intent = new Intent(this, pickGreen.class);
-
-        startActivity(intent);
-    }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_unused_goods, menu);
+        getMenuInflater().inflate(R.menu.menu_pick_green, menu);
         return true;
     }
 
@@ -82,4 +63,24 @@ public class Unused_goods extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    private void changeUnused(){
+        Intent intent = new Intent(this, Unused_goods.class);
+
+        startActivity(intent);
+    }
+
+    private void changeGeneral(){
+        Intent intent = new Intent(this, pickList.class);
+
+        startActivity(intent);
+    }
+
+    private void changeRecycled(){
+        Intent intent = new Intent(this, pickRecycled.class);
+
+        startActivity(intent);
+    }
+
+
 }

@@ -1,11 +1,15 @@
 <resources>
     <string name="app_name">PickleProject</string>
 
-    <string name="hello_world">world!</string>
+    <string name="hello_world">Hello World!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_unused_goods">Unused_goods</string>
     <string name="title_pick">PICK</string>
     <string name="title_activity_pick">Pick</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_home">Home</string>
+    <string name="title_activity_picklist">picklist</string>
+    <string name="title_activity_pick_list">pickList</string>
+    <string name="title_activity_pick_recycled">pickRecycled</string>
+    <string name="title_activity_pick_green">pickGreen</string>
 </resources>

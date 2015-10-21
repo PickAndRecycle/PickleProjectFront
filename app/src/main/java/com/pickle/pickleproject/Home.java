@@ -29,10 +29,26 @@ public class Home extends Activity {
                 camera_intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
                 startActivityForResult(camera_intent,CAM_REQUEST);
 
+
+            }
+        });
+        Button Swipebutton = (Button) findViewById(R.id.swiperightbtn);
+
+        Swipebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changePick();
             }
         });
 
         }
+
+    private void changePick(){
+        Intent intent = new Intent(this, Unused_goods.class);
+
+        startActivity(intent);
+    }
+
     private File getFile(){
         File folder = new File("sdcard/Pickle/media/");
         if(!folder.exists()){

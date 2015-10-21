@@ -8,21 +8,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-public class Unused_goods extends AppCompatActivity {
+public class pickList extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_unused_goods);
+        setContentView(R.layout.activity_pick_list);
 
-        Button GeneralButton = (Button) findViewById(R.id.Generalbtn);
+        Button UnusedButton = (Button) findViewById(R.id.Unusedbtn);
         Button RecycledButton = (Button) findViewById(R.id.Recycledbtn);
         Button GreenButton = (Button) findViewById(R.id.Greenbtn);
 
-        GeneralButton.setOnClickListener(new View.OnClickListener() {
+        UnusedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeGeneral();
+                changeUnused();
             }
         });
 
@@ -39,10 +39,33 @@ public class Unused_goods extends AppCompatActivity {
                 changeGreen();
             }
         });
+
     }
 
-    private void changeGeneral(){
-        Intent intent = new Intent(this, pickList.class);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_pick_list, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void changeUnused(){
+        Intent intent = new Intent(this, Unused_goods.class);
 
         startActivity(intent);
     }
@@ -61,25 +84,5 @@ public class Unused_goods extends AppCompatActivity {
 
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_unused_goods, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }
