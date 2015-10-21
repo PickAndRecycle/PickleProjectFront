@@ -35,6 +35,7 @@ public class Home extends Activity {
             }
         });
 
+        /*
         Button Swipebutton;
         Swipebutton = (Button) findViewById(R.id.swiperightbtn);
 
@@ -44,6 +45,7 @@ public class Home extends Activity {
                 changePick();
             }
         });
+        */
 
         gestureDetector = new GestureDetector(new SwipeGestureDetector());
 

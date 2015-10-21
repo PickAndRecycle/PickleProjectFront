@@ -54,7 +54,7 @@
 
     </RelativeLayout>
 
-    <Button
+    <!--<Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/swiperightbtn"
@@ -63,5 +63,6 @@
         android:layout_above="@+id/relativeLayout"
         android:layout_alignParentTop="true"
         android:background="#00ffffff" />
+        -->
 
 </RelativeLayout>
