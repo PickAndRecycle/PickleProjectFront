@@ -12,4 +12,5 @@
     <string name="title_activity_pick_list">pickList</string>
     <string name="title_activity_pick_recycled">pickRecycled</string>
     <string name="title_activity_pick_green">pickGreen</string>
+    <string name="title_activity_registration">RegistrationActivity</string>
 </resources>
