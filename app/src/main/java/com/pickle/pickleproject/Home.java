@@ -97,7 +97,7 @@ public class Home extends Activity {
                         && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
                     Home.this.changePick();
 
-                    // Right swipe
+
                 } //else if (-diff > SWIPE_MIN_DISTANCE
                     //    && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
                   //  YourActivity.this.onRightSwipe();
