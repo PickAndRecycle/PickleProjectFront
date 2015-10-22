@@ -51,7 +51,8 @@
                     android:text="ADD A DESCRIPTION"
                     android:id="@+id/textView6"
                     android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true" />
+                    android:layout_centerHorizontal="true"
+                    android:textColor="#ffffff" />
             </RelativeLayout>
 
         </RelativeLayout>
