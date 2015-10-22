@@ -43,7 +43,7 @@ public class Home extends Activity   {
     private void changePick(){
         Intent intent = new Intent(this, Unused_goods.class);
         startActivity(intent);
-        this.overridePendingTransition(R.anim.push_left_in,R.anim.push_left_out);
+        this.overridePendingTransition(R.anim.push_left_out,R.anim.push_left_in);
     }
 
     private File getFile(){
