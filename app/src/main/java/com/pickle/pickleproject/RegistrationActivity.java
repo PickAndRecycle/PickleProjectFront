@@ -1,16 +1,21 @@
 package com.pickle.pickleproject;
 
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class RegistrationActivity extends AppCompatActivity {
 
+    TextView t;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+        t = (TextView) findViewById(R.id.textView6);
+        t.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Montserrat-Regular.otf"));
     }
 
     @Override
