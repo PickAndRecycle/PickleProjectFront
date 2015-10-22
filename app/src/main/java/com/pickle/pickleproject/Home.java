@@ -32,10 +32,9 @@ public class Home extends Activity   {
                 startActivityForResult(camera_intent, CAM_REQUEST);
 
 
-
             }
         });
-        changeAddDescription();
+
 
         gestureDetector = new GestureDetector(new SwipeGestureDetector());
 
@@ -64,6 +63,7 @@ public class Home extends Activity   {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         String path = "sdcard/Pickle/cam_image.jpg";
+        changeAddDescription();
     }
 
     @Override
