@@ -15,20 +15,28 @@ public class Throw_or_Report extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_throw_or__report);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        Button Throw = (Button) findViewById(R.id.ThrowButton);
+        Throw.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onClick(View v) {
+                Throw();
             }
         });
-
-
+        Button Report = (Button) findViewById(R.id.ReportButton);
+        Report.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Report();
+            }
+        });
     }
-
+    private void Throw(){
+        Intent intent = new Intent(this, throwCategory.class);
+        startActivity(intent);
+    }
+    private void Report(){
+        Intent intent = new Intent(this, reportSuccess.class);
+        startActivity(intent);
+    }
 
 }

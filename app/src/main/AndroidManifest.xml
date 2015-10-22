@@ -62,7 +62,7 @@
             android:theme="@style/AppTheme" >
         </activity>
         <activity
-            android:name=".unusedGoodsDialog"
+            android:name=".unused_goods_dialog"
             android:label="@string/title_activity_unused_goods_dialog"
             android:theme="@style/AppTheme" >
         </activity>
@@ -77,6 +77,16 @@
             android:theme="@style/AppTheme" >
         </activity>
         <activity android:name=".ConfigurationActivity" >
+        </activity>
+        <activity
+            android:name=".unused_goods_dialog"
+            android:label="@string/title_activity_unused_goods_dialog"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name=".other_trash_dialog"
+            android:label="@string/title_activity_other_trash_dialog"
+            android:theme="@style/AppTheme" >
         </activity>
     </application>
 

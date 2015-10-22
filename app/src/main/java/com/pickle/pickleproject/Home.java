@@ -43,7 +43,7 @@ public class Home extends Activity   {
 
         }
 
-    private void changeJar() {
+    private void historyJar() {
         Intent intent = new Intent(this, picklejar.class);
         startActivity(intent);
         this.overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
@@ -91,10 +91,6 @@ public class Home extends Activity   {
 
     private void onLeftSwipe() {
         changePick();
-    }
-
-    private void onRightSwipe() {
-        changeJar();
     }
 
     private void onDownSwipe() {changeProfileActivity();}
