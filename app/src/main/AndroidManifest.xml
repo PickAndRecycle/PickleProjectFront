@@ -78,8 +78,6 @@
         </activity>
         <activity android:name=".ConfigurationActivity" >
         </activity>
-        <activity android:name=".MyProfileActivity" >
-        </activity>
     </application>
 
 </manifest>
