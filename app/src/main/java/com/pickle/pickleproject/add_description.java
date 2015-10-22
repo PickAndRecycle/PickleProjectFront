@@ -27,7 +27,6 @@ public class add_description extends AppCompatActivity {
             }
         });
         Button NextButton = (Button) findViewById(R.id.nextbutton);
-        NextButton.setOnClickListener();
         NextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
