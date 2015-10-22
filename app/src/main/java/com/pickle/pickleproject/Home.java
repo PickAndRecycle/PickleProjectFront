@@ -18,6 +18,7 @@ import android.content.Context;
 public class Home extends Activity   {
     int CAM_REQUEST =1;
     ImageButton Camera;
+    private GestureDetector gestureDetector;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,25 +37,8 @@ public class Home extends Activity   {
             }
         });
 
-        /*
-        Button Swipebutton;
-        Swipebutton = (Button) findViewById(R.id.swiperightbtn);
 
-        Swipebutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                changePick();
-            }
-        });
-        */
-
-            /*view.setOnTouchListener(new OnSwipeTouchListener(context) {
-                @Override
-                public void onSwipeLeft() {
-                    // Whatever
-                }
-            });*/
-
+        gestureDetector = new GestureDetector(new SwipeGestureDetector());
 
         }
 
@@ -78,7 +62,56 @@ public class Home extends Activity   {
         String path = "sdcard/Pickle/cam_image.jpg";
     }
 
+    public boolean onTouchEvent(MotionEvent event) {
+        if (gestureDetector.onTouchEvent(event)) {
+            return true;
+        }
+        return super.onTouchEvent(event);
+    }
 
+    private void onLeftSwipe() {
+        changePick();
+    }
+
+    /*private void onRightSwipe() {
+        // Do something
+    }*/
+
+    // Private class for gestures
+    private class SwipeGestureDetector
+            extends GestureDetector.SimpleOnGestureListener {
+        // Swipe properties, you can change it to make the swipe
+        // longer or shorter and speed
+        private static final int SWIPE_MIN_DISTANCE = 120;
+        private static final int SWIPE_MAX_OFF_PATH = 200;
+        private static final int SWIPE_THRESHOLD_VELOCITY = 200;
+
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2,
+                               float velocityX, float velocityY) {
+            try {
+                float diffAbs = Math.abs(e1.getY() - e2.getY());
+                float diff = e1.getX() - e2.getX();
+
+                if (diffAbs > SWIPE_MAX_OFF_PATH)
+                    return false;
+
+                // Left swipe
+                if (diff > SWIPE_MIN_DISTANCE
+                        && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+                    Home.this.onLeftSwipe();
+
+                    // Right swipe
+                } /*else if (-diff > SWIPE_MIN_DISTANCE
+                        && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+                    YourActivity.this.onRightSwipe();
+                }*/
+            } catch (Exception e) {
+                Log.e("YourActivity", "Error on gestures");
+            }
+            return false;
+        }
+    }
 
 
 }
