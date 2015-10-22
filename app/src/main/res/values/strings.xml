@@ -21,5 +21,4 @@
     <string name="joinPickleText">JOIN PICKLE</string>
     <string name="title_activity_individual__trash__info">Individual_Trash_Info</string>
     <string name="back">BACK</string>
-    <string name="title_activity_trash_notification">TrashNotification</string>
 </resources>

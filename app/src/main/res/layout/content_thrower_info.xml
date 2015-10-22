@@ -5,12 +5,12 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_individual__trash__info"
-    tools:context="com.pickle.pickleproject.Individual_Trash_Info">
+    tools:context="com.pickle.pickleproject.Thrower_Info">
 
     <RelativeLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="70dp"
         android:background="#f1654c"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
@@ -19,11 +19,11 @@
 
         <Button
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="70dp"
             android:text="@string/back"
             android:id="@+id/back_button"
             android:background="#00ffffff"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:textAlignment="inherit"
             android:textColor="#ffffff"
             android:layout_alignParentBottom="true"
