@@ -29,13 +29,13 @@ public class Home extends Activity   {
                 Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 File file = getFile();
                 camera_intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
-                startActivityForResult(camera_intent,CAM_REQUEST);
-                changeAddDescription();
+                startActivityForResult(camera_intent, CAM_REQUEST);
+
 
 
             }
         });
-
+        changeAddDescription();
 
         gestureDetector = new GestureDetector(new SwipeGestureDetector());
 
