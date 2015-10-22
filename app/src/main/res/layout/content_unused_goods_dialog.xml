@@ -48,20 +48,20 @@
         <Button
             android:layout_width="290dp"
             android:layout_height="70dp"
-            android:text="@string/submitText"
+            android:text="Submit"
             android:id="@+id/submitButtonUnusedGoods"
             android:background="#00B5b5"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:textColor="#FFFFFF"
-            android:textSize="17sp" />
+            android:textSize="25dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/binText"
+            android:text="bin"
             android:id="@+id/binTextUnusedGoods"
             android:textSize="30sp"
             android:layout_centerVertical="true"
