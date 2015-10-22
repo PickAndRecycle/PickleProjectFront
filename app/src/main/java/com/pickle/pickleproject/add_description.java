@@ -33,9 +33,20 @@ public class add_description extends AppCompatActivity {
                 changeNext();
             }
         });
+        Button HomeButton = (Button) findViewById(R.id.backbutton);
+        NextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeBack();
+            }
+        });
     }
     private void changeNext(){
         Intent intent = new Intent(this, Throw_or_Report.class);
+        startActivity(intent);
+    }
+    private void changeBack(){
+        Intent intent = new Intent(this, Home.class);
         startActivity(intent);
     }
 
