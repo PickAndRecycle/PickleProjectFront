@@ -10,9 +10,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.Button;
 import java.io.File;
-import android.content.Context;
 
 
 public class Home extends Activity   {
@@ -44,8 +42,8 @@ public class Home extends Activity   {
 
     private void changePick(){
         Intent intent = new Intent(this, Unused_goods.class);
-
         startActivity(intent);
+        this.overridePendingTransition(R.anim.push_left_in,R.anim.push_left_out);
     }
 
     private File getFile(){
