@@ -41,12 +41,6 @@ public class Home extends Activity   {
 
         gestureDetector = new GestureDetector(new SwipeGestureDetector());
 
-        }
-
-    private void historyJar() {
-        Intent intent = new Intent(this, picklejar.class);
-        startActivity(intent);
-        this.overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
     }
 
     private void changePick(){
@@ -61,7 +55,7 @@ public class Home extends Activity   {
     }
 
     private void changeProfileActivity(){
-        Intent intent = new Intent(this, MyProfileActivity.class);
+        Intent intent = new Intent(this, ProfileActivity.class);
         startActivity(intent);
         this.overridePendingTransition(R.anim.push_down_in, R.anim.push_down_out);
     }
@@ -154,4 +148,3 @@ public class Home extends Activity   {
 
 
 }
-

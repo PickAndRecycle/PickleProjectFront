@@ -88,6 +88,8 @@
             android:label="@string/title_activity_other_trash_dialog"
             android:theme="@style/AppTheme" >
         </activity>
+        <activity android:name=".ProfileActivity" >
+        </activity>
     </application>
 
 </manifest>
