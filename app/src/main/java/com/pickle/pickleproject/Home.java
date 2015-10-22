@@ -48,12 +48,12 @@ public class Home extends Activity   {
         });
         */
 
-            view.setOnTouchListener(new OnSwipeTouchListener(context) {
+            /*view.setOnTouchListener(new OnSwipeTouchListener(context) {
                 @Override
                 public void onSwipeLeft() {
                     // Whatever
                 }
-            });
+            });*/
 
 
         }
