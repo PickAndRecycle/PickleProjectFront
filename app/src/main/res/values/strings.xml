@@ -24,4 +24,6 @@
     <string name="title_activity_throw_category">throwCategory</string>
     <string name="title_activity_report_success">reportSuccess</string>
     <string name="title_activity_unused_goods_dialog">unusedGoodsDialog</string>
+    <string name="title_activity_add_description">add_description</string>
+    <string name="title_activity_throw_or__report">Throw_or_Report</string>
 </resources>

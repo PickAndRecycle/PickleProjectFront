@@ -30,6 +30,7 @@ public class Home extends Activity   {
                 File file = getFile();
                 camera_intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
                 startActivityForResult(camera_intent,CAM_REQUEST);
+                changeAddDescription();
 
 
             }
@@ -44,6 +45,11 @@ public class Home extends Activity   {
         Intent intent = new Intent(this, Unused_goods.class);
         startActivity(intent);
         this.overridePendingTransition(R.anim.push_left_in,R.anim.push_left_out);
+    }
+    private void changeAddDescription(){
+        Intent intent = new Intent(this, add_description.class);
+        startActivity(intent);
+
     }
 
     private File getFile(){
