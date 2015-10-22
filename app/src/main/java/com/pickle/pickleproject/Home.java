@@ -52,7 +52,7 @@ public class Home extends Activity   {
     private void changePick(){
         Intent intent = new Intent(this, Unused_goods.class);
         startActivity(intent);
-        this.overridePendingTransition(R.anim.push_left_in,R.anim.push_left_out);
+        this.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
     }
     private void changeAddDescription(){
         Intent intent = new Intent(this, add_description.class);
@@ -61,7 +61,7 @@ public class Home extends Activity   {
     }
 
     private void changeProfileActivity(){
-        Intent intent = new Intent(this, MyProfileActivity.class);
+        Intent intent = new Intent(this, ProfileActivity.class);
         startActivity(intent);
         this.overridePendingTransition(R.anim.push_down_in, R.anim.push_down_out);
     }
