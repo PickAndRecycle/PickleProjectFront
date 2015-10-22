@@ -31,7 +31,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
         </activity>
         <activity
-            android:name=".pickGeneral"
+            android:name=".pickList"
             android:label="@string/title_activity_pick_list" >
         </activity>
         <activity
@@ -43,37 +43,8 @@
             android:label="@string/title_activity_pick_green" >
         </activity>
         <activity
-            android:name=".RegistrationActivity"
-            android:label="@string/title_activity_registration" >
-        </activity>
-        <activity
-            android:name=".Thrower_Info"
-            android:label="@string/title_activity_individual__trash__info"
-            android:theme="@style/AppTheme" >
-        </activity>
-        <activity
-            android:name=".throwCategory"
-            android:label="@string/title_activity_throw_category"
-            android:theme="@style/AppTheme" >
-        </activity>
-        <activity
-            android:name=".reportSuccess"
-            android:label="@string/title_activity_report_success"
-            android:theme="@style/AppTheme" >
-        </activity>
-        <activity
-            android:name=".unusedGoodsDialog"
-            android:label="@string/title_activity_unused_goods_dialog"
-            android:theme="@style/AppTheme" >
-        </activity>
-        <activity
-            android:name=".add_description"
-            android:label="@string/title_activity_add_description"
-            android:theme="@style/AppTheme" >
-        </activity>
-        <activity
-            android:name=".Throw_or_Report"
-            android:label="@string/title_activity_throw_or__report"
+            android:name=".login"
+            android:label="@string/title_activity_login"
             android:theme="@style/AppTheme" >
         </activity>
     </application>
