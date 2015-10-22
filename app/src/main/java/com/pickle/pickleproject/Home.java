@@ -55,7 +55,7 @@ public class Home extends Activity   {
     }
 
     private void changeProfileActivity(){
-        Intent intent = new Intent(this, RegistrationActivity.class);
+        Intent intent = new Intent(this, MyProfileActivity.class);
         startActivity(intent);
         this.overridePendingTransition(R.anim.push_down_in, R.anim.push_down_out);
     }

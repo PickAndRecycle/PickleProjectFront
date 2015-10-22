@@ -36,4 +36,6 @@
     <string name="title_activity_throw_or__report">Throw_or_Report</string>
     <string name="title_activity_login">login</string>
     <string name="LocationText">LOCATION</string>
+    <string name="profileText">PROFILE</string>
+    <string name="configurationButton">configurationButton</string>
 </resources>
