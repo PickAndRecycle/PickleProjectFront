@@ -78,6 +78,11 @@
         </activity>
         <activity android:name=".ConfigurationActivity" >
         </activity>
+        <activity
+            android:name=".unused_goods_dialog"
+            android:label="@string/title_activity_unused_goods_dialog"
+            android:theme="@style/AppTheme" >
+        </activity>
     </application>
 
 </manifest>
