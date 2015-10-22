@@ -125,7 +125,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="don&apos;t have an account yet?"
-            android:id="@+id/textView11"
+            android:id="@+id/noAccount"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
             android:textSize="20dp"

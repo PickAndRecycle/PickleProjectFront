@@ -23,8 +23,8 @@ public class TrashNotification extends AppCompatActivity {
             }
         });
 
-
         }
+
     public void Home(){
         Intent home = new Intent(this,Home.class);
         startActivity(home);

@@ -6,9 +6,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
@@ -18,7 +15,6 @@ public class throwCategory extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_throw_category);
-    }
 
     Button unusedButton = (Button) findViewById(R.id.UnusedButton);
     Button generalButton = (Button) findViewById(R.id.GeneralButton);
@@ -31,21 +27,18 @@ public class throwCategory extends AppCompatActivity {
             changeUnusedButton();
         }
     });
-
     generalButton.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             changeGeneralButton();
         }
     });
-
     recycleButton.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             changeRecycleButton();
         }
     });
-
     greenButton.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -53,8 +46,10 @@ public class throwCategory extends AppCompatActivity {
         }
     });
 
+    }
+
     private void changeUnusedButton(){
-        Intent intent = new Intent(this, other_trash_dialog.class);
+        Intent intent = new Intent(this, unused_goods_dialog.class);
         startActivity(intent);
     }
 
