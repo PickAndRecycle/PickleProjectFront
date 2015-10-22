@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import java.io.File;
 
@@ -22,6 +23,8 @@ public class Home extends Activity   {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+
         Camera = (ImageButton) findViewById(R.id.Camera_Button);
         Camera.setOnClickListener(new View.OnClickListener() {
 
@@ -51,6 +54,12 @@ public class Home extends Activity   {
 
     }
 
+    private void changeProfileActivity(){
+        Intent intent = new Intent(this, RegistrationActivity.class);
+        startActivity(intent);
+        this.overridePendingTransition(R.anim.push_down_in, R.anim.push_down_out);
+    }
+
     private File getFile(){
         File folder = new File("sdcard/Pickle");
         if(!folder.exists()){
@@ -78,6 +87,8 @@ public class Home extends Activity   {
         changePick();
     }
 
+    private void onDownSwipe() {changeProfileActivity();}
+
     /*private void onRightSwipe() {
         // Do something
     }*/
@@ -95,19 +106,36 @@ public class Home extends Activity   {
         public boolean onFling(MotionEvent e1, MotionEvent e2,
                                float velocityX, float velocityY) {
             try {
-                float diffAbs = Math.abs(e1.getY() - e2.getY());
-                float diff = e1.getX() - e2.getX();
+                float diffAbsLeftRight = Math.abs(e1.getY() - e2.getY());
+                float diffLeftRight = e1.getX() - e2.getX();
 
-                if (diffAbs > SWIPE_MAX_OFF_PATH)
+                float diffAbsUpDown = Math.abs(e1.getX() - e2.getX());
+                float diffUpDown = e1.getY() - e2.getY();
+
+
+                if (diffAbsLeftRight > SWIPE_MAX_OFF_PATH)
                     return false;
 
                 // Left swipe
-                if (diff > SWIPE_MIN_DISTANCE
+                if (diffLeftRight > SWIPE_MIN_DISTANCE
                         && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
                     Home.this.onLeftSwipe();
 
                     // Right swipe
-                } /*else if (-diff > SWIPE_MIN_DISTANCE
+                }
+
+                if (diffAbsUpDown > SWIPE_MAX_OFF_PATH)
+                    return false;
+
+                // Left swipe
+                if (-diffUpDown > SWIPE_MIN_DISTANCE
+                        && Math.abs(velocityY) > SWIPE_THRESHOLD_VELOCITY) {
+                    Home.this.onDownSwipe();
+
+                    // Right swipe
+                }
+
+                 /*else if (-diff > SWIPE_MIN_DISTANCE
                         && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
                     YourActivity.this.onRightSwipe();
                 }*/

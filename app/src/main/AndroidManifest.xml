@@ -76,6 +76,8 @@
             android:label="@string/title_activity_throw_or__report"
             android:theme="@style/AppTheme" >
         </activity>
+        <activity android:name=".ConfigurationActivity" >
+        </activity>
     </application>
 
 </manifest>

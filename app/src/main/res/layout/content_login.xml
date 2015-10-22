@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="#3e4651"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/activity_login" tools:context="com.pickle.pickleproject.login"><![CDATA[
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5"
+        android:id="@+id/e">
+
+
+
+
+
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5">
+
+
+
+
+
+
+
+
+
+
+
+    ]]>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SIGN IN"
+        android:id="@+id/textView6"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:textSize="40dp"
+        android:textAlignment="center"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/editText2"
+            android:background="#FFFFFF"
+            android:textSize="30dp"
+            android:text="password"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:autoText="false"
+            android:textIsSelectable="false"
+            android:layout_centerVertical="true"
+        android:layout_alignWithParentIfMissing="false"/>
+
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:text="username"
+            android:ems="10"
+            android:id="@+id/editText"
+            android:textSize="30dp"
+            android:background="#FFFFFF"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_above="@+id/editText2"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentStart="true" />
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SIGN IN"
+            android:id="@+id/textView9"
+            android:background="#50b5ff"
+            android:textSize="30dp"
+            android:textColor="#FFFFFF"
+            android:textAlignment="center"
+            android:autoText="false"
+            android:singleLine="false"
+            android:layout_marginTop="39dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:gravity="center_horizontal"
+            android:layout_below="@+id/editText2"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="false"
+            android:layout_alignRight="@+id/textView10"
+            android:layout_alignEnd="@+id/textView10" />
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SIGN IN WITH GOOGLE+"
+            android:id="@+id/textView10"
+            android:background="#fa6f5a"
+            android:textSize="30dp"
+            android:textColor="#FFFFFF"
+            android:textAlignment="center"
+            android:autoText="false"
+            android:singleLine="false"
+            android:layout_below="@+id/textView9"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="false"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="false"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:gravity="center_horizontal" />
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="don&apos;t have an account yet?"
+            android:id="@+id/textView11"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:textSize="17dp"
+            android:textAlignment="center"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
+
+</RelativeLayout>
+
