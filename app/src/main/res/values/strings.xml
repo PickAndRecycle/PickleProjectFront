@@ -12,5 +12,27 @@
     <string name="title_activity_pick_list">pickList</string>
     <string name="title_activity_pick_recycled">pickRecycled</string>
     <string name="title_activity_pick_green">pickGreen</string>
+    <string name="title_activity_registration">RegistrationActivity</string>
+    <string name="usernameText">username</string>
+    <string name="emailText">email</string>
+    <string name="passwordText">password</string>
+    <string name="passwordConfirmationText">password</string>
+    <string name="signUpText">SIGN UP</string>
+    <string name="joinPickleText">JOIN PICKLE</string>
+    <string name="title_activity_individual__trash__info">Individual_Trash_Info</string>
+    <string name="back">BACK</string>
+    <string name="title_activity_profile">ProfileActivity</string>
+    <string name="ProfilePicture">profilePicture</string>
+    <string name="PoinText">POINTS</string>
+    <string name="TotalPointText">totalPoints</string>
+    <string name="TotalPointLeftText">__ points left to the next level!</string>
+    <string name="LeaderBoardText">LEADERBOARD</string>
+    <string name="EditProfileText">EDIT PROFILE</string>
+    <string name="SignOutText">SIGN OUT</string>
+    <string name="title_activity_throw_category">throwCategory</string>
+    <string name="title_activity_report_success">reportSuccess</string>
+    <string name="title_activity_unused_goods_dialog">unusedGoodsDialog</string>
+    <string name="title_activity_add_description">add_description</string>
+    <string name="title_activity_throw_or__report">Throw_or_Report</string>
     <string name="title_activity_login">login</string>
 </resources>
