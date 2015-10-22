@@ -19,7 +19,7 @@
         <ImageButton
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:id="@+id/imageButton"
+            android:id="@+id/UnusedButton"
             android:background="@drawable/button"
             android:backgroundTint="#d8d8d8"
             android:foreground="@mipmap/unused_goods_icon"
@@ -50,7 +50,7 @@
         <ImageButton
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:id="@+id/imageButton4"
+            android:id="@+id/GeneralButton"
             android:background="@drawable/button"
             android:backgroundTint="#d72223"
             android:foreground="@mipmap/general_waste_icon"
@@ -81,7 +81,7 @@
         <ImageButton
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:id="@+id/imageButton6"
+            android:id="@+id/GreenButton"
             android:background="@drawable/button"
             android:backgroundTint="#32c183"
             android:foreground="@mipmap/green_waste_icon"
@@ -113,7 +113,7 @@
         <ImageButton
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:id="@+id/imageButton5"
+            android:id="@+id/RecycleButton"
             android:background="@drawable/button"
             android:backgroundTint="#f0be49"
             android:foreground="@mipmap/recyclable_waste_icon"
