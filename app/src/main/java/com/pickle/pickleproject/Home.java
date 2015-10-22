@@ -60,6 +60,7 @@ public class Home extends Activity   {
         String path = "sdcard/Pickle/cam_image.jpg";
     }
 
+    @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (gestureDetector.onTouchEvent(event)) {
             return true;
