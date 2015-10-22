@@ -10,6 +10,9 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
 
 public class pickGeneral extends AppCompatActivity {
     private GestureDetector gestureDetector;
@@ -18,6 +21,33 @@ public class pickGeneral extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pick_general);
+
+        //String[] myStringArray={"A","B","C"};
+        MyData myDataArray[]=new MyData[]{
+                new MyData("Address1",10,5),
+                new MyData("Address2",20,6),
+                new MyData("Address3",30,7),
+                new MyData("Address4",40,5),
+                new MyData("Address5",50,6),
+                new MyData("Address6",60,7),
+                new MyData("Address7",70,5),
+                new MyData("Address8",80,6),
+                new MyData("Address9",90,7),
+        };
+
+        ListAdapter myAdapter=new ListAdapter( this, R.layout.rowlayout, myDataArray);
+        ListView myList = (ListView)
+                findViewById(R.id.listView);
+        myList.setAdapter(myAdapter);
+
+        /*
+        ArrayAdapter<String> myAdapter=new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, myStringArray);
+        ListView myList=(ListView)
+                findViewById(R.id.listView);
+        myList.setAdapter(myAdapter);
+
+        */
+
 
         Button UnusedButton = (Button) findViewById(R.id.Unusedbtn);
         Button RecycledButton = (Button) findViewById(R.id.Recycledbtn);

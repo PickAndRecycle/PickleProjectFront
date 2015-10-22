@@ -35,7 +35,8 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="70dp">
+            android:layout_height="70dp"
+            android:id="@+id/linearLayout4">
 
             <RelativeLayout
                 android:layout_width="90dp"
@@ -49,7 +50,8 @@
                     android:text="UNUSED"
                     android:id="@+id/textView2"
                     android:layout_centerInParent="true"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="#FFFFFF"
+                    android:textSize="17sp" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -64,7 +66,8 @@
                     android:text="GENERAL"
                     android:id="@+id/textView3"
                     android:layout_centerInParent="true"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="#FFFFFF"
+                    android:textSize="17sp" />
 
                 <Button
                     android:layout_width="match_parent"
@@ -85,7 +88,8 @@
                     android:text="RECYCLED"
                     android:id="@+id/textView4"
                     android:layout_centerInParent="true"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="#FFFFFF"
+                    android:textSize="17sp" />
 
                 <Button
                     android:layout_width="match_parent"
@@ -107,7 +111,8 @@
                     android:text="GREEN"
                     android:id="@+id/textView5"
                     android:layout_centerInParent="true"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="#FFFFFF"
+                    android:textSize="17sp" />
 
                 <Button
                     android:layout_width="match_parent"
@@ -117,6 +122,13 @@
             </RelativeLayout>
 
         </LinearLayout>
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/listView4"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/linearLayout4" />
     </RelativeLayout>
 
 </LinearLayout>

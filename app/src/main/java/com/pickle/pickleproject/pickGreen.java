@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 
 public class pickGreen extends AppCompatActivity {
     private GestureDetector gestureDetector;
@@ -17,6 +18,18 @@ public class pickGreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pick_green);
+
+        MyData myDataArray[]=new MyData[]{
+                new MyData("Address1",10,5),
+                new MyData("Address2",20,6),
+                new MyData("Address3",30,7)
+        };
+
+        ListAdapter myAdapter=new ListAdapter( this, R.layout.rowlayout, myDataArray);
+        ListView myList = (ListView)
+                findViewById(R.id.listView2);
+        myList.setAdapter(myAdapter);
+
 
         Button UnusedButton = (Button) findViewById(R.id.Unusedbtn);
         Button GeneralButton = (Button) findViewById(R.id.Generalbtn);
