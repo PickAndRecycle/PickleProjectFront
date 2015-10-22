@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import java.io.File;
 
@@ -22,6 +23,8 @@ public class Home extends Activity   {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+
         Camera = (ImageButton) findViewById(R.id.Camera_Button);
         Camera.setOnClickListener(new View.OnClickListener() {
 
@@ -125,7 +128,8 @@ public class Home extends Activity   {
                     return false;
 
                 // Left swipe
-                if (diffUpDown < 0.0) {
+                if (-diffUpDown > SWIPE_MIN_DISTANCE
+                        && Math.abs(velocityY) > SWIPE_THRESHOLD_VELOCITY) {
                     Home.this.onDownSwipe();
 
                     // Right swipe

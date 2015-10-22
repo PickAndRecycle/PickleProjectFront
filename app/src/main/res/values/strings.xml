@@ -35,4 +35,5 @@
     <string name="title_activity_add_description">add_description</string>
     <string name="title_activity_throw_or__report">Throw_or_Report</string>
     <string name="title_activity_login">login</string>
+    <string name="LocationText">LOCATION</string>
 </resources>
