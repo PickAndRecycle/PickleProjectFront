@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/activity_throw_category"
+    tools:context="com.pickle.pickleproject.throwCategory"
+    android:background="#b1000000">
+
+    <RelativeLayout
+        android:layout_width="180dp"
+        android:layout_height="250dp"
+        android:id="@+id/unusedGoodsLayout"
+        android:layout_alignTop="@+id/generalWasteLayout"
+        android:layout_alignLeft="@+id/recyclableWasteLayout"
+        android:layout_alignStart="@+id/recyclableWasteLayout">
+
+        <ImageButton
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:id="@+id/imageButton"
+            android:background="@drawable/button"
+            android:backgroundTint="#d8d8d8"
+            android:foreground="@mipmap/unusedGoodsIcon"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="UNUSED GOODS"
+            android:id="@+id/unusedGoodsText"
+            android:layout_marginBottom="27dp"
+            android:textColor="#FFFFFF"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="180dp"
+        android:layout_height="250dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/generalWasteLayout">
+
+        <ImageButton
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:id="@+id/imageButton4"
+            android:background="@drawable/button"
+            android:backgroundTint="#d72223"
+            android:foreground="@mipmap/generalWasteIcon"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="GENERAL WASTE"
+            android:id="@+id/generalWasteText"
+            android:layout_marginBottom="27dp"
+            android:textColor="#FFFFFF"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="180dp"
+        android:layout_height="250dp"
+        android:id="@+id/greenWasteLayout"
+        android:layout_below="@+id/unusedGoodsLayout"
+        android:layout_alignLeft="@+id/generalWasteLayout"
+        android:layout_alignStart="@+id/generalWasteLayout">
+
+        <ImageButton
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:id="@+id/imageButton6"
+            android:background="@drawable/button"
+            android:backgroundTint="#32c183"
+            android:foreground="@mipmap/greenWasteIcon"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="GREEN WASTE"
+            android:id="@+id/greenWasteText"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:layout_marginBottom="27dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="180dp"
+        android:layout_height="250dp"
+        android:id="@+id/recyclableWasteLayout"
+        android:layout_below="@+id/unusedGoodsLayout"
+        android:layout_toLeftOf="@+id/greenWasteLayout"
+        android:layout_toStartOf="@+id/greenWasteLayout">
+
+        <ImageButton
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:id="@+id/imageButton5"
+            android:background="@drawable/button"
+            android:backgroundTint="#f0be49"
+            android:foreground="@mipmap/recyclableWasteIcon"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="RECYCLABLE WASTE"
+            android:id="@+id/recyclableWasteText"
+            android:layout_marginBottom="27dp"
+            android:textColor="#FFFFFF"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:text="@string/back"
+        android:id="@+id/button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/recyclableWasteLayout"
+        android:layout_alignStart="@+id/recyclableWasteLayout"
+        android:layout_alignRight="@+id/greenWasteLayout"
+        android:layout_alignEnd="@+id/greenWasteLayout"
+        android:background="#f1654c"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
+
+</RelativeLayout>
