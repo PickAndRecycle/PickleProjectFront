@@ -29,8 +29,7 @@ public class Home extends Activity   {
                 Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 File file = getFile();
                 camera_intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
-                startActivityForResult(camera_intent,CAM_REQUEST);
-                changeAddDescription();
+                startActivityForResult(camera_intent, CAM_REQUEST);
 
 
             }
@@ -64,6 +63,7 @@ public class Home extends Activity   {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         String path = "sdcard/Pickle/cam_image.jpg";
+        changeAddDescription();
     }
 
     @Override
