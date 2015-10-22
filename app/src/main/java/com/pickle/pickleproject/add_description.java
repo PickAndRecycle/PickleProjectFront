@@ -33,8 +33,9 @@ public class add_description extends AppCompatActivity {
                 changeNext();
             }
         });
+
         Button HomeButton = (Button) findViewById(R.id.backbutton);
-        NextButton.setOnClickListener(new View.OnClickListener() {
+        HomeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 changeBack();
