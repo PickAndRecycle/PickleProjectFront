@@ -24,7 +24,7 @@ public class ConfigurationActivity extends AppCompatActivity {
     }
 
     private void changeProfile(){
-        Intent intent = new Intent(this, ProfileActivity.class);
+        Intent intent = new Intent(this, MyProfileActivity.class);
         startActivity(intent);
     }
 }

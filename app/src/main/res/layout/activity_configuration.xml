@@ -223,7 +223,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/PrivacyPolicyArea" >
+        android:layout_below="@+id/PrivacyPolicyArea"
+        android:layout_alignParentTop="false">
 
         <com.pickle.pickleproject.MontserratTextView
             android:layout_width="wrap_content"

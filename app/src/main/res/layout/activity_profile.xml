@@ -1,20 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="wrap_content"
-    android:layout_height="match_parent" android:fitsSystemWindows="true"
-    tools:context="com.pickle.pickleproject.ProfileActivity">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.pickle.pickleproject.ConfigurationActivity">
 
-    <android.support.design.widget.AppBarLayout android:layout_height="wrap_content"
-        android:layout_width="match_parent" android:theme="@style/AppTheme.AppBarOverlay">
 
-        <android.support.v7.widget.Toolbar android:id="@+id/toolbar"
-            android:layout_width="match_parent" android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary" app:popupTheme="@style/AppTheme.PopupOverlay" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:id="@+id/ActionBar"
+        android:background="#3e4651">
 
-    </android.support.design.widget.AppBarLayout>
+        <com.pickle.pickleproject.MontserratTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/profileText"
+            android:id="@+id/profileText"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:textColor="#ffffff" />
 
-    <include layout="@layout/content_profile" />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/configurationButton"
+            android:src="@mipmap/setting_icon"
+            android:background="#00ffffff"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:tint="#ffffff"
+            android:contentDescription="@string/configurationButton" />
+    </RelativeLayout>
 
-</android.support.design.widget.CoordinatorLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/profileArea"
+        android:layout_below="@+id/ActionBar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="50dp">
+
+        <com.pickle.pickleproject.MontserratTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/usernameText"
+            android:id="@+id/username"
+            android:layout_alignParentRight="true" />
+
+        <com.pickle.pickleproject.MontserratTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/emailText"
+            android:id="@+id/email"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/username" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/pointsArea"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <com.pickle.pickleproject.MontserratTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/PoinText"
+            android:id="@+id/pointsText"
+            android:layout_centerHorizontal="true" />
+
+        <com.pickle.pickleproject.MontserratTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/TotalPointText"
+            android:id="@+id/totalPoint"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/pointsText" />
+
+        <com.pickle.pickleproject.MontserratTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/TotalPointLeftText"
+            android:id="@+id/totalPointLeft"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/totalPoint" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/menuButtonArea"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentBottom="true">
+
+        <com.pickle.pickleproject.MontserratButton
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:text="@string/LeaderBoardText"
+            android:id="@+id/leaderBoardButton"
+            android:background="#3e4651"
+            android:textColor="#ffffff" />
+
+        <com.pickle.pickleproject.MontserratButton
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:text="@string/EditProfileText"
+            android:id="@+id/editProfileButton"
+            android:layout_below="@+id/leaderBoardButton"
+            android:background="#00b5b5"
+            android:textColor="#ffffff" />
+
+        <com.pickle.pickleproject.MontserratButton
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:text="@string/SignOutText"
+            android:id="@+id/signOutButton"
+            android:layout_below="@+id/editProfileButton"
+            android:background="#f1654c"
+            android:textColor="#ffffff" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
