@@ -3,12 +3,16 @@ package com.pickle.pickleproject;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
 public class pickRecycled extends AppCompatActivity {
+    private GestureDetector gestureDetector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +22,8 @@ public class pickRecycled extends AppCompatActivity {
         Button UnusedButton = (Button) findViewById(R.id.Unusedbtn);
         Button GeneralButton = (Button) findViewById(R.id.Generalbtn);
         Button GreenButton = (Button) findViewById(R.id.Greenbtn);
+
+        gestureDetector = new GestureDetector(new SwipeGestureDetector());
 
         UnusedButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,21 +71,71 @@ public class pickRecycled extends AppCompatActivity {
 
     private void changeUnused(){
         Intent intent = new Intent(this, Unused_goods.class);
-
         startActivity(intent);
     }
 
     private void changeGeneral(){
-        Intent intent = new Intent(this, pickList.class);
-
+        Intent intent = new Intent(this, pickGeneral.class);
         startActivity(intent);
+        this.overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
     }
 
     private void changeGreen(){
         Intent intent = new Intent(this, pickGreen.class);
-
         startActivity(intent);
+        this.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
     }
 
+    /* Slide gestures */
 
+    public boolean onTouchEvent(MotionEvent event) {
+        if (gestureDetector.onTouchEvent(event)) {
+            return true;
+        }
+        return super.onTouchEvent(event);
+    }
+
+    private void onLeftSwipe() {
+        changeGreen();
+    }
+
+    private void onRightSwipe() {
+        changeGeneral();
+    }
+
+    // Private class for gestures
+    private class SwipeGestureDetector
+            extends GestureDetector.SimpleOnGestureListener {
+        // Swipe properties, you can change it to make the swipe
+        // longer or shorter and speed
+        private static final int SWIPE_MIN_DISTANCE = 120;
+        private static final int SWIPE_MAX_OFF_PATH = 200;
+        private static final int SWIPE_THRESHOLD_VELOCITY = 200;
+
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2,
+                               float velocityX, float velocityY) {
+            try {
+                float diffAbs = Math.abs(e1.getY() - e2.getY());
+                float diff = e1.getX() - e2.getX();
+
+                if (diffAbs > SWIPE_MAX_OFF_PATH)
+                    return false;
+
+                // Left swipe
+                if (diff > SWIPE_MIN_DISTANCE
+                        && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+                    pickRecycled.this.onLeftSwipe();
+
+                    // Right swipe
+                } else if (-diff > SWIPE_MIN_DISTANCE
+                        && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+                    pickRecycled.this.onRightSwipe();
+                }
+            } catch (Exception e) {
+                Log.e("YourActivity", "Error on gestures");
+            }
+            return false;
+        }
+    }
 }

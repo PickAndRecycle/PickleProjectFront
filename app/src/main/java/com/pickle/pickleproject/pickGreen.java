@@ -75,12 +75,12 @@ public class pickGreen extends AppCompatActivity {
     }
 
     private void changeGeneral(){
-        Intent intent = new Intent(this, pickList.class);
+        Intent intent = new Intent(this, pickGeneral.class);
 
         startActivity(intent);
     }
 
-    private void changeRecycled(){
+    private void changeRecycled() {
         Intent intent = new Intent(this, pickRecycled.class);
 
         startActivity(intent);
