@@ -1,11 +1,13 @@
 package com.pickle.pickleproject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 
 public class add_description extends AppCompatActivity {
 
@@ -24,6 +26,17 @@ public class add_description extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        Button NextButton = (Button) findViewById(R.id.nextbutton);
+        NextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeNext();
+            }
+        });
+    }
+    private void changeNext(){
+        Intent intent = new Intent(this, Throw_or_Report.class);
+        startActivity(intent);
     }
 
 }

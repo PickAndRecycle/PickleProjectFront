@@ -43,6 +43,12 @@ public class Home extends Activity   {
 
         }
 
+    private void historyJar() {
+        Intent intent = new Intent(this, picklejar.class);
+        startActivity(intent);
+        this.overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
+    }
+
     private void changePick(){
         Intent intent = new Intent(this, Unused_goods.class);
         startActivity(intent);

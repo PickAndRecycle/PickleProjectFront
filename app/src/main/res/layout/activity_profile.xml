@@ -43,22 +43,6 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="50dp">
 
-        <com.pickle.pickleproject.MontserratTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/usernameText"
-            android:id="@+id/username"
-            android:layout_alignParentRight="true" />
-
-        <com.pickle.pickleproject.MontserratTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/emailText"
-            android:id="@+id/email"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/username" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -131,5 +115,24 @@
             android:textColor="#ffffff" />
 
     </RelativeLayout>
+
+    <com.pickle.pickleproject.MontserratTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/usernameText"
+        android:id="@+id/username"
+        android:layout_alignBaseline="@+id/profileArea"
+        android:layout_alignBottom="@+id/profileArea"
+        android:layout_centerHorizontal="true" />
+
+    <com.pickle.pickleproject.MontserratTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/emailText"
+        android:id="@+id/email"
+        android:layout_below="@+id/profileArea"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

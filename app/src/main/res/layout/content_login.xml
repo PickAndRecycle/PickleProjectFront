@@ -49,7 +49,7 @@
         android:layout_centerHorizontal="true" />
 
     <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:ems="10"
@@ -61,11 +61,12 @@
             android:paddingBottom="5dp"
             android:autoText="false"
             android:textIsSelectable="false"
-            android:layout_centerVertical="true"
-        android:layout_alignWithParentIfMissing="false"/>
+        android:layout_alignWithParentIfMissing="false"
+        android:layout_below="@+id/editText"
+        android:layout_alignParentRight="true" />
 
     <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:text="username"
@@ -75,62 +76,62 @@
             android:background="#FFFFFF"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            android:layout_above="@+id/editText2"
-            android:layout_alignParentLeft="false"
-            android:layout_alignParentStart="true" />
+        android:layout_marginTop="84dp"
+        android:layout_below="@+id/textView6"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="SIGN IN"
             android:id="@+id/textView9"
-            android:background="#50b5ff"
-            android:textSize="30dp"
+            android:background="#00B5B5"
+            android:textSize="25dp"
             android:textColor="#FFFFFF"
             android:textAlignment="center"
             android:autoText="false"
             android:singleLine="false"
-            android:layout_marginTop="39dp"
-            android:paddingTop="15dp"
+        android:paddingTop="15dp"
             android:paddingBottom="15dp"
             android:gravity="center_horizontal"
-            android:layout_below="@+id/editText2"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="false"
-            android:layout_alignRight="@+id/textView10"
-            android:layout_alignEnd="@+id/textView10" />
+        android:textStyle="bold"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/textView10"
+        android:layout_alignParentRight="true" />
 
     <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="SIGN IN WITH GOOGLE+"
             android:id="@+id/textView10"
             android:background="#fa6f5a"
-            android:textSize="30dp"
+            android:textSize="25dp"
             android:textColor="#FFFFFF"
             android:textAlignment="center"
             android:autoText="false"
             android:singleLine="false"
-            android:layout_below="@+id/textView9"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="false"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="false"
-            android:paddingTop="15dp"
+        android:paddingTop="15dp"
             android:paddingBottom="15dp"
-            android:gravity="center_horizontal" />
+            android:gravity="center_horizontal"
+        android:textStyle="bold"
+        android:layout_above="@+id/textView11"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="104dp" />
 
     <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="don&apos;t have an account yet?"
             android:id="@+id/textView11"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
-            android:textSize="17dp"
+            android:textSize="20dp"
             android:textAlignment="center"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center" />
 
 </RelativeLayout>
 
