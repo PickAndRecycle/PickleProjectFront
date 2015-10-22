@@ -78,11 +78,6 @@
         </activity>
         <activity android:name=".ConfigurationActivity" >
         </activity>
-        <activity
-            android:name=".newsfeed"
-            android:label="@string/title_activity_newsfeed"
-            android:theme="@style/AppTheme" >
-        </activity>
     </application>
 
 </manifest>

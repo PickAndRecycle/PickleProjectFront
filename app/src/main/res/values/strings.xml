@@ -38,5 +38,4 @@
     <string name="LocationText">LOCATION</string>
     <string name="profileText">PROFILE</string>
     <string name="configurationButton">configurationButton</string>
-    <string name="title_activity_newsfeed">newsfeed</string>
 </resources>
