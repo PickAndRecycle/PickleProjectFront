@@ -38,4 +38,10 @@
     <string name="LocationText">LOCATION</string>
     <string name="profileText">PROFILE</string>
     <string name="configurationButton">configurationButton</string>
+    <string name = "binText">Bin</string>
+    <string name="submitText">SUBMIT</string>
+    <string name="title_activity_other_trash_dialog">other_trash_dialog</string>
+    <string name="detailsText">DETAILS</string>
+    <string name="titleText">TITLE</string>
+    <string name="conditionText">CONDITION</string>
 </resources>
