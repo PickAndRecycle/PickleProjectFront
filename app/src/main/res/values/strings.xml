@@ -13,6 +13,12 @@
     <string name="title_activity_pick_recycled">pickRecycled</string>
     <string name="title_activity_pick_green">pickGreen</string>
     <string name="title_activity_registration">RegistrationActivity</string>
+    <string name="usernameText">username</string>
+    <string name="emailText">email</string>
+    <string name="passwordText">password</string>
+    <string name="passwordConfirmationText">password</string>
+    <string name="signUpText">SIGN UP</string>
+    <string name="joinPickleText">JOIN PICKLE</string>
     <string name="title_activity_individual__trash__info">Individual_Trash_Info</string>
     <string name="back">BACK</string>
 </resources>

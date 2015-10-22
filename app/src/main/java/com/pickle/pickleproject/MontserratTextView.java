@@ -8,11 +8,11 @@ import android.widget.TextView;
 /**
  * Created by danieldeem on 10/21/2015.
  */
-public class MyCustomTextView extends TextView {
+public class MontserratTextView extends TextView {
 
-    public MyCustomTextView(Context context, AttributeSet attrs) {
+    public MontserratTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        this.setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/OpenSans-Regular.ttf"));
+        this.setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/Montserrat-Regular.otf"));
 
 
     }
