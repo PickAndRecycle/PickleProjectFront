@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.View;
+import android.widget.ImageButton;
 
 public class ProfileActivity extends AppCompatActivity {
     private GestureDetector gestureDetector;
@@ -14,6 +16,18 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         gestureDetector = new GestureDetector(new SwipeGestureDetector());
+        ImageButton configurationButton = (ImageButton) findViewById(R.id.configurationButton);
+        configurationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeConfiguration();
+            }
+        });
+    }
+
+    private void changeConfiguration(){
+        Intent intent = new Intent(this, ConfigurationActivity.class);
+        startActivity(intent);
     }
     public boolean onTouchEvent(MotionEvent event) {
         if (gestureDetector.onTouchEvent(event)) {
@@ -24,7 +38,7 @@ public class ProfileActivity extends AppCompatActivity {
     private void onUpSwipe(){
         Intent intent = new Intent(this, Home.class);
         startActivity(intent);
-        this.overridePendingTransition(R.anim.push_up_in,R.anim.push_up_out);
+        this.overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
     }
     private class SwipeGestureDetector
             extends GestureDetector.SimpleOnGestureListener {
