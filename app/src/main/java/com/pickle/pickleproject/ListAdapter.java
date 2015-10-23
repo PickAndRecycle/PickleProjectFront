@@ -14,13 +14,13 @@ import org.w3c.dom.Text;
 /**
  * Created by Yanuar Wicaksana on 10/22/15.
  */
-public class ListAdapter extends ArrayAdapter<MyData> {
+public class ListAdapter extends ArrayAdapter<Trash> {
 
     private Context context;
     private int resource;
-    private MyData[] objects;
+    private Trash[] objects;
 
-    public ListAdapter(Context context, int resource,MyData[] objects) {
+    public ListAdapter(Context context, int resource,Trash[] objects) {
 
         super(context, resource, objects);
 
@@ -43,11 +43,11 @@ public class ListAdapter extends ArrayAdapter<MyData> {
         TextView dash = (TextView) row.findViewById(R.id.dash);
 
         address.setText((CharSequence)
-                objects[position].myAddress);
+                objects[position].description);
         number.setText(Integer.toString(
-                objects[position].myNum));
+                objects[position].total));
         distance.setText(Integer.toString(
-                objects[position].myDist));
+                objects[position].distance));
 
         return row;
     }

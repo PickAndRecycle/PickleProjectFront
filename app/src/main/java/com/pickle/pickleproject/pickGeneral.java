@@ -1,6 +1,7 @@
 package com.pickle.pickleproject;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,32 +14,67 @@ import android.widget.Button;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+/*
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.StatusLine;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+*/
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class pickGeneral extends AppCompatActivity {
     private GestureDetector gestureDetector;
-
+/*
+    public String readJSONFeed(String URL) {
+        StringBuilder stringBuilder = new StringBuilder();
+        HttpClient httpClient = new DefaultHttpClient();
+        HttpGet httpGet = new HttpGet(URL);
+        try {
+            HttpResponse response = httpClient.execute(httpGet);
+            StatusLine statusLine = response.getStatusLine();
+            int statusCode = statusLine.getStatusCode();
+            if (statusCode == 200) {
+                HttpEntity entity = response.getEntity();
+                InputStream inputStream = entity.getContent();
+                BufferedReader reader = new BufferedReader(
+                        new InputStreamReader(inputStream));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    stringBuilder.append(line);
+                }
+                inputStream.close();
+            } else {
+                Log.d("JSON", "Failed to download file");
+            }
+        } catch (Exception e) {
+            Log.d("readJSONFeed", e.getLocalizedMessage());
+        }
+        return stringBuilder.toString();
+    }
+*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pick_general);
 
         //String[] myStringArray={"A","B","C"};
-        MyData myDataArray[]=new MyData[]{
-                new MyData("Address1",10,5),
-                new MyData("Address2",20,6),
-                new MyData("Address3",30,7),
-                new MyData("Address4",40,5),
-                new MyData("Address5",50,6),
-                new MyData("Address6",60,7),
-                new MyData("Address7",70,5),
-                new MyData("Address8",80,6),
-                new MyData("Address9",90,7),
-        };
-
-        ListAdapter myAdapter=new ListAdapter( this, R.layout.rowlayout, myDataArray);
-        ListView myList = (ListView)
-                findViewById(R.id.listView);
-        myList.setAdapter(myAdapter);
+        new JSONTask().execute("http://private-22976-pickleapi.apiary-mock.com/trash");
 
         /*
         ArrayAdapter<String> myAdapter=new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, myStringArray);
@@ -117,8 +153,90 @@ public class pickGeneral extends AppCompatActivity {
         startActivity(intent);
     }
 
-/* Slide gestures */
 
+
+    public class JSONTask extends AsyncTask<String,String,List<Trash>> {
+
+        @Override
+        protected List<Trash> doInBackground(String... params) {
+            HttpURLConnection connection = null;
+            BufferedReader reader = null;
+
+            try {
+                URL url = new URL(params[0]);
+                connection = (HttpURLConnection) url.openConnection();
+                connection.connect();
+
+                InputStream stream = connection.getInputStream();
+
+                StringBuffer buffer = new StringBuffer();
+
+                reader = new BufferedReader(new InputStreamReader(stream));
+
+                String line = "";
+                while((line = reader.readLine()) != null){
+                    buffer.append(line);
+                }
+                String finalJson = buffer.toString();
+
+                JSONObject parentObject = new JSONObject(finalJson);
+                JSONArray parentArray = parentObject.getJSONArray("Result");
+
+                List<Trash> Trashlist = new ArrayList<Trash>();
+
+                for(int i=0 ; i<parentArray.length();i++){
+                    JSONObject finalObject = parentArray.getJSONObject(i);
+
+                    Trash trashObj = new Trash();
+                    trashObj.setDesc(finalObject.getString("description"));
+                    trashObj.setDistance(finalObject.getInt("distance"));
+                    trashObj.setTotal(finalObject.getInt("total"));
+
+                    Trashlist.add(trashObj);
+
+                }
+
+
+                return Trashlist;
+
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } finally {
+                if (connection != null) {
+                    connection.disconnect();
+                }
+                try {
+                    if(reader != null){
+                        reader.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(List<Trash> Result) {
+            super.onPostExecute(Result);
+
+            //Log.d("IDOBJECT",Result.get(0).getDesc());
+
+            Trash[] trashArray = Result.toArray(new Trash[0]);
+            ListAdapter myAdapter=new ListAdapter(pickGeneral.this, R.layout.rowlayout, trashArray);
+            ListView myList = (ListView)
+                    findViewById(R.id.listView);
+            myList.setAdapter(myAdapter);
+
+        }
+    }
+
+    /* Slide gestures */
     public boolean onTouchEvent(MotionEvent event) {
         if (gestureDetector.onTouchEvent(event)) {
             return true;
