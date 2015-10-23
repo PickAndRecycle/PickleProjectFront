@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.View;
+import android.widget.ImageButton;
 
 public class ProfileActivity extends AppCompatActivity {
     private GestureDetector gestureDetector;
@@ -14,7 +16,20 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         gestureDetector = new GestureDetector(new SwipeGestureDetector());
+        ImageButton configurationButton = (ImageButton) findViewById(R.id.configurationButton);
+        configurationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeConfiguration();
+            }
+        });
     }
+
+    private void changeConfiguration(){
+        Intent intent = new Intent(this,ConfigurationActivity.class);
+        startActivity(intent);
+    }
+
     public boolean onTouchEvent(MotionEvent event) {
         if (gestureDetector.onTouchEvent(event)) {
             return true;
