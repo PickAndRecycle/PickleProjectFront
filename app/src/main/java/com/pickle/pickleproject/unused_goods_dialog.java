@@ -19,7 +19,7 @@ public class unused_goods_dialog extends AppCompatActivity {
         setContentView(R.layout.activity_unused_goods_dialog);
 
     Button submitUnusedButton = (Button) findViewById(R.id.submitButtonUnusedGoods);
-    Button backHomeButton = (Button) findViewById(R.id.trash_notification_home);
+    //Button backHomeButton = (Button) findViewById(R.id.trash_notification_home);
 
     submitUnusedButton.setOnClickListener(new View.OnClickListener() {
         @Override
@@ -27,12 +27,12 @@ public class unused_goods_dialog extends AppCompatActivity {
             changeSubmitButton();
         }
     });
-    backHomeButton.setOnClickListener(new View.OnClickListener() {
+    /*backHomeButton.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             changeBackHomeButton();
         }
-    });
+    });*/
 
     }
 

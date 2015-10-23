@@ -90,6 +90,8 @@
         </activity>
         <activity android:name=".ProfileActivity" >
         </activity>
+        <activity android:name=".TrashNotification">
+        </activity>
     </application>
 
 </manifest>
