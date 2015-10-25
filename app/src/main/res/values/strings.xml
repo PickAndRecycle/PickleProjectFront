@@ -39,4 +39,12 @@
     <string name="profileText">PROFILE</string>
     <string name="configurationButton">configurationButton</string>
     <string name="title_activity_other_trash_dialog" />
+    <string name="SettingText">SETTINGS</string>
+    <string name="AboutUsText">ABOUT US</string>
+    <string name="TermsOfServiceText">TERMS OF SERVICE</string>
+    <string name="PrivacyPolicyText">PRIVACY POLICY</string>
+    <string name="BackToMyProfileText">BACK TO MY PROFILE</string>
+    <string name="ClearPickleJarText">CLEAR PICKLE JAR</string>
+    <string name="ChangeLanguage">CHANGE LANGUAGE</string>
+    <string name="LoremIpsumText">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a metus elit. Fusce congue feugiat risus, sed tempor mi ultrices nec. Ut id tempus mi. Aliquam rhoncus, orci eget convallis fermentum, augue ipsum aliquam tellus, nec semper arcu arcu blandit diam. Aliquam in nibh commodo, tempus ligula non, placerat elit. Sed semper erat felis, ut lobortis libero posuere vitae. Phasellus tristique interdum rhoncus. Phasellus porttitor malesuada ultricies. Suspendisse tempus ipsum ut arcu pellentesque, ut sagittis sapien volutpat. In lectus est, ultricies ut dolor et, molestie commodo dui. Maecenas porta sit amet elit et sodales. Duis elit purus, tincidunt ac eros vitae, gravida rutrum urna. Etiam euismod dolor eget quam pellentesque sagittis. Aenean accumsan eu sem a ultricies. Ut nunc</string>
 </resources>
