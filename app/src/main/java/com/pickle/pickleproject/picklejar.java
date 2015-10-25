@@ -1,9 +1,8 @@
 package com.pickle.pickleproject;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -32,6 +31,14 @@ public class picklejar extends AppCompatActivity {
         this.overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
     }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (gestureDetector.onTouchEvent(event)) {
+            return true;
+        }
+        return super.onTouchEvent(event);
+
+    }
 
     private void onLeftSwipe() {
         changeHome();

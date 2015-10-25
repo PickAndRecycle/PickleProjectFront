@@ -130,8 +130,8 @@ public class Home extends Activity   {
                         && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
                     Home.this.onLeftSwipe();
 
-                } /*if (-diffLeftRight > SWIPE_MIN_DISTANCE // right swipe
-                        && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) */else{
+                } if (-diffLeftRight > SWIPE_MIN_DISTANCE // right swipe
+                        && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY){
                     Home.this.onRightSwipe();
                 }
 

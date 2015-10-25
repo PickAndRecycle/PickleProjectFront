@@ -105,6 +105,10 @@
             android:label="@string/title_activity_individual_trash_info"
             android:theme="@style/AppTheme" >
         </activity>
+        <activity android:name=".picklejar">
+        </activity>
+        <activity android:name=".newsfeed">
+        </activity>
     </application>
 
 </manifest>
