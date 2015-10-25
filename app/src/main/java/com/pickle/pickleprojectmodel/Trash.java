@@ -1,4 +1,4 @@
-package com.pickle.pickleproject;
+package com.pickle.pickleprojectmodel;
 
 /**
  * Created by Yanuar Wicaksana on 10/15/15.
@@ -12,18 +12,22 @@ import java.util.*;
 
 public class Trash {
     public int id, status;
-    public String description;
+    public String description,title;
     public File photo;
     public Double latitude,longitude;
     public Time timestamp;
     public boolean report;
     public int distance;
-    public int total;
+    public int size;
+    public TrashCategories categories;
+    public UnusedCondition condition;
 
 
-    public Trash(int id, String description, int status, File photo, Double latitude, Double longitude, Time timestamp, boolean report, int distance, int total){
+    public Trash(int id, String description,String title, int status, File photo, Double latitude, Double longitude,
+                 Time timestamp, boolean report, int distance, int size, TrashCategories categories, UnusedCondition condition){
         this.id = id;
         this.description = description;
+        this.title = title;
         this.status = status;
         this.photo = photo;
         this.latitude = latitude;
@@ -31,7 +35,9 @@ public class Trash {
         this.timestamp = timestamp;
         this.report = report;
         this.distance = distance;
-        this.total = total;
+        this.size = size;
+        this.categories = categories;
+        this.condition = condition;
 
     }
     public Trash(){
@@ -64,6 +70,14 @@ public class Trash {
 
     public void setDesc(String desc) {
         this.description = desc;
+    }
+
+    public void setTitle(String newtitle) {
+        this.title = newtitle;
+    }
+
+    public String getTitle(){
+        return title;
     }
 
     public File getPhoto() {
@@ -114,14 +128,28 @@ public class Trash {
         return distance;
     }
 
-    public void setTotal(int newtotal){
-        this.total = newtotal;
+    public void setsize(int newsize){
+        this.size = newsize;
     }
 
-    public int getTotal(){
-        return total;
+    public int getsize(){
+        return size;
+    }
+    public void setCategories(TrashCategories newcategories){
+        this.categories = newcategories;
     }
 
+    public TrashCategories getCategories(){
+        return categories;
+    }
+
+    public void setCondition(UnusedCondition condition){
+        this.condition = condition;
+    }
+
+    public UnusedCondition getCondition(){
+        return condition;
+    }
 
     public int CalculateDist(Double lat, Double lon){
         double theta = this.longitude - lon;

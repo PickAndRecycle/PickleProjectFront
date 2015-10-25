@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import org.json.JSONArray;
-import org.w3c.dom.Text;
+import com.pickle.pickleprojectmodel.Trash;
+import com.pickle.pickleprojectmodel.TrashCategories;
 
 /**
  * Created by Yanuar Wicaksana on 10/22/15.
@@ -42,13 +42,16 @@ public class ListAdapter extends ArrayAdapter<Trash> {
         TextView bin = (TextView) row.findViewById(R.id.bin);
         TextView dash = (TextView) row.findViewById(R.id.dash);
 
-        address.setText((CharSequence)
-                objects[position].description);
-        number.setText(Integer.toString(
-                objects[position].total));
-        distance.setText(Integer.toString(
-                objects[position].distance));
 
+        distance.setText(Integer.toString(objects[position].distance));
+        if(objects[position].getCategories().equals(TrashCategories.UNUSED)){
+            number.setText((CharSequence) objects[position].getCondition().toString());
+            address.setText((CharSequence) objects[position].title);
+            bin.setText("");
+        } else {
+            number.setText(Integer.toString(objects[position].size));
+            address.setText((CharSequence) objects[position].description);
+        }
         return row;
     }
 
