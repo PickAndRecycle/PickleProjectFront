@@ -1,5 +1,6 @@
 package com.pickle.pickleproject;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,11 +9,15 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 
 public class picklejar extends AppCompatActivity {
+    private GestureDetector gestureDetector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_picklejar);
+
+        gestureDetector = new GestureDetector(new SwipeGestureDetector());
+
     }
 
     private void changeHome() {
@@ -27,12 +32,15 @@ public class picklejar extends AppCompatActivity {
         this.overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
     }
 
+
     private void onLeftSwipe() {
         changeHome();
     }
+
     private void onRightSwipe() {
         changeNews();
     }
+
 
     // Private class for gestures
     private class SwipeGestureDetector
