@@ -40,7 +40,6 @@
     <string name="configurationButton">configurationButton</string>
     <string name="title_activity_other_trash_dialog" />
     <string name="title_activity_individual_trash_info">individual_trash_info</string>
-    <string name="title_activity_maps">Pick_Map</string>
     <string name="title_activity_modify_request_unused">Modify_request_unused</string>
     <string-array name="Condition">
         <item>Good</item>
@@ -52,5 +51,4 @@
         <item>General Waste</item>
         <item>Green Waste</item>
     </string-array>
-
 </resources>
