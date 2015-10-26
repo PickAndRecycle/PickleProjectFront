@@ -40,7 +40,7 @@ public class Home extends Activity   {
 
         gestureDetector = new GestureDetector(new SwipeGestureDetector());
 
-        }
+    }
 
     private void historyJar() {
         Intent intent = new Intent(this, picklejar.class);
@@ -86,17 +86,20 @@ public class Home extends Activity   {
             return true;
         }
         return super.onTouchEvent(event);
+
     }
 
     private void onLeftSwipe() {
         changePick();
     }
 
-    private void onDownSwipe() {changeProfileActivity();}
+    private void onRightSwipe(){
+        historyJar();
+    }
 
-    /*private void onRightSwipe() {
-        // Do something
-    }*/
+    private void onDownSwipe() {
+        changeProfileActivity();
+    }
 
     // Private class for gestures
     private class SwipeGestureDetector
@@ -121,29 +124,26 @@ public class Home extends Activity   {
                 if (diffAbsLeftRight > SWIPE_MAX_OFF_PATH)
                     return false;
 
+
                 // Left swipe
                 if (diffLeftRight > SWIPE_MIN_DISTANCE
                         && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
                     Home.this.onLeftSwipe();
 
-                    // Right swipe
+                } if (-diffLeftRight > SWIPE_MIN_DISTANCE // right swipe
+                        && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY){
+                    Home.this.onRightSwipe();
                 }
 
                 if (diffAbsUpDown > SWIPE_MAX_OFF_PATH)
                     return false;
 
-                // Left swipe
+                // Down swipe
                 if (-diffUpDown > SWIPE_MIN_DISTANCE
                         && Math.abs(velocityY) > SWIPE_THRESHOLD_VELOCITY) {
                     Home.this.onDownSwipe();
 
-                    // Right swipe
                 }
-
-                 /*else if (-diff > SWIPE_MIN_DISTANCE
-                        && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                    YourActivity.this.onRightSwipe();
-                }*/
             } catch (Exception e) {
                 Log.e("YourActivity", "Error on gestures");
             }
