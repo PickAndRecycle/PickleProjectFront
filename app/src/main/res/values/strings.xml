@@ -50,5 +50,6 @@
         <item>General Waste</item>
         <item>Green Waste</item>
     </string-array>
+    <string name="title_activity_modify_request_other">Modify_request_other</string>
 
 </resources>

@@ -7,9 +7,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_modify_request_unused"
-    tools:context="com.pickle.pickleproject.Modify_request_unused">
-
+    tools:showIn="@layout/activity_modify_request_other"
+    tools:context="com.pickle.pickleproject.Modify_request_other">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -22,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="TITLE"
+            android:text="DESCRIPTION"
             android:id="@+id/textView12"
             android:textSize="30dp"
             android:textColor="#00B5B5" />
@@ -36,7 +35,7 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="100dp"
         android:layout_below="@+id/linearLayout5"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -46,17 +45,51 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="DESCRIPTION"
+            android:text="WASTE TYPE"
             android:id="@+id/textView13"
             android:textSize="30dp"
             android:textColor="#00B5B5" />
 
-        <EditText
+        <Spinner
+            android:entries="@array/Waste"
             android:layout_width="match_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/editText7"
-            android:layout_gravity="center_horizontal" />
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner"
+            android:layout_gravity="right" />
+    </LinearLayout>
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@+id/linearLayout6"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/linearLayout7">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="SIZE"
+            android:id="@+id/textView14"
+            android:textSize="30dp"
+            android:textColor="#00B5B5" />
+
+        <EditText
+            android:layout_width="124dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/editText6" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="BIN"
+            android:id="@+id/textView15"
+            android:textSize="30dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -84,30 +117,4 @@
             android:textColor="#FFFFFF"
             android:background="#00B5B5" />
     </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_below="@+id/linearLayout6"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="CONDITION"
-            android:id="@+id/textView16"
-            android:textSize="30dp"
-            android:textColor="#00B5B5" />
-
-        <Spinner
-            android:entries="@array/Condition"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/spinner2"
-            android:layout_weight="1" />
-    </LinearLayout>
-
 </RelativeLayout>

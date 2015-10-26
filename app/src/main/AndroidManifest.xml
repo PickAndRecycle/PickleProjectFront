@@ -98,6 +98,11 @@
             android:label="@string/title_activity_modify_request_unused"
             android:theme="@style/AppTheme" >
         </activity>
+        <activity
+            android:name=".Modify_request_other"
+            android:label="@string/title_activity_modify_request_other"
+            android:theme="@style/AppTheme" >
+        </activity>
     </application>
 
 </manifest>
