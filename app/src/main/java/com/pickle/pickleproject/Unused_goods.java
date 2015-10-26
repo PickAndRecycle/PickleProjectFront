@@ -13,6 +13,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.pickle.pickleprojectmodel.Trash;
+import com.pickle.pickleprojectmodel.TrashCategories;
+import com.pickle.pickleprojectmodel.UnusedCondition;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,8 +30,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 public class Unused_goods extends AppCompatActivity {
@@ -174,11 +176,22 @@ public class Unused_goods extends AppCompatActivity {
                     JSONObject finalObject = parentArray.getJSONObject(i);
 
                     Trash trashObj = new Trash();
-                    trashObj.setDesc(finalObject.getString("description"));
-                    trashObj.setDistance(finalObject.getInt("distance"));
-                    trashObj.setTotal(finalObject.getInt("total"));
+                    
+                    if(finalObject.getString("categories").equals("Unused Goods")){
+                        Log.d("Categories", finalObject.getString("categories"));
+                        trashObj.setCategories(TrashCategories.UNUSED);
+                        trashObj.setDistance(finalObject.getInt("distance"));
+                        trashObj.setTitle(finalObject.getString("title"));
+                        if(finalObject.getString("condition").equals("Good" )){
+                            trashObj.setCondition(UnusedCondition.GOOD);
+                        } else if(finalObject.getString("condition").equals("Bad")){
+                            trashObj.setCondition(UnusedCondition.BAD);
+                        } else if (finalObject.getString("condition").equals("New")){
+                            trashObj.setCondition(UnusedCondition.NEW);
+                        }
+                        Trashlist.add(trashObj);
+                    }
 
-                    Trashlist.add(trashObj);
 
                 }
 

@@ -13,6 +13,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.pickle.pickleprojectmodel.Trash;
+import com.pickle.pickleprojectmodel.TrashCategories;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -139,11 +142,13 @@ public class pickRecycled extends AppCompatActivity {
                     JSONObject finalObject = parentArray.getJSONObject(i);
 
                     Trash trashObj = new Trash();
-                    trashObj.setDesc(finalObject.getString("description"));
-                    trashObj.setDistance(finalObject.getInt("distance"));
-                    trashObj.setTotal(finalObject.getInt("total"));
-
-                    Trashlist.add(trashObj);
+                    if(finalObject.getString("categories").equals("Recycleable Waste") ){
+                        trashObj.setDesc(finalObject.getString("description"));
+                        trashObj.setDistance(finalObject.getInt("distance"));
+                        trashObj.setsize(finalObject.getInt("size"));
+                        trashObj.setCategories(TrashCategories.RECYCLED);
+                        Trashlist.add(trashObj);
+                    }
 
                 }
 

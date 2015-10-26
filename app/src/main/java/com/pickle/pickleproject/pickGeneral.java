@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 /*
@@ -22,6 +21,9 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 */
+
+import com.pickle.pickleprojectmodel.Trash;
+import com.pickle.pickleprojectmodel.TrashCategories;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -188,11 +190,14 @@ public class pickGeneral extends AppCompatActivity {
                     JSONObject finalObject = parentArray.getJSONObject(i);
 
                     Trash trashObj = new Trash();
-                    trashObj.setDesc(finalObject.getString("description"));
-                    trashObj.setDistance(finalObject.getInt("distance"));
-                    trashObj.setTotal(finalObject.getInt("total"));
+                    if(finalObject.getString("categories").equals("General Waste") ){
+                        trashObj.setDesc(finalObject.getString("description"));
+                        trashObj.setDistance(finalObject.getInt("distance"));
+                        trashObj.setsize(finalObject.getInt("size"));
+                        trashObj.setCategories(TrashCategories.GENERAL);
+                        Trashlist.add(trashObj);
+                    }
 
-                    Trashlist.add(trashObj);
 
                 }
 
