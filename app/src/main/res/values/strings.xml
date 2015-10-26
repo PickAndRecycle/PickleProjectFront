@@ -39,4 +39,6 @@
     <string name="profileText">PROFILE</string>
     <string name="configurationButton">configurationButton</string>
     <string name="title_activity_other_trash_dialog" />
+    <string name="title_activity_individual_trash_info">individual_trash_info</string>
+    <string name="title_activity_maps">Pick_Map</string>
 </resources>
