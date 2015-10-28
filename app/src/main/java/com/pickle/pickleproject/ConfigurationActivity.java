@@ -13,6 +13,24 @@ public class ConfigurationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuration);
 
+        Button TermsOfServiceButton = (Button) findViewById(R.id.TermsOfServiceButton);
+
+        TermsOfServiceButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeTermsOfService();
+            }
+        });
+
+        Button PrivacyPolicyButton = (Button) findViewById(R.id.PrivacyPolicyButton);
+
+        PrivacyPolicyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changePrivacyPolicy();
+            }
+        });
+
         Button backToMyProfileButton = (Button) findViewById(R.id.BackToMyProfileButton);
 
         backToMyProfileButton.setOnClickListener(new View.OnClickListener() {
@@ -21,6 +39,16 @@ public class ConfigurationActivity extends AppCompatActivity {
                 changeProfile();
             }
         });
+    }
+
+    private void changeTermsOfService(){
+        Intent intent = new Intent(this, TermsOfService.class);
+        startActivity(intent);
+    }
+
+    private void changePrivacyPolicy(){
+        Intent intent = new Intent(this, PrivacyPolicyActivity.class);
+        startActivity(intent);
     }
 
     private void changeProfile(){

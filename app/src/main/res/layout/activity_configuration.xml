@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="SETTINGS"
+            android:text="@string/SettingText"
             android:id="@+id/SettingsText"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
@@ -71,7 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="CLEAR PICKLE JAR"
+            android:text="@string/ClearPickleJarText"
             android:id="@+id/ClearPickleJarText"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
@@ -103,7 +103,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="CHANGE LANGUAGE"
+            android:text="@string/ChangeLanguage"
             android:id="@+id/ChangeLanguageText"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
@@ -134,7 +134,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="ABOUT US"
+            android:text="@string/AboutUsText"
             android:id="@+id/AboutUsText"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
@@ -165,7 +165,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="TERMS OF SERVICE"
+            android:text="@string/TermsOfServiceText"
             android:id="@+id/TermsOfServiceText"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
@@ -197,7 +197,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="PRIVACY POLICY"
+            android:text="@string/PrivacyPolicyText"
             android:id="@+id/PrivacyPolicyText"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
@@ -230,7 +230,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="BACK TO MY PROFILE"
+            android:text="@string/BackToMyProfileText"
             android:id="@+id/BackToMyProfileText"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
