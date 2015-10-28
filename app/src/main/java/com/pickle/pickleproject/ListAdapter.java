@@ -2,11 +2,15 @@ package com.pickle.pickleproject;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.support.v7.app.AppCompatActivity;
 
 import com.pickle.pickleprojectmodel.Trash;
 import com.pickle.pickleprojectmodel.TrashCategories;
@@ -34,8 +38,8 @@ public class ListAdapter extends ArrayAdapter<Trash> {
                         View convertView,
                         ViewGroup parent) {
         LayoutInflater inflater= ((Activity) context).getLayoutInflater();
-        View row=inflater.inflate(resource, parent, false);
-        TextView address= (TextView) row.findViewById(R.id.address);
+        final View row=inflater.inflate(resource, parent, false);
+        final TextView address= (TextView) row.findViewById(R.id.address);
         TextView number=(TextView) row.findViewById(R.id.number);
         TextView distance = (TextView) row.findViewById(R.id.distance);
         TextView km = (TextView) row.findViewById(R.id.km);
@@ -52,8 +56,19 @@ public class ListAdapter extends ArrayAdapter<Trash> {
             number.setText(Integer.toString(objects[position].size));
             address.setText((CharSequence) objects[position].description);
         }
+        row.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //row.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
+                Intent intent = new Intent(context, individual_trash_info.class);
+                context.startActivity(intent);
+            }
+        });
         return row;
     }
+
+
+
 
 
 }

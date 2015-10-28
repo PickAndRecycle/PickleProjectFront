@@ -49,7 +49,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="285dp"
+        android:layout_height="match_parent"
         android:background="#f0654c"
         android:id="@+id/trashreport"
         android:layout_below="@+id/trashthrow"

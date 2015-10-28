@@ -48,8 +48,13 @@
             android:label="@string/title_activity_registration" >
         </activity>
         <activity
+            android:name=".individual_trash_info"
+            android:label="@string/title_activity_individual_trash_info"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
             android:name=".Thrower_Info"
-            android:label="@string/title_activity_individual__trash__info"
+            android:label="@string/title_activity_thrower_info"
             android:theme="@style/AppTheme" >
         </activity>
         <activity
@@ -74,7 +79,7 @@
         </activity>
         <activity
             android:name=".Throw_or_Report"
-            android:label="@string/title_activity_throw_or__report"
+            android:label="@string/title_activity_throw_or_report"
             android:theme="@style/AppTheme" >
         </activity>
         <activity android:name=".ConfigurationActivity" >

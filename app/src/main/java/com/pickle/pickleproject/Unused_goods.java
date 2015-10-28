@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -101,6 +102,10 @@ public class Unused_goods extends AppCompatActivity {
         this.overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
     }
 
+    private void changeIndividual(){
+        Intent intent = new Intent(this, individual_trash_info.class);
+        startActivity(intent);
+    }
 
 
     @Override
@@ -142,7 +147,7 @@ public class Unused_goods extends AppCompatActivity {
         changeHome();
     }
 
-
+    // To pull the JSON request
     public class JSONTask extends AsyncTask<String,String,List<Trash>>{
 
         @Override
@@ -231,7 +236,14 @@ public class Unused_goods extends AppCompatActivity {
             ListView myList = (ListView)
                     findViewById(R.id.listView4);
             myList.setAdapter(myAdapter);
-
+            /*
+            AdapterView.OnItemClickListener ClickedHandler = new AdapterView.OnItemClickListener(){
+                public void onItemClick(AdapterView parent, View v, int position, long id){
+                    changeIndividual();
+                }
+            };
+            myList.setOnItemClickListener(ClickedHandler);
+            */
         }
     }
 

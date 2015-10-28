@@ -12,8 +12,8 @@ import java.util.*;
 
 public class Trash {
     public int id, status;
-    public String description,title;
-    public File photo;
+    public String description,title, photo_url;
+    public File photo_data;
     public Double latitude,longitude;
     public Time timestamp;
     public boolean report;
@@ -23,13 +23,13 @@ public class Trash {
     public UnusedCondition condition;
 
 
-    public Trash(int id, String description,String title, int status, File photo, Double latitude, Double longitude,
+    public Trash(int id, String description,String title, int status, File photo_data, Double latitude, Double longitude,
                  Time timestamp, boolean report, int distance, int size, TrashCategories categories, UnusedCondition condition){
         this.id = id;
         this.description = description;
         this.title = title;
         this.status = status;
-        this.photo = photo;
+        this.photo_data = photo_data;
         this.latitude = latitude;
         this.longitude = longitude;
         this.timestamp = timestamp;
@@ -38,6 +38,7 @@ public class Trash {
         this.size = size;
         this.categories = categories;
         this.condition = condition;
+        this.photo_url = "";
 
     }
     public Trash(){
@@ -80,12 +81,8 @@ public class Trash {
         return title;
     }
 
-    public File getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(File photo) {
-        this.photo = photo;
+    public void setPhoto(File newphoto) {
+        this.photo_data = newphoto;
     }
 
     public Double getLatitude() {
@@ -149,6 +146,14 @@ public class Trash {
 
     public UnusedCondition getCondition(){
         return condition;
+    }
+
+    public void setPhoto_url(String url){
+        this.photo_url = url;
+    }
+
+    public String getPhoto_url(){
+        return photo_url;
     }
 
     public int CalculateDist(Double lat, Double lon){
