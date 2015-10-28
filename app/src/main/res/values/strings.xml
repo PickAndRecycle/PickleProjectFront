@@ -19,7 +19,8 @@
     <string name="passwordConfirmationText">password</string>
     <string name="signUpText">SIGN UP</string>
     <string name="joinPickleText">JOIN PICKLE</string>
-    <string name="title_activity_individual__trash__info">Individual_Trash_Info</string>
+    <string name="title_activity_individual_trash_info">individual_trash_info</string>
+    <string name="title_activity_thrower_info">Thrower_Info</string>
     <string name="back">BACK</string>
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="ProfilePicture">profilePicture</string>
@@ -33,7 +34,7 @@
     <string name="title_activity_report_success">reportSuccess</string>
     <string name="title_activity_unused_goods_dialog">unusedGoodsDialog</string>
     <string name="title_activity_add_description">add_description</string>
-    <string name="title_activity_throw_or__report">Throw_or_Report</string>
+    <string name="title_activity_throw_or_report">Throw_or_Report</string>
     <string name="title_activity_login">login</string>
     <string name="LocationText">LOCATION</string>
     <string name="profileText">PROFILE</string>

@@ -109,7 +109,7 @@ public class pickGreen extends AppCompatActivity {
         this.overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
     }
 
-
+    // To pull the JSON request
     public class JSONTask extends AsyncTask<String,String,List<Trash>> {
 
         @Override
