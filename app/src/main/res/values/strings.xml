@@ -53,4 +53,5 @@
         <item>Green Waste</item>
     </string-array>
 
+    <string name="title_activity_pick_details">pick_details</string>
 </resources>

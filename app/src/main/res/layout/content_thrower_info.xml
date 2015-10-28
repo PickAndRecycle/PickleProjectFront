@@ -59,7 +59,7 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="CALL"
-                    android:id="@+id/call_button_text"
+                    android:id="@+id/call_button"
                     android:textColor="#FFFFFF"
                     android:layout_marginBottom="32dp"
                     android:layout_alignParentBottom="true"
