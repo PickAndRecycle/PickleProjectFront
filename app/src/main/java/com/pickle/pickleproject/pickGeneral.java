@@ -22,6 +22,10 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 */
 
+import com.google.gson.Gson;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
 import com.pickle.pickleprojectmodel.Trash;
 import com.pickle.pickleprojectmodel.TrashCategories;
 
@@ -33,6 +37,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -42,34 +47,7 @@ import java.util.List;
 
 public class pickGeneral extends AppCompatActivity {
     private GestureDetector gestureDetector;
-/*
-    public String readJSONFeed(String URL) {
-        StringBuilder stringBuilder = new StringBuilder();
-        HttpClient httpClient = new DefaultHttpClient();
-        HttpGet httpGet = new HttpGet(URL);
-        try {
-            HttpResponse response = httpClient.execute(httpGet);
-            StatusLine statusLine = response.getStatusLine();
-            int statusCode = statusLine.getStatusCode();
-            if (statusCode == 200) {
-                HttpEntity entity = response.getEntity();
-                InputStream inputStream = entity.getContent();
-                BufferedReader reader = new BufferedReader(
-                        new InputStreamReader(inputStream));
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    stringBuilder.append(line);
-                }
-                inputStream.close();
-            } else {
-                Log.d("JSON", "Failed to download file");
-            }
-        } catch (Exception e) {
-            Log.d("readJSONFeed", e.getLocalizedMessage());
-        }
-        return stringBuilder.toString();
-    }
-*/
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -156,7 +134,7 @@ public class pickGeneral extends AppCompatActivity {
     }
 
 
-
+// To pull the JSON request
     public class JSONTask extends AsyncTask<String,String,List<Trash>> {
 
         @Override
@@ -189,12 +167,16 @@ public class pickGeneral extends AppCompatActivity {
                 for(int i=0 ; i<parentArray.length();i++){
                     JSONObject finalObject = parentArray.getJSONObject(i);
 
+                    //Gson gson = new Gson();
                     Trash trashObj = new Trash();
                     if(finalObject.getString("categories").equals("General Waste") ){
+                        //Trash trashObj = gson.fromJson(String.valueOf(finalObject),Trash.class);
+
                         trashObj.setDesc(finalObject.getString("description"));
                         trashObj.setDistance(finalObject.getInt("distance"));
                         trashObj.setsize(finalObject.getInt("size"));
                         trashObj.setCategories(TrashCategories.GENERAL);
+
                         Trashlist.add(trashObj);
                     }
 
@@ -290,6 +272,22 @@ public class pickGeneral extends AppCompatActivity {
                 Log.e("YourActivity", "Error on gestures");
             }
             return false;
+        }
+    }
+
+    private class TrashCategoriesDeserializer implements JsonDeserializer<TrashCategories>{
+        public TrashCategories deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context){
+            if(json.getAsJsonPrimitive().getAsString().equals("Unused Goods")){
+                return TrashCategories.UNUSED;
+            } else if (json.getAsJsonPrimitive().getAsString().equals("Green Waste")){
+                return TrashCategories.GREEN;
+            } else if (json.getAsJsonPrimitive().getAsString().equals("General Waste")){
+                return TrashCategories.GENERAL;
+            } else if (json.getAsJsonPrimitive().getAsString().equals("Recycleable Waste")){
+                return TrashCategories.RECYCLED;
+            } else{
+                return TrashCategories.UNSPECIFIED;
+            }
         }
     }
 

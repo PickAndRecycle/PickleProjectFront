@@ -7,13 +7,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <!--
-         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
-         Google Maps Android API v2, but you must specify either coarse or fine
-         location permissions for the 'MyLocation' functionality. 
-    -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/logo"
@@ -55,8 +48,13 @@
             android:label="@string/title_activity_registration" >
         </activity>
         <activity
+            android:name=".individual_trash_info"
+            android:label="@string/title_activity_individual_trash_info"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
             android:name=".Thrower_Info"
-            android:label="@string/title_activity_individual__trash__info"
+            android:label="@string/title_activity_thrower_info"
             android:theme="@style/AppTheme" >
         </activity>
         <activity
@@ -81,7 +79,7 @@
         </activity>
         <activity
             android:name=".Throw_or_Report"
-            android:label="@string/title_activity_throw_or__report"
+            android:label="@string/title_activity_throw_or_report"
             android:theme="@style/AppTheme" >
         </activity>
         <activity android:name=".ConfigurationActivity" >
@@ -98,16 +96,7 @@
         </activity>
         <activity android:name=".ProfileActivity" >
         </activity>
-        <activity android:name=".TrashNotification" >
-        </activity>
-        <activity
-            android:name=".individual_trash_info"
-            android:label="@string/title_activity_individual_trash_info"
-            android:theme="@style/AppTheme" >
-        </activity>
-        <activity android:name=".picklejar">
-        </activity>
-        <activity android:name=".newsfeed">
+        <activity android:name=".TrashNotification">
         </activity>
     </application>
 

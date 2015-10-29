@@ -19,7 +19,8 @@
     <string name="passwordConfirmationText">password</string>
     <string name="signUpText">SIGN UP</string>
     <string name="joinPickleText">JOIN PICKLE</string>
-    <string name="title_activity_individual__trash__info">Individual_Trash_Info</string>
+    <string name="title_activity_individual_trash_info">individual_trash_info</string>
+    <string name="title_activity_thrower_info">Thrower_Info</string>
     <string name="back">BACK</string>
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="ProfilePicture">profilePicture</string>
@@ -33,12 +34,31 @@
     <string name="title_activity_report_success">reportSuccess</string>
     <string name="title_activity_unused_goods_dialog">unusedGoodsDialog</string>
     <string name="title_activity_add_description">add_description</string>
-    <string name="title_activity_throw_or__report">Throw_or_Report</string>
+    <string name="title_activity_throw_or_report">Throw_or_Report</string>
     <string name="title_activity_login">login</string>
     <string name="LocationText">LOCATION</string>
     <string name="profileText">PROFILE</string>
     <string name="configurationButton">configurationButton</string>
     <string name="title_activity_other_trash_dialog" />
-    <string name="title_activity_individual_trash_info">individual_trash_info</string>
-    <string name="title_activity_maps">Pick_Map</string>
+    <string name="SettingText">SETTINGS</string>
+    <string name="AboutUsText">ABOUT US</string>
+    <string name="TermsOfServiceText">TERMS OF SERVICE</string>
+    <string name="PrivacyPolicyText">PRIVACY POLICY</string>
+    <string name="BackToMyProfileText">BACK TO MY PROFILE</string>
+    <string name="ClearPickleJarText">CLEAR PICKLE JAR</string>
+    <string name="ChangeLanguage">CHANGE LANGUAGE</string>
+    <string name="LoremIpsumText">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a metus elit. Fusce congue feugiat risus, sed tempor mi ultrices nec. Ut id tempus mi. Aliquam rhoncus, orci eget convallis fermentum, augue ipsum aliquam tellus, nec semper arcu arcu blandit diam. Aliquam in nibh commodo, tempus ligula non, placerat elit. Sed semper erat felis, ut lobortis libero posuere vitae. Phasellus tristique interdum rhoncus. Phasellus porttitor malesuada ultricies. Suspendisse tempus ipsum ut arcu pellentesque, ut sagittis sapien volutpat. In lectus est, ultricies ut dolor et, molestie commodo dui. Maecenas porta sit amet elit et sodales. Duis elit purus, tincidunt ac eros vitae, gravida rutrum urna. Etiam euismod dolor eget quam pellentesque sagittis. Aenean accumsan eu sem a ultricies. Ut nunc</string>
+    <string name="title_activity_modify_request_unused">Modify_request_unused</string>
+    <string-array name="Condition">
+        <item>Good</item>
+        <item>Normal</item>
+        <item>Bad</item>
+    </string-array>
+    <string-array name="Waste">
+        <item>Recycle Waste</item>
+        <item>General Waste</item>
+        <item>Green Waste</item>
+    </string-array>
+    <string name="title_activity_modify_request_other">Modify_request_other</string>
+
 </resources>

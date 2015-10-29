@@ -4,7 +4,7 @@ package com.pickle.pickleprojectmodel;
  * Created by Yanuar Wicaksana on 10/25/15.
  */
 public enum TrashCategories {
-    UNUSED, GENERAL, RECYCLED, GREEN;
+    UNUSED, GENERAL, RECYCLED, GREEN, UNSPECIFIED;
 
     @Override
     public String toString() {

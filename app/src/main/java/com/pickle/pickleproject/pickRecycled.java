@@ -108,7 +108,7 @@ public class pickRecycled extends AppCompatActivity {
         this.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
     }
 
-
+    // To pull the JSON request
     public class JSONTask extends AsyncTask<String,String,List<Trash>> {
 
         @Override
