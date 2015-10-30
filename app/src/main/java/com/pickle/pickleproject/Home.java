@@ -9,8 +9,10 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import java.io.File;
+
 
 
 public class Home extends Activity   {
@@ -36,6 +38,8 @@ public class Home extends Activity   {
 
             }
         });
+
+
 
 
         gestureDetector = new GestureDetector(new SwipeGestureDetector());

@@ -15,7 +15,7 @@ public class Trash {
     public String description,title, photo_url;
     public File photo_data;
     public Double latitude,longitude;
-    public Time timestamp;
+    public int timestamp;
     public boolean report;
     public int distance;
     public int size;
@@ -24,7 +24,7 @@ public class Trash {
 
 
     public Trash(int id, String description,String title, int status, File photo_data, Double latitude, Double longitude,
-                 Time timestamp, boolean report, int distance, int size, TrashCategories categories, UnusedCondition condition){
+                 int timestamp, boolean report, int distance, int size, TrashCategories categories, UnusedCondition condition){
         this.id = id;
         this.description = description;
         this.title = title;
@@ -101,11 +101,11 @@ public class Trash {
         this.longitude = longitude;
     }
 
-    public Time getTimestamp() {
+    public int getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(Time timestamp) {
+    public void setTimestamp(int timestamp) {
         this.timestamp = timestamp;
     }
 
