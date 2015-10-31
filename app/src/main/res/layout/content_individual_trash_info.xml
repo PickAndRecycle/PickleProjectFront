@@ -17,7 +17,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
-        <TextView
+        <com.pickle.pickleproject.MontserratTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -28,9 +28,17 @@
             android:textSize="20sp" />
     </RelativeLayout>
 
+<<<<<<< HEAD
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
+=======
+    <com.pickle.pickleproject.MontserratButton
+        android:layout_width="180dp"
+        android:layout_height="70dp"
+        android:text="BACK"
+        android:id="@+id/back_button_2"
+>>>>>>> 7376ff8a92381ce0f04ad47dbca3136ddb32544f
         android:layout_alignParentBottom="true"
         android:id="@+id/relativeLayout7">
 
@@ -54,6 +62,7 @@
                 android:layout_alignParentStart="true" />
         </RelativeLayout>
 
+<<<<<<< HEAD
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -73,4 +82,17 @@
                 android:layout_alignParentEnd="true" />
         </RelativeLayout>
     </RelativeLayout>
+=======
+    <com.pickle.pickleproject.MontserratButton
+        android:layout_width="180dp"
+        android:layout_height="70dp"
+        android:text="PICK"
+        android:id="@+id/pick_button"
+        android:layout_alignBottom="@+id/back_button_2"
+        android:layout_alignRight="@+id/relativeLayout6"
+        android:layout_alignEnd="@+id/relativeLayout6"
+        android:background="#00B5B5"
+        android:textSize="20sp"
+        android:textColor="#FFFFFF" />
+>>>>>>> 7376ff8a92381ce0f04ad47dbca3136ddb32544f
 </RelativeLayout>

@@ -6,7 +6,12 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+<<<<<<< HEAD
     
+=======
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+>>>>>>> 7376ff8a92381ce0f04ad47dbca3136ddb32544f
     <application
         android:allowBackup="true"
         android:icon="@mipmap/logo"
@@ -98,6 +103,14 @@
         </activity>
         <activity android:name=".TrashNotification">
         </activity>
+<<<<<<< HEAD
+=======
+        <activity
+            android:name=".Modify_request_unused"
+            android:label="@string/title_activity_modify_request_unused"
+            android:theme="@style/AppTheme" >
+        </activity>
+>>>>>>> 7376ff8a92381ce0f04ad47dbca3136ddb32544f
         <activity android:name=".TrashNotification" >
         </activity>
         <activity
@@ -105,9 +118,19 @@
             android:label="@string/title_activity_individual_trash_info"
             android:theme="@style/AppTheme" >
         </activity>
-        <activity android:name=".picklejar">
+        <activity android:name=".picklejar" >
         </activity>
-        <activity android:name=".newsfeed">
+        <activity android:name=".newsfeed" >
+        </activity>
+        <activity
+            android:name=".pick_details"
+            android:label="@string/title_activity_pick_details"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name=".view_article"
+            android:label="@string/title_activity_view_article"
+            android:theme="@style/AppTheme">
         </activity>
     </application>
 

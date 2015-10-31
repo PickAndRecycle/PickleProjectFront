@@ -13,6 +13,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
 import com.pickle.pickleprojectmodel.Trash;
 import com.pickle.pickleprojectmodel.TrashCategories;
 
@@ -24,6 +30,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -142,12 +149,18 @@ public class pickGreen extends AppCompatActivity {
                 for(int i=0 ; i<parentArray.length();i++){
                     JSONObject finalObject = parentArray.getJSONObject(i);
 
-                    Trash trashObj = new Trash();
+                    Trash trashObj;
+                    GsonBuilder gsonBuilder = new GsonBuilder();
+                    gsonBuilder.registerTypeAdapter(TrashCategories.class, new TrashCategoriesDeserialize());
+                    Gson gson = gsonBuilder.create();
                     if(finalObject.getString("categories").equals("Green Waste")){
+                        trashObj = gson.fromJson(String.valueOf(finalObject), Trash.class);
+                        /*
                         trashObj.setDesc(finalObject.getString("description"));
                         trashObj.setDistance(finalObject.getInt("distance"));
                         trashObj.setsize(finalObject.getInt("size"));
                         trashObj.setCategories(TrashCategories.GREEN);
+                        */
                         Trashlist.add(trashObj);
                     }
 
@@ -235,5 +248,21 @@ public class pickGreen extends AppCompatActivity {
         }
     }
 
+    private class TrashCategoriesDeserialize implements JsonDeserializer<TrashCategories> {
+        @Override
+        public TrashCategories deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+            if(json.getAsString().equals("Unused Goods")){
+                return TrashCategories.UNUSED;
+            } else if (json.getAsString().equals("General Waste")){
+                return TrashCategories.GENERAL;
+            } else if (json.getAsString().equals("Recycleable Waste")){
+                return TrashCategories.RECYCLED;
+            } else if (json.getAsString().equals("Green Waste")){
+                return TrashCategories.GREEN;
+            } else {
+                return TrashCategories.UNSPECIFIED;
+            }
+        }
+    }
 
 }

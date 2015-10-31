@@ -23,9 +23,10 @@
             android:background="@drawable/button"
             android:backgroundTint="#d8d8d8"
             android:foreground="@mipmap/unused_goods_icon"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:tint="#d8d8d8" />
+            android:tint="#d8d8d8"
+            android:layout_above="@+id/unusedGoodsText"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
         <TextView
             android:layout_width="wrap_content"

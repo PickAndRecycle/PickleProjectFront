@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,6 +50,8 @@ public class ListAdapter extends ArrayAdapter<Trash> {
 
         distance.setText(Integer.toString(objects[position].distance));
         if(objects[position].getCategories().equals(TrashCategories.UNUSED)){
+            //Log.d("position", Integer.toString(position));
+            //Log.d("id", Integer.toString(objects[position].id));
             number.setText((CharSequence) objects[position].getCondition().toString());
             address.setText((CharSequence) objects[position].title);
             bin.setText("");

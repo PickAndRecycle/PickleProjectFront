@@ -4,7 +4,7 @@ package com.pickle.pickleprojectmodel;
  * Created by Yanuar Wicaksana on 10/25/15.
  */
 public enum UnusedCondition {
-    GOOD, BAD, NEW;
+    GOOD, BAD, NEW, UNSPECIFIED;
 
     @Override
     public String toString() {

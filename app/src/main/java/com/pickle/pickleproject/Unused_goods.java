@@ -14,6 +14,17 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapter;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import com.pickle.pickleprojectmodel.Trash;
 import com.pickle.pickleprojectmodel.TrashCategories;
 import com.pickle.pickleprojectmodel.UnusedCondition;
@@ -26,6 +37,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -172,6 +184,7 @@ public class Unused_goods extends AppCompatActivity {
                 }
                 String finalJson = buffer.toString();
 
+
                 JSONObject parentObject = new JSONObject(finalJson);
                 JSONArray parentArray = parentObject.getJSONArray("Result");
 
@@ -180,13 +193,22 @@ public class Unused_goods extends AppCompatActivity {
                 for(int i=0 ; i<parentArray.length();i++){
                     JSONObject finalObject = parentArray.getJSONObject(i);
 
-                    Trash trashObj = new Trash();
-                    
+                    Trash trashObj;
+                    GsonBuilder gsonBuilder = new GsonBuilder();
+                    //Gson gsonBuilder = new GsonBuilder().registerTypeAdapterFactory(new TrashCategoriesDeserializer())
+                    //        .registerTypeAdapterFactory(new UnusedConditionDeserializer())
+                    //        .create();
+                    //gsonBuilder.registerTypeAdapter(TrashCategories.class, new TrashCategoriesDeserialize());
+                    gsonBuilder.registerTypeAdapter(UnusedCondition.class, new UnusedConditionDeserialize());
+                    Gson gson = gsonBuilder.create();
+
                     if(finalObject.getString("categories").equals("Unused Goods")){
-                        Log.d("Categories", finalObject.getString("categories"));
+                        trashObj = gson.fromJson(String.valueOf(finalObject), Trash.class);
+
                         trashObj.setCategories(TrashCategories.UNUSED);
-                        trashObj.setDistance(finalObject.getInt("distance"));
-                        trashObj.setTitle(finalObject.getString("title"));
+                        //trashObj.setDistance(finalObject.getInt("distance"));
+                        //trashObj.setTitle(finalObject.getString("title"));
+                        /*
                         if(finalObject.getString("condition").equals("Good" )){
                             trashObj.setCondition(UnusedCondition.GOOD);
                         } else if(finalObject.getString("condition").equals("Bad")){
@@ -194,6 +216,20 @@ public class Unused_goods extends AppCompatActivity {
                         } else if (finalObject.getString("condition").equals("New")){
                             trashObj.setCondition(UnusedCondition.NEW);
                         }
+                        */
+                        /*
+                        Log.d("id:", Integer.toString(trashObj.id));
+                        Log.d("description:", trashObj.description);
+                        Log.d("title:", trashObj.title);
+                        Log.d("status:", Integer.toString(trashObj.status));
+                        Log.d("latitude:", Double.toString(trashObj.latitude));
+                        Log.d("longitude:", Double.toString(trashObj.longitude));
+                        Log.d("timestamp:", Integer.toString(trashObj.timestamp));
+                        Log.d("distance:", Integer.toString(trashObj.distance));
+                        Log.d("size:", Integer.toString(trashObj.size));
+                        Log.d("categories", trashObj.categories.toString());
+                        Log.d("condition", trashObj.condition.toString());
+                        */
                         Trashlist.add(trashObj);
                     }
 
@@ -236,14 +272,7 @@ public class Unused_goods extends AppCompatActivity {
             ListView myList = (ListView)
                     findViewById(R.id.listView4);
             myList.setAdapter(myAdapter);
-            /*
-            AdapterView.OnItemClickListener ClickedHandler = new AdapterView.OnItemClickListener(){
-                public void onItemClick(AdapterView parent, View v, int position, long id){
-                    changeIndividual();
-                }
-            };
-            myList.setOnItemClickListener(ClickedHandler);
-            */
+
         }
     }
 
@@ -285,4 +314,128 @@ public class Unused_goods extends AppCompatActivity {
             return false;
         }
     }
+
+    private class TrashCategoriesDeserialize implements JsonDeserializer<TrashCategories> {
+        @Override
+        public TrashCategories deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+            if(json.getAsString().equals("Unused Goods")){
+                return TrashCategories.UNUSED;
+            } else if (json.getAsString().equals("General Waste")){
+                return TrashCategories.GENERAL;
+            } else if (json.getAsString().equals("Recycleable Waste")){
+                return TrashCategories.RECYCLED;
+            } else if (json.getAsString().equals("Green Waste")){
+                return TrashCategories.GREEN;
+            } else {
+                return TrashCategories.UNSPECIFIED;
+            }
+        }
+    }
+
+    private class UnusedConditionDeserialize implements JsonDeserializer<UnusedCondition>{
+        @Override
+        public UnusedCondition deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+            if(json.getAsString().equals("Good")){
+                return UnusedCondition.GOOD;
+            } else if(json.getAsString().equals("Bad")){
+                return UnusedCondition.BAD;
+            } else if(json.getAsString().equals("New")){
+                return UnusedCondition.NEW;
+            } else{
+                return UnusedCondition.UNSPECIFIED;
+            }
+        }
+    }
+
+/*
+    public abstract class CustomizedTypeAdapterFactory<C> implements TypeAdapterFactory {
+
+        private final Class<C> customizedClass;
+
+        public CustomizedTypeAdapterFactory(Class<C> customizedClass) {
+            this.customizedClass = customizedClass;
+        }
+
+        @SuppressWarnings("unchecked") // we use a runtime check to guarantee that 'C' and 'T' are equal
+        public final <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+            return type.getRawType() == customizedClass
+                    ? (TypeAdapter<T>) customizeMyClassAdapter(gson, (TypeToken<C>) type)
+                    : null;
+        }
+
+        private TypeAdapter<C> customizeMyClassAdapter(Gson gson, TypeToken<C> type) {
+            final TypeAdapter<C> delegate = gson.getDelegateAdapter(this, type);
+            final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+
+            return new TypeAdapter<C>() {
+
+                @Override public void write(JsonWriter out, C value) throws IOException {
+                    JsonElement tree = delegate.toJsonTree(value);
+                    beforeWrite(value, tree);
+                    elementAdapter.write(out, tree);
+                }
+
+
+                @Override public C read(JsonReader in) throws IOException {
+                    JsonElement tree = elementAdapter.read(in);
+                    afterRead(tree);
+                    return delegate.fromJsonTree(tree);
+                }
+            };
+        }
+
+
+        protected void beforeWrite(C source, JsonElement toSerialize) {
+
+        }
+
+
+        protected void afterRead(JsonElement deserialized) {
+            //return null;
+        }
+
+    }
+
+    private class TrashCategoriesDeserializer extends CustomizedTypeAdapterFactory<TrashCategories>{
+
+        TrashCategoriesDeserializer(){
+            super(TrashCategories.class);
+        }
+
+        @Override
+        protected void afterRead( JsonElement deserialized) {
+            if(deserialized.getAsString().equals("Unused Goods")){
+                TrashCategories.UNUSED;
+            } else if (deserialized.getAsString().equals("General Waste")){
+                return TrashCategories.GENERAL;
+            } else if (deserialized.getAsString().equals("Recycleable Waste")){
+                return TrashCategories.RECYCLED;
+            } else if (deserialized.getAsString().equals("Green Waste")){
+                return TrashCategories.GREEN;
+            } else {
+                return TrashCategories.UNSPECIFIED;
+            }
+        }
+
+    }
+
+    private class UnusedConditionDeserializer extends CustomizedTypeAdapterFactory<UnusedCondition>{
+        UnusedConditionDeserializer(){
+            super(UnusedCondition.class);
+        }
+
+        @Override
+        protected UnusedCondition afterRead2(JsonElement deserialized) {
+            if(deserialized.getAsString().equals("Good")){
+                return UnusedCondition.GOOD;
+            } else if(deserialized.getAsString().equals("Bad")){
+                return UnusedCondition.BAD;
+            } else if(deserialized.getAsString().equals("New")){
+                return UnusedCondition.NEW;
+            } else{
+                return UnusedCondition.UNSPECIFIED;
+            }
+        }
+    }
+*/
 }
