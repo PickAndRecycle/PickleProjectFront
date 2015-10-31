@@ -52,6 +52,12 @@
         <item>General Waste</item>
         <item>Green Waste</item>
     </string-array>
-
+    <string name ="loremipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </string>
     <string name="title_activity_pick_details">pick_details</string>
+    <string name="title_activity_view_article">view_article</string>
+    <string name="sampleTitleText">Sample Title</string>
+    <string name="newsfeedText">NEWSFEED</string>
 </resources>

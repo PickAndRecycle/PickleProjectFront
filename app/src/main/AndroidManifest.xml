@@ -97,6 +97,7 @@
             android:name=".Modify_request_unused"
             android:label="@string/title_activity_modify_request_unused"
             android:theme="@style/AppTheme" >
+        </activity>
         <activity android:name=".TrashNotification" >
         </activity>
         <activity
@@ -112,6 +113,11 @@
             android:name=".pick_details"
             android:label="@string/title_activity_pick_details"
             android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name=".view_article"
+            android:label="@string/title_activity_view_article"
+            android:theme="@style/AppTheme">
         </activity>
     </application>
 
