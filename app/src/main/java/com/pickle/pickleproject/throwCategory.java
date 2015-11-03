@@ -8,6 +8,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 public class throwCategory extends AppCompatActivity {
@@ -21,6 +22,14 @@ public class throwCategory extends AppCompatActivity {
     ImageButton generalButton = (ImageButton) findViewById(R.id.GeneralButton);
     ImageButton recycleButton = (ImageButton) findViewById(R.id.RecycleButton);
     ImageButton greenButton = (ImageButton) findViewById(R.id.GreenButton);
+
+        Button backButton = (Button) findViewById(R.id.button);
+        backButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
     unusedButton.setOnClickListener(new View.OnClickListener() {
         @Override

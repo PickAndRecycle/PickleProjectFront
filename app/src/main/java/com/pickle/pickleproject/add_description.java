@@ -33,10 +33,31 @@ public class add_description extends AppCompatActivity {
         Button NextButton = (Button) findViewById(R.id.nextButton);
         NextButton.setOnClickListener(new View.OnClickListener() {
 
+            private EditText descForm;
+            private final static String STORETEXT="storetext.txt";
 
             @Override
             public void onClick(View v) {
                 changeNext();
+                descForm = (EditText) findViewById(R.id.editText);
+
+//                try {
+//                    OutputStreamWriter out = new OutputStreamWriter(openFileOutput(STORETEXT, 0));
+//                    out.write(descForm.getText().toString()+"\n");
+//                    out.close();
+//                    Toast toast = new Toast(getApplicationContext());
+//                    toast.makeText(add_description.this, "The contents are saved in the file.", toast.LENGTH_SHORT).show();
+//                } catch (FileNotFoundException e) {
+//                    e.printStackTrace();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+
+
+                //TOAST FOR DEBUGGING
+                Toast toast = new Toast(getApplicationContext());
+                toast.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
+                toast.makeText(add_description.this, descForm.getText(), toast.LENGTH_SHORT).show();
             }
         });
 
