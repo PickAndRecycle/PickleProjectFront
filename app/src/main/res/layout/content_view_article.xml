@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/backArticleButton"
-            android:src="@mipmap/backIcon"
+            android:src="@mipmap/backicon"
             android:background="#00ffffff"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
