@@ -56,7 +56,7 @@ public class pickGeneral extends AppCompatActivity {
         setContentView(R.layout.activity_pick_general);
 
         //String[] myStringArray={"A","B","C"};
-        new JSONTask().execute("http://private-22976-pickleapi.apiary-mock.com/trash");
+        new JSONTask().execute("http://localhost:8080/trash/");
 
         /*
         ArrayAdapter<String> myAdapter=new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, myStringArray);

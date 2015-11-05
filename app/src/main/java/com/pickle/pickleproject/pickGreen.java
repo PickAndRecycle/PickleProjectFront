@@ -44,7 +44,7 @@ public class pickGreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pick_green);
 
-        new JSONTask().execute("http://private-22976-pickleapi.apiary-mock.com/trash");
+        new JSONTask().execute("http://localhost:8080/trash/");
 
 
         Button UnusedButton = (Button) findViewById(R.id.Unusedbtn);

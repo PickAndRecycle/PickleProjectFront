@@ -59,7 +59,7 @@ public class Unused_goods extends AppCompatActivity {
         String url = "http://private-22976-pickleapi.apiary-mock.com/trash";
         String str = getJSON(url,2000);
         */
-        new JSONTask().execute("http://private-22976-pickleapi.apiary-mock.com/trash");
+        new JSONTask().execute("http://localhost:8080/trash/");
 
 
         //Log.d(str);
