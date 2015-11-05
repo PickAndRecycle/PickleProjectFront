@@ -10,10 +10,7 @@
         android:layout_gravity="top"
         android:background="#00B5B5"
         android:layout_alignParentTop="true"
-<<<<<<< HEAD
-        android:id="@+id/relativeLayout9">>>>>>> Temporary merge branch 2
-=======
->>>>>>> 7376ff8a92381ce0f04ad47dbca3136ddb32544f
+        android:id="@+id/relativeLayout9">
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:id="@+id/relativeLayout3"
