@@ -12,14 +12,12 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 
-import com.pickle.pickleprojectmodel.Trash;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
-public class add_description extends AppCompatActivity {
+public class AddDescription extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +44,7 @@ public class add_description extends AppCompatActivity {
                     out.write(descForm.getText().toString()+"\n");
                     out.close();
                     Toast toast = new Toast(getApplicationContext());
-                    toast.makeText(add_description.this, "The contents are saved in the file.", toast.LENGTH_SHORT).show();
+                    toast.makeText(AddDescription.this, "The contents are saved in the file.", toast.LENGTH_SHORT).show();
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
@@ -57,7 +55,7 @@ public class add_description extends AppCompatActivity {
                 //TOAST FOR DEBUGGING
                 Toast toast = new Toast(getApplicationContext());
                 toast.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
-                toast.makeText(add_description.this, descForm.getText(), toast.LENGTH_SHORT).show();
+                toast.makeText(AddDescription.this, descForm.getText(), toast.LENGTH_SHORT).show();
             }
         });
 
@@ -72,7 +70,7 @@ public class add_description extends AppCompatActivity {
     }
 
     private void changeNext(){
-        Intent intent = new Intent(this, Throw_or_Report.class);
+        Intent intent = new Intent(this, ThrowOrReport.class);
         startActivity(intent);
     }
     private void changeBack(){

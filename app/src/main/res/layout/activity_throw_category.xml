@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:fitsSystemWindows="true"
-    tools:context="com.pickle.pickleproject.throwCategory">
+    tools:context="com.pickle.pickleproject.ThrowCategory">
 
     <include layout="@layout/content_throw_category" />
 

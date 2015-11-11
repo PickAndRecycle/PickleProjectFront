@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import java.io.File;
 
@@ -47,18 +46,18 @@ public class Home extends Activity   {
     }
 
     private void historyJar() {
-        Intent intent = new Intent(this, picklejar.class);
+        Intent intent = new Intent(this, Picklejar.class);
         startActivity(intent);
         this.overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
     }
 
     private void changePick(){
-        Intent intent = new Intent(this, Unused_goods.class);
+        Intent intent = new Intent(this, PickUnused.class);
         startActivity(intent);
         this.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
     }
     private void changeAddDescription(){
-        Intent intent = new Intent(this, add_description.class);
+        Intent intent = new Intent(this, AddDescription.class);
         startActivity(intent);
 
     }

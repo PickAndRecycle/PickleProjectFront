@@ -22,6 +22,10 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 */
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
@@ -30,6 +34,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import com.pickle.pickleprojectmodel.Trash;
 import com.pickle.pickleprojectmodel.TrashCategories;
+import com.pickle.pickleprojectmodel.UnusedCondition;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,25 +52,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class pickGeneral extends AppCompatActivity {
+public class PickGeneral extends AppCompatActivity implements Response.ErrorListener, Response.Listener<JSONObject> {
     private GestureDetector gestureDetector;
+
+    private RequestQueue mQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pick_general);
-
-        //String[] myStringArray={"A","B","C"};
-        new JSONTask().execute("http://localhost:8080/trash/");
-
-        /*
-        ArrayAdapter<String> myAdapter=new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, myStringArray);
-        ListView myList=(ListView)
-                findViewById(R.id.listView);
-        myList.setAdapter(myAdapter);
-
-        */
-
 
         Button UnusedButton = (Button) findViewById(R.id.Unusedbtn);
         Button RecycledButton = (Button) findViewById(R.id.Recycledbtn);
@@ -94,6 +89,57 @@ public class pickGeneral extends AppCompatActivity {
             }
         });
 
+        mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext())
+                .getRequestQueue();
+        //String url = "http://10.0.0.2:8080/trash";
+        String url = "http://private-22976-pickleapi.apiary-mock.com/trash";
+
+        final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method
+                .GET, url,
+                new JSONObject(), this, this);
+        mQueue.add(jsonRequest);
+    }
+
+    @Override
+    public void onErrorResponse(VolleyError error) {
+        Log.d("Error:",error.getMessage());
+    }
+
+    @Override
+    public void onResponse(JSONObject response) {
+
+        try {
+            JSONObject parentObject = response;
+            Log.d("json:", response.getString("result"));
+            JSONArray parentArray = parentObject.getJSONArray("result");
+
+            List<Trash> Trashlist = new ArrayList<Trash>();
+
+            for(int i=0 ; i<parentArray.length();i++){
+                JSONObject finalObject = parentArray.getJSONObject(i);
+
+                Trash trashObj;
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                gsonBuilder.registerTypeAdapter(TrashCategories.class, new TrashCategoriesDeserialize());
+                Gson gson = gsonBuilder.create();
+                if(finalObject.getString("categories").equals("General Waste") ){
+                    trashObj = gson.fromJson(String.valueOf(finalObject), Trash.class);
+                    Trashlist.add(trashObj);
+                }
+
+            }
+
+            Trash[] trashArray = Trashlist.toArray(new Trash[0]);
+            ListAdapter myAdapter=new ListAdapter(PickGeneral.this, R.layout.rowlayout, trashArray);
+            ListView myList = (ListView)
+                    findViewById(R.id.listView);
+            myList.setAdapter(myAdapter);
+
+            //return Trashlist;
+        }  catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
@@ -119,113 +165,20 @@ public class pickGeneral extends AppCompatActivity {
     }
 
     private void changeUnused(){
-        Intent intent = new Intent(this, Unused_goods.class);
+        Intent intent = new Intent(this, PickUnused.class);
         startActivity(intent);
         this.overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
     }
 
     private void changeRecycled(){
-        Intent intent = new Intent(this, pickRecycled.class);
+        Intent intent = new Intent(this, PickRecycled.class);
         startActivity(intent);
         this.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
     }
 
     private void changeGreen(){
-        Intent intent = new Intent(this, pickGreen.class);
+        Intent intent = new Intent(this, PickGreen.class);
         startActivity(intent);
-    }
-
-
-// To pull the JSON request
-    public class JSONTask extends AsyncTask<String,String,List<Trash>> {
-
-        @Override
-        protected List<Trash> doInBackground(String... params) {
-            HttpURLConnection connection = null;
-            BufferedReader reader = null;
-
-            try {
-                URL url = new URL(params[0]);
-                connection = (HttpURLConnection) url.openConnection();
-                connection.connect();
-
-                InputStream stream = connection.getInputStream();
-
-                StringBuffer buffer = new StringBuffer();
-
-                reader = new BufferedReader(new InputStreamReader(stream));
-
-                String line = "";
-                while((line = reader.readLine()) != null){
-                    buffer.append(line);
-                }
-                String finalJson = buffer.toString();
-
-                JSONObject parentObject = new JSONObject(finalJson);
-                JSONArray parentArray = parentObject.getJSONArray("Result");
-
-                List<Trash> Trashlist = new ArrayList<Trash>();
-
-                for(int i=0 ; i<parentArray.length();i++){
-                    JSONObject finalObject = parentArray.getJSONObject(i);
-
-
-                    Trash trashObj;
-                    GsonBuilder gsonBuilder = new GsonBuilder();
-                    gsonBuilder.registerTypeAdapter(TrashCategories.class, new TrashCategoriesDeserialize());
-                    Gson gson = gsonBuilder.create();
-                    if(finalObject.getString("categories").equals("General Waste") ){
-                        trashObj = gson.fromJson(String.valueOf(finalObject), Trash.class);
-                        /*
-                        trashObj.setDesc(finalObject.getString("description"));
-                        trashObj.setDistance(finalObject.getInt("distance"));
-                        trashObj.setsize(finalObject.getInt("size"));
-                        trashObj.setCategories(TrashCategories.GENERAL);
-                        */
-                        Trashlist.add(trashObj);
-                    }
-
-
-                }
-
-
-                return Trashlist;
-
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } finally {
-                if (connection != null) {
-                    connection.disconnect();
-                }
-                try {
-                    if(reader != null){
-                        reader.close();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(List<Trash> Result) {
-            super.onPostExecute(Result);
-
-            //Log.d("IDOBJECT",Result.get(0).getDesc());
-
-            Trash[] trashArray = Result.toArray(new Trash[0]);
-            ListAdapter myAdapter=new ListAdapter(pickGeneral.this, R.layout.rowlayout, trashArray);
-            ListView myList = (ListView)
-                    findViewById(R.id.listView);
-            myList.setAdapter(myAdapter);
-
-        }
     }
 
     /* Slide gestures */
@@ -266,12 +219,12 @@ public class pickGeneral extends AppCompatActivity {
                 // Left swipe
                 if (diff > SWIPE_MIN_DISTANCE
                         && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                    pickGeneral.this.onLeftSwipe();
+                    PickGeneral.this.onLeftSwipe();
 
                     // Right swipe
                 } else if (-diff > SWIPE_MIN_DISTANCE
                         && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                    pickGeneral.this.onRightSwipe();
+                    PickGeneral.this.onRightSwipe();
                 }
             } catch (Exception e) {
                 Log.e("YourActivity", "Error on gestures");

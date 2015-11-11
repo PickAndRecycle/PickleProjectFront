@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-public class individual_trash_info extends AppCompatActivity {
+public class IndividualTrashInfo extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +31,7 @@ public class individual_trash_info extends AppCompatActivity {
     }
 
     private void changeThrowerInfo(){
-        Intent intent = new Intent(this, Thrower_Info.class);
+        Intent intent = new Intent(this, ThrowerInfo.class);
         startActivity(intent);
     }
 }

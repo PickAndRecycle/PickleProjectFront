@@ -1,16 +1,12 @@
 package com.pickle.pickleproject;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageButton;
 
-public class throwCategory extends AppCompatActivity {
+public class ThrowCategory extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,22 +46,22 @@ public class throwCategory extends AppCompatActivity {
     }
 
     private void changeUnusedButton(){
-        Intent intent = new Intent(this, unused_goods_dialog.class);
+        Intent intent = new Intent(this, UnusedGoodsDialog.class);
         startActivity(intent);
     }
 
     private void changeGeneralButton(){
-        Intent intent = new Intent(this, other_trash_dialog.class);
+        Intent intent = new Intent(this, OtherTrashDialog.class);
         startActivity(intent);
     }
 
     private void changeRecycleButton(){
-        Intent intent = new Intent(this, other_trash_dialog.class);
+        Intent intent = new Intent(this, OtherTrashDialog.class);
         startActivity(intent);
     }
 
     private void changeGreenButton(){
-        Intent intent = new Intent(this, other_trash_dialog.class);
+        Intent intent = new Intent(this, OtherTrashDialog.class);
         startActivity(intent);
     }
 

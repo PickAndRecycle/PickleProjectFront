@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.ArrayAdapter;
 
-public class unused_goods_dialog extends AppCompatActivity {
+public class UnusedGoodsDialog extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

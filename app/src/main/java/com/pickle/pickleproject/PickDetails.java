@@ -9,7 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
-public class pick_details extends AppCompatActivity {
+public class PickDetails extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,12 +45,12 @@ public class pick_details extends AppCompatActivity {
     }
 
     private void changePick(){
-        Intent intent = new Intent(this, Thrower_Info.class);
+        Intent intent = new Intent(this, ThrowerInfo.class);
         startActivity(intent);
     }
 
     private void changeCancel(){
-        Intent intent = new Intent(this, pickGeneral.class);
+        Intent intent = new Intent(this, PickGeneral.class);
         startActivity(intent);
     }
 

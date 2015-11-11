@@ -27,7 +27,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class picklejar extends AppCompatActivity {
+public class Picklejar extends AppCompatActivity {
     private GestureDetector gestureDetector;
 
     @Override
@@ -46,7 +46,7 @@ public class picklejar extends AppCompatActivity {
     }
 
     private void changeNews() {
-        Intent intent = new Intent(this, newsfeed.class);
+        Intent intent = new Intent(this, Newsfeed.class);
         startActivity(intent);
         this.overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
     }
@@ -153,7 +153,7 @@ public class picklejar extends AppCompatActivity {
             //Log.d("IDOBJECT",Result.get(0).getDesc());
 
             Trash[] trashArray = Result.toArray(new Trash[0]);
-            PicklejarAdapter myAdapter=new PicklejarAdapter(picklejar.this, R.layout.rowpicklejar, trashArray);
+            PicklejarAdapter myAdapter=new PicklejarAdapter(Picklejar.this, R.layout.rowpicklejar, trashArray);
             ListView myList = (ListView)
                     findViewById(R.id.ListPickleJar);
             myList.setAdapter(myAdapter);
@@ -195,12 +195,12 @@ public class picklejar extends AppCompatActivity {
                 // Left swipe
                 if (diff > SWIPE_MIN_DISTANCE
                         && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                    picklejar.this.onLeftSwipe();
+                    Picklejar.this.onLeftSwipe();
 
                     // Right swipe
                 } else if (-diff > SWIPE_MIN_DISTANCE
                         && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                    picklejar.this.onRightSwipe();
+                    Picklejar.this.onRightSwipe();
                 }
             } catch (Exception e) {
                 Log.e("YourActivity", "Error on gestures");

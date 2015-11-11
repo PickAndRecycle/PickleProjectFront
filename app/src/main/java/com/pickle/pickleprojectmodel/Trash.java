@@ -21,11 +21,11 @@ public class Trash {
     public int distance;
     public int size;
     public TrashCategories categories;
-    public UnusedCondition condition;
+    public UnusedCondition trash_condition;
 
 
     public Trash(int id, String description, String title, int status, File photo_data, Double latitude, Double longitude,
-                 int timestamp, boolean report, int distance, int size, TrashCategories categories, UnusedCondition condition){
+                 int timestamp, boolean report, int distance, int size, TrashCategories categories, UnusedCondition trash_condition){
         this.id = id;
         this.description = description;
         this.title = title;
@@ -38,7 +38,7 @@ public class Trash {
         this.distance = distance;
         this.size = size;
         this.categories = categories;
-        this.condition = condition;
+        this.trash_condition = trash_condition;
         this.photo_url = "";
 
     }
@@ -141,12 +141,12 @@ public class Trash {
         return categories;
     }
 
-    public void setCondition(UnusedCondition condition){
-        this.condition = condition;
+    public void setCondition(UnusedCondition trash_condition){
+        this.trash_condition = trash_condition;
     }
 
     public UnusedCondition getCondition(){
-        return condition;
+        return trash_condition;
     }
 
     public void setPhoto_url(String url){

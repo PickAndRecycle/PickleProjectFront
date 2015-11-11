@@ -13,6 +13,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
@@ -37,16 +41,14 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class pickRecycled extends AppCompatActivity {
+public class PickRecycled extends AppCompatActivity implements Response.ErrorListener, Response.Listener<JSONObject> {
     private GestureDetector gestureDetector;
+    private RequestQueue mQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pick_recycled);
-
-        new JSONTask().execute("http://localhost:8080/trash/");
-
 
         Button UnusedButton = (Button) findViewById(R.id.Unusedbtn);
         Button GeneralButton = (Button) findViewById(R.id.Generalbtn);
@@ -74,6 +76,58 @@ public class pickRecycled extends AppCompatActivity {
                 changeGreen();
             }
         });
+
+        mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext())
+                .getRequestQueue();
+        //String url = "http://10.0.0.2:8080/trash";
+        String url = "http://private-22976-pickleapi.apiary-mock.com/trash";
+
+        final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method
+                .GET, url,
+                new JSONObject(), this, this);
+        mQueue.add(jsonRequest);
+    }
+
+    @Override
+    public void onErrorResponse(VolleyError error) {
+        Log.d("Error:",error.getMessage());
+    }
+
+    @Override
+    public void onResponse(JSONObject response) {
+
+        try {
+            JSONObject parentObject = response;
+            Log.d("json:", response.getString("result"));
+            JSONArray parentArray = parentObject.getJSONArray("result");
+
+            List<Trash> Trashlist = new ArrayList<Trash>();
+
+            for(int i=0 ; i<parentArray.length();i++){
+                JSONObject finalObject = parentArray.getJSONObject(i);
+
+                Trash trashObj;
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                gsonBuilder.registerTypeAdapter(TrashCategories.class, new TrashCategoriesDeserialize());
+                Gson gson = gsonBuilder.create();
+                if(finalObject.getString("categories").equals("Recycleable Waste") ){
+                    trashObj = gson.fromJson(String.valueOf(finalObject), Trash.class);
+                    Trashlist.add(trashObj);
+                }
+
+            }
+
+            Trash[] trashArray = Trashlist.toArray(new Trash[0]);
+            ListAdapter myAdapter=new ListAdapter(PickRecycled.this ,R.layout.rowlayout, trashArray);
+            ListView myList = (ListView)
+                    findViewById(R.id.listView3);
+            myList.setAdapter(myAdapter);
+
+
+        }  catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
@@ -99,112 +153,21 @@ public class pickRecycled extends AppCompatActivity {
     }
 
     private void changeUnused(){
-        Intent intent = new Intent(this, Unused_goods.class);
+        Intent intent = new Intent(this, PickUnused.class);
         startActivity(intent);
     }
 
     private void changeGeneral(){
-        Intent intent = new Intent(this, pickGeneral.class);
+        Intent intent = new Intent(this, PickGeneral.class);
         startActivity(intent);
         this.overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
     }
 
     private void changeGreen(){
-        Intent intent = new Intent(this, pickGreen.class);
+        Intent intent = new Intent(this, PickGreen.class);
         startActivity(intent);
         this.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
     }
-
-    // To pull the JSON request
-    public class JSONTask extends AsyncTask<String,String,List<Trash>> {
-
-        @Override
-        protected List<Trash> doInBackground(String... params) {
-            HttpURLConnection connection = null;
-            BufferedReader reader = null;
-
-            try {
-                URL url = new URL(params[0]);
-                connection = (HttpURLConnection) url.openConnection();
-                connection.connect();
-
-                InputStream stream = connection.getInputStream();
-
-                StringBuffer buffer = new StringBuffer();
-
-                reader = new BufferedReader(new InputStreamReader(stream));
-
-                String line = "";
-                while((line = reader.readLine()) != null){
-                    buffer.append(line);
-                }
-                String finalJson = buffer.toString();
-
-                JSONObject parentObject = new JSONObject(finalJson);
-                JSONArray parentArray = parentObject.getJSONArray("Result");
-
-                List<Trash> Trashlist = new ArrayList<Trash>();
-
-                for(int i=0 ; i<parentArray.length();i++){
-                    JSONObject finalObject = parentArray.getJSONObject(i);
-
-                    Trash trashObj;
-                    GsonBuilder gsonBuilder = new GsonBuilder();
-                    gsonBuilder.registerTypeAdapter(TrashCategories.class, new TrashCategoriesDeserialize());
-                    Gson gson = gsonBuilder.create();
-                    if(finalObject.getString("categories").equals("Recycleable Waste") ){
-                        trashObj = gson.fromJson(String.valueOf(finalObject), Trash.class);
-                        /*
-                        trashObj.setDesc(finalObject.getString("description"));
-                        trashObj.setDistance(finalObject.getInt("distance"));
-                        trashObj.setsize(finalObject.getInt("size"));
-                        trashObj.setCategories(TrashCategories.RECYCLED);
-                        */
-                        Trashlist.add(trashObj);
-                    }
-
-                }
-
-
-                return Trashlist;
-
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } finally {
-                if (connection != null) {
-                    connection.disconnect();
-                }
-                try {
-                    if(reader != null){
-                        reader.close();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(List<Trash> Result) {
-            super.onPostExecute(Result);
-
-            //Log.d("IDOBJECT",Result.get(0).getDesc());
-
-            Trash[] trashArray = Result.toArray(new Trash[0]);
-            ListAdapter myAdapter=new ListAdapter(pickRecycled.this ,R.layout.rowlayout, trashArray);
-            ListView myList = (ListView)
-                    findViewById(R.id.listView3);
-            myList.setAdapter(myAdapter);
-
-        }
-    }
-
 
     /* Slide gestures */
 
@@ -245,12 +208,12 @@ public class pickRecycled extends AppCompatActivity {
                 // Left swipe
                 if (diff > SWIPE_MIN_DISTANCE
                         && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                    pickRecycled.this.onLeftSwipe();
+                    PickRecycled.this.onLeftSwipe();
 
                     // Right swipe
                 } else if (-diff > SWIPE_MIN_DISTANCE
                         && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                    pickRecycled.this.onRightSwipe();
+                    PickRecycled.this.onRightSwipe();
                 }
             } catch (Exception e) {
                 Log.e("YourActivity", "Error on gestures");

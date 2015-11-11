@@ -1,7 +1,6 @@
 package com.pickle.pickleproject;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,7 +9,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -20,11 +18,6 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapter;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
 import com.pickle.pickleprojectmodel.Trash;
 import com.pickle.pickleprojectmodel.TrashCategories;
 import com.pickle.pickleprojectmodel.UnusedCondition;
@@ -33,36 +26,28 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+
 import java.lang.reflect.Type;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class Unused_goods extends AppCompatActivity {
+public class PickUnused extends AppCompatActivity implements Response.ErrorListener, Response.Listener<JSONObject> {
 
     private GestureDetector gestureDetector;
-
+    private RequestQueue mQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_unused_goods);
 
-        /*
-        String url = "http://private-22976-pickleapi.apiary-mock.com/trash";
-        String str = getJSON(url,2000);
-        */
-        new JSONTask().execute("http://localhost:8080/trash/");
 
-
-        //Log.d(str);
+        //new JSONTask().execute("http://10.0.0.2:8080/trash/");
 
 
         Button GeneralButton = (Button) findViewById(R.id.Generalbtn);
@@ -91,21 +76,83 @@ public class Unused_goods extends AppCompatActivity {
                 changeGreen();
             }
         });
+
+        mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext())
+                .getRequestQueue();
+        //String url = "http://10.0.0.2:8080/trash";
+        String url = "http://private-22976-pickleapi.apiary-mock.com/trash";
+
+        final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method
+                .GET, url,
+                new JSONObject(), this, this);
+        mQueue.add(jsonRequest);
     }
 
+    @Override
+    public void onErrorResponse(VolleyError error) {
+        Log.d("Error:",error.getMessage());
+    }
+
+    @Override
+    public void onResponse(JSONObject response) {
+
+        try {
+            JSONObject parentObject = response;
+            Log.d("json:", response.getString("result"));
+            JSONArray parentArray = parentObject.getJSONArray("result");
+
+            List<Trash> Trashlist = new ArrayList<Trash>();
+
+            for(int i=0 ; i<parentArray.length();i++){
+                JSONObject finalObject = parentArray.getJSONObject(i);
+
+                Trash trashObj;
+                GsonBuilder gsonBuilder = new GsonBuilder();
+
+                gsonBuilder.registerTypeAdapter(UnusedCondition.class, new UnusedConditionDeserialize());
+                Gson gson = gsonBuilder.create();
+
+                if(finalObject.getString("categories").equals("Unused Goods")){
+                    trashObj = gson.fromJson(String.valueOf(finalObject), Trash.class);
+
+                    trashObj.setCategories(TrashCategories.UNUSED);
+                    Trashlist.add(trashObj);
+                }
+
+            }
+            Trash[] trashArray = Trashlist.toArray(new Trash[0]);
+            ListAdapter myAdapter=new ListAdapter(PickUnused.this ,R.layout.rowlayout, trashArray);
+            ListView myList = (ListView)
+                    findViewById(R.id.listView4);
+            myList.setAdapter(myAdapter);
+
+            //return Trashlist;
+        }  catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        /*
+        try {
+            Log.d("json",response.getString("result"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }*/
+    }
+
+
     private void changeGeneral(){
-        Intent intent = new Intent(this, pickGeneral.class);
+        Intent intent = new Intent(this, PickGeneral.class);
         startActivity(intent);
         this.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
     }
 
     private void changeRecycled(){
-        Intent intent = new Intent(this, pickRecycled.class);
+        Intent intent = new Intent(this, PickRecycled.class);
         startActivity(intent);
     }
 
     private void changeGreen(){
-        Intent intent = new Intent(this, pickGreen.class);
+        Intent intent = new Intent(this, PickGreen.class);
         startActivity(intent);
     }
     private void changeHome() {
@@ -115,7 +162,7 @@ public class Unused_goods extends AppCompatActivity {
     }
 
     private void changeIndividual(){
-        Intent intent = new Intent(this, individual_trash_info.class);
+        Intent intent = new Intent(this, IndividualTrashInfo.class);
         startActivity(intent);
     }
 
@@ -159,6 +206,8 @@ public class Unused_goods extends AppCompatActivity {
         changeHome();
     }
 
+
+/*
     // To pull the JSON request
     public class JSONTask extends AsyncTask<String,String,List<Trash>>{
 
@@ -195,10 +244,7 @@ public class Unused_goods extends AppCompatActivity {
 
                     Trash trashObj;
                     GsonBuilder gsonBuilder = new GsonBuilder();
-                    //Gson gsonBuilder = new GsonBuilder().registerTypeAdapterFactory(new TrashCategoriesDeserializer())
-                    //        .registerTypeAdapterFactory(new UnusedConditionDeserializer())
-                    //        .create();
-                    //gsonBuilder.registerTypeAdapter(TrashCategories.class, new TrashCategoriesDeserialize());
+
                     gsonBuilder.registerTypeAdapter(UnusedCondition.class, new UnusedConditionDeserialize());
                     Gson gson = gsonBuilder.create();
 
@@ -206,30 +252,6 @@ public class Unused_goods extends AppCompatActivity {
                         trashObj = gson.fromJson(String.valueOf(finalObject), Trash.class);
 
                         trashObj.setCategories(TrashCategories.UNUSED);
-                        //trashObj.setDistance(finalObject.getInt("distance"));
-                        //trashObj.setTitle(finalObject.getString("title"));
-                        /*
-                        if(finalObject.getString("condition").equals("Good" )){
-                            trashObj.setCondition(UnusedCondition.GOOD);
-                        } else if(finalObject.getString("condition").equals("Bad")){
-                            trashObj.setCondition(UnusedCondition.BAD);
-                        } else if (finalObject.getString("condition").equals("New")){
-                            trashObj.setCondition(UnusedCondition.NEW);
-                        }
-                        */
-                        /*
-                        Log.d("id:", Integer.toString(trashObj.id));
-                        Log.d("description:", trashObj.description);
-                        Log.d("title:", trashObj.title);
-                        Log.d("status:", Integer.toString(trashObj.status));
-                        Log.d("latitude:", Double.toString(trashObj.latitude));
-                        Log.d("longitude:", Double.toString(trashObj.longitude));
-                        Log.d("timestamp:", Integer.toString(trashObj.timestamp));
-                        Log.d("distance:", Integer.toString(trashObj.distance));
-                        Log.d("size:", Integer.toString(trashObj.size));
-                        Log.d("categories", trashObj.categories.toString());
-                        Log.d("condition", trashObj.condition.toString());
-                        */
                         Trashlist.add(trashObj);
                     }
 
@@ -268,7 +290,7 @@ public class Unused_goods extends AppCompatActivity {
             //Log.d("IDOBJECT",Result.get(0).getDesc());
 
             Trash[] trashArray = Result.toArray(new Trash[0]);
-            ListAdapter myAdapter=new ListAdapter(Unused_goods.this ,R.layout.rowlayout, trashArray);
+            ListAdapter myAdapter=new ListAdapter(PickUnused.this ,R.layout.rowlayout, trashArray);
             ListView myList = (ListView)
                     findViewById(R.id.listView4);
             myList.setAdapter(myAdapter);
@@ -276,8 +298,7 @@ public class Unused_goods extends AppCompatActivity {
         }
     }
 
-
-
+*/
 
     // Private class for gestures
     private class SwipeGestureDetector
@@ -301,12 +322,12 @@ public class Unused_goods extends AppCompatActivity {
                 // Left swipe
                 if (diff > SWIPE_MIN_DISTANCE
                         && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                    Unused_goods.this.onLeftSwipe();
+                    PickUnused.this.onLeftSwipe();
 
                     // Right swipe
                 } else if (-diff > SWIPE_MIN_DISTANCE
                         && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                    Unused_goods.this.onRightSwipe();
+                    PickUnused.this.onRightSwipe();
                 }
             } catch (Exception e) {
                 Log.e("YourActivity", "Error on gestures");

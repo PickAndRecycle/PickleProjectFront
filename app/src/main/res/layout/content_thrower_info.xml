@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_individual__trash__info"
-    tools:context="com.pickle.pickleproject.Thrower_Info">
+    tools:context="com.pickle.pickleproject.ThrowerInfo">
 
     <RelativeLayout
         android:orientation="vertical"

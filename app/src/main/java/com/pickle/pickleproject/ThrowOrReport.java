@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-public class Throw_or_Report extends AppCompatActivity {
+public class ThrowOrReport extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,11 +28,11 @@ public class Throw_or_Report extends AppCompatActivity {
         });
     }
     private void Throw(){
-        Intent intent = new Intent(this, throwCategory.class);
+        Intent intent = new Intent(this, ThrowCategory.class);
         startActivity(intent);
     }
     private void Report(){
-        Intent intent = new Intent(this, reportSuccess.class);
+        Intent intent = new Intent(this, ReportSuccess.class);
         startActivity(intent);
     }
 

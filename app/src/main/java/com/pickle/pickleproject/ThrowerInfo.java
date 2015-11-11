@@ -2,16 +2,14 @@ package com.pickle.pickleproject;
 
 import android.content.Intent;
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
 
-public class Thrower_Info extends AppCompatActivity {
+public class ThrowerInfo extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +29,7 @@ public class Thrower_Info extends AppCompatActivity {
     }
 
     private void changeUnused(){
-        Intent intent = new Intent(this, Unused_goods.class);
+        Intent intent = new Intent(this, PickUnused.class);
 
         ImageButton back_button = (ImageButton) findViewById(R.id.back_button);
         ImageButton call_button = (ImageButton) findViewById(R.id.call_button);
