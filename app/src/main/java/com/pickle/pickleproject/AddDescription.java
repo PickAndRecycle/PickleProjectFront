@@ -72,7 +72,7 @@ public class AddDescription extends AppCompatActivity {
         descForm = (EditText) findViewById(R.id.editText);
         Intent intent = new Intent(this, ThrowOrReport.class);
         //To pass descForm into the next page
-        intent.putExtra("descForm", descForm.getText());
+        intent.putExtra("descForm", descForm.getText().toString());
         //TOAST FOR DEBUGGING
         Toast toast = new Toast(getApplicationContext());
         toast.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
