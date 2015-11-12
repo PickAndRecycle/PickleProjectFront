@@ -31,14 +31,16 @@ public class AddDescription extends AppCompatActivity {
         Button NextButton = (Button) findViewById(R.id.nextButton);
         NextButton.setOnClickListener(new View.OnClickListener() {
 
-            private EditText descForm;
-            private final static String STORETEXT="storetext.txt";
+            /*
+            private final static String STORETEXT="description.txt";
+            */
 
             @Override
             public void onClick(View v) {
                 changeNext();
-                descForm = (EditText) findViewById(R.id.editText);
 
+
+                /*
                 try {
                     OutputStreamWriter out = new OutputStreamWriter(openFileOutput(STORETEXT, 0));
                     out.write(descForm.getText().toString()+"\n");
@@ -50,12 +52,8 @@ public class AddDescription extends AppCompatActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                */
 
-
-                //TOAST FOR DEBUGGING
-                Toast toast = new Toast(getApplicationContext());
-                toast.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
-                toast.makeText(AddDescription.this, descForm.getText(), toast.LENGTH_SHORT).show();
             }
         });
 
@@ -70,7 +68,16 @@ public class AddDescription extends AppCompatActivity {
     }
 
     private void changeNext(){
+        EditText descForm;
+        descForm = (EditText) findViewById(R.id.editText);
         Intent intent = new Intent(this, ThrowOrReport.class);
+        //To pass descForm into the next page
+        intent.putExtra("descForm", descForm.getText());
+        //TOAST FOR DEBUGGING
+        Toast toast = new Toast(getApplicationContext());
+        toast.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
+        toast.makeText(AddDescription.this, descForm.getText(), toast.LENGTH_SHORT).show();
+
         startActivity(intent);
     }
     private void changeBack(){
