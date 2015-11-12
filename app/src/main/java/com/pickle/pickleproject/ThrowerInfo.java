@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Button;
 
 public class ThrowerInfo extends AppCompatActivity {
 
@@ -16,22 +17,7 @@ public class ThrowerInfo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thrower_info);
 
-        ImageButton backButton = (ImageButton) findViewById(R.id.back_button);
-
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-                changeUnused();
-            }
-        });
-
-    }
-
-    private void changeUnused(){
-        Intent intent = new Intent(this, PickUnused.class);
-
-        ImageButton back_button = (ImageButton) findViewById(R.id.back_button);
+        Button back_button = (Button) findViewById(R.id.back_button);
         ImageButton call_button = (ImageButton) findViewById(R.id.call_button);
 
         back_button.setOnClickListener(new View.OnClickListener() {
@@ -40,14 +26,15 @@ public class ThrowerInfo extends AppCompatActivity {
                 changeBack();
             }
         });
+
         call_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 changeCall();
             }
         });
-    }
 
+    }
     private void changeBack() {
         Intent intent = new Intent(this, Home.class);
         startActivity(intent);
@@ -69,5 +56,4 @@ public class ThrowerInfo extends AppCompatActivity {
 
         startActivity(intent);
     }
-
 }

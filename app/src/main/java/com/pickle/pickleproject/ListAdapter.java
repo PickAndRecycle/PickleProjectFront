@@ -31,7 +31,7 @@ public class ListAdapter extends ArrayAdapter<Trash> {
     }
 
     @Override
-    public View getView(int position,
+    public View getView(final int position,
                         View convertView,
                         ViewGroup parent) {
         LayoutInflater inflater= ((Activity) context).getLayoutInflater();
@@ -60,6 +60,7 @@ public class ListAdapter extends ArrayAdapter<Trash> {
             public void onClick(View v) {
                 //row.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
                 Intent intent = new Intent(context, IndividualTrashInfo.class);
+                intent.putExtra("object", objects[position]);
                 context.startActivity(intent);
             }
         });

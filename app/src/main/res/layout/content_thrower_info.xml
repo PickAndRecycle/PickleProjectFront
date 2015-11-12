@@ -81,43 +81,36 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="177.5dp"
-            android:layout_height="202dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_toRightOf="@+id/relativeLayout2"
-            android:layout_toEndOf="@+id/relativeLayout2" >
+            android:layout_toEndOf="@+id/relativeLayout2">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="GET LOCATION"
+                android:id="@+id/get_location_text"
+                android:textColor="#FFFFFF"
+                android:layout_below="@+id/get_location_button"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="32dp" />
+
+            <ImageButton
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:id="@+id/get_location_button"
+                android:src="@mipmap/location"
+                android:background="@drawable/button"
+                android:backgroundTint="#2ea8ed"
+                android:tint="#ffffff"
+                android:layout_marginTop="33dp"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="GET LOCATION"
-                    android:id="@+id/get_location_text"
-                    android:textColor="#FFFFFF"
-                    android:layout_below="@+id/get_location_button"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="32dp" />
-
-                <ImageButton
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:id="@+id/get_location_button"
-                    android:src="@mipmap/location"
-                    android:background="@drawable/button"
-                    android:backgroundTint="#2ea8ed"
-                    android:tint="#ffffff"
-                    android:layout_marginTop="33dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true" />
-
-            </RelativeLayout>
+                android:layout_centerHorizontal="true" />
 
         </RelativeLayout>
 
