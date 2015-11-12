@@ -1,16 +1,12 @@
 package com.pickle.pickleproject;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -24,24 +20,14 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import com.pickle.pickleprojectmodel.Trash;
 import com.pickle.pickleprojectmodel.TrashCategories;
-import com.pickle.pickleprojectmodel.UnusedCondition;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.lang.reflect.Type;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.widget.AdapterView.*;
 
 public class Picklejar extends AppCompatActivity implements Response.ErrorListener, Response.Listener<JSONObject> {
     private GestureDetector gestureDetector;
@@ -54,8 +40,10 @@ public class Picklejar extends AppCompatActivity implements Response.ErrorListen
         gestureDetector = new GestureDetector(new SwipeGestureDetector());
         mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext())
                 .getRequestQueue();
-        //String url = "http://10.0.0.2:8080/trash";
-        String url = "http://private-22976-pickleapi.apiary-mock.com/trash";
+
+        //Use your machine IP (Mac/Linux ifconfig in terminal, Windows ipconfig in cmd) IP should be 192.x.x.x
+        String url = "http://192.168.0.103:8080/trash/";
+        //String url = "http://private-22976-pickleapi.apiary-mock.com/trash";
 
         final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method
                 .GET, url,
@@ -90,13 +78,14 @@ public class Picklejar extends AppCompatActivity implements Response.ErrorListen
             Log.d("json:", response.getString("result"));
             JSONArray parentArray = parentObject.getJSONArray("result");
             List <Trash> Trashlist = new ArrayList<Trash>();
-            String username ="Tsabita";
+            String username ="Yanuar";
             for (int i=0; i<parentArray.length(); i++){
                 JSONObject finalObject = parentArray.getJSONObject(i);
                 Trash trashObj;
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 gsonBuilder.registerTypeAdapter(TrashCategories.class,new TrashCategoriesDeserialize());
                 Gson gson = gsonBuilder.create();
+
                 if (finalObject.getString("username").equals(username)) {
                     if (finalObject.getString("status").equals(1)) {
                         trashObj = gson.fromJson(String.valueOf(finalObject), Trash.class);
@@ -113,15 +102,7 @@ public class Picklejar extends AppCompatActivity implements Response.ErrorListen
                 final ListView myList = (ListView)
                         findViewById(R.id.ListPickleJar);
                 myList.setAdapter(myAdapter);
-               /* myList.setOnItemClickListener(new OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Intent intent = new Intent(Picklejar.this,ModifyConfirmation.class);
-                        intent.putExtra("categories",trash.getCategories());
-                        startActivity(intent);
 
-                    }
-                });*/
 
 
             }

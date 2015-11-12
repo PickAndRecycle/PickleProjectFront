@@ -49,15 +49,16 @@
     <string name="ChangeLanguage">CHANGE LANGUAGE</string>
     <string name="LoremIpsumText">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a metus elit. Fusce congue feugiat risus, sed tempor mi ultrices nec. Ut id tempus mi. Aliquam rhoncus, orci eget convallis fermentum, augue ipsum aliquam tellus, nec semper arcu arcu blandit diam. Aliquam in nibh commodo, tempus ligula non, placerat elit. Sed semper erat felis, ut lobortis libero posuere vitae. Phasellus tristique interdum rhoncus. Phasellus porttitor malesuada ultricies. Suspendisse tempus ipsum ut arcu pellentesque, ut sagittis sapien volutpat. In lectus est, ultricies ut dolor et, molestie commodo dui. Maecenas porta sit amet elit et sodales. Duis elit purus, tincidunt ac eros vitae, gravida rutrum urna. Etiam euismod dolor eget quam pellentesque sagittis. Aenean accumsan eu sem a ultricies. Ut nunc</string>
     <string name="title_activity_modify_request_unused">Modify_request_unused</string>
-    <string-array name="Condition">
+    <string-array name="condition">
         <item>Good</item>
-        <item>Normal</item>
+        <item>New</item>
         <item>Bad</item>
+
     </string-array>
     <string-array name="Waste">
-        <item>Recycle Waste</item>
-        <item>General Waste</item>
-        <item>Green Waste</item>
+        <item>Recycled</item>
+        <item>General</item>
+        <item>Green</item>
     </string-array>
     <string name="title_activity_modify_request_other">Modify_request_other</string>
     <string name ="loremipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
