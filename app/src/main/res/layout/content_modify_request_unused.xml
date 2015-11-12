@@ -103,7 +103,7 @@
             android:textColor="#00B5B5" />
 
         <Spinner
-            android:entries="@array/Condition"
+            android:entries="@array/condition"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/spinner2"

@@ -87,6 +87,7 @@
             android:layout_above="@+id/submitButtonOtherWaste"
             android:layout_alignRight="@+id/editText4"
             android:layout_alignEnd="@+id/editText4"
-            android:layout_marginLeft="280dp" />
+            android:layout_marginLeft="280dp"
+            android:entries="@array/condition"/>
     </RelativeLayout>
 </RelativeLayout>

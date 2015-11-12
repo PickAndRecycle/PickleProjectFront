@@ -53,10 +53,13 @@ public class PicklejarAdapter extends ArrayAdapter<Trash> {
             desc.setText((CharSequence) objects[position].getCategories().toString());
         }
         if (objects[position].getStatus() == 1){
-            stat.setText("Thrown");
+            stat.setText("Picked");
+        }
+        else if (objects[position].getStatus() == 0){
+            stat.setText("Available");
         }
         else{
-            stat.setText("Picked");
+            stat.setText("Done");
         }
         row.setOnClickListener(new View.OnClickListener() {
             @Override

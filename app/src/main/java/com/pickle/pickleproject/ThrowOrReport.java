@@ -3,8 +3,10 @@ package com.pickle.pickleproject;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class ThrowOrReport extends AppCompatActivity {
 
@@ -28,11 +30,39 @@ public class ThrowOrReport extends AppCompatActivity {
         });
     }
     private void Throw(){
+        Intent lastIntent = getIntent();
+        Boolean report = false;
+        lastIntent.putExtra("report", report.booleanValue());
+
+
         Intent intent = new Intent(this, ThrowCategory.class);
+        intent.putExtras(lastIntent.getExtras());
+
+
+        Bundle parseInfo = intent.getExtras();
+        Toast boom = new Toast(getApplicationContext());
+        boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
+        boom.makeText(ThrowOrReport.this, parseInfo.toString(), boom.LENGTH_SHORT).show();
+        //System.out.println(parseInfo.toString());
+
+
+        //TOAST FOR DEBUGGING
+        Toast toast = new Toast(getApplicationContext());
+        toast.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
+        toast.makeText(ThrowOrReport.this, "false", toast.LENGTH_SHORT).show();
+
         startActivity(intent);
     }
     private void Report(){
         Intent intent = new Intent(this, ReportSuccess.class);
+
+        Boolean report = true;
+        intent.putExtra("report", report.booleanValue());
+        //TOAST FOR DEBUGGING
+        Toast toast = new Toast(getApplicationContext());
+        toast.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
+        toast.makeText(ThrowOrReport.this, "true", toast.LENGTH_SHORT).show();
+
         startActivity(intent);
     }
 
