@@ -70,7 +70,7 @@
             android:theme="@style/AppTheme" >
         </activity>
         <activity
-            android:name=".OtherTrashDialog"
+            android:name=".UnusedGoodsDialog"
             android:label="@string/title_activity_unused_goods_dialog"
             android:theme="@style/AppTheme" >
         </activity>
@@ -87,7 +87,7 @@
         <activity android:name=".ConfigurationActivity" >
         </activity>
         <activity
-            android:name=".UnusedGoodsDialog"
+            android:name=".OtherTrashDialog"
             android:label="@string/title_activity_other_trash_dialog"
             android:theme="@style/AppTheme" >
         </activity>
@@ -120,7 +120,11 @@
         </activity>
         <activity
             android:name=".ModifyConfirmation"
+<<<<<<< HEAD
             android:label="activity_modify_confirmation"
+=======
+            android:label="modify_confirmation"
+>>>>>>> d78d362c7ca45997ae678f0bc8a7fe645fc5cdbf
             android:theme="@style/AppTheme" >
         </activity>
     </application>

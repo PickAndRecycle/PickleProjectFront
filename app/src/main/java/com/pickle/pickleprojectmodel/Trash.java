@@ -16,7 +16,7 @@ public class Trash implements Serializable {
     public int status;
     public String description, photo_url;
     public String title;
-    public File photo_data;
+    public String photo_data;
     public int latitude,longitude;
     public int timestamp;
     public boolean report;
@@ -24,10 +24,11 @@ public class Trash implements Serializable {
     public int size;
     public TrashCategories categories;
     public UnusedCondition trash_condition;
+    public String username;
 
-
-    public Trash(String id, String description, String title, int status, File photo_data, int latitude, int longitude,
-                 int timestamp, boolean report, int distance, int size, TrashCategories categories, UnusedCondition trash_condition){
+    public Trash(String id, String description, String title, int status, String photo_data, int latitude, int longitude,
+                 int timestamp, boolean report, int distance, int size, TrashCategories categories, UnusedCondition trash_condition,
+                 String username){
         this.id = id;
         this.description = description;
         this.title = title;
@@ -42,7 +43,7 @@ public class Trash implements Serializable {
         this.categories = categories;
         this.trash_condition = trash_condition;
         this.photo_url = "";
-
+        this.username = username;
     }
     public Trash(){
 
@@ -84,7 +85,7 @@ public class Trash implements Serializable {
         return title;
     }
 
-    public void setPhoto(File newphoto) {
+    public void setPhoto(String newphoto) {
         this.photo_data = newphoto;
     }
 
@@ -158,6 +159,16 @@ public class Trash implements Serializable {
     public String getPhoto_url(){
         return photo_url;
     }
+
+    public String getUsername(){
+        return username;
+    }
+
+    public void setUsername(String username){
+        this.username = username;
+    }
+
+
 
     public int CalculateDist(Double lat, Double lon){
         double theta = this.longitude - lon;
