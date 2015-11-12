@@ -120,11 +120,7 @@
         </activity>
         <activity
             android:name=".ModifyConfirmation"
-<<<<<<< HEAD
-            android:label="activity_modify_confirmation"
-=======
             android:label="modify_confirmation"
->>>>>>> d78d362c7ca45997ae678f0bc8a7fe645fc5cdbf
             android:theme="@style/AppTheme" >
         </activity>
     </application>
