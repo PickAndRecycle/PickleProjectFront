@@ -9,6 +9,16 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.widget.ListView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
 import com.pickle.pickleprojectmodel.Trash;
 import com.pickle.pickleprojectmodel.TrashCategories;
 import com.pickle.pickleprojectmodel.UnusedCondition;
@@ -21,21 +31,31 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Picklejar extends AppCompatActivity {
+public class Picklejar extends AppCompatActivity implements Response.ErrorListener, Response.Listener<JSONObject> {
     private GestureDetector gestureDetector;
+    private RequestQueue mQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_picklejar);
-        new JSONTask().execute("http://private-22976-pickleapi.apiary-mock.com/trash");
         gestureDetector = new GestureDetector(new SwipeGestureDetector());
+        mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext())
+                .getRequestQueue();
+        //String url = "http://10.0.0.2:8080/trash";
+        String url = "http://private-22976-pickleapi.apiary-mock.com/trash";
+
+        final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method
+                .GET, url,
+                new JSONObject(), this, this);
+        mQueue.add(jsonRequest);
 
     }
 
@@ -59,105 +79,63 @@ public class Picklejar extends AppCompatActivity {
         return super.onTouchEvent(event);
 
     }
-    public class JSONTask extends AsyncTask<String,String,List<Trash>> {
-
-        @Override
-        protected List<Trash> doInBackground(String... params) {
-            HttpURLConnection connection = null;
-            BufferedReader reader = null;
-
-            try {
-                URL url = new URL(params[0]);
-                connection = (HttpURLConnection) url.openConnection();
-                connection.connect();
-
-                InputStream stream = connection.getInputStream();
-
-                StringBuffer buffer = new StringBuffer();
-
-                reader = new BufferedReader(new InputStreamReader(stream));
-
-                String line = "";
-                while((line = reader.readLine()) != null){
-                    buffer.append(line);
-                }
-                String finalJson = buffer.toString();
-
-                JSONObject parentObject = new JSONObject(finalJson);
-                JSONArray parentArray = parentObject.getJSONArray("Result");
-
-                List<Trash> Trashlist = new ArrayList<Trash>();
-
-                for(int i=0 ; i<parentArray.length();i++){
-                    JSONObject finalObject = parentArray.getJSONObject(i);
-
-                    Trash trashObj = new Trash();
-                    if (finalObject.getString("categories").equals("Unused Goods")){
-                        trashObj.setCategories(TrashCategories.UNUSED);
-                        trashObj.setDistance(finalObject.getInt("distance"));
-                        trashObj.setTitle(finalObject.getString("title"));
-                        if(finalObject.getString("condition").equals("Good" )){
-                            trashObj.setCondition(UnusedCondition.GOOD);
-                        } else if(finalObject.getString("condition").equals("Bad")){
-                            trashObj.setCondition(UnusedCondition.BAD);
-                        } else if (finalObject.getString("condition").equals("New")){
-                            trashObj.setCondition(UnusedCondition.NEW);
-                        }
-                        Trashlist.add(trashObj);
+    public void onResponse(JSONObject response){
+        try{
+            JSONObject parentObject = response;
+            Log.d("json:", response.getString("result"));
+            JSONArray parentArray = parentObject.getJSONArray("result");
+            List <Trash> Trashlist = new ArrayList<Trash>();
+            String username ="Nauval";
+            for (int i=0; i<parentArray.length(); i++){
+                JSONObject finalObject = parentArray.getJSONObject(i);
+                Trash trashObj;
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                gsonBuilder.registerTypeAdapter(TrashCategories.class,new TrashCategoriesDeserialize());
+                Gson gson = gsonBuilder.create();
+                if (finalObject.getString("username").equals(username)){
+                    if (finalObject.getString("status").equals(1)){
+                        trashObj = gson.fromJson(String.valueOf(finalObject), Trash.class);
+                        Trashlist.add(0,trashObj);
                     }
                     else{
-                        if(finalObject.getString("categories").equals("General Waste") ){
-                            trashObj.setCategories(TrashCategories.GENERAL);
-                        }
-                        else if(finalObject.getString("categories").equals("Green Waste")){
-                            trashObj.setCategories(TrashCategories.GREEN);
-                        }
-                        else if(finalObject.getString("categories").equals("Recycleable Waste") ){
-                            trashObj.setCategories(TrashCategories.RECYCLED);
-
-                        }
-                        trashObj.setDesc(finalObject.getString("description"));
-                        trashObj.setDistance(finalObject.getInt("distance"));
-                        trashObj.setsize(finalObject.getInt("size"));
+                        trashObj = gson.fromJson(String.valueOf(finalObject), Trash.class);
                         Trashlist.add(trashObj);
                     }
+
                 }
-                return Trashlist;
+                Trash[] trashArray = Trashlist.toArray(new Trash[0]);
+                ListAdapter myAdapter=new ListAdapter(Picklejar.this, R.layout.rowpicklejar, trashArray);
+                ListView myList = (ListView)
+                        findViewById(R.id.ListPickleJar);
+                myList.setAdapter(myAdapter);
 
 
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } finally {
-                if (connection != null) {
-                    connection.disconnect();
-                }
-                try {
-                    if(reader != null){
-                        reader.close();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
             }
-            return null;
+
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
+    }
 
+    @Override
+    public void onErrorResponse(VolleyError error) {
+        Log.d("Error:",error.getMessage());
+    }
+
+    private class TrashCategoriesDeserialize implements JsonDeserializer<TrashCategories> {
         @Override
-        protected void onPostExecute(List<Trash> Result) {
-            super.onPostExecute(Result);
-
-            //Log.d("IDOBJECT",Result.get(0).getDesc());
-
-            Trash[] trashArray = Result.toArray(new Trash[0]);
-            PicklejarAdapter myAdapter=new PicklejarAdapter(Picklejar.this, R.layout.rowpicklejar, trashArray);
-            ListView myList = (ListView)
-                    findViewById(R.id.ListPickleJar);
-            myList.setAdapter(myAdapter);
-
+        public TrashCategories deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+            if(json.getAsString().equals("Unused Goods")){
+                return TrashCategories.UNUSED;
+            } else if (json.getAsString().equals("General Waste")){
+                return TrashCategories.GENERAL;
+            } else if (json.getAsString().equals("Recycleable Waste")){
+                return TrashCategories.RECYCLED;
+            } else if (json.getAsString().equals("Green Waste")){
+                return TrashCategories.GREEN;
+            } else {
+                return TrashCategories.UNSPECIFIED;
+            }
         }
     }
 
