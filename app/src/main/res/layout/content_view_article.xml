@@ -13,7 +13,8 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:background="#6C7A89"
-        android:id="@+id/relativeLayout7">
+        android:id="@+id/relativeLayout7"
+        android:layout_alignParentStart="false">
 
         <TextView
             android:layout_width="wrap_content"
