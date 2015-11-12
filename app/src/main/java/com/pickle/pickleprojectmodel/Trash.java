@@ -6,11 +6,12 @@ package com.pickle.pickleprojectmodel;
 
 
 import java.io.File;
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.*;
 
 
-public class Trash {
+public class Trash implements Serializable {
     public String id;
     public int status;
     public String description, photo_url;
