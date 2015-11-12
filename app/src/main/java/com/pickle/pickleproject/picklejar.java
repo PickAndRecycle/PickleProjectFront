@@ -54,8 +54,10 @@ public class Picklejar extends AppCompatActivity implements Response.ErrorListen
         gestureDetector = new GestureDetector(new SwipeGestureDetector());
         mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext())
                 .getRequestQueue();
-        //String url = "http://10.0.0.2:8080/trash";
-        String url = "http://private-22976-pickleapi.apiary-mock.com/trash";
+
+        //Use your machine IP (Mac/Linux ifconfig in terminal, Windows ipconfig in cmd) IP should be 192.x.x.x
+        String url = "http://192.168.0.103:8080/trash/";
+        //String url = "http://private-22976-pickleapi.apiary-mock.com/trash";
 
         final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method
                 .GET, url,
@@ -90,13 +92,14 @@ public class Picklejar extends AppCompatActivity implements Response.ErrorListen
             Log.d("json:", response.getString("result"));
             JSONArray parentArray = parentObject.getJSONArray("result");
             List <Trash> Trashlist = new ArrayList<Trash>();
-            String username ="Tsabita";
+            String username ="Yanuar";
             for (int i=0; i<parentArray.length(); i++){
                 JSONObject finalObject = parentArray.getJSONObject(i);
                 Trash trashObj;
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 gsonBuilder.registerTypeAdapter(TrashCategories.class,new TrashCategoriesDeserialize());
                 Gson gson = gsonBuilder.create();
+
                 if (finalObject.getString("username").equals(username)) {
                     if (finalObject.getString("status").equals(1)) {
                         trashObj = gson.fromJson(String.valueOf(finalObject), Trash.class);

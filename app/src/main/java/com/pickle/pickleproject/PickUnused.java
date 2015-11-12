@@ -85,6 +85,7 @@ public class PickUnused extends AppCompatActivity implements Response.ErrorListe
         String url = "http://192.168.0.103:8080/trash/";
         //String url = "http://private-22976-pickleapi.apiary-mock.com/trash";
 
+
         final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.GET, url, new JSONObject(), this, this);
         jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         mQueue.add(jsonRequest);
@@ -370,95 +371,5 @@ public class PickUnused extends AppCompatActivity implements Response.ErrorListe
         }
     }
 
-/*
-    public abstract class CustomizedTypeAdapterFactory<C> implements TypeAdapterFactory {
 
-        private final Class<C> customizedClass;
-
-        public CustomizedTypeAdapterFactory(Class<C> customizedClass) {
-            this.customizedClass = customizedClass;
-        }
-
-        @SuppressWarnings("unchecked") // we use a runtime check to guarantee that 'C' and 'T' are equal
-        public final <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-            return type.getRawType() == customizedClass
-                    ? (TypeAdapter<T>) customizeMyClassAdapter(gson, (TypeToken<C>) type)
-                    : null;
-        }
-
-        private TypeAdapter<C> customizeMyClassAdapter(Gson gson, TypeToken<C> type) {
-            final TypeAdapter<C> delegate = gson.getDelegateAdapter(this, type);
-            final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-
-            return new TypeAdapter<C>() {
-
-                @Override public void write(JsonWriter out, C value) throws IOException {
-                    JsonElement tree = delegate.toJsonTree(value);
-                    beforeWrite(value, tree);
-                    elementAdapter.write(out, tree);
-                }
-
-
-                @Override public C read(JsonReader in) throws IOException {
-                    JsonElement tree = elementAdapter.read(in);
-                    afterRead(tree);
-                    return delegate.fromJsonTree(tree);
-                }
-            };
-        }
-
-
-        protected void beforeWrite(C source, JsonElement toSerialize) {
-
-        }
-
-
-        protected void afterRead(JsonElement deserialized) {
-            //return null;
-        }
-
-    }
-
-    private class TrashCategoriesDeserializer extends CustomizedTypeAdapterFactory<TrashCategories>{
-
-        TrashCategoriesDeserializer(){
-            super(TrashCategories.class);
-        }
-
-        @Override
-        protected void afterRead( JsonElement deserialized) {
-            if(deserialized.getAsString().equals("Unused Goods")){
-                TrashCategories.UNUSED;
-            } else if (deserialized.getAsString().equals("General Waste")){
-                return TrashCategories.GENERAL;
-            } else if (deserialized.getAsString().equals("Recycleable Waste")){
-                return TrashCategories.RECYCLED;
-            } else if (deserialized.getAsString().equals("Green Waste")){
-                return TrashCategories.GREEN;
-            } else {
-                return TrashCategories.UNSPECIFIED;
-            }
-        }
-
-    }
-
-    private class UnusedConditionDeserializer extends CustomizedTypeAdapterFactory<UnusedCondition>{
-        UnusedConditionDeserializer(){
-            super(UnusedCondition.class);
-        }
-
-        @Override
-        protected UnusedCondition afterRead2(JsonElement deserialized) {
-            if(deserialized.getAsString().equals("Good")){
-                return UnusedCondition.GOOD;
-            } else if(deserialized.getAsString().equals("Bad")){
-                return UnusedCondition.BAD;
-            } else if(deserialized.getAsString().equals("New")){
-                return UnusedCondition.NEW;
-            } else{
-                return UnusedCondition.UNSPECIFIED;
-            }
-        }
-    }
-*/
 }
