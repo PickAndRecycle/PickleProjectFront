@@ -1,7 +1,6 @@
 package com.pickle.pickleproject;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -21,20 +20,12 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import com.pickle.pickleprojectmodel.Trash;
 import com.pickle.pickleprojectmodel.TrashCategories;
-import com.pickle.pickleprojectmodel.UnusedCondition;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.lang.reflect.Type;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,29 +76,30 @@ public class Picklejar extends AppCompatActivity implements Response.ErrorListen
             Log.d("json:", response.getString("result"));
             JSONArray parentArray = parentObject.getJSONArray("result");
             List <Trash> Trashlist = new ArrayList<Trash>();
-            String username ="Nauval";
+            String username ="Tsabita";
             for (int i=0; i<parentArray.length(); i++){
                 JSONObject finalObject = parentArray.getJSONObject(i);
                 Trash trashObj;
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 gsonBuilder.registerTypeAdapter(TrashCategories.class,new TrashCategoriesDeserialize());
                 Gson gson = gsonBuilder.create();
-                if (finalObject.getString("username").equals(username)){
-                    if (finalObject.getString("status").equals(1)){
+                if (finalObject.getString("username").equals(username)) {
+                    if (finalObject.getString("status").equals(1)) {
                         trashObj = gson.fromJson(String.valueOf(finalObject), Trash.class);
-                        Trashlist.add(0,trashObj);
-                    }
-                    else{
+                        Trashlist.add(0, trashObj);
+                    } else {
                         trashObj = gson.fromJson(String.valueOf(finalObject), Trash.class);
                         Trashlist.add(trashObj);
                     }
-
                 }
-                Trash[] trashArray = Trashlist.toArray(new Trash[0]);
-                ListAdapter myAdapter=new ListAdapter(Picklejar.this, R.layout.rowpicklejar, trashArray);
-                ListView myList = (ListView)
+
+
+                final Trash[] trashArray = Trashlist.toArray(new Trash[0]);
+                final PicklejarAdapter myAdapter=new PicklejarAdapter(Picklejar.this, R.layout.rowpicklejar, trashArray);
+                final ListView myList = (ListView)
                         findViewById(R.id.ListPickleJar);
                 myList.setAdapter(myAdapter);
+
 
 
             }
@@ -119,7 +111,7 @@ public class Picklejar extends AppCompatActivity implements Response.ErrorListen
 
     @Override
     public void onErrorResponse(VolleyError error) {
-        Log.d("Error:",error.getMessage());
+        Log.d("Error:", error.getMessage());
     }
 
     private class TrashCategoriesDeserialize implements JsonDeserializer<TrashCategories> {
@@ -138,6 +130,7 @@ public class Picklejar extends AppCompatActivity implements Response.ErrorListen
             }
         }
     }
+
 
 
 

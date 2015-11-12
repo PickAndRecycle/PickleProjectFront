@@ -6,16 +6,18 @@ package com.pickle.pickleprojectmodel;
 
 
 import java.io.File;
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.*;
 
 
-public class Trash {
-    public int id, status;
+public class Trash implements Serializable {
+    public String id;
+    public int status;
     public String description, photo_url;
     public String title;
     public File photo_data;
-    public Double latitude,longitude;
+    public int latitude,longitude;
     public int timestamp;
     public boolean report;
     public int distance;
@@ -24,7 +26,7 @@ public class Trash {
     public UnusedCondition trash_condition;
 
 
-    public Trash(int id, String description, String title, int status, File photo_data, Double latitude, Double longitude,
+    public Trash(String id, String description, String title, int status, File photo_data, int latitude, int longitude,
                  int timestamp, boolean report, int distance, int size, TrashCategories categories, UnusedCondition trash_condition){
         this.id = id;
         this.description = description;
@@ -50,11 +52,11 @@ public class Trash {
         System.out.println("tests");
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -86,19 +88,19 @@ public class Trash {
         this.photo_data = newphoto;
     }
 
-    public Double getLatitude() {
+    public int getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(Double latitude) {
+    public void setLatitude(int latitude) {
         this.latitude = latitude;
     }
 
-    public Double getLongitude() {
+    public int getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(Double longitude) {
+    public void setLongitude(int longitude) {
         this.longitude = longitude;
     }
 

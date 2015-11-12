@@ -51,8 +51,8 @@
     <string name="title_activity_modify_request_unused">Modify_request_unused</string>
     <string-array name="condition">
         <item>Good</item>
-        <item>Normal</item>
         <item>Bad</item>
+        <item>New</item>
     </string-array>
     <string-array name="Waste">
         <item>Recycle Waste</item>

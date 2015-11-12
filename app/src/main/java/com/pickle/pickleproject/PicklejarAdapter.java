@@ -2,13 +2,16 @@ package com.pickle.pickleproject;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.pickle.pickleprojectmodel.Trash;
+import com.pickle.pickleprojectmodel.TrashCategories;
 
 /**
  * Created by admin on 10/28/2015.
@@ -27,7 +30,7 @@ public class PicklejarAdapter extends ArrayAdapter<Trash> {
         this.resource = resource;
         this.objects = objects;
     }
-    public View getView(int position,
+    public View getView(final int position,
                         View convertView,
                         ViewGroup parent) {
         LayoutInflater inflater= ((Activity) context).getLayoutInflater();
@@ -39,10 +42,34 @@ public class PicklejarAdapter extends ArrayAdapter<Trash> {
         TextView dash = (TextView) row.findViewById(R.id.dash);
 
 
-        title.setText((CharSequence) objects[position].title);
-        desc.setText((CharSequence) objects[position].description);
-        time.setText(Integer.toString( objects[position].timestamp));
-        stat.setText(Integer.toString(objects[position].status));
+        if(objects[position].getCategories().equals(TrashCategories.UNUSED)){
+            //Log.d("position", Integer.toString(position));
+            //Log.d("id", Integer.toString(objects[position].id));
+            title.setText((CharSequence) objects[position].title);
+            desc.setText((CharSequence) objects[position].getDesc());
+            time.setText(Integer.toString(objects[position].timestamp));
+        } else {
+            title.setText((CharSequence)objects[position].title);
+            desc.setText((CharSequence) objects[position].getCategories().toString());
+        }
+        if (objects[position].getStatus() == 1){
+            stat.setText("Picked");
+        }
+        else if (objects[position].getStatus() == 0){
+            stat.setText("Available");
+        }
+        else{
+            stat.setText("Done");
+        }
+        row.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //row.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
+                Intent intent = new Intent(context, ModifyConfirmation.class);
+                intent.putExtra("object", objects[position]);
+                context.startActivity(intent);
+            }
+        });
 
         return row;
     }
