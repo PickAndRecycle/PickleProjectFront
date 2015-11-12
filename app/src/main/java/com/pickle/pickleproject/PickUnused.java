@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
@@ -79,18 +80,19 @@ public class PickUnused extends AppCompatActivity implements Response.ErrorListe
 
         mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext())
                 .getRequestQueue();
-        //String url = "http://10.0.0.2:8080/trash";
-        String url = "http://private-22976-pickleapi.apiary-mock.com/trash";
 
-        final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method
-                .GET, url,
-                new JSONObject(), this, this);
+        //Use your machine IP (Mac/Linux ifconfig in terminal, Windows ipconfig in cmd) IP should be 192.x.x.x
+        String url = "http://192.168.0.103:8080/trash/";
+        //String url = "http://private-22976-pickleapi.apiary-mock.com/trash";
+
+        final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.GET, url, new JSONObject(), this, this);
+        jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         mQueue.add(jsonRequest);
     }
 
     @Override
     public void onErrorResponse(VolleyError error) {
-        Log.d("Error:",error.getMessage());
+        Log.d("Error:",error.toString());
     }
 
     @Override
