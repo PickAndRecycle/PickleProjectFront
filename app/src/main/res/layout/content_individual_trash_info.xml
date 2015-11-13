@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="lorep ipsum dolor sit amet"
-            android:id="@+id/sampleText"
+            android:id="@+id/descriptionText"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             android:textSize="20sp" />

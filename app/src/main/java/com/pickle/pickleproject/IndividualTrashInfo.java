@@ -15,12 +15,20 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.*;
 import com.android.volley.RequestQueue;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 import com.pickle.pickleprojectmodel.Trash;
 
 import android.util.LruCache;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,51 +58,47 @@ public class IndividualTrashInfo extends AppCompatActivity {
         NetworkImageView trashInfo = (NetworkImageView) findViewById(R.id.trashInfoPicture);
         trashInfo.setImageUrl("http://104.155.213.80/insantani/public/api/products/1/picture", mImageLoader);
 
-        Trash trash = (Trash) getIntent().getSerializableExtra("object");
+        final Trash trash = (Trash) getIntent().getSerializableExtra("object");
         final String secureID = trash.getId();
-        trash.setStatus(1);
-
+        MontserratTextView description = (MontserratTextView) findViewById(R.id.descriptionText);
+        description.setText(trash.getDesc());
 
         pickButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeThrowerInfo();
+                trash.setStatus(1);
+                mQueue = CustomVolleyRequestQueue.getInstance(getApplicationContext()).getRequestQueue();
 
-                mQueue = Volley.newRequestQueue(getApplicationContext());
+                String url = "http://192.168.0.101:8080/trash/" + secureID + "/";
+                GsonBuilder gsonBuilder = new GsonBuilder();
 
-                String url = "http://192.168.0.100:8080/trash/"+secureID+"/";
-                StringRequest putRequest = new StringRequest(Request.Method.PUT, url,
-                        new Response.Listener<String>()
-                        {
-                            @Override
-                            public void onResponse(String response) {
-                                // response
-                                Log.d("Response", response);
-                            }
-                        },
-                        new Response.ErrorListener()
-                        {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                // error
-                                Log.d("Error.Response", String.valueOf(error));
+                gsonBuilder.registerTypeAdapter(Trash.class, new TrashSerializer());
+                Gson gson = gsonBuilder.create();
+                String json = gson.toJson(trash);
+                Log.d("json", json);
+                try {
+                    final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.PUT, url, new JSONObject(json), new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                Log.d("result", response.getString("result"));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
                         }
-                ) {
-
-                    @Override
-                    protected Map<String, String> getParams()
-                    {
-                        Map<String, String>  params = new HashMap<String, String>();
-                        params.put("status", "1");
-
-                        return params;
-                    }
-
-                };
-
-                mQueue.add(putRequest);
-
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.d("Error:", error.getMessage());
+                        }
+                    });
+                    jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+                    mQueue.add(jsonRequest);
+                    changeThrowerInfo();
+                }
+                catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -109,4 +113,26 @@ public class IndividualTrashInfo extends AppCompatActivity {
         Intent intent = new Intent(this, ThrowerInfo.class);
         startActivity(intent);
     }
+
+    private class TrashSerializer implements JsonSerializer<Trash> {
+        @Override
+        public JsonElement serialize(Trash src, Type typeOfSrc, JsonSerializationContext context) {
+            JsonObject object = new JsonObject();
+            object.addProperty("id",src.getId());
+            object.addProperty("categories",src.getCategories().toString());
+            object.addProperty("username",src.getUsername());
+            object.addProperty("status",src.getStatus());
+            object.addProperty("description",src.getDesc());
+            object.addProperty("distance",src.getDistance());
+            object.addProperty("photo_url",src.getPhoto_url());
+            object.addProperty("latitude",src.getLatitude());
+            object.addProperty("longitude",src.getLongitude());
+            object.addProperty("report",src.isReport());
+            object.addProperty("title",src.getTitle());
+            object.addProperty("trash_condition","");
+            object.addProperty("size",src.getsize());
+            return object;
+        }
+    }
+
 }
