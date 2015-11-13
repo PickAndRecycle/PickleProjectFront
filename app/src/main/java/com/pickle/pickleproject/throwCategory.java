@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.pickle.pickleprojectmodel.TrashCategories;
+
 public class ThrowCategory extends AppCompatActivity {
 
     @Override
@@ -58,39 +60,64 @@ public class ThrowCategory extends AppCompatActivity {
     }
 
     private void changeUnusedButton(){
-        Intent intent = new Intent(this, OtherTrashDialog.class);
+
+        TrashCategories categories = TrashCategories.UNUSED;
+        Intent intent = new Intent(this, UnusedGoodsDialog.class);
+        intent.putExtras(getIntent().getExtras());
+        intent.putExtra("categories", categories);
+
+        //TOAST FOR DEBUGGING
+        Bundle parseInfo = intent.getExtras();
+        Toast boom = new Toast(getApplicationContext());
+        boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
+        boom.makeText(ThrowCategory.this, parseInfo.toString(), boom.LENGTH_SHORT).show();
+
         startActivity(intent);
-        //TOAST
-        Toast toast = new Toast(getApplicationContext());
-        toast.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
-        toast.makeText(ThrowCategory.this, "Unused Goods", toast.LENGTH_SHORT).show();
     }
 
     private void changeGeneralButton(){
-        Intent intent = new Intent(this, UnusedGoodsDialog.class);
+        TrashCategories categories = TrashCategories.GENERAL;
+        Intent intent = new Intent(this, OtherTrashDialog.class);
+        intent.putExtras(getIntent().getExtras());
+        intent.putExtra("categories", categories);
+
+        //TOAST FOR DEBUGGING
+        Bundle parseInfo = intent.getExtras();
+        Toast boom = new Toast(getApplicationContext());
+        boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
+        boom.makeText(ThrowCategory.this, parseInfo.toString(), boom.LENGTH_SHORT).show();
+
         startActivity(intent);
-        //TOAST
-        Toast toast = new Toast(getApplicationContext());
-        toast.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
-        toast.makeText(ThrowCategory.this, "General Waste", toast.LENGTH_SHORT).show();
     }
 
     private void changeRecycleButton(){
-        Intent intent = new Intent(this, UnusedGoodsDialog.class);
+        TrashCategories categories = TrashCategories.RECYCLED;
+        Intent intent = new Intent(this, OtherTrashDialog.class);
+        intent.putExtras(getIntent().getExtras());
+        intent.putExtra("categories", categories);
+
+        //TOAST FOR DEBUGGING
+        Bundle parseInfo = intent.getExtras();
+        Toast boom = new Toast(getApplicationContext());
+        boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
+        boom.makeText(ThrowCategory.this, parseInfo.toString(), boom.LENGTH_SHORT).show();
+
         startActivity(intent);
-        //TOAST
-        Toast toast = new Toast(getApplicationContext());
-        toast.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
-        toast.makeText(ThrowCategory.this, "Recyclable Waste", toast.LENGTH_SHORT).show();
     }
 
     private void changeGreenButton(){
-        Intent intent = new Intent(this, UnusedGoodsDialog.class);
+        TrashCategories categories = TrashCategories.GREEN;
+        Intent intent = new Intent(this, OtherTrashDialog.class);
+        intent.putExtras(getIntent().getExtras());
+        intent.putExtra("categories", categories);
+
+        //TOAST FOR DEBUGGING
+        Bundle parseInfo = intent.getExtras();
+        Toast boom = new Toast(getApplicationContext());
+        boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
+        boom.makeText(ThrowCategory.this, parseInfo.toString(), boom.LENGTH_SHORT).show();
+
         startActivity(intent);
-        //TOAST
-        Toast toast = new Toast(getApplicationContext());
-        toast.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
-        toast.makeText(ThrowCategory.this, "Green Waste", toast.LENGTH_SHORT).show();
     }
 
 }

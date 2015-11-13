@@ -73,10 +73,12 @@ public class AddDescription extends AppCompatActivity {
         Intent intent = new Intent(this, ThrowOrReport.class);
         //To pass descForm into the next page
         intent.putExtra("descForm", descForm.getText().toString());
+
         //TOAST FOR DEBUGGING
-        Toast toast = new Toast(getApplicationContext());
-        toast.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
-        toast.makeText(AddDescription.this, descForm.getText(), toast.LENGTH_SHORT).show();
+        Bundle parseInfo = intent.getExtras();
+        Toast boom = new Toast(getApplicationContext());
+        boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
+        boom.makeText(AddDescription.this, parseInfo.toString(), boom.LENGTH_SHORT).show();
 
         startActivity(intent);
     }
