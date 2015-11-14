@@ -1,15 +1,25 @@
 package com.pickle.pickleproject;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.GestureDetector;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
+
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
+
 import java.io.File;
 
 
@@ -18,11 +28,35 @@ public class Home extends Activity   {
     int CAM_REQUEST =1;
     ImageButton Camera;
     private GestureDetector gestureDetector;
+    Location mLastLocation;
+    private GoogleApiClient mGoogleApiClient;
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        // Acquire a reference to the system Location Manager
+        LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+
+        // Define a listener that responds to location updates
+        LocationListener locationListener = new LocationListener() {
+            public void onLocationChanged(Location location) {
+                // Called when a new location is found by the network location provider.
+
+            }
+
+            public void onStatusChanged(String provider, int status, Bundle extras) {}
+
+            public void onProviderEnabled(String provider) {}
+
+            public void onProviderDisabled(String provider) {}
+        };
+
+        // Register the listener with the Location Manager to receive location updates
+        //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0,locationListener);
+
+
 
 
         Camera = (ImageButton) findViewById(R.id.Camera_Button);
@@ -56,8 +90,18 @@ public class Home extends Activity   {
         startActivity(intent);
         this.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
     }
-    private void changeAddDescription(){
+    private void changeAddDescription(double latitude, double longitude){
         Intent intent = new Intent(this, AddDescription.class);
+
+        intent.putExtra("latitude",latitude);
+        intent.putExtra("longitude",longitude);
+
+        //TOAST FOR DEBUGGING
+        Bundle parseInfo = intent.getExtras();
+        Toast boom = new Toast(getApplicationContext());
+        boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
+        boom.makeText(Home.this, parseInfo.toString(), boom.LENGTH_SHORT).show();
+
         startActivity(intent);
 
     }
@@ -77,10 +121,17 @@ public class Home extends Activity   {
         return image_file;
     }
 
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         String path = "sdcard/Pickle/cam_image.jpg";
-        changeAddDescription();
+
+        Double latitude = 0.0;
+        Double longitude = 0.0;
+
+
+        changeAddDescription(latitude,longitude);
     }
 
     @Override

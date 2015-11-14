@@ -72,7 +72,8 @@ public class AddDescription extends AppCompatActivity {
         descForm = (EditText) findViewById(R.id.editText);
         Intent intent = new Intent(this, ThrowOrReport.class);
         //To pass descForm into the next page
-        intent.putExtra("descForm", descForm.getText().toString());
+        intent.putExtras(getIntent().getExtras());
+        intent.putExtra("description", descForm.getText().toString());
 
         //TOAST FOR DEBUGGING
         Bundle parseInfo = intent.getExtras();
