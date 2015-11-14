@@ -28,8 +28,9 @@ public class Home extends Activity   {
     int CAM_REQUEST =1;
     ImageButton Camera;
     private GestureDetector gestureDetector;
-    Location mLastLocation;
-    private GoogleApiClient mGoogleApiClient;
+    //Location mLastLocation;
+    //private GoogleApiClient mGoogleApiClient;
+    GPSTracker gps;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,19 +91,33 @@ public class Home extends Activity   {
         startActivity(intent);
         this.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
     }
-    private void changeAddDescription(double latitude, double longitude){
-        Intent intent = new Intent(this, AddDescription.class);
+    private void changeAddDescription(){
 
-        intent.putExtra("latitude",latitude);
-        intent.putExtra("longitude",longitude);
+        gps = new GPSTracker(Home.this);
+        if(gps.canGetLocation()){
+            //If GPS can get location
+            Intent intent = new Intent(this, AddDescription.class);
+            //GET THE CURRENT LATITUDE AND LONGITUDE
+            double latitude = gps.getLatitude();
+            double longitude = gps.getLongitude();
+            //PUT LATITUDE AND LONGITUDE INTO THE NEXT PAGE
+            intent.putExtra("latitude", latitude);
+            intent.putExtra("longitude", longitude);
+            //TOAST FOR DEBUGGING
+            Bundle parseInfo = intent.getExtras();
+            Toast boom = new Toast(getApplicationContext());
+            boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
+            boom.makeText(Home.this, parseInfo.toString(), boom.LENGTH_SHORT).show();
 
-        //TOAST FOR DEBUGGING
-        Bundle parseInfo = intent.getExtras();
-        Toast boom = new Toast(getApplicationContext());
-        boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
-        boom.makeText(Home.this, parseInfo.toString(), boom.LENGTH_SHORT).show();
+            startActivity(intent);
 
-        startActivity(intent);
+            // \n is for new line
+        }else{
+            // can't get location
+            // GPS or Network is not enabled
+            // Ask user to enable GPS/network in settings
+            gps.showSettingsAlert();
+        }
 
     }
 
@@ -127,11 +142,12 @@ public class Home extends Activity   {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         String path = "sdcard/Pickle/cam_image.jpg";
 
-        Double latitude = 0.0;
-        Double longitude = 0.0;
+        //Double latitude = 0.0;
+        //Double longitude = 0.0;
 
 
-        changeAddDescription(latitude,longitude);
+        //changeAddDescription(latitude,longitude);
+        changeAddDescription();
     }
 
     @Override
