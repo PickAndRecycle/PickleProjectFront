@@ -64,7 +64,7 @@ public class ThrowCategory extends AppCompatActivity {
         TrashCategories categories = TrashCategories.UNUSED;
         Intent intent = new Intent(this, UnusedGoodsDialog.class);
         intent.putExtras(getIntent().getExtras());
-        intent.putExtra("categories", categories);
+        intent.putExtra("categories", "Unused");
 
         //TOAST FOR DEBUGGING
         Bundle parseInfo = intent.getExtras();
@@ -79,7 +79,7 @@ public class ThrowCategory extends AppCompatActivity {
         TrashCategories categories = TrashCategories.GENERAL;
         Intent intent = new Intent(this, OtherTrashDialog.class);
         intent.putExtras(getIntent().getExtras());
-        intent.putExtra("categories", categories);
+        intent.putExtra("categories", "General");
 
         //TOAST FOR DEBUGGING
         Bundle parseInfo = intent.getExtras();
@@ -94,7 +94,7 @@ public class ThrowCategory extends AppCompatActivity {
         TrashCategories categories = TrashCategories.RECYCLED;
         Intent intent = new Intent(this, OtherTrashDialog.class);
         intent.putExtras(getIntent().getExtras());
-        intent.putExtra("categories", categories);
+        intent.putExtra("categories", "Recycled");
 
         //TOAST FOR DEBUGGING
         Bundle parseInfo = intent.getExtras();
@@ -109,7 +109,7 @@ public class ThrowCategory extends AppCompatActivity {
         TrashCategories categories = TrashCategories.GREEN;
         Intent intent = new Intent(this, OtherTrashDialog.class);
         intent.putExtras(getIntent().getExtras());
-        intent.putExtra("categories", categories);
+        intent.putExtra("categories", "Green");
 
         //TOAST FOR DEBUGGING
         Bundle parseInfo = intent.getExtras();

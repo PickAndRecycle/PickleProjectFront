@@ -41,8 +41,7 @@ public class Picklejar extends AppCompatActivity implements Response.ErrorListen
         mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext())
                 .getRequestQueue();
 
-        //Use your machine IP (Mac/Linux ifconfig in terminal, Windows ipconfig in cmd) IP should be 192.x.x.x
-        String url = "http://192.168.0.103:8080/trash/";
+        String url = "http://104.155.237.238:8080/trash/";
         //String url = "http://private-22976-pickleapi.apiary-mock.com/trash";
 
         final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method
@@ -85,17 +84,18 @@ public class Picklejar extends AppCompatActivity implements Response.ErrorListen
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 gsonBuilder.registerTypeAdapter(TrashCategories.class,new TrashCategoriesDeserialize());
                 Gson gson = gsonBuilder.create();
-
-                if (finalObject.getString("username").equals(username)) {
-                    if (finalObject.getString("status").equals(1)) {
-                        trashObj = gson.fromJson(String.valueOf(finalObject), Trash.class);
-                        Trashlist.add(0, trashObj);
-                    } else {
-                        trashObj = gson.fromJson(String.valueOf(finalObject), Trash.class);
-                        Trashlist.add(trashObj);
+                boolean bool = Boolean.parseBoolean(finalObject.getString("report"));
+                if(bool == false) {
+                    if (finalObject.getString("username").equals(username)) {
+                        if (Integer.parseInt(finalObject.getString("status")) == 1) {
+                            trashObj = gson.fromJson(String.valueOf(finalObject), Trash.class);
+                            Trashlist.add(0, trashObj);
+                        } else {
+                            trashObj = gson.fromJson(String.valueOf(finalObject), Trash.class);
+                            Trashlist.add(trashObj);
+                        }
                     }
                 }
-
 
                 final Trash[] trashArray = Trashlist.toArray(new Trash[0]);
                 final PicklejarAdapter myAdapter=new PicklejarAdapter(Picklejar.this, R.layout.rowpicklejar, trashArray);

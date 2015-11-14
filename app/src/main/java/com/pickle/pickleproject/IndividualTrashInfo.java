@@ -69,7 +69,7 @@ public class IndividualTrashInfo extends AppCompatActivity {
                 trash.setStatus(1);
                 mQueue = CustomVolleyRequestQueue.getInstance(getApplicationContext()).getRequestQueue();
 
-                String url = "http://192.168.0.101:8080/trash/" + secureID + "/";
+                String url = "http://104.155.237.238:8080/trash/" + secureID;
                 GsonBuilder gsonBuilder = new GsonBuilder();
 
                 gsonBuilder.registerTypeAdapter(Trash.class, new TrashSerializer());

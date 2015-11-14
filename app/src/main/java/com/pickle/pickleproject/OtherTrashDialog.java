@@ -73,17 +73,19 @@ public class OtherTrashDialog extends AppCompatActivity {
 
         mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext()).getRequestQueue();
 
-        final String url = "http://192.168.1.167:8080/trash/";
+        final String url = "http://104.155.237.238:8080/trash/";
 
         Trash trash = new Trash();
         //trash.setLatitude((int) intent.getDoubleExtra("latitude",0.0) );
         //trash.setLongitude((int) intent.getDoubleExtra("longitude",0.0));
         trash.setDesc(intent.getStringExtra("description"));
+        Log.d("description", trash.getDesc());
         trash.setReport(intent.getBooleanExtra("report", false));
-        trash.setCategories(TrashCategories.valueOf(intent.getStringExtra("categories")));
+        Log.d("categories", intent.getStringExtra("categories").toUpperCase());
+        trash.setCategories(TrashCategories.valueOf(intent.getStringExtra("categories").toUpperCase()));
         trash.setTitle("");
-        trash.setCondition(UnusedCondition.UNSPECIFIED);
-        trash.setsize(intent.getIntExtra("size", 1));
+        trash.setCondition(null);
+        trash.setsize(Integer.parseInt(sizeForm.getText().toString()));
 
 
         GsonBuilder gsonBuilder = new GsonBuilder();

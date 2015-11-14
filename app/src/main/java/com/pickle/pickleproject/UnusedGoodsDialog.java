@@ -73,16 +73,16 @@ public class UnusedGoodsDialog extends AppCompatActivity {
 
         mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext()).getRequestQueue();
 
-        final String url = "http://192.168.1.167:8080/trash/";
+        final String url = "http://104.155.237.238:8080/trash/";
 
         Trash trash = new Trash();
         //trash.setLatitude((int) intent.getDoubleExtra("latitude",0.0) );
         //trash.setLongitude((int) intent.getDoubleExtra("longitude",0.0));
         trash.setDesc(intent.getStringExtra("description"));
         trash.setReport(intent.getBooleanExtra("report",false));
-        trash.setCategories(TrashCategories.valueOf(intent.getStringExtra("categories")));
+        trash.setCategories(TrashCategories.UNUSED);
         trash.setTitle(intent.getStringExtra("title"));
-        trash.setCondition(UnusedCondition.valueOf(intent.getStringExtra("condition")));
+        trash.setCondition(UnusedCondition.valueOf(intent.getStringExtra("condition").toUpperCase()));
 
 
         GsonBuilder gsonBuilder = new GsonBuilder();

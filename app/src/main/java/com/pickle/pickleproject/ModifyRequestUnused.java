@@ -56,7 +56,7 @@ public class ModifyRequestUnused extends AppCompatActivity {
 
         mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext()).getRequestQueue();
 
-        final String url = "http://192.168.0.103:8080/trash/" + trash.getId();
+        final String url = "http://104.155.237.238:8080/trash/" + trash.getId();
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override

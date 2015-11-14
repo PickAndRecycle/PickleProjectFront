@@ -83,8 +83,7 @@ public class PickGeneral extends AppCompatActivity implements Response.ErrorList
 
         mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext()).getRequestQueue();
 
-        //Use your machine IP (Mac/Linux ifconfig in terminal, Windows ipconfig in cmd) IP should be 192.x.x.x
-        String url = "http://192.168.0.103:8080/trash/";
+        String url = "http://104.155.237.238:8080/trash/";
         //String url = "http://private-22976-pickleapi.apiary-mock.com/trash";
 
         final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.GET, url, new JSONObject(), this, this);
@@ -114,11 +113,16 @@ public class PickGeneral extends AppCompatActivity implements Response.ErrorList
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 gsonBuilder.registerTypeAdapter(TrashCategories.class, new TrashCategoriesDeserialize());
                 Gson gson = gsonBuilder.create();
-                if(finalObject.getString("categories").equals("General Waste") ){
-                    trashObj = gson.fromJson(String.valueOf(finalObject), Trash.class);
-                    Trashlist.add(trashObj);
-                }
+                boolean bool = Boolean.parseBoolean(finalObject.getString("report"));
+                if(bool == false) {
+                    if (Integer.parseInt(finalObject.getString("status")) == 0) {
+                        if (finalObject.getString("categories").equals("General Waste")) {
+                            trashObj = gson.fromJson(String.valueOf(finalObject), Trash.class);
 
+                            Trashlist.add(trashObj);
+                        }
+                    }
+                }
             }
 
             Trash[] trashArray = Trashlist.toArray(new Trash[0]);

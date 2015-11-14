@@ -81,8 +81,7 @@ public class ThrowOrReport extends AppCompatActivity {
 
         mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext()).getRequestQueue();
 
-        final String url = "http://192.168.1.167:8080/trash/";
-
+        final String url = "http://104.155.237.238:8080/trash/";
 
         Trash trash = new Trash();
         //trash.setLatitude((int) intent.getDoubleExtra("latitude", 0.0) );

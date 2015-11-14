@@ -81,8 +81,8 @@ public class PickUnused extends AppCompatActivity implements Response.ErrorListe
         mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext())
                 .getRequestQueue();
 
-        //Use your machine IP (Mac/Linux ifconfig in terminal, Windows ipconfig in cmd) IP should be 192.x.x.x
-        String url = "http://192.168.0.103:8080/trash/";
+
+        String url = "http://104.155.237.238:8080/trash/";
         //String url = "http://private-22976-pickleapi.apiary-mock.com/trash";
 
 
@@ -114,12 +114,16 @@ public class PickUnused extends AppCompatActivity implements Response.ErrorListe
 
                 gsonBuilder.registerTypeAdapter(UnusedCondition.class, new UnusedConditionDeserialize());
                 Gson gson = gsonBuilder.create();
+                boolean bool = Boolean.parseBoolean(finalObject.getString("report"));
+                if(bool == false) {
+                    if (Integer.parseInt(finalObject.getString("status")) == 0) {
+                        if (finalObject.getString("categories").equals("Unused Goods")) {
+                            trashObj = gson.fromJson(String.valueOf(finalObject), Trash.class);
 
-                if(finalObject.getString("categories").equals("Unused Goods")){
-                    trashObj = gson.fromJson(String.valueOf(finalObject), Trash.class);
-
-                    trashObj.setCategories(TrashCategories.UNUSED);
-                    Trashlist.add(trashObj);
+                            trashObj.setCategories(TrashCategories.UNUSED);
+                            Trashlist.add(trashObj);
+                        }
+                    }
                 }
 
             }
@@ -210,98 +214,6 @@ public class PickUnused extends AppCompatActivity implements Response.ErrorListe
     }
 
 
-/*
-    // To pull the JSON request
-    public class JSONTask extends AsyncTask<String,String,List<Trash>>{
-
-        @Override
-        protected List<Trash> doInBackground(String... params) {
-            HttpURLConnection connection = null;
-            BufferedReader reader = null;
-
-            try {
-                URL url = new URL(params[0]);
-                connection = (HttpURLConnection) url.openConnection();
-                connection.connect();
-
-                InputStream stream = connection.getInputStream();
-
-                StringBuffer buffer = new StringBuffer();
-
-                reader = new BufferedReader(new InputStreamReader(stream));
-
-                String line = "";
-                while((line = reader.readLine()) != null){
-                    buffer.append(line);
-                }
-                String finalJson = buffer.toString();
-
-
-                JSONObject parentObject = new JSONObject(finalJson);
-                JSONArray parentArray = parentObject.getJSONArray("Result");
-
-                List<Trash> Trashlist = new ArrayList<Trash>();
-
-                for(int i=0 ; i<parentArray.length();i++){
-                    JSONObject finalObject = parentArray.getJSONObject(i);
-
-                    Trash trashObj;
-                    GsonBuilder gsonBuilder = new GsonBuilder();
-
-                    gsonBuilder.registerTypeAdapter(UnusedCondition.class, new UnusedConditionDeserialize());
-                    Gson gson = gsonBuilder.create();
-
-                    if(finalObject.getString("categories").equals("Unused Goods")){
-                        trashObj = gson.fromJson(String.valueOf(finalObject), Trash.class);
-
-                        trashObj.setCategories(TrashCategories.UNUSED);
-                        Trashlist.add(trashObj);
-                    }
-
-
-                }
-
-
-                return Trashlist;
-
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } finally {
-                if (connection != null) {
-                    connection.disconnect();
-                }
-                try {
-                    if(reader != null){
-                        reader.close();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(List<Trash> Result) {
-            super.onPostExecute(Result);
-
-            //Log.d("IDOBJECT",Result.get(0).getDesc());
-
-            Trash[] trashArray = Result.toArray(new Trash[0]);
-            ListAdapter myAdapter=new ListAdapter(PickUnused.this ,R.layout.rowlayout, trashArray);
-            ListView myList = (ListView)
-                    findViewById(R.id.listView4);
-            myList.setAdapter(myAdapter);
-
-        }
-    }
-
-*/
 
     // Private class for gestures
     private class SwipeGestureDetector
