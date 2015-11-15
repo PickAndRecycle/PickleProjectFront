@@ -56,7 +56,7 @@ public class IndividualTrashInfo extends AppCompatActivity {
         });
 
         NetworkImageView trashInfo = (NetworkImageView) findViewById(R.id.trashInfoPicture);
-        trashInfo.setImageUrl("http://104.155.213.80/insantani/public/api/products/1/picture", mImageLoader);
+        trashInfo.setImageUrl("http://i63.tinypic.com/312zpeu.jpg", mImageLoader);
 
         final Trash trash = (Trash) getIntent().getSerializableExtra("object");
         final String secureID = trash.getId();

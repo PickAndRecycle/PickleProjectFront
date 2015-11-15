@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -41,25 +42,17 @@ public class ModifyRequestOther extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modify_request_other);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
         context = this.getApplicationContext();
         final Trash trash = (Trash) getIntent().getSerializableExtra("object");
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
+        final EditText title = (EditText) findViewById(R.id.editText8);
         final EditText description = (EditText) findViewById(R.id.editText5);
         final EditText size = (EditText) findViewById(R.id.editText6);
         final Spinner spinner = (Spinner) findViewById(R.id.spinner);
 
         Button saveButton = (Button) findViewById(R.id.button3);
+        ImageButton backButton = (ImageButton) findViewById(R.id.backButton);
 
         mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext()).getRequestQueue();
 
@@ -68,6 +61,7 @@ public class ModifyRequestOther extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                trash.setTitle(title.getText().toString());
                 trash.setsize(Integer.parseInt(size.getText().toString()));
                 trash.setDesc(description.getText().toString());
                 trash.setCategories(TrashCategories.valueOf(spinner.getSelectedItem().toString().toUpperCase()));
@@ -105,8 +99,19 @@ public class ModifyRequestOther extends AppCompatActivity {
             }
         });
 
+        backButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                goBack();
+            }
+        });
+
     }
 
+    private void goBack(){
+        Intent intent = new Intent(this,ModifyConfirmation.class);
+        startActivity(intent);
+    }
     private void changeJar(){
         Intent intent = new Intent(this,Picklejar.class);
         startActivity(intent);

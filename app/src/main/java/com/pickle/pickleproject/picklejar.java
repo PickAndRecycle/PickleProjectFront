@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.android.volley.Request;
@@ -48,6 +50,23 @@ public class Picklejar extends AppCompatActivity implements Response.ErrorListen
                 .GET, url,
                 new JSONObject(), this, this);
         mQueue.add(jsonRequest);
+
+        ImageButton newsfeedButton = (ImageButton) findViewById(R.id.newsfeedButton);
+        ImageButton homeButton = (ImageButton) findViewById(R.id.homeButton);
+
+        newsfeedButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                changeNews();
+            }
+        });
+
+        homeButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                changeHome();
+            }
+        });
 
     }
 
@@ -133,9 +152,6 @@ public class Picklejar extends AppCompatActivity implements Response.ErrorListen
             }
         }
     }
-
-
-
 
 
     private void onLeftSwipe() {

@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.View;
+import android.widget.ImageButton;
 
 public class Newsfeed extends AppCompatActivity {
     private GestureDetector gestureDetector;
@@ -15,6 +17,15 @@ public class Newsfeed extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_newsfeed);
         gestureDetector = new GestureDetector(new SwipeGestureDetector());
+
+        ImageButton pickleJarButton = (ImageButton) findViewById(R.id.pickleJarButton);
+
+        pickleJarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changePickleJar();
+            }
+        });
     }
 
     private void changePickleJar(){

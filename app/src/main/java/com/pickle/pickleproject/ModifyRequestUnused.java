@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -53,6 +54,7 @@ public class ModifyRequestUnused extends AppCompatActivity {
         final Spinner spinner = (Spinner) findViewById(R.id.spinner2);
 
         Button saveButton = (Button) findViewById(R.id.button3);
+        ImageButton backButton = (ImageButton) findViewById(R.id.backButton);
 
         mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext()).getRequestQueue();
 
@@ -98,12 +100,19 @@ public class ModifyRequestUnused extends AppCompatActivity {
             }
         });
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        backButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                goBack();
+            }
+        });
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
+    }
 
+    private void goBack(){
+        Intent intent = new Intent(this,ModifyConfirmation.class);
+        startActivity(intent);
     }
 
     private void changeJar(){
