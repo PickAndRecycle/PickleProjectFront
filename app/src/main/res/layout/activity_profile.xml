@@ -37,7 +37,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/contentArea"
+        android:id="@+id/profileArea"
         android:layout_below="@+id/ActionBar"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -122,8 +122,8 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/usernameText"
         android:id="@+id/username"
-        android:layout_alignBaseline="@+id/contentArea"
-        android:layout_alignBottom="@+id/contentArea"
+        android:layout_alignBaseline="@+id/profileArea"
+        android:layout_alignBottom="@+id/profileArea"
         android:layout_centerHorizontal="true" />
 
     <com.pickle.pickleproject.MontserratTextView
