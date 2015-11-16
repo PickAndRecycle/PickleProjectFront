@@ -51,6 +51,9 @@ public class ModifyRequestOther extends AppCompatActivity {
         final EditText size = (EditText) findViewById(R.id.editText6);
         final Spinner spinner = (Spinner) findViewById(R.id.spinner);
 
+        description.setText(trash.getDesc());
+        size.setText(String.valueOf(trash.getsize()));
+
         Button saveButton = (Button) findViewById(R.id.button3);
         ImageButton backButton = (ImageButton) findViewById(R.id.backButton);
 
