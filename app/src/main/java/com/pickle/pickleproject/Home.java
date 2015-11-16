@@ -36,7 +36,7 @@ public class Home extends Activity   {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
+        /*
         // Acquire a reference to the system Location Manager
         LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 
@@ -56,7 +56,7 @@ public class Home extends Activity   {
 
         // Register the listener with the Location Manager to receive location updates
         //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0,locationListener);
-
+        */
 
 
 
@@ -117,6 +117,21 @@ public class Home extends Activity   {
             // GPS or Network is not enabled
             // Ask user to enable GPS/network in settings
             gps.showSettingsAlert();
+            //If GPS can get location
+            Intent intent = new Intent(this, AddDescription.class);
+            //GET THE CURRENT LATITUDE AND LONGITUDE
+            double latitude = gps.getLatitude();
+            double longitude = gps.getLongitude();
+            //PUT LATITUDE AND LONGITUDE INTO THE NEXT PAGE
+            intent.putExtra("latitude", latitude);
+            intent.putExtra("longitude", longitude);
+            //TOAST FOR DEBUGGING
+            Bundle parseInfo = intent.getExtras();
+            Toast boom = new Toast(getApplicationContext());
+            boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
+            boom.makeText(Home.this, parseInfo.toString(), boom.LENGTH_SHORT).show();
+
+            startActivity(intent);
         }
 
     }

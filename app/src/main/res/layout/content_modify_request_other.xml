@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:id="@+id/linearLayout5"
-        android:layout_below="@+id/emailLayout"
+        android:layout_below="@+id/relativeLayout11"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="24dp">
@@ -175,7 +175,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:background="#3E4651"
-        android:id="@+id/emailLayout">
+        android:id="@+id/relativeLayout11">
 
         <com.pickle.pickleproject.MontserratTextView
             android:layout_width="wrap_content"
