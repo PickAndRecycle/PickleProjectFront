@@ -40,7 +40,7 @@ import java.lang.reflect.Type;
 public class ModifyRequestUnused extends AppCompatActivity {
 
     private Context context;
-    private RequestQueue mQueue;
+    private RequestQueue aQueue, mQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +59,7 @@ public class ModifyRequestUnused extends AppCompatActivity {
 
         Button saveButton = (Button) findViewById(R.id.button3);
         ImageButton backButton = (ImageButton) findViewById(R.id.backButton);
+        ImageButton doneButton = (ImageButton) findViewById(R.id.doneButton);
 
         mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext()).getRequestQueue();
 
@@ -111,17 +112,58 @@ public class ModifyRequestUnused extends AppCompatActivity {
             }
         });
 
+        doneButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                changeStatus();
+            }
+        });
 
     }
 
     private void goBack(){
-        Intent intent = new Intent(this,ModifyConfirmation.class);
-        startActivity(intent);
+        finish();
     }
 
     private void changeJar(){
         Intent intent = new Intent(this,Picklejar.class);
         startActivity(intent);
+    }
+
+    private void changeStatus() {
+        final Trash trash = (Trash) getIntent().getSerializableExtra("object");
+        trash.setStatus(2);
+        GsonBuilder gsonBuilder = new GsonBuilder();
+
+        aQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext()).getRequestQueue();
+        final String url = "http://104.155.237.238:8080/trash/" + trash.getId();
+
+        gsonBuilder.registerTypeAdapter(Trash.class, new TrashSerializer());
+        Gson gson = gsonBuilder.create();
+        String json = gson.toJson(trash);
+        try {
+            final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.PUT, url, new JSONObject(json), new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+                        Log.d("result", response.getString("result"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.d("Error:", error.getMessage());
+                }
+            });
+            jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+            aQueue.add(jsonRequest);
+            changeJar();
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
 
