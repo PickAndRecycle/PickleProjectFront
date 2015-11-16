@@ -12,6 +12,17 @@ public class Account implements Serializable {
     private String password;
     private String phone_number;
     private String profile_picture_url;
+=======
+ * Created by danieldeem on 11/16/2015.
+ */
+public class Account implements Serializable {
+    public String id;
+    public String username;
+    public String email;
+    public String password;
+    public String phoneNumber;
+    public String photoUrl;
+>>>>>>> f7721f36dc64109b7625a0f03ddfa32c491c4a8b
 
     public String getId() {
         return id;
@@ -29,6 +40,7 @@ public class Account implements Serializable {
         return password;
     }
 
+<<<<<<< HEAD
     public String getPhone_number() {
         return phone_number;
     }
@@ -43,12 +55,29 @@ public class Account implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+=======
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+>>>>>>> f7721f36dc64109b7625a0f03ddfa32c491c4a8b
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
+<<<<<<< HEAD
     public void setPhone_number(String phone_number) {
         this.phone_number = phone_number;
     }
@@ -68,3 +97,18 @@ public class Account implements Serializable {
         return sb.toString();
     }
 }
+=======
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
+    }
+}
+
+>>>>>>> f7721f36dc64109b7625a0f03ddfa32c491c4a8b
