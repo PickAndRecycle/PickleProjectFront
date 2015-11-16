@@ -37,13 +37,18 @@ public class EditProfile extends AppCompatActivity {
         final EditText username = (EditText) findViewById(R.id.editText8);
         final EditText password = (EditText) findViewById(R.id.editText9);
         final EditText email = (EditText) findViewById(R.id.editText10);
-        EditText address = (EditText) findViewById(R.id.editText11);
         final EditText phone = (EditText) findViewById(R.id.editText12);
+
+        username.setText(account.getUsername());
+        password.setText(account.getPassword());
+        email.setText(account.getEmail());
+        phone.setText(account.getPhone_number());
 
         MontserratButton saveButton = (MontserratButton) findViewById(R.id.saveButton);
 
         mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext()).getRequestQueue();
 
+        //final String url = "http://192.168.56.1:8080/account/" + account.getId();
         final String url = "http://104.155.237.238:8080/account/" + account.getId();
 
         saveButton.setOnClickListener(new View.OnClickListener() {

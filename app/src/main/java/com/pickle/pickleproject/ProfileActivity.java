@@ -34,10 +34,13 @@ public class ProfileActivity extends AppCompatActivity implements Response.Error
 
         mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext()).getRequestQueue();
 
-        //Dummy ID
+        //GCP
         String id = "09ce2e3a-8f89-4f7c-99a5-0b1ef7573ef5";
-
         String url = "http://104.155.237.238:8080/account/" + id;
+
+        //Localhost
+        //String id  = "b86174cb-93c6-4b73-844c-be3f2070ea31";
+        //String url = "http://192.168.56.1:8080/account/" + id;
 
         final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.GET, url, new JSONObject(), this, this);
         jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
@@ -72,9 +75,11 @@ public class ProfileActivity extends AppCompatActivity implements Response.Error
 
             MontserratTextView username = (MontserratTextView) findViewById(R.id.username);
             MontserratTextView email = (MontserratTextView) findViewById(R.id.email);
+            MontserratTextView point = (MontserratTextView) findViewById(R.id.totalPoint);
 
             username.setText(account.getUsername());
             email.setText(account.getEmail());
+            point.setText(String.valueOf(account.getPoint()));
 
             MontserratButton editProfile = (MontserratButton) findViewById(R.id.editProfileButton);
             editProfile.setOnClickListener(new View.OnClickListener() {

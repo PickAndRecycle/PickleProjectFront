@@ -53,6 +53,10 @@ public class ModifyRequestUnused extends AppCompatActivity {
         final EditText description = (EditText) findViewById(R.id.editText7);
         final Spinner spinner = (Spinner) findViewById(R.id.spinner2);
 
+        title.setText(trash.getTitle());
+        description.setText(trash.getDesc());
+
+
         Button saveButton = (Button) findViewById(R.id.button3);
         ImageButton backButton = (ImageButton) findViewById(R.id.backButton);
 

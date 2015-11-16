@@ -12,7 +12,7 @@ public class Account implements Serializable {
     private String password;
     private String phone_number;
     private String profile_picture_url;
-
+    private int point;
 
     public String getId() {
         return id;
@@ -59,6 +59,14 @@ public class Account implements Serializable {
         this.profile_picture_url = profile_picture_url;
     }
 
+    public int getPoint() {
+        return point;
+    }
+
+    public void setPoint(int point) {
+        this.point = point;
+    }
+
     public String toString() {
         final StringBuffer sb = new StringBuffer("Account{");
         sb.append("id=").append(getId());
@@ -67,6 +75,7 @@ public class Account implements Serializable {
         sb.append(", password='").append(getPassword()).append('\'');
         sb.append(", phone number='").append(getPhone_number()).append('\'');
         sb.append(", profile picture=").append(getProfile_picture_url());
+        sb.append(", point=").append(point);
         return sb.toString();
     }
 }
