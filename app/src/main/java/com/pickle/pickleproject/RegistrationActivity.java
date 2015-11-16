@@ -142,8 +142,8 @@ public class RegistrationActivity extends AppCompatActivity {
             object.addProperty("username",src.getUsername());
             object.addProperty("email",src.getEmail());
             object.addProperty("password",src.getPassword());
-            object.addProperty("phoneNumber",src.getPhoneNumber());
-            object.addProperty("photoUrl",src.getPhotoUrl());
+            object.addProperty("phoneNumber",src.getPhone_number());
+            object.addProperty("photoUrl",src.getProfile_picture_url());
 
             return object;
         }

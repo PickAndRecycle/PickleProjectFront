@@ -8,6 +8,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.WebChromeClient;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -42,6 +43,15 @@ public class ProfileActivity extends AppCompatActivity implements Response.Error
         final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.GET, url, new JSONObject(), this, this);
         jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         mQueue.add(jsonRequest);
+        
+        //TEMPORARY BUTTON FOR SIGN IN
+        Button signInButton = (Button) findViewById(R.id.signInButton);
+        signInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signIn();
+            }
+        });
 
         ImageButton configurationButton = (ImageButton) findViewById(R.id.configurationButton);
         configurationButton.setOnClickListener(new View.OnClickListener() {
@@ -90,6 +100,12 @@ public class ProfileActivity extends AppCompatActivity implements Response.Error
 
     }
 
+    // TEMPORARY BUTTON FOR SIGN IN
+    private void signIn(){
+        Intent intent = new Intent(this, SignIn.class);
+        startActivity(intent);
+
+    }
 
     private void changeConfiguration(){
         Intent intent = new Intent(this,ConfigurationActivity.class);
