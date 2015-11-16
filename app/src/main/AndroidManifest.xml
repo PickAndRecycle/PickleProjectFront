@@ -102,10 +102,7 @@
             android:label="@string/title_activity_modify_request_unused"
             android:theme="@style/AppTheme" >
         </activity>
-        <activity
-            android:name=".ModifyRequestOther"
-
-            ></activity>
+        <activity android:name=".ModifyRequestOther" />
         <activity android:name=".Picklejar" >
         </activity>
         <activity android:name=".Newsfeed" >
@@ -123,6 +120,11 @@
         <activity
             android:name=".ModifyConfirmation"
             android:label="modify_confirmation"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name=".EditProfile"
+            android:label="@string/title_activity_edit_profile"
             android:theme="@style/AppTheme" >
         </activity>
     </application>
