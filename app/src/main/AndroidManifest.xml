@@ -127,6 +127,9 @@
             android:label="@string/title_activity_edit_profile"
             android:theme="@style/AppTheme" >
         </activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="ffa109bb423a1a0d29bee7f6dc2150c0c788e4c2" />
     </application>
 
 </manifest>
