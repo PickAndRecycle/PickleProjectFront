@@ -9,6 +9,7 @@ public class Account implements Serializable {
     public String id;
     public String username;
     public String email;
+    public String password;
     public String phoneNumber;
     public String photoUrl;
 
@@ -22,6 +23,10 @@ public class Account implements Serializable {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public String getPhoneNumber() {
@@ -42,6 +47,10 @@ public class Account implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public void setPhoneNumber(String phoneNumber) {
