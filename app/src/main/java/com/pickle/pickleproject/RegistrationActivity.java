@@ -22,6 +22,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 import com.pickle.pickleprojectmodel.Account;
 import com.pickle.pickleprojectmodel.Trash;
 import com.pickle.pickleprojectmodel.TrashCategories;
@@ -29,6 +33,8 @@ import com.pickle.pickleprojectmodel.UnusedCondition;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.lang.reflect.Type;
 
 public class RegistrationActivity extends AppCompatActivity {
     private EditText username;
@@ -126,5 +132,20 @@ public class RegistrationActivity extends AppCompatActivity {
 
 
         //startActivity(intent);
+    }
+
+    private class AccountSerializer implements JsonSerializer<Account> {
+        @Override
+        public JsonElement serialize(Account src, Type typeOfSrc, JsonSerializationContext context) {
+            JsonObject object = new JsonObject();
+            object.addProperty("id",src.getId());
+            object.addProperty("username",src.getUsername());
+            object.addProperty("email",src.getEmail());
+            object.addProperty("password",src.getPassword());
+            object.addProperty("phoneNumber",src.getPhoneNumber());
+            object.addProperty("photoUrl",src.getPhotoUrl());
+
+            return object;
+        }
     }
 }
