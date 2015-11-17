@@ -14,7 +14,7 @@
         android:background="#6C7A89"
         android:id="@+id/relativeLayout8">
 
-        <TextView
+        <com.pickle.pickleproject.MontserratTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/newsfeedText"
@@ -23,6 +23,16 @@
             android:layout_centerHorizontal="true"
             android:textSize="24sp"
             android:textColor="#FFFFFF" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pickleJarButton"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:src="@mipmap/forwardicon"
+            android:background="#00FFFFFF" />
 
     </RelativeLayout>
 
