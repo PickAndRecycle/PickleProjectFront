@@ -46,10 +46,10 @@ public class PicklejarAdapter extends ArrayAdapter<Trash> {
             //Log.d("position", Integer.toString(position));
             //Log.d("id", Integer.toString(objects[position].id));
             title.setText((CharSequence) objects[position].title);
-            desc.setText((CharSequence) objects[position].getDesc());
+            desc.setText((CharSequence) objects[position].getCategories().toString());
             time.setText(Integer.toString(objects[position].timestamp));
         } else {
-            title.setText((CharSequence)objects[position].title);
+            title.setText((CharSequence)objects[position].getDesc());
             desc.setText((CharSequence) objects[position].getCategories().toString());
         }
         if (objects[position].getStatus() == 1){

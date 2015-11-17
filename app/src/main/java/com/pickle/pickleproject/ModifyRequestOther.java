@@ -2,6 +2,7 @@ package com.pickle.pickleproject;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -35,7 +36,7 @@ import java.lang.reflect.Type;
 
 public class ModifyRequestOther extends AppCompatActivity {
     private Context context;
-    private RequestQueue mQueue;
+    private RequestQueue requestQueue, mQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +51,12 @@ public class ModifyRequestOther extends AppCompatActivity {
         final EditText size = (EditText) findViewById(R.id.editText6);
         final Spinner spinner = (Spinner) findViewById(R.id.spinner);
 
+        description.setText(trash.getDesc());
+        size.setText(String.valueOf(trash.getsize()));
+
         Button saveButton = (Button) findViewById(R.id.button3);
         ImageButton backButton = (ImageButton) findViewById(R.id.backButton);
+        ImageButton doneButton = (ImageButton) findViewById(R.id.doneButton);
 
         mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext()).getRequestQueue();
 
@@ -105,15 +110,57 @@ public class ModifyRequestOther extends AppCompatActivity {
             }
         });
 
+        doneButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                changeStatus();
+            }
+        });
+
     }
 
     private void goBack(){
-        Intent intent = new Intent(this,ModifyConfirmation.class);
-        startActivity(intent);
+        finish();
     }
     private void changeJar(){
         Intent intent = new Intent(this,Picklejar.class);
         startActivity(intent);
+    }
+
+    private void changeStatus(){
+        final Trash trash = (Trash) getIntent().getSerializableExtra("object");
+        trash.setStatus(2);
+        GsonBuilder gsonBuilder = new GsonBuilder();
+
+        requestQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext()).getRequestQueue();
+        final String url = "http://104.155.237.238:8080/trash/" + trash.getId();
+
+        gsonBuilder.registerTypeAdapter(Trash.class, new TrashSerializer());
+        Gson gson = gsonBuilder.create();
+        String json = gson.toJson(trash);
+        try {
+            final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.PUT, url, new JSONObject(json), new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+                        Log.d("result",response.getString("result"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.d("Error:", error.getMessage());
+                }
+            });
+            jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+            requestQueue.add(jsonRequest);
+            changeJar();
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     private class TrashSerializer implements JsonSerializer<Trash> {
