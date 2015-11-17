@@ -25,10 +25,11 @@ public class Trash implements Serializable {
     public TrashCategories categories;
     public UnusedCondition trash_condition;
     public String username;
+    public String thumbnailUrl;
 
     public Trash(String id, String description, String title, int status, String photo_data, int latitude, int longitude,
                  int timestamp, boolean report, int distance, int size, TrashCategories categories, UnusedCondition trash_condition,
-                 String username){
+                 String username, String thumbnailUrl){
         this.id = id;
         this.description = description;
         this.title = title;
@@ -44,6 +45,7 @@ public class Trash implements Serializable {
         this.trash_condition = trash_condition;
         this.photo_url = "";
         this.username = username;
+        this.thumbnailUrl = thumbnailUrl;
     }
     public Trash(){
 
@@ -168,7 +170,13 @@ public class Trash implements Serializable {
         this.username = username;
     }
 
+    public String getThumbnailUrl() {
+        return thumbnailUrl;
+    }
 
+    public void setThumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
+    }
 
     public int CalculateDist(Double lat, Double lon){
         double theta = this.longitude - lon;
