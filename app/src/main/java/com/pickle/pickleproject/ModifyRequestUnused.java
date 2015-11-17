@@ -29,7 +29,6 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import com.pickle.pickleprojectmodel.Trash;
-import com.pickle.pickleprojectmodel.TrashCategories;
 import com.pickle.pickleprojectmodel.UnusedCondition;
 
 import org.json.JSONException;
