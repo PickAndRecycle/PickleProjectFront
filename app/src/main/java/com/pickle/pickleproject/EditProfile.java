@@ -48,8 +48,8 @@ public class EditProfile extends AppCompatActivity {
 
         mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext()).getRequestQueue();
 
-        final String url = "http://192.168.56.1:8080/account/" + account.getId();
-        //final String url = "http://104.155.237.238:8080/account/" + account.getId();
+        //final String url = "http://192.168.56.1:8080/account/" + account.getId();
+        final String url = "http://104.155.237.238:8080/account/" + account.getId();
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override

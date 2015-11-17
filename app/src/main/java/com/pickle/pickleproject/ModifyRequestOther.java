@@ -46,7 +46,6 @@ public class ModifyRequestOther extends AppCompatActivity {
         context = this.getApplicationContext();
         final Trash trash = (Trash) getIntent().getSerializableExtra("object");
 
-        final EditText title = (EditText) findViewById(R.id.editText8);
         final EditText description = (EditText) findViewById(R.id.editText5);
         final EditText size = (EditText) findViewById(R.id.editText6);
         final Spinner spinner = (Spinner) findViewById(R.id.spinner);
@@ -65,7 +64,6 @@ public class ModifyRequestOther extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                trash.setTitle(title.getText().toString());
                 trash.setsize(Integer.parseInt(size.getText().toString()));
                 trash.setDesc(description.getText().toString());
                 trash.setCategories(TrashCategories.valueOf(spinner.getSelectedItem().toString().toUpperCase()));

@@ -38,8 +38,8 @@ public class Newsfeed extends AppCompatActivity implements Response.ErrorListene
         mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext())
                 .getRequestQueue();
 
-        //String url = "http://104.155.237.238:8080/article/"; //GCP
-        String url = "http://192.168.43.127:8080/article/";
+        String url = "http://104.155.237.238:8080/article/"; //GCP
+        //String url = "http://192.168.43.127:8080/article/";
 
         final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.GET, url, new JSONObject(), this, this);
         mQueue.add(jsonRequest);
