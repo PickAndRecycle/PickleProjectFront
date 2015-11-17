@@ -83,7 +83,7 @@ public class Home extends Activity   {
     }
 
     private void changePick(){
-        Intent intent = new Intent(this, PickUnused.class);
+        Intent intent = new Intent(this, PickList.class);
         startActivity(intent);
         this.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
     }

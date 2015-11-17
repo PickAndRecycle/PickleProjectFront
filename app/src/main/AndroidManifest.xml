@@ -132,6 +132,11 @@
             android:name="io.fabric.ApiKey"
             android:value="5f6b3ea8a3ac6de1507f508a716e7102c2ac25a9" />
 
+        <activity
+            android:name=".PickList"
+            android:label="@string/title_activity_pick_list"
+            android:theme="@style/AppTheme" >
+        </activity>
     </application>
 
 </manifest>

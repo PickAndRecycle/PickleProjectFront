@@ -34,7 +34,8 @@ public class ListAdapter extends ArrayAdapter<Trash> {
     public View getView(final int position,
                         View convertView,
                         ViewGroup parent) {
-        LayoutInflater inflater= ((Activity) context).getLayoutInflater();
+        LayoutInflater inflater = (LayoutInflater) context
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View row=inflater.inflate(resource, parent, false);
         final TextView address= (TextView) row.findViewById(R.id.address);
         TextView number=(TextView) row.findViewById(R.id.number);
@@ -55,7 +56,7 @@ public class ListAdapter extends ArrayAdapter<Trash> {
             number.setText(Integer.toString(objects[position].size));
             address.setText((CharSequence) objects[position].description);
         }
-        row.setOnClickListener(new View.OnClickListener() {
+       /* row.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //row.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
@@ -63,7 +64,7 @@ public class ListAdapter extends ArrayAdapter<Trash> {
                 intent.putExtra("object", objects[position]);
                 context.startActivity(intent);
             }
-        });
+        });*/
         return row;
     }
 
