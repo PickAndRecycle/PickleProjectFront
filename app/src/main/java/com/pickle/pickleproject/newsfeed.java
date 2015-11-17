@@ -8,15 +8,41 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ListView;
 
-public class Newsfeed extends AppCompatActivity {
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.pickle.pickleprojectmodel.Article;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Newsfeed extends AppCompatActivity implements Response.ErrorListener, Response.Listener<JSONObject> {
     private GestureDetector gestureDetector;
+    private RequestQueue mQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_newsfeed);
         gestureDetector = new GestureDetector(new SwipeGestureDetector());
+
+        mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext())
+                .getRequestQueue();
+
+        //String url = "http://104.155.237.238:8080/article/"; //GCP
+        String url = "http://192.168.43.127:8080/article/";
+
+        final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.GET, url, new JSONObject(), this, this);
+        mQueue.add(jsonRequest);
 
         ImageButton pickleJarButton = (ImageButton) findViewById(R.id.pickleJarButton);
 
@@ -45,6 +71,39 @@ public class Newsfeed extends AppCompatActivity {
 
     private void onLeftSwipe() {
         changePickleJar();
+    }
+
+    @Override
+    public void onErrorResponse(VolleyError error) {
+        Log.d("Error:",error.toString());
+    }
+
+    @Override
+    public void onResponse(JSONObject response) {
+        try{
+            JSONObject parentObject = response;
+            Log.d("json:", response.getString("result"));
+            JSONArray parentArray = parentObject.getJSONArray("result");
+            List<Article> ArticleList = new ArrayList<Article>();
+
+            for(int i=0 ; i<parentArray.length();i++) {
+                JSONObject finalObject = parentArray.getJSONObject(i);
+                Article articleObj;
+                GsonBuilder gsonBuilder = new GsonBuilder();
+
+                Gson gson = gsonBuilder.create();
+                articleObj = gson.fromJson(String.valueOf(finalObject),Article.class);
+                ArticleList.add(articleObj);
+            }
+            final Article[] newsfeedArray = ArticleList.toArray(new Article[0]);
+            final NewsfeedAdapter myAdapter = new NewsfeedAdapter(this, R.layout.rownewsfeed, newsfeedArray);
+            final ListView myList = (ListView) findViewById(R.id.newsfeedListview);
+            myList.setAdapter(myAdapter);
+
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     // Private class for gestures

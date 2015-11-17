@@ -9,16 +9,17 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.pickle.pickleprojectmodel.Newsfeed;
+import com.pickle.pickleprojectmodel.Article;
 
 /**
  * Created by admin on 11/13/2015.
  */
-public class NewsfeedAdapter extends ArrayAdapter<Newsfeed> {
+public class NewsfeedAdapter extends ArrayAdapter<Article> {
     private Context context;
     private int resource;
-    private Newsfeed[] objects;
-    public NewsfeedAdapter(Context context, int resource, Newsfeed[] objects) {
+    private Article[] objects;
+
+    public NewsfeedAdapter(Context context, int resource, Article[] objects) {
 
         super(context, resource, objects);
 
@@ -26,6 +27,7 @@ public class NewsfeedAdapter extends ArrayAdapter<Newsfeed> {
         this.resource = resource;
         this.objects = objects;
     }
+
     public View getView(final int position,
                         View convertView,
                         ViewGroup parent) {
@@ -34,11 +36,12 @@ public class NewsfeedAdapter extends ArrayAdapter<Newsfeed> {
         TextView title = (TextView) row.findViewById(R.id.titleNewsfeed);
         TextView desc = (TextView) row.findViewById(R.id.descriptionNewsfeed);
         title.setText((CharSequence) objects[position].title);
-        if(objects[position].content.length() <66){
-        desc.setText((CharSequence) objects[position].content);}
+        /*if(objects[position].content.length() <66){
+            desc.setText((CharSequence) objects[position].content);}
         else{
-            desc.setText((CharSequence) objects[position].content.substring(0,60)+"...");
-        }
+            //desc.setText((CharSequence) objects[position].content.substring(0,10)+"...");
+            desc.setText((CharSequence) objects[position].content);
+        }*/
         row.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
