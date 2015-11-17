@@ -69,4 +69,5 @@
     <string name="sampleTitleText">Sample Title</string>
     <string name="newsfeedText">NEWSFEED</string>
     <string name="title_activity_edit_profile">EditProfile</string>
+    <string name="phoneNumberText">phone number</string>
 </resources>

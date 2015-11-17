@@ -11,7 +11,8 @@
         android:background="#ffffff"
         android:id="@+id/registrationForm"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentStart="false">
 
         <EditText
             android:layout_width="wrap_content"
@@ -20,25 +21,11 @@
             android:text="@string/usernameText"
             android:ems="10"
             android:id="@+id/username"
-            android:layout_below="@+id/textView6"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:autoText="false"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:ems="10"
-            android:id="@+id/email"
-            android:text="@string/emailText"
-            android:layout_below="@+id/passwordConfirmation"
-            android:layout_alignLeft="@+id/passwordConfirmation"
-            android:layout_alignStart="@+id/passwordConfirmation"
-            android:layout_alignRight="@+id/passwordConfirmation"
-            android:layout_alignEnd="@+id/passwordConfirmation" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -65,6 +52,34 @@
             android:layout_alignParentStart="true"
             android:layout_alignRight="@+id/password"
             android:layout_alignEnd="@+id/password" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:ems="10"
+            android:id="@+id/email"
+            android:text="@string/emailText"
+            android:layout_below="@+id/passwordConfirmation"
+            android:layout_alignLeft="@+id/passwordConfirmation"
+            android:layout_alignStart="@+id/passwordConfirmation"
+            android:layout_alignRight="@+id/passwordConfirmation"
+            android:layout_alignEnd="@+id/passwordConfirmation" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:id="@+id/phoneNumber"
+            android:text="@string/phoneNumberText"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignEnd="@+id/email"
+            android:inputType="phone"
+            android:layout_below="@+id/email" />
+
     </RelativeLayout>
 
     <com.pickle.pickleproject.MontserratTextView
