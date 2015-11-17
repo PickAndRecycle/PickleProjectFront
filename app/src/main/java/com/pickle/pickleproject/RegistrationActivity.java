@@ -40,6 +40,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private EditText username;
     private EditText email;
     private EditText password;
+    private EditText phoneNumber;
     private RequestQueue mQueue;
 
     @Override
@@ -80,14 +81,12 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     private void changeSignUpButton() {
-        username = (EditText) findViewById(R.id.usernameText);
-        email = (EditText) findViewById(R.id.emailText);
-        password = (EditText) findViewById(R.id.passwordText);
+        username = (EditText) findViewById(R.id.username);
+        email = (EditText) findViewById(R.id.email);
+        password = (EditText) findViewById(R.id.password);
+        phoneNumber = (EditText) findViewById(R.id.phoneNumber);
 
-        /***
-        Intent intent = new Intent(this, TrashNotification.class);
-        ***/
-
+        Intent intent = new Intent(this, ReportSuccess.class);
 
         mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext()).getRequestQueue();
 
@@ -97,6 +96,7 @@ public class RegistrationActivity extends AppCompatActivity {
         account.setUsername(username.toString());
         account.setEmail(email.toString());
         account.setPassword(password.toString());
+        account.setPhone_number(phoneNumber.toString());
 
 
         GsonBuilder gsonBuilder = new GsonBuilder();
@@ -131,7 +131,7 @@ public class RegistrationActivity extends AppCompatActivity {
         }
 
 
-        //startActivity(intent);
+        startActivity(intent);
     }
 
     private class AccountSerializer implements JsonSerializer<Account> {
