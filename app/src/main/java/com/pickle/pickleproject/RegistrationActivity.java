@@ -90,7 +90,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
         mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext()).getRequestQueue();
 
-        final String url = "http://104.155.237.238:8080/trash/";
+        final String url = "http://104.155.237.238:8080/account/";
 
         Account account = new Account();
         account.setUsername(username.toString());

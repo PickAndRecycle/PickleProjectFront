@@ -7,6 +7,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class SignIn extends AppCompatActivity {
@@ -20,6 +21,13 @@ public class SignIn extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 signIn();
+            }
+        });
+        TextView noAccount = (TextView) findViewById(R.id.textView20);
+        noAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                register();
             }
         });
     }
@@ -41,5 +49,10 @@ public class SignIn extends AppCompatActivity {
 
         startActivity(intent);
 
+    }
+
+    private void register(){
+        Intent intent = new Intent(this, RegistrationActivity.class);
+        startActivity(intent);
     }
 }
