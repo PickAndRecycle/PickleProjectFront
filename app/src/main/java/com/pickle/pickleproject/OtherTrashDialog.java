@@ -50,6 +50,7 @@ public class OtherTrashDialog extends AppCompatActivity {
             changeSubmitButton();
         }
     });
+
     /*backHomeButton.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -112,6 +113,7 @@ public class OtherTrashDialog extends AppCompatActivity {
             });
             jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
             mQueue.add(jsonRequest);
+            startActivity(intent);
 
 
         }
@@ -120,11 +122,14 @@ public class OtherTrashDialog extends AppCompatActivity {
         }
 
 
-        startActivity(intent);
-    }void changeBackHomeButton(){
+
+    }
+    /*
+    void changeBackHomeButton(){
         Intent intent = new Intent(this, Home.class);
         startActivity(intent);
     }
+    */
 
 
 
