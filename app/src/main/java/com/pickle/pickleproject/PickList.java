@@ -1,12 +1,11 @@
 package com.pickle.pickleproject;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -20,7 +19,7 @@ public class PickList extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("UNUSED"));
         tabLayout.addTab(tabLayout.newTab().setText("GENERAL"));
-        tabLayout.addTab(tabLayout.newTab().setText("RECLYCLE"));
+        tabLayout.addTab(tabLayout.newTab().setText("RECYCLED"));
         tabLayout.addTab(tabLayout.newTab().setText("GREEN"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
@@ -28,7 +27,7 @@ public class PickList extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                changeHome();
             }
         });
 
@@ -54,6 +53,12 @@ public class PickList extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void changeHome() {
+        Intent intent = new Intent(this, Home.class);
+        startActivity(intent);
+        this.overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
     }
 
 }

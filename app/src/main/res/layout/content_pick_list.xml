@@ -15,11 +15,11 @@
         android:id="@+id/relativeLayout7"
         android:layout_alignParentStart="false">
 
-        <TextView
+        <com.pickle.pickleproject.MontserratTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="PICKLIST"
+            android:text="@string/title_pick"
             android:id="@+id/newsfeedText"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"

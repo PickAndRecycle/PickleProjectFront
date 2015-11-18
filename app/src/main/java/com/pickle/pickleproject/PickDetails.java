@@ -50,7 +50,7 @@ public class PickDetails extends AppCompatActivity {
     }
 
     private void changeCancel(){
-        Intent intent = new Intent(this, PickGeneral.class);
+        Intent intent = new Intent(this, PickList.class);
         startActivity(intent);
     }
 
