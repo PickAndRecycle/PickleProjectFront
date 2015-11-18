@@ -50,11 +50,11 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="39dp" />
 
-    <ImageView
+    <com.android.volley.toolbox.NetworkImageView
         android:layout_width="300dp"
         android:layout_height="180dp"
         android:id="@+id/articlePhoto"
-        android:background="#d4d4d4"
+        android:background="#00FFFFFF"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
@@ -68,6 +68,7 @@
         android:phoneNumber="false"
         android:layout_below="@+id/articlePhoto"
         android:layout_alignLeft="@+id/articlePhoto"
+        android:layout_alignStart="@+id/articlePhoto"
         android:layout_alignRight="@+id/articlePhoto"
         android:layout_alignEnd="@+id/articlePhoto"
         android:layout_marginTop="20dp" />
