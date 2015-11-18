@@ -3,6 +3,8 @@ package com.pickle.pickleproject;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.util.LruCache;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,9 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.Volley;
 import com.pickle.pickleprojectmodel.Trash;
 import com.pickle.pickleprojectmodel.TrashCategories;
 
@@ -21,6 +26,8 @@ public class PicklejarAdapter extends ArrayAdapter<Trash> {
     private Context context;
     private int resource;
     private Trash[] objects;
+    private RequestQueue mRequestQueue;
+    private ImageLoader mImageLoader;
 
     public PicklejarAdapter(Context context, int resource, Trash[] objects) {
 
@@ -29,6 +36,17 @@ public class PicklejarAdapter extends ArrayAdapter<Trash> {
         this.context = context;
         this.resource = resource;
         this.objects = objects;
+
+        mRequestQueue = Volley.newRequestQueue(context);
+        mImageLoader = new ImageLoader(mRequestQueue, new ImageLoader.ImageCache() {
+            private final LruCache<String, Bitmap> mCache = new LruCache<String, Bitmap>(10);
+            public void putBitmap(String url, Bitmap bitmap) {
+                mCache.put(url, bitmap);
+            }
+            public Bitmap getBitmap(String url) {
+                return mCache.get(url);
+            }
+        });
     }
     public View getView(final int position,
                         View convertView,
@@ -40,7 +58,8 @@ public class PicklejarAdapter extends ArrayAdapter<Trash> {
         TextView time = (TextView) row.findViewById(R.id.Time);
         TextView stat = (TextView) row.findViewById(R.id.Stat);
         TextView dash = (TextView) row.findViewById(R.id.dash);
-
+        CircleImageView thumbnail = (CircleImageView) row.findViewById(R.id.thumbnailjar);
+        thumbnail.setImageUrl("http://i63.tinypic.com/312zpeu.jpg", mImageLoader);
 
         if(objects[position].getCategories().equals(TrashCategories.UNUSED)){
             //Log.d("position", Integer.toString(position));

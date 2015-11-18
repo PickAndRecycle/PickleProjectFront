@@ -3,12 +3,17 @@ package com.pickle.pickleproject;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.util.LruCache;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.Volley;
 import com.pickle.pickleprojectmodel.Article;
 
 /**
@@ -18,6 +23,8 @@ public class NewsfeedAdapter extends ArrayAdapter<Article> {
     private Context context;
     private int resource;
     private Article[] objects;
+    private RequestQueue mRequestQueue;
+    private ImageLoader mImageLoader;
 
     public NewsfeedAdapter(Context context, int resource, Article[] objects) {
 
@@ -26,6 +33,17 @@ public class NewsfeedAdapter extends ArrayAdapter<Article> {
         this.context = context;
         this.resource = resource;
         this.objects = objects;
+
+        mRequestQueue = Volley.newRequestQueue(context);
+        mImageLoader = new ImageLoader(mRequestQueue, new ImageLoader.ImageCache() {
+            private final LruCache<String, Bitmap> mCache = new LruCache<String, Bitmap>(10);
+            public void putBitmap(String url, Bitmap bitmap) {
+                mCache.put(url, bitmap);
+            }
+            public Bitmap getBitmap(String url) {
+                return mCache.get(url);
+            }
+        });
     }
 
     public View getView(final int position,
@@ -36,12 +54,9 @@ public class NewsfeedAdapter extends ArrayAdapter<Article> {
         TextView title = (TextView) row.findViewById(R.id.titleNewsfeed);
         TextView desc = (TextView) row.findViewById(R.id.descriptionNewsfeed);
         title.setText((CharSequence) objects[position].title);
-        /*if(objects[position].content.length() <66){
-            desc.setText((CharSequence) objects[position].content);}
-        else{
-            //desc.setText((CharSequence) objects[position].content.substring(0,10)+"...");
-            desc.setText((CharSequence) objects[position].content);
-        }*/
+        CircleImageView thumbnail = (CircleImageView) row.findViewById(R.id.thumbnailnews);
+        thumbnail.setImageUrl("http://i63.tinypic.com/312zpeu.jpg", mImageLoader);
+
         row.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
