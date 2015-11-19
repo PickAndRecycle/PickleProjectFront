@@ -129,6 +129,18 @@ public class Picklejar extends AppCompatActivity implements Response.ErrorListen
                                 int status = Trashlist.get(j).getStatus();
                                 if (status == 1|| status == 2){
                                     trashObj = gson.fromJson(String.valueOf(finalObject), Trash.class);
+                                    if (finalObject.getString("categories").equals("Unused Goods")) {
+                                        trashObj.setCategories(TrashCategories.UNUSED);
+                                    }
+                                    else if (finalObject.getString("categories").equals("General Waste")) {
+                                        trashObj.setCategories(TrashCategories.GENERAL);
+                                    }
+                                    else if (finalObject.getString("categories").equals("Recycleable Waste")) {
+                                        trashObj.setCategories(TrashCategories.RECYCLED);
+                                    }
+                                    else if (finalObject.getString("categories").equals("Green Waste")){
+                                        trashObj.setCategories(TrashCategories.GREEN);
+                                    }
                                     if (j>1){
                                     Trashlist.add(j-1 ,trashObj);}
                                     else{Trashlist.add(0,trashObj);}
