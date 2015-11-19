@@ -10,6 +10,7 @@ import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -22,7 +23,7 @@ import java.io.File;
 
 public class Home extends Activity   {
     int CAM_REQUEST =1;
-    ImageButton Camera;
+    Button Camera;
     private GestureDetector gestureDetector;
     //Location mLastLocation;
     //private GoogleApiClient mGoogleApiClient;
@@ -31,7 +32,7 @@ public class Home extends Activity   {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_home_page);
         /*
         // Acquire a reference to the system Location Manager
         LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
@@ -54,9 +55,11 @@ public class Home extends Activity   {
         //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0,locationListener);
         */
 
+        Button profileButton = (Button) findViewById(R.id.profileButton);
+        Button jarNewsButton = (Button) findViewById(R.id.jarNewsButton);
+        Button pickButton = (Button) findViewById(R.id.pickButton);
 
-
-        Camera = (ImageButton) findViewById(R.id.Camera_Button);
+        Camera = (Button) findViewById(R.id.throwReportButton);
         Camera.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
@@ -69,8 +72,26 @@ public class Home extends Activity   {
             }
         });
 
+        profileButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                changeProfileActivity();
+            }
+        });
 
+        pickButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                changePick();
+            }
+        });
 
+        jarNewsButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                historyJar();
+            }
+        });
 
         gestureDetector = new GestureDetector(new SwipeGestureDetector());
 

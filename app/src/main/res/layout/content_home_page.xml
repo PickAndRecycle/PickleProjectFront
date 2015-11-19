@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/activity_home_page" tools:context="com.pickle.pickleproject.HomePage"
+    android:background="#3E4651">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/imageView4"
+        android:src="@mipmap/logo"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:id="@+id/profileLayout">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:background="#00FFFFFF"
+            android:src="@mipmap/upicon" />
+
+        <com.pickle.pickleproject.MontserratTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/profileText"
+            android:id="@+id/profileText"
+            android:layout_below="@+id/imageButton"
+            android:layout_centerHorizontal="true"
+            android:textSize="15sp"
+            android:textColor="#F4B350" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:id="@+id/profileButton"
+            android:layout_alignParentTop="true"
+            android:background="#00FFFFFF"
+            android:layout_alignStart="@+id/imageView4"
+            android:gravity="top|center_horizontal"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="130dp"
+        android:layout_height="match_parent"
+        android:id="@+id/jarNewsLayout"
+        android:layout_alignTop="@+id/profileButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton4"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:background="#00FFFFFF"
+            android:src="@mipmap/backicon" />
+
+        <com.pickle.pickleproject.MontserratTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="PICKLE\nJAR\n\nNEWS\nFEED"
+            android:id="@+id/jarNewsText"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/imageButton4"
+            android:layout_toEndOf="@+id/imageButton4"
+            android:textColor="#F4B350"
+            android:textSize="15sp" />
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:id="@+id/jarNewsButton"
+            android:background="#00FFFFFF"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="130dp"
+        android:layout_height="match_parent"
+        android:id="@+id/pickLayout"
+        android:layout_alignRight="@+id/profileLayout">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton5"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:background="#00FFFFFF"
+            android:src="@mipmap/forwardicon" />
+
+        <com.pickle.pickleproject.MontserratTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/title_pick"
+            android:id="@+id/pickText"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/imageButton5"
+            android:layout_toStartOf="@+id/imageButton5"
+            android:textSize="15sp"
+            android:textColor="#F4B350" />
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:id="@+id/pickButton"
+            android:background="#00FFFFFF"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:id="@+id/throwReportLayout"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentBottom="true">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton6"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="#00FFFFFF"
+            android:src="@mipmap/camera"
+            android:layout_marginBottom="10dp" />
+
+        <com.pickle.pickleproject.MontserratTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="THROW\n\nOR\n\nREPORT"
+            android:id="@+id/textView24"
+            android:layout_above="@+id/imageButton6"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            android:textColor="#F4B350"
+            android:textSize="15sp"
+            android:layout_marginBottom="15dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:id="@+id/throwReportButton"
+            android:background="#00FFFFFF"
+            android:gravity="top|center_horizontal"
+            android:layout_alignBottom="@+id/imageButton6"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+
+</RelativeLayout>
