@@ -91,13 +91,19 @@ public class RegistrationActivity extends AppCompatActivity {
         mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext()).getRequestQueue();
 
         final String url = "http://104.155.237.238:8080/account/";
-
+/*
         Account account = new Account();
-        account.setUsername(username.toString());
-        account.setEmail(email.toString());
-        account.setPassword(password.toString());
-        account.setPhone_number(phoneNumber.toString());
-
+        account.setUsername(username.getText().toString());
+        account.setEmail(email.getText().toString());
+        account.setPassword(password.getText().toString());
+        account.setPhone_number(phoneNumber.getText().toString());
+*/
+        //SLIGHT MODIFICATION
+        Account account = new Account();
+        account.setUsername(username.getText().toString());
+        account.setEmail(email.getText().toString());
+        account.setPassword(password.getText().toString());
+        account.setPhone_number(phoneNumber.getText().toString());
 
         GsonBuilder gsonBuilder = new GsonBuilder();
 
@@ -142,8 +148,8 @@ public class RegistrationActivity extends AppCompatActivity {
             object.addProperty("username",src.getUsername());
             object.addProperty("email",src.getEmail());
             object.addProperty("password",src.getPassword());
-            object.addProperty("phoneNumber",src.getPhone_number());
-            object.addProperty("photoUrl",src.getProfile_picture_url());
+            object.addProperty("phone_number",src.getPhone_number());
+            object.addProperty("photo_url",src.getProfile_picture_url());
 
             return object;
         }

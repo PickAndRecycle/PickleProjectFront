@@ -18,14 +18,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-            android:text="@string/usernameText"
             android:ems="10"
             android:id="@+id/username"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:autoText="false"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:hint="username" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -33,12 +33,12 @@
             android:inputType="textPassword"
             android:ems="10"
             android:id="@+id/password"
-            android:text="@string/passwordText"
             android:layout_below="@+id/username"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignRight="@+id/username"
-            android:layout_alignEnd="@+id/username" />
+            android:layout_alignEnd="@+id/username"
+            android:hint="password" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -46,12 +46,12 @@
             android:inputType="textPassword"
             android:ems="10"
             android:id="@+id/passwordConfirmation"
-            android:text="@string/passwordConfirmationText"
             android:layout_below="@+id/password"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignRight="@+id/password"
-            android:layout_alignEnd="@+id/password" />
+            android:layout_alignEnd="@+id/password"
+            android:hint="confirmation password" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -59,26 +59,26 @@
             android:inputType="textEmailAddress"
             android:ems="10"
             android:id="@+id/email"
-            android:text="@string/emailText"
             android:layout_below="@+id/passwordConfirmation"
             android:layout_alignLeft="@+id/passwordConfirmation"
             android:layout_alignStart="@+id/passwordConfirmation"
             android:layout_alignRight="@+id/passwordConfirmation"
-            android:layout_alignEnd="@+id/passwordConfirmation" />
+            android:layout_alignEnd="@+id/passwordConfirmation"
+            android:hint="email" />
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
             android:id="@+id/phoneNumber"
-            android:text="@string/phoneNumberText"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_alignEnd="@+id/email"
             android:inputType="phone"
-            android:layout_below="@+id/email" />
+            android:layout_below="@+id/email"
+            android:hint="phone number" />
 
     </RelativeLayout>
 
