@@ -76,10 +76,13 @@ public class AddDescription extends AppCompatActivity {
         intent.putExtra("description", descForm.getText().toString());
 
         //TOAST FOR DEBUGGING
+
         Bundle parseInfo = intent.getExtras();
+        /*
         Toast boom = new Toast(getApplicationContext());
         boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
         boom.makeText(AddDescription.this, parseInfo.toString(), boom.LENGTH_SHORT).show();
+        */
 
         startActivity(intent);
     }

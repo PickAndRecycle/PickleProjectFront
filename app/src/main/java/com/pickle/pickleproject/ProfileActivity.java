@@ -64,7 +64,13 @@ public class ProfileActivity extends AppCompatActivity implements Response.Error
         });
         */
 
-
+        ImageButton backButton = (ImageButton) findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                onUpSwipe();
+            }
+        });
 
         ImageButton configurationButton = (ImageButton) findViewById(R.id.configurationButton);
         configurationButton.setOnClickListener(new View.OnClickListener() {

@@ -67,10 +67,13 @@ public class OtherTrashDialog extends AppCompatActivity {
         intent.putExtra("size", Integer.parseInt(sizeForm.getText().toString()));
 
         //TOAST FOR DEBUGGING
+
         Bundle parseInfo = intent.getExtras();
+        /*
         Toast boom = new Toast(getApplicationContext());
         boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
         boom.makeText(OtherTrashDialog.this, parseInfo.toString(), boom.LENGTH_SHORT).show();
+        */
 
         mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext()).getRequestQueue();
 
