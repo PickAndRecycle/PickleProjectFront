@@ -26,7 +26,9 @@ import com.pickle.pickleprojectmodel.UnusedCondition;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.lang.reflect.Type;
+import java.util.HashMap;
 
 public class ThrowOrReport extends AppCompatActivity {
     private RequestQueue mQueue;
@@ -69,6 +71,8 @@ public class ThrowOrReport extends AppCompatActivity {
         Intent intent = new Intent(this, ReportSuccess.class);
         intent.putExtras(getIntent().getExtras());
         intent.putExtra("report", report.booleanValue());
+        String pathPhoto = "sdcard/Pickle/cam_image.jpg";
+        File picture = new File(pathPhoto);
 
         //TOAST FOR DEBUGGING
         Bundle parseInfo = intent.getExtras();
@@ -86,7 +90,7 @@ public class ThrowOrReport extends AppCompatActivity {
         //trash.setLatitude((int) intent.getDoubleExtra("latitude", 0.0) );
         //trash.setLongitude((int) intent.getDoubleExtra("longitude",0.0));
         trash.setDesc(intent.getStringExtra("description"));
-        trash.setReport(intent.getBooleanExtra("report",true));
+        trash.setReport(intent.getBooleanExtra("report", true));
         trash.setTitle("");
         trash.setCondition(UnusedCondition.UNSPECIFIED);
         Log.d("trash",trash.getDesc());
@@ -96,33 +100,25 @@ public class ThrowOrReport extends AppCompatActivity {
         gsonBuilder.registerTypeAdapter(Trash.class, new TrashSerializer());
         Gson gson = gsonBuilder.create();
         String json = gson.toJson(trash);
+        Log.d("string",json);
+        HashMap<String,String> hashMap = new HashMap<String,String>();
+        hashMap.put("VOInput",json);
 
 
         Log.d("json", json);
-        try {
-            final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.POST, url, new JSONObject(json), new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
-                    try {
-                        Log.d("result",response.getString("result"));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Log.d("Error:", error.toString());
-                }
-            });
-            jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-            mQueue.add(jsonRequest);
-            startActivity(intent);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
+        final PhotoMultipartRequest photoMultipartRequest = new PhotoMultipartRequest(url,new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d("result",response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Error:", error.toString());
+            }
+        },picture,hashMap);
+        mQueue.add(photoMultipartRequest);
+        startActivity(intent);
 
 
     }
