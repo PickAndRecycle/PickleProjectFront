@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.content.SharedPreferences;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -35,6 +36,7 @@ import java.util.List;
 public class Picklejar extends AppCompatActivity implements Response.ErrorListener, Response.Listener<JSONObject> {
     private GestureDetector gestureDetector;
     private RequestQueue mQueue;
+    public static final String PREFS_NAME = "PicklePrefs";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,12 +94,15 @@ public class Picklejar extends AppCompatActivity implements Response.ErrorListen
 
     }
     public void onResponse(JSONObject response){
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        String getUsername = settings.getString("username", "0");
+
         try{
             JSONObject parentObject = response;
             Log.d("json:", response.getString("result"));
             JSONArray parentArray = parentObject.getJSONArray("result");
             List <Trash> Trashlist = new ArrayList<Trash>();
-            String username ="Yanuar";
+            String username = getUsername;
             for (int i=0; i<parentArray.length(); i++){
                 JSONObject finalObject = parentArray.getJSONObject(i);
                 Log.d("categories",finalObject.getString("categories"));
@@ -142,7 +147,7 @@ public class Picklejar extends AppCompatActivity implements Response.ErrorListen
                                         trashObj.setCategories(TrashCategories.GREEN);
                                     }
                                     if (j>1){
-                                    Trashlist.add(j-1 ,trashObj);}
+                                        Trashlist.add(j-1 ,trashObj);}
                                     else{Trashlist.add(0,trashObj);}
                                     break;
                                 }

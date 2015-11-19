@@ -38,9 +38,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/backButton"
-            android:src="@mipmap/backicon"
             android:background="#00FFFFFF"
-            android:layout_alignTop="@+id/configurationButton"
+            android:src="@mipmap/backicon"
+            android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
     </RelativeLayout>
@@ -76,7 +76,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/TotalPointText"
             android:id="@+id/totalPoint"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/pointsText" />
@@ -131,7 +130,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/usernameText"
         android:id="@+id/username"
         android:layout_alignBaseline="@+id/contentArea"
         android:layout_alignBottom="@+id/contentArea"
@@ -141,18 +139,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/emailText"
         android:id="@+id/email"
         android:layout_below="@+id/contentArea"
         android:layout_centerHorizontal="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SIGN IN"
-        android:id="@+id/signInButton"
-        android:layout_below="@+id/email"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

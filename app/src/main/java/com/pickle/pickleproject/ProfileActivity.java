@@ -1,15 +1,18 @@
 package com.pickle.pickleproject;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -27,6 +30,7 @@ import org.json.JSONObject;
 public class ProfileActivity extends AppCompatActivity implements Response.ErrorListener, Response.Listener<JSONObject> {
     private GestureDetector gestureDetector;
     private RequestQueue mQueue;
+    public static final String PREFS_NAME = "PicklePrefs";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,8 +39,11 @@ public class ProfileActivity extends AppCompatActivity implements Response.Error
 
         mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext()).getRequestQueue();
 
+        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, 0);
+
         //GCP
-        String id = "46d83e4c-93b9-4d88-a500-85a0809dc275";
+        //String id = "46d83e4c-93b9-4d88-a500-85a0809dc275";
+        String id = preferences.getString("secure_id", "0");
         String url = "http://104.155.237.238:8080/account/" + id;
 
         //Localhost
@@ -46,7 +53,7 @@ public class ProfileActivity extends AppCompatActivity implements Response.Error
         final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.GET, url, new JSONObject(), this, this);
         jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         mQueue.add(jsonRequest);
-        
+        /*
         //TEMPORARY BUTTON FOR SIGN IN
         Button signInButton = (Button) findViewById(R.id.signInButton);
         signInButton.setOnClickListener(new View.OnClickListener() {
@@ -55,20 +62,21 @@ public class ProfileActivity extends AppCompatActivity implements Response.Error
                 signIn();
             }
         });
-
-        ImageButton configurationButton = (ImageButton) findViewById(R.id.configurationButton);
-        configurationButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                changeConfiguration();
-            }
-        });
+        */
 
         ImageButton backButton = (ImageButton) findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 onUpSwipe();
+            }
+        });
+
+        ImageButton configurationButton = (ImageButton) findViewById(R.id.configurationButton);
+        configurationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeConfiguration();
             }
         });
     }
@@ -107,14 +115,36 @@ public class ProfileActivity extends AppCompatActivity implements Response.Error
                 }
             });
 
+            MontserratButton signOut = (MontserratButton) findViewById(R.id.signOutButton);
+            signOut.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    SharedPreferences preferences = getSharedPreferences(PREFS_NAME, 0);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.clear();
+                    editor.commit();
+                    //TOAST
+                    Toast boom = new Toast(getApplicationContext());
+                    boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
+                    boom.makeText(ProfileActivity.this, "Logged Out", boom.LENGTH_SHORT).show();
+                    signOut();
+                }
+            });
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
     }
+    /*
+        // TEMPORARY BUTTON FOR SIGN IN
+        private void signIn(){
+            Intent intent = new Intent(this, SignIn.class);
+            startActivity(intent);
 
-    // TEMPORARY BUTTON FOR SIGN IN
-    private void signIn(){
+        }
+    */
+    private void signOut(){
         Intent intent = new Intent(this, SignIn.class);
         startActivity(intent);
 
@@ -168,7 +198,7 @@ public class ProfileActivity extends AppCompatActivity implements Response.Error
 
 
 
-                    // Right swipe
+                // Right swipe
 
 
                 if (diffAbsUpDown > SWIPE_MAX_OFF_PATH)

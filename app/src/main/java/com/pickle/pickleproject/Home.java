@@ -2,6 +2,7 @@ package com.pickle.pickleproject;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -28,6 +29,8 @@ public class Home extends Activity   {
     //Location mLastLocation;
     //private GoogleApiClient mGoogleApiClient;
     GPSTracker gps;
+    public static final String PREFS_NAME = "PicklePrefs";
+    boolean doubleBackToExitPressedOnce = false;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,9 +89,9 @@ public class Home extends Activity   {
             }
         });
 
-        jarNewsButton.setOnClickListener(new View.OnClickListener(){
+        jarNewsButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 historyJar();
             }
         });
@@ -154,9 +157,17 @@ public class Home extends Activity   {
     }
 
     private void changeProfileActivity(){
-        Intent intent = new Intent(this, ProfileActivity.class);
-        startActivity(intent);
-        this.overridePendingTransition(R.anim.push_down_in, R.anim.push_down_out);
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        String id = settings.getString("valid", "0");
+        if(id.equals("0")){
+            Intent intent = new Intent(this, SignIn.class);
+            startActivity(intent);
+        }
+        else{
+            Intent intent = new Intent(this, ProfileActivity.class);
+            startActivity(intent);
+            this.overridePendingTransition(R.anim.push_down_in, R.anim.push_down_out);
+            }
     }
 
     private File getFile(){
@@ -200,7 +211,13 @@ public class Home extends Activity   {
     }
 
     private void onDownSwipe() {
-        changeProfileActivity();
+            changeProfileActivity();
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
     }
 
     // Private class for gestures
