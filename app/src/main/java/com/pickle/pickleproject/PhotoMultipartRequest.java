@@ -14,9 +14,7 @@ import java.util.Map;
 
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.HttpMultipartMode;
-import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
-import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
 
 import com.android.volley.AuthFailureError;
@@ -28,79 +26,76 @@ import com.android.volley.Response.Listener;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.HttpHeaderParser;
 
-public class PhotoMultipartRequest extends Request<String> {
+public class PhotoMultipartRequest<T> extends Request<T> {
 
-    private MultipartEntity entity = new MultipartEntity();
 
-    private static final String FILE_PART_NAME = "image";
+    private static final String FILE_PART_NAME = "file";
 
-    private final Response.Listener<String> mListener;
-    private final File file;
-    private final HashMap<String, String> params;
+    private MultipartEntityBuilder mBuilder = MultipartEntityBuilder.create();
+    private final Response.Listener<T> mListener;
+    private final File mImageFile;
+    private final HashMap<String,String> mParams;
+    protected Map<String, String> headers;
 
-    public PhotoMultipartRequest(String url, Response.Listener<String> listener, Response.ErrorListener errorListener, File file, HashMap<String, String> params)
-    {
+    public PhotoMultipartRequest(String url, Listener<T> listener, ErrorListener errorListener, File imageFile, HashMap<String,String> params){
         super(Method.POST, url, errorListener);
 
         mListener = listener;
-        this.file = file;
-        this.params = params;
+        mImageFile = imageFile;
+        mParams = params;
+
         buildMultipartEntity();
     }
 
-    private void buildMultipartEntity()
-    {
-        entity.addPart(FILE_PART_NAME, new FileBody(file));
-        try
-        {
-            for ( String key : params.keySet() ) {
-                entity.addPart(key, new StringBody(params.get(key)));
-            }
+    @Override
+    public Map<String, String> getHeaders() throws AuthFailureError {
+        Map<String, String> headers = super.getHeaders();
+
+        if (headers == null
+                || headers.equals(Collections.emptyMap())) {
+            headers = new HashMap<String, String>();
         }
-        catch (UnsupportedEncodingException e)
-        {
-            VolleyLog.e("UnsupportedEncodingException");
+
+        headers.put("Accept", "application/json");
+
+        return headers;
+    }
+
+    private void buildMultipartEntity(){
+        mBuilder.addBinaryBody(FILE_PART_NAME, mImageFile, ContentType.create("image/jpeg"), mImageFile.getName());
+        for(String key : mParams.keySet()){
+                mBuilder.addTextBody(key, mParams.get(key));
         }
+        mBuilder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
+        mBuilder.setLaxMode().setBoundary("xx").setCharset(Charset.forName("UTF-8"));
     }
 
     @Override
-    public String getBodyContentType()
-    {
-        return entity.getContentType().getValue();
+    public String getBodyContentType(){
+        String contentTypeHeader = mBuilder.build().getContentType().getValue();
+        return contentTypeHeader;
     }
 
     @Override
-    public byte[] getBody() throws AuthFailureError
-    {
+    public byte[] getBody() throws AuthFailureError{
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        try
-        {
-            entity.writeTo(bos);
+        try {
+            mBuilder.build().writeTo(bos);
+        } catch (IOException e) {
+            VolleyLog.e("IOException writing to ByteArrayOutputStream bos, building the multipart request.");
         }
-        catch (IOException e)
-        {
-            VolleyLog.e("IOException writing to ByteArrayOutputStream");
-        }
+
         return bos.toByteArray();
     }
 
-    /**
-     * copied from Android StringRequest class
-     */
     @Override
-    protected Response<String> parseNetworkResponse(NetworkResponse response) {
-        String parsed;
-        try {
-            parsed = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
-        } catch (UnsupportedEncodingException e) {
-            parsed = new String(response.data);
-        }
-        return Response.success(parsed, HttpHeaderParser.parseCacheHeaders(response));
+    protected Response<T> parseNetworkResponse(NetworkResponse response) {
+        T result = null;
+        return Response.success(result, HttpHeaderParser.parseCacheHeaders(response));
     }
 
     @Override
-    protected void deliverResponse(String response)
-    {
+    protected void deliverResponse(T response) {
         mListener.onResponse(response);
     }
 }

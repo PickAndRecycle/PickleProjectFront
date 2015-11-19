@@ -29,6 +29,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.lang.reflect.Type;
 import java.util.HashMap;
+import java.util.Map;
 
 public class ThrowOrReport extends AppCompatActivity {
     private RequestQueue mQueue;
@@ -98,19 +99,20 @@ public class ThrowOrReport extends AppCompatActivity {
         trash.setReport(intent.getBooleanExtra("report", true));
         trash.setTitle("");
         trash.setCondition(UnusedCondition.UNSPECIFIED);
-        Log.d("trash",trash.getDesc());
+        Log.d("trash", trash.getDesc());
 
 
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(Trash.class, new TrashSerializer());
         Gson gson = gsonBuilder.create();
         String json = gson.toJson(trash);
-        Log.d("string",json);
-        HashMap<String,String> hashMap = new HashMap<String,String>();
-        hashMap.put("VOInput",json);
+        Log.d("string", json);
+        Map<String,String> map = new HashMap<String,String>();
+        map.put("VOInput",json);
 
 
         Log.d("json", json);
+        /*
         final PhotoMultipartRequest photoMultipartRequest = new PhotoMultipartRequest(url,new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -123,6 +125,20 @@ public class ThrowOrReport extends AppCompatActivity {
             }
         },picture,hashMap);
         mQueue.add(photoMultipartRequest);
+        */
+        MultipartRequest multipartRequest = new MultipartRequest(url, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Error:", error.toString());
+            }
+        },new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d("result",response);
+            }
+        },picture, map);
+        mQueue.add(multipartRequest);
+
         startActivity(intent);
 
 
