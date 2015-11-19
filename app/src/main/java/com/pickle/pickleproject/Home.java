@@ -123,11 +123,14 @@ public class Home extends Activity   {
             //PUT LATITUDE AND LONGITUDE INTO THE NEXT PAGE
             intent.putExtra("latitude", latitude);
             intent.putExtra("longitude", longitude);
+
             //TOAST FOR DEBUGGING
             Bundle parseInfo = intent.getExtras();
+            /*
             Toast boom = new Toast(getApplicationContext());
             boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
             boom.makeText(Home.this, parseInfo.toString(), boom.LENGTH_SHORT).show();
+            */
 
             startActivity(intent);
 

@@ -67,9 +67,11 @@ public class UnusedGoodsDialog extends AppCompatActivity {
 
         //TOAST FOR DEBUGGING
         Bundle parseInfo = intent.getExtras();
+        /*
         Toast boom = new Toast(getApplicationContext());
         boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
         boom.makeText(UnusedGoodsDialog.this, parseInfo.toString(), boom.LENGTH_SHORT).show();
+        */
 
         mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext()).getRequestQueue();
 

@@ -58,9 +58,11 @@ public class ThrowOrReport extends AppCompatActivity {
 
         //TOAST FOR DEBUGGING
         Bundle parseInfo = intent.getExtras();
+        /*
         Toast boom = new Toast(getApplicationContext());
         boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
         boom.makeText(ThrowOrReport.this, parseInfo.toString(), boom.LENGTH_SHORT).show();
+        */
 
         startActivity(intent);
     }
@@ -72,9 +74,12 @@ public class ThrowOrReport extends AppCompatActivity {
 
         //TOAST FOR DEBUGGING
         Bundle parseInfo = intent.getExtras();
+        /*
         Toast boom = new Toast(getApplicationContext());
         boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
         boom.makeText(ThrowOrReport.this, intent.getStringExtra("description"), boom.LENGTH_SHORT).show();
+        */
+
 
 
 

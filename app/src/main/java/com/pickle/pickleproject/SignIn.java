@@ -107,9 +107,11 @@ public class SignIn extends AppCompatActivity {
 
 
                                     //TOAST
+                                    /*
                                     Toast boom = new Toast(getApplicationContext());
                                     boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
                                     boom.makeText(SignIn.this, x, boom.LENGTH_SHORT).show();
+                                    */
 
                                     validator = true;
                                     break;
