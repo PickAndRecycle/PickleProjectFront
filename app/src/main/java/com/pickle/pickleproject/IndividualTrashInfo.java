@@ -111,6 +111,8 @@ public class IndividualTrashInfo extends AppCompatActivity {
 
     private void changeThrowerInfo(){
         Intent intent = new Intent(this, ThrowerInfo.class);
+        final Trash trash = (Trash) getIntent().getSerializableExtra("object");
+        intent.putExtra("object",trash);
         startActivity(intent);
     }
 

@@ -195,4 +195,23 @@ public class Trash implements Serializable {
     private static double rad2deg(double rad) {
         return (rad * 180 / Math.PI);
     }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Trash{");
+        sb.append("categories='").append(categories).append('\'');
+        sb.append(", username='").append(username).append('\'');
+        sb.append(", status=").append(status);
+        sb.append(", description='").append(description).append('\'');
+        sb.append(", distance=").append(distance);
+        sb.append(", photo url='").append(photo_url).append('\'');
+        sb.append(", latitude=").append(latitude);
+        sb.append(", longitude=").append(longitude);
+        sb.append(", report=").append(report);
+        sb.append(", title='").append(title).append('\'');
+        sb.append(", trash_condition='").append(trash_condition).append('\'');
+        sb.append(", size='").append(size);
+        sb.append(", thumbnail url='").append(thumbnailUrl).append('\'');
+        return sb.toString();
+    }
 }

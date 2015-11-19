@@ -1,24 +1,40 @@
 package com.pickle.pickleproject;
 
+import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
-import android.Manifest;
-import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.PhoneStateListener;
+import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Button;
 
-public class ThrowerInfo extends AppCompatActivity {
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.RequestQueue;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.pickle.pickleprojectmodel.Trash;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class ThrowerInfo extends AppCompatActivity implements Response.ErrorListener, Response.Listener<JSONObject>{
+    private RequestQueue mQueue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thrower_info);
 
         Button back_button = (Button) findViewById(R.id.back_button);
-        ImageButton call_button = (ImageButton) findViewById(R.id.call_button);
 
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -27,33 +43,119 @@ public class ThrowerInfo extends AppCompatActivity {
             }
         });
 
-        call_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                changeCall();
-            }
-        });
+        //final Trash trash = (Trash) getIntent().getSerializableExtra("object");
+        //final String username = trash.getId();
+        mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext()).getRequestQueue();
+        String url = "http://104.155.237.238:8080/account/";
+        final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.GET, url, new JSONObject(), this, this);
+        jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        mQueue.add(jsonRequest);
+
 
     }
+
     private void changeBack() {
         Intent intent = new Intent(this, Home.class);
         startActivity(intent);
     }
 
-    private void changeCall() {
-        Intent intent = new Intent(Intent.ACTION_CALL);
-        intent.setData(Uri.parse("tel:08127648183"));
-        if (checkSelfPermission(Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    public void requestPermissions(@NonNull String[] permissions, int requestCode)
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for Activity#requestPermissions for more details.
-            return;
-        }
-
+    @TargetApi(Build.VERSION_CODES.M)
+    private void changeCall(String phone) {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel:"+phone));
         startActivity(intent);
+    }
+
+    @Override
+    public void onErrorResponse(VolleyError error) {
+        Log.d("Error:", error.getMessage());
+    }
+
+    @Override
+    public void onResponse(JSONObject response) {
+        try{
+            final Trash trash = (Trash) getIntent().getSerializableExtra("object");
+            Log.d("trash", trash.toString());
+            final String username = trash.getUsername();
+            JSONObject parentObject = response;
+            Log.d("json:", response.getString("result"));
+            JSONArray parentArray = parentObject.getJSONArray("result");
+
+
+            for (int i=0; i<parentArray.length(); i++) {
+                JSONObject finalObject = parentArray.getJSONObject(i);
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                Gson gson = gsonBuilder.create();
+                if (finalObject.getString("username").equals(username)){
+                    final String phone = finalObject.getString("phone_number");
+                    PhoneCallListener phoneListener = new PhoneCallListener();
+                    TelephonyManager telephonyManager = (TelephonyManager) this
+                            .getSystemService(Context.TELEPHONY_SERVICE);
+                    telephonyManager.listen(phoneListener, PhoneStateListener.LISTEN_CALL_STATE);
+
+                    ImageButton call_button = (ImageButton) findViewById(R.id.call_button);
+
+                    call_button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            changeCall(phone);
+                        }
+                    });
+                    break;
+                }
+            }
+
+            // add PhoneStateListener
+
+
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //monitor phone call activities
+    private class PhoneCallListener extends PhoneStateListener {
+
+        private boolean isPhoneCalling = false;
+
+        String LOG_TAG = "LOGGING 123";
+
+        @Override
+        public void onCallStateChanged(int state, String incomingNumber) {
+
+            if (TelephonyManager.CALL_STATE_RINGING == state) {
+                // phone ringing
+                Log.i(LOG_TAG, "RINGING, number: " + incomingNumber);
+            }
+
+            if (TelephonyManager.CALL_STATE_OFFHOOK == state) {
+                // active
+                Log.i(LOG_TAG, "OFFHOOK");
+
+                isPhoneCalling = true;
+            }
+
+            if (TelephonyManager.CALL_STATE_IDLE == state) {
+                // run when class initial and phone call ended,
+                // need detect flag from CALL_STATE_OFFHOOK
+                Log.i(LOG_TAG, "IDLE");
+
+                if (isPhoneCalling) {
+
+                    Log.i(LOG_TAG, "restart app");
+
+                    // restart app
+                    Intent i = getBaseContext().getPackageManager()
+                            .getLaunchIntentForPackage(
+                                    getBaseContext().getPackageName());
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(i);
+
+                    isPhoneCalling = false;
+                }
+
+            }
+        }
     }
 }
