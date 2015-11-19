@@ -1,6 +1,7 @@
 package com.pickle.pickleproject;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -22,7 +23,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import com.pickle.pickleprojectmodel.Trash;
 import com.pickle.pickleprojectmodel.TrashCategories;
-import com.pickle.pickleprojectmodel.UnusedCondition;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,6 +35,7 @@ import java.util.List;
 public class Picklejar extends AppCompatActivity implements Response.ErrorListener, Response.Listener<JSONObject> {
     private GestureDetector gestureDetector;
     private RequestQueue mQueue;
+    public static final String PREFS_NAME = "PicklePrefs";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,65 +93,28 @@ public class Picklejar extends AppCompatActivity implements Response.ErrorListen
 
     }
     public void onResponse(JSONObject response){
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        String getUsername = settings.getString("username", "0");
         try{
             JSONObject parentObject = response;
             Log.d("json:", response.getString("result"));
             JSONArray parentArray = parentObject.getJSONArray("result");
             List <Trash> Trashlist = new ArrayList<Trash>();
-            String username ="Yanuar";
+            String username = getUsername;
             for (int i=0; i<parentArray.length(); i++){
                 JSONObject finalObject = parentArray.getJSONObject(i);
-                Log.d("categories",finalObject.getString("categories"));
                 Trash trashObj;
                 GsonBuilder gsonBuilder = new GsonBuilder();
-                gsonBuilder.registerTypeAdapter(UnusedCondition.class,new UnusedConditionDeserialize());
+                gsonBuilder.registerTypeAdapter(TrashCategories.class,new TrashCategoriesDeserialize());
                 Gson gson = gsonBuilder.create();
                 boolean bool = Boolean.parseBoolean(finalObject.getString("report"));
                 if(bool == false) {
                     if (finalObject.getString("username").equals(username)) {
-                        if (Integer.parseInt(finalObject.getString("status")) == 0) {
+                        if (Integer.parseInt(finalObject.getString("status")) == 1) {
                             trashObj = gson.fromJson(String.valueOf(finalObject), Trash.class);
-                            if (finalObject.getString("categories").equals("Unused Goods")) {
-                                trashObj.setCategories(TrashCategories.UNUSED);
-                            }
-                            else if (finalObject.getString("categories").equals("General Waste")) {
-                                trashObj.setCategories(TrashCategories.GENERAL);
-                            }
-                            else if (finalObject.getString("categories").equals("Recycleable Waste")) {
-                                trashObj.setCategories(TrashCategories.RECYCLED);
-                            }
-                            else if (finalObject.getString("categories").equals("Green Waste")){
-                                trashObj.setCategories(TrashCategories.GREEN);
-                            }
                             Trashlist.add(0, trashObj);
-                        }
-                        else if(Integer.parseInt(finalObject.getString("status")) == 1){
-                            for (int j=0; j<Trashlist.size(); j++){
-                                int status = Trashlist.get(j).getStatus();
-                                if (status == 1|| status == 2){
-                                    trashObj = gson.fromJson(String.valueOf(finalObject), Trash.class);
-                                    if (j>1){
-                                    Trashlist.add(j-1 ,trashObj);}
-                                    else{Trashlist.add(0,trashObj);}
-                                    break;
-                                }
-                            }
-
-                        }
-                        else {
+                        } else {
                             trashObj = gson.fromJson(String.valueOf(finalObject), Trash.class);
-                            if (finalObject.getString("categories").equals("Unused Goods")) {
-                                trashObj.setCategories(TrashCategories.UNUSED);
-                            }
-                            else if (finalObject.getString("categories").equals("General Waste")) {
-                                trashObj.setCategories(TrashCategories.GENERAL);
-                            }
-                            else if (finalObject.getString("categories").equals("Recycleable Waste")) {
-                                trashObj.setCategories(TrashCategories.RECYCLED);
-                            }
-                            else if (finalObject.getString("categories").equals("Green Waste")){
-                                trashObj.setCategories(TrashCategories.GREEN);
-                            }
                             Trashlist.add(trashObj);
                         }
                     }
@@ -174,21 +138,6 @@ public class Picklejar extends AppCompatActivity implements Response.ErrorListen
     @Override
     public void onErrorResponse(VolleyError error) {
         Log.d("Error:", error.getMessage());
-    }
-
-    private class UnusedConditionDeserialize implements JsonDeserializer<UnusedCondition> {
-        @Override
-        public UnusedCondition deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-            if (json.getAsString().equals("Good")) {
-                return UnusedCondition.GOOD;
-            } else if (json.getAsString().equals("Bad")) {
-                return UnusedCondition.BAD;
-            } else if (json.getAsString().equals("New")) {
-                return UnusedCondition.NEW;
-            } else {
-                return UnusedCondition.UNSPECIFIED;
-            }
-        }
     }
 
     private class TrashCategoriesDeserialize implements JsonDeserializer<TrashCategories> {
