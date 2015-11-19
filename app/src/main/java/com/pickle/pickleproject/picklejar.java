@@ -106,10 +106,24 @@ public class Picklejar extends AppCompatActivity implements Response.ErrorListen
                 boolean bool = Boolean.parseBoolean(finalObject.getString("report"));
                 if(bool == false) {
                     if (finalObject.getString("username").equals(username)) {
-                        if (Integer.parseInt(finalObject.getString("status")) == 1) {
+                        if (Integer.parseInt(finalObject.getString("status")) == 0) {
                             trashObj = gson.fromJson(String.valueOf(finalObject), Trash.class);
                             Trashlist.add(0, trashObj);
-                        } else {
+                        }
+                        else if(Integer.parseInt(finalObject.getString("status")) == 1){
+                            for (int j=0; j<Trashlist.size(); j++){
+                                int status = Trashlist.get(j).getStatus();
+                                if (status == 1|| status == 2){
+                                    trashObj = gson.fromJson(String.valueOf(finalObject), Trash.class);
+                                    if (j>1){
+                                    Trashlist.add(j-1 ,trashObj);}
+                                    else{Trashlist.add(0,trashObj);}
+                                    break;
+                                }
+                            }
+
+                        }
+                        else {
                             trashObj = gson.fromJson(String.valueOf(finalObject), Trash.class);
                             Trashlist.add(trashObj);
                         }
