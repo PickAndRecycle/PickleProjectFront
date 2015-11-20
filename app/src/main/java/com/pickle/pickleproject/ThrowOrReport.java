@@ -69,7 +69,7 @@ public class ThrowOrReport extends AppCompatActivity {
 
         startActivity(intent);
     }
-    private void Report(){
+    private void Report() {
         Boolean report = true;
         Intent intent = new Intent(this, ReportSuccess.class);
         intent.putExtras(getIntent().getExtras());
@@ -84,8 +84,6 @@ public class ThrowOrReport extends AppCompatActivity {
         boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
         boom.makeText(ThrowOrReport.this, intent.getStringExtra("description"), boom.LENGTH_SHORT).show();
         */
-
-
 
 
         mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext()).getRequestQueue();
@@ -107,45 +105,41 @@ public class ThrowOrReport extends AppCompatActivity {
         Gson gson = gsonBuilder.create();
         String json = gson.toJson(trash);
         Log.d("string", json);
-        Map<String,String> map = new HashMap<String,String>();
-        map.put("VOInput",json);
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("VOInput", json);
 
 
         Log.d("json", json);
-        /*
-        final PhotoMultipartRequest photoMultipartRequest = new PhotoMultipartRequest(url,new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.d("result",response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("Error:", error.toString());
-            }
-        },picture,hashMap);
-        mQueue.add(photoMultipartRequest);
-        */
-        MultipartRequest multipartRequest = new MultipartRequest(url, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("Error:", error.toString());
-            }
-        },new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.d("result",response);
-            }
-        },picture, map);
-        mQueue.add(multipartRequest);
 
-        startActivity(intent);
+        try {
+            final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.POST, url, new JSONObject(json), new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+                        Log.d("result", response.getString("result"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.d("Error:", error.getMessage());
+                }
+            });
+            jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+            mQueue.add(jsonRequest);
+
+            startActivity(intent);
 
 
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
 
-    private class TrashSerializer implements JsonSerializer<Trash> {
+        private class TrashSerializer implements JsonSerializer<Trash> {
         @Override
         public JsonElement serialize(Trash src, Type typeOfSrc, JsonSerializationContext context) {
             JsonObject object = new JsonObject();
