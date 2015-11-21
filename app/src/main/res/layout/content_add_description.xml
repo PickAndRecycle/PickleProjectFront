@@ -21,7 +21,6 @@
                 android:inputType="textMultiLine"
                 android:ems="10"
                 android:id="@+id/editText"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
                 android:background="#b1ffffff"
                 android:textSize="20sp"
                 android:textAlignment="center"

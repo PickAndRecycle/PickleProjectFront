@@ -59,7 +59,7 @@ public class PicklejarAdapter extends ArrayAdapter<Trash> {
         TextView stat = (TextView) row.findViewById(R.id.Stat);
         TextView dash = (TextView) row.findViewById(R.id.dash);
         CircleImageView thumbnail = (CircleImageView) row.findViewById(R.id.thumbnailjar);
-        thumbnail.setImageUrl("http://i63.tinypic.com/312zpeu.jpg", mImageLoader);
+        thumbnail.setImageUrl(objects[position].getPhoto_url(), mImageLoader);
 
         if(objects[position].getCategories().equals(TrashCategories.UNUSED)){
             //Log.d("position", Integer.toString(position));

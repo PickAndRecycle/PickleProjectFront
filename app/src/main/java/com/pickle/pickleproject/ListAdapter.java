@@ -68,7 +68,7 @@ public class ListAdapter extends ArrayAdapter<Trash> {
         TextView bin = (TextView) row.findViewById(R.id.bin);
         TextView dash = (TextView) row.findViewById(R.id.dash);
         CircleImageView thumbnail = (CircleImageView) row.findViewById(R.id.thumbnail);
-        thumbnail.setImageUrl("http://i63.tinypic.com/312zpeu.jpg", mImageLoader);
+        thumbnail.setImageUrl(objects[position].getPhoto_url(), mImageLoader);
 
         distance.setText(Integer.toString(objects[position].distance));
         if(objects[position].getCategories().equals(TrashCategories.UNUSED)){

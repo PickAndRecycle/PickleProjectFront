@@ -55,13 +55,14 @@ public class IndividualTrashInfo extends AppCompatActivity {
             }
         });
 
-        NetworkImageView trashInfo = (NetworkImageView) findViewById(R.id.trashInfoPicture);
-        trashInfo.setImageUrl("http://i63.tinypic.com/312zpeu.jpg", mImageLoader);
+
 
         final Trash trash = (Trash) getIntent().getSerializableExtra("object");
         final String secureID = trash.getId();
         MontserratTextView description = (MontserratTextView) findViewById(R.id.descriptionText);
         description.setText(trash.getDesc());
+        NetworkImageView trashInfo = (NetworkImageView) findViewById(R.id.trashInfoPicture);
+        trashInfo.setImageUrl(trash.getPhoto_url(), mImageLoader);
 
         pickButton.setOnClickListener(new View.OnClickListener() {
             @Override

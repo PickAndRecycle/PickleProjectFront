@@ -16,6 +16,8 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 import com.pickle.pickleprojectmodel.Article;
 
+import org.w3c.dom.Text;
+
 /**
  * Created by admin on 11/13/2015.
  */
@@ -55,8 +57,13 @@ public class NewsfeedAdapter extends ArrayAdapter<Article> {
         TextView desc = (TextView) row.findViewById(R.id.descriptionNewsfeed);
         title.setText((CharSequence) objects[position].title);
         CircleImageView thumbnail = (CircleImageView) row.findViewById(R.id.thumbnailnews);
-        thumbnail.setImageUrl("http://i63.tinypic.com/312zpeu.jpg", mImageLoader);
-
+        thumbnail.setImageUrl(objects[position].getPhoto_url(), mImageLoader);
+        if (objects[position].getContent().toString().length() < 23){
+            desc.setText((CharSequence) objects[position].getContent());
+        }
+        else{
+            desc.setText((CharSequence) objects[position].getContent().substring(0,23));
+        }
         row.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

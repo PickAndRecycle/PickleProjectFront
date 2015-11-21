@@ -79,7 +79,11 @@ public class ModifyConfirmation extends AppCompatActivity {
                 @Override
                 public void onResponse(JSONObject response) {
                     try {
-                        Log.d("result", response.getString("result"));
+                        JSONObject parentObject = response;
+                        Log.d("json2:", response.getString("result"));
+                        JSONObject finalObject = parentObject.getJSONObject("result");
+                        NetworkImageView trashInfo = (NetworkImageView) findViewById(R.id.ImageModify);
+                        trashInfo.setImageUrl(finalObject.getString("photo_url"), mImageLoader);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
