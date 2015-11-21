@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.LruCache;
 import android.view.View;
-import android.widget.ImageButton;
+import android.widget.ImageButton;;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -47,8 +47,8 @@ public class ViewArticle extends AppCompatActivity {
         content.setText(article.getContent());
 
         NetworkImageView articlePhoto = (NetworkImageView) findViewById(R.id.articlePhoto);
-        articlePhoto.setImageUrl("http://i63.tinypic.com/312zpeu.jpg", mImageLoader);
-
+        articlePhoto.setImageUrl(article.getPhoto_url(), mImageLoader);
+;
         ImageButton backArticleButton = (ImageButton) findViewById(R.id.backArticleButton);
 
         backArticleButton.setOnClickListener(new View.OnClickListener(){
