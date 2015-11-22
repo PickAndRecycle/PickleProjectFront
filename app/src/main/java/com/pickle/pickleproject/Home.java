@@ -62,10 +62,17 @@ public class Home extends Activity   {
         Camera.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                File file = getFile();
-                camera_intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
-                startActivityForResult(camera_intent, CAM_REQUEST);
+                SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+                String id = settings.getString("valid", "0");
+                if(id.equals("0")){
+                    signIn();
+                }
+                else{
+                    Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    File file = getFile();
+                    camera_intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
+                    startActivityForResult(camera_intent, CAM_REQUEST);
+                }
 
 
             }
@@ -100,6 +107,10 @@ public class Home extends Activity   {
         Intent intent = new Intent(this, Picklejar.class);
         startActivity(intent);
         this.overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
+    }
+    private void signIn(){
+        Intent intent = new Intent(this, SignIn.class);
+        startActivity(intent);
     }
 
     private void changePick(){
