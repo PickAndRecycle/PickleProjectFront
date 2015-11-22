@@ -29,6 +29,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;
+import java.util.Date;
 
 public class OtherTrashDialog extends AppCompatActivity {
     private EditText sizeForm;
@@ -62,18 +63,23 @@ public class OtherTrashDialog extends AppCompatActivity {
 
     private void changeSubmitButton(){
         sizeForm = (EditText) findViewById(R.id.editText3);
+        //get current date and time and convert it into milliseconds
+        Date date = new Date();
+        long currentTime = date.getTime();
+
         Intent intent = new Intent(this, TrashNotification.class);
         intent.putExtras(getIntent().getExtras());
         intent.putExtra("size", Integer.parseInt(sizeForm.getText().toString()));
+        intent.putExtra("timestamp", currentTime);
 
         //TOAST FOR DEBUGGING
 
         Bundle parseInfo = intent.getExtras();
-        /*
+
         Toast boom = new Toast(getApplicationContext());
         boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
         boom.makeText(OtherTrashDialog.this, parseInfo.toString(), boom.LENGTH_SHORT).show();
-        */
+
 
         mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext()).getRequestQueue();
 

@@ -31,6 +31,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;
+import java.util.Calendar;
+import java.util.Date;
 
 public class UnusedGoodsDialog extends AppCompatActivity {
     private EditText titleForm;
@@ -58,20 +60,22 @@ public class UnusedGoodsDialog extends AppCompatActivity {
         titleForm = (EditText) findViewById(R.id.editText4);
         conditionForm = (Spinner) findViewById(R.id.conditionSpinner);
         String condition = conditionForm.getSelectedItem().toString();
-
+        //get current date and time and convert it into milliseconds
+        Date date = new Date();
+        long currentTime = date.getTime();
 
         Intent intent = new Intent(this, TrashNotification.class);
         intent.putExtras(getIntent().getExtras());
         intent.putExtra("title", titleForm.getText().toString());
         intent.putExtra("condition", condition);
+        intent.putExtra("timestamp", currentTime);
 
         //TOAST FOR DEBUGGING
         Bundle parseInfo = intent.getExtras();
-        /*
+
         Toast boom = new Toast(getApplicationContext());
         boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
         boom.makeText(UnusedGoodsDialog.this, parseInfo.toString(), boom.LENGTH_SHORT).show();
-        */
 
         mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext()).getRequestQueue();
 
