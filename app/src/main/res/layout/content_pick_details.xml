@@ -21,7 +21,7 @@
         <Button
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:text="Pick"
+            android:text="@string/pick"
             android:background="#00B5B5"
             android:id="@+id/pickButton"
             android:layout_alignParentTop="true"
@@ -42,7 +42,7 @@
         <Button
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:text="Cancel"
+            android:text="@string/cancel"
             android:background="#fa6f5a"
             android:id="@+id/cancelButton"
             android:layout_alignParentTop="true"

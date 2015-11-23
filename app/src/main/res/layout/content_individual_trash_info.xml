@@ -39,7 +39,7 @@
         <Button
             android:layout_width="195dp"
             android:layout_height="match_parent"
-            android:text="BACK"
+            android:text="@string/back"
             android:id="@+id/back_button_2"
             android:background="#F1654C"
             android:textColor="#FFFFFF"
@@ -53,7 +53,7 @@
         <Button
             android:layout_width="190dp"
             android:layout_height="match_parent"
-            android:text="PICK"
+            android:text="@string/pick"
             android:id="@+id/pick_button"
             android:background="#00B5B5"
             android:textSize="20sp"

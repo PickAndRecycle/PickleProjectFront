@@ -1,10 +1,13 @@
 package com.pickle.pickleproject;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import java.util.Locale;
 
 public class ConfigurationActivity extends AppCompatActivity {
 
@@ -37,6 +40,26 @@ public class ConfigurationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 changeProfile();
+            }
+        });
+        final Configuration config = new Configuration();
+        Button language = (Button) findViewById(R.id.ChangeLanguageButton);
+        language.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //if (config.locale == Locale.ENGLISH){
+                    Locale indonesia = new Locale("in");
+                    Locale.setDefault(indonesia);
+                    config.locale = indonesia;
+                    getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+               // }
+                /*else {
+                    Locale english = new Locale("en");
+                    Locale.setDefault(english);
+                    config.locale = english;
+                    getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+                }*/
+
             }
         });
     }
