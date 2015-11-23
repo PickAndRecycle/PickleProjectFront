@@ -91,7 +91,6 @@ public class SignIn extends AppCompatActivity {
                                     String getUsername = accountObj.getUsername();
                                     Integer getPoint = accountObj.getPoint();
                                     String getEmail = accountObj.getEmail();
-                                    String getPhoneNumber = accountObj.getPhone_number();
 
                                     String x = "secure id= "+ getSecure_id +", "+"username= " + getUsername +", "+"point= " + getPoint+ ", " +"email= "+getEmail;
 
@@ -101,7 +100,6 @@ public class SignIn extends AppCompatActivity {
                                     editor.putString("secure_id", getSecure_id);
                                     editor.putString("username", getUsername);
                                     editor.putInt("point", getPoint);
-                                    editor.putString("phone_number", getPhoneNumber);
                                     editor.putString("email", getEmail);
                                     editor.putString("valid", "1");
                                     editor.commit();
