@@ -94,6 +94,7 @@ public class UnusedGoodsDialog extends AppCompatActivity {
         trash.setCategories(TrashCategories.UNUSED);
         trash.setTitle(intent.getStringExtra("title"));
         trash.setCondition(UnusedCondition.valueOf(intent.getStringExtra("condition").toUpperCase()));
+        trash.setUsername(intent.getStringExtra("username"));
 
 
         GsonBuilder gsonBuilder = new GsonBuilder();

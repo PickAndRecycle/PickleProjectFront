@@ -97,6 +97,7 @@ public class ThrowOrReport extends AppCompatActivity {
         trash.setReport(intent.getBooleanExtra("report", true));
         trash.setTitle("");
         trash.setCondition(UnusedCondition.UNSPECIFIED);
+        trash.setUsername(intent.getStringExtra("username"));
         Log.d("trash", trash.getDesc());
 
 

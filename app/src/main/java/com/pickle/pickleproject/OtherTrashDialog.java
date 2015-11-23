@@ -101,6 +101,7 @@ public class OtherTrashDialog extends AppCompatActivity {
         trash.setTitle("");
         trash.setCondition(null);
         trash.setsize(Integer.parseInt(sizeForm.getText().toString()));
+        trash.setUsername(intent.getStringExtra("username"));
 
 
         GsonBuilder gsonBuilder = new GsonBuilder();
