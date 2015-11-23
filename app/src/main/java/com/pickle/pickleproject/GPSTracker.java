@@ -17,7 +17,7 @@ import android.provider.Settings;
 import android.util.Log;
 
 /**
- * Created by kamar on 14/11/2015.
+ * Created by Ravi Tamada on 01/07/2015, slightly modified by Kamar on 14/11/2015.
  */
 public class GPSTracker extends Service implements LocationListener {
     private final Context mContext;
@@ -69,6 +69,7 @@ public class GPSTracker extends Service implements LocationListener {
                 this.canGetLocation = true;
                 // First get location from Network Provider
                 if (isNetworkEnabled) {
+                    //Slight modification consisting of version API23 checking and permission checking on locationManager.
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                             // TODO: Consider calling
@@ -131,6 +132,7 @@ public class GPSTracker extends Service implements LocationListener {
      * */
     public void stopUsingGPS() {
         if (locationManager != null) {
+            //Another slight modification consisting of version API23 checking and permission checking on locationManager.
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     // TODO: Consider calling
