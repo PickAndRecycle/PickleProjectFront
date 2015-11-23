@@ -59,6 +59,11 @@ public class ThrowerInfo extends AppCompatActivity implements Response.ErrorList
         startActivity(intent);
     }
 
+    private void changeMap() {
+        Intent intent = new Intent(this, viewMap.class);
+        startActivity(intent);
+    }
+
     @TargetApi(Build.VERSION_CODES.M)
     private void changeCall(String phone) {
         Intent intent = new Intent(Intent.ACTION_DIAL);
@@ -99,6 +104,15 @@ public class ThrowerInfo extends AppCompatActivity implements Response.ErrorList
                         @Override
                         public void onClick(View v) {
                             changeCall(phone);
+                        }
+                    });
+
+                    ImageButton getLocationButton = (ImageButton) findViewById(R.id.get_location_button);
+
+                    getLocationButton.setOnClickListener(new View.OnClickListener(){
+                        @Override
+                        public void onClick(View v){
+                            changeMap();
                         }
                     });
                     break;
