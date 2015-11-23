@@ -106,10 +106,28 @@ public class ThrowOrReport extends AppCompatActivity {
         String json = gson.toJson(trash);
         Log.d("string", json);
         Map<String, String> map = new HashMap<String, String>();
-        map.put("VOInput", json);
+        map.put("voInput", json);
 
 
         Log.d("json", json);
+
+        final MultipartRequest multipartRequest = new MultipartRequest(url,new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Error:", error.getMessage());
+            }
+        },new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d("result", response);
+            }
+        },picture,map);
+
+        mQueue.add(multipartRequest);
+
+        startActivity(intent);
+
+        /*
 
         try {
             final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.POST, url, new JSONObject(json), new Response.Listener<JSONObject>() {
@@ -136,6 +154,7 @@ public class ThrowOrReport extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        */
     }
 
 

@@ -30,9 +30,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.lang.reflect.Type;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UnusedGoodsDialog extends AppCompatActivity {
     private EditText titleForm;
@@ -63,6 +66,8 @@ public class UnusedGoodsDialog extends AppCompatActivity {
         //get current date and time and convert it into milliseconds
         Date date = new Date();
         long currentTime = date.getTime();
+        String pathPhoto = "sdcard/Pickle/cam_image.jpg";
+        File picture = new File(pathPhoto);
 
         Intent intent = new Intent(this, TrashNotification.class);
         intent.putExtras(getIntent().getExtras());
@@ -97,6 +102,34 @@ public class UnusedGoodsDialog extends AppCompatActivity {
         Gson gson = gsonBuilder.create();
         String json = gson.toJson(trash);
         Log.d("json", json);
+
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("voInput", json);
+
+
+        Log.d("json", json);
+
+        final MultipartRequest multipartRequest = new MultipartRequest(url,new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Error:", error.getMessage());
+            }
+        },new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d("result", response);
+            }
+        },picture,map);
+
+        mQueue.add(multipartRequest);
+
+        startActivity(intent);
+
+
+
+        /*
+
+
         try {
             final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.POST, url, new JSONObject(json), new Response.Listener<JSONObject>() {
                 @Override
@@ -122,6 +155,8 @@ public class UnusedGoodsDialog extends AppCompatActivity {
         catch (JSONException e) {
             e.printStackTrace();
         }
+
+        */
 
 
 
