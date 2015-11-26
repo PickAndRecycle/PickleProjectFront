@@ -2,6 +2,7 @@ package com.pickle.pickleproject;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -40,6 +41,7 @@ import java.util.List;
  */
 public class TabUnused extends Fragment implements Response.ErrorListener, Response.Listener<JSONObject> {
     private RequestQueue mQueue;
+    public static final String PREFS_NAME = "PicklePrefs";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -78,13 +80,17 @@ public class TabUnused extends Fragment implements Response.ErrorListener, Respo
                 gsonBuilder.registerTypeAdapter(UnusedCondition.class, new UnusedConditionDeserialize());
                 Gson gson = gsonBuilder.create();
                 boolean bool = Boolean.parseBoolean(finalObject.getString("report"));
+                SharedPreferences preferences = this.getActivity().getSharedPreferences(PREFS_NAME, 0);
+                String username = preferences.getString("username", "");
                 if(bool == false) {
                     if (Integer.parseInt(finalObject.getString("status")) == 0) {
-                        if (finalObject.getString("categories").equals("Unused Goods")) {
-                            trashObj = gson.fromJson(String.valueOf(finalObject), Trash.class);
+                        if (!(finalObject.getString("username").equals(username))) {
+                            if (finalObject.getString("categories").equals("Unused Goods")) {
+                                trashObj = gson.fromJson(String.valueOf(finalObject), Trash.class);
 
-                            trashObj.setCategories(TrashCategories.UNUSED);
-                            Trashlist.add(trashObj);
+                                trashObj.setCategories(TrashCategories.UNUSED);
+                                Trashlist.add(trashObj);
+                            }
                         }
                     }
                 }

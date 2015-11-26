@@ -1,6 +1,7 @@
 package com.pickle.pickleproject;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -39,6 +40,7 @@ import java.util.List;
  */
 public class TabGreen extends Fragment implements Response.ErrorListener, Response.Listener<JSONObject> {
     private RequestQueue mQueue;
+    public static final String PREFS_NAME = "PicklePrefs";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,6 +49,7 @@ public class TabGreen extends Fragment implements Response.ErrorListener, Respon
         mQueue = CustomVolleyRequestQueue.getInstance(getActivity().getApplicationContext())
                 .getRequestQueue();
         String url = "http://104.155.237.238:8080/trash/";
+
         final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.GET, url, new JSONObject(), this, this);
         jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         mQueue.add(jsonRequest);
@@ -75,12 +78,16 @@ public class TabGreen extends Fragment implements Response.ErrorListener, Respon
                 gsonBuilder.registerTypeAdapter(TrashCategories.class, new TrashCategoriesDeserialize());
                 Gson gson = gsonBuilder.create();
                 boolean bool = Boolean.parseBoolean(finalObject.getString("report"));
+                SharedPreferences preferences = this.getActivity().getSharedPreferences(PREFS_NAME, 0);
+                String username = preferences.getString("username", "");
                 if (bool == false) {
                     if (Integer.parseInt(finalObject.getString("status")) == 0) {
-                        if (finalObject.getString("categories").equals("Green Waste")) {
-                            trashObj = gson.fromJson(String.valueOf(finalObject), Trash.class);
+                        if (!(finalObject.getString("username").equals(username))) {
+                            if (finalObject.getString("categories").equals("Green Waste")) {
+                                trashObj = gson.fromJson(String.valueOf(finalObject), Trash.class);
 
-                            Trashlist.add(trashObj);
+                                Trashlist.add(trashObj);
+                            }
                         }
                     }
                 }
