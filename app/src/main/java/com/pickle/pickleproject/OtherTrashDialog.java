@@ -93,6 +93,7 @@ public class OtherTrashDialog extends AppCompatActivity {
         Trash trash = new Trash();
         //trash.setLatitude((int) intent.getDoubleExtra("latitude",0.0) );
         //trash.setLongitude((int) intent.getDoubleExtra("longitude",0.0));
+        trash.setUsername(intent.getStringExtra("username"));
         trash.setDesc(intent.getStringExtra("description"));
         Log.d("description", trash.getDesc());
         trash.setReport(intent.getBooleanExtra("report", false));
