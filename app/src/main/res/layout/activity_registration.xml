@@ -25,7 +25,7 @@
             android:autoText="false"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:hint="username" />
+            android:hint="@string/usernameText" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -38,7 +38,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignRight="@+id/username"
             android:layout_alignEnd="@+id/username"
-            android:hint="password" />
+            android:hint="@string/passwordText" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -51,7 +51,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignRight="@+id/password"
             android:layout_alignEnd="@+id/password"
-            android:hint="confirmation password" />
+            android:hint="@string/passwordConfirmationText" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -64,7 +64,7 @@
             android:layout_alignStart="@+id/passwordConfirmation"
             android:layout_alignRight="@+id/passwordConfirmation"
             android:layout_alignEnd="@+id/passwordConfirmation"
-            android:hint="email" />
+            android:hint="@string/emailText" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -78,7 +78,7 @@
             android:layout_alignEnd="@+id/email"
             android:inputType="phone"
             android:layout_below="@+id/email"
-            android:hint="phone number" />
+            android:hint="@string/phoneNumberText" />
 
     </RelativeLayout>
 

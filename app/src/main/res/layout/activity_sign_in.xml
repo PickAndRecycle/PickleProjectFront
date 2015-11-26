@@ -33,7 +33,7 @@
         android:layout_marginTop="100dp"
         android:layout_below="@+id/textView17"
         android:layout_centerHorizontal="true"
-        android:hint="username" />
+        android:hint="@string/usernameText" />
 
     <EditText
         android:layout_width="match_parent"
@@ -50,7 +50,7 @@
         android:layout_alignWithParentIfMissing="false"
         android:layout_below="@+id/editText8"
         android:layout_centerHorizontal="true"
-        android:hint="password" />
+        android:hint="@string/passwordText" />
 
     <RelativeLayout
         android:layout_width="175dp"

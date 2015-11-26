@@ -13,28 +13,28 @@
     <string name="title_activity_pick_list">Daftar Sampah</string>
     <string name="title_activity_pick_recycled">Daur Ulang</string>
     <string name="title_activity_pick_green">Hijau</string>
-    <string name="title_activity_registration">Activitas Registrasi</string>
-    <string name="usernameText">username</string>
+    <string name="title_activity_registration">Registrasi</string>
+    <string name="usernameText">nama pengguna</string>
     <string name="description">DESKRIPSI</string>
     <string name="next">LANJUT</string>
     <string name="emailText">email</string>
-    <string name="passwordText">password</string>
-    <string name="passwordConfirmationText">password</string>
-    <string name="signUpText">Bergabung</string>
-    <string name="joinPickleText">Gabung Pickle</string>
+    <string name="passwordText">sandi</string>
+    <string name="passwordConfirmationText">konfirmasi sandi</string>
+    <string name="signUpText">DAFTAR</string>
+    <string name="joinPickleText">GABUNG PICKLE</string>
     <string name="phone">Telepon</string>
     <string name="title_activity_individual_trash_info">individual_trash_info</string>
     <string name="title_activity_thrower_info">Thrower_Info</string>
     <string name="back">KEMBALI</string>
-    <string name="editProfile">RUBAH PROFIL</string>
+    <string name="editProfile">UBAH PROFIL</string>
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="ProfilePicture">Gambar Profil</string>
     <string name="PoinText">POIN</string>
     <string name="TotalPointText">total poin</string>
     <string name="TotalPointLeftText">__ poin untuk naik level!</string>
     <string name="LeaderBoardText">LEADERBOARD</string>
-    <string name="EditProfileText">RUBAH PROFIL</string>
-    <string name="SignOutText">SIGN OUT</string>
+    <string name="EditProfileText">UBAH PROFIL</string>
+    <string name="SignOutText">KELUAR</string>
     <string name="title_activity_throw_category">throwCategory</string>
     <string name="title_activity_report_success">reportSuccess</string>
     <string name="title_activity_unused_goods_dialog">unusedGoodsDialog</string>
@@ -46,17 +46,17 @@
     <string name="configurationButton">configurationButton</string>
     <string name="title_activity_other_trash_dialog" />
     <string name="SettingText">PENGATURAN</string>
-    <string name="AboutUsText">TENTANG KITA</string>
-    <string name="TermsOfServiceText">KEBIJAKAN</string>
-    <string name="PrivacyPolicyText">KEBIJAKAN PRIVASI</string>
+    <string name="AboutUsText">TENTANG KAMI</string>
+    <string name="TermsOfServiceText">PERSYARATAN LAYANAN</string>
+    <string name="PrivacyPolicyText">KEBIJAKAN PRIBADI</string>
     <string name="BackToMyProfileText">KEMBALI KE PROFIL</string>
     <string name="ClearPickleJarText">HAPUS PICKLEJAR</string>
-    <string name="ChangeLanguage">RUBAH BAHASA</string>
+    <string name="ChangeLanguage">UBAH BAHASA</string>
     <string name="LoremIpsumText">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a metus elit. Fusce congue feugiat risus, sed tempor mi ultrices nec. Ut id tempus mi. Aliquam rhoncus, orci eget convallis fermentum, augue ipsum aliquam tellus, nec semper arcu arcu blandit diam. Aliquam in nibh commodo, tempus ligula non, placerat elit. Sed semper erat felis, ut lobortis libero posuere vitae. Phasellus tristique interdum rhoncus. Phasellus porttitor malesuada ultricies. Suspendisse tempus ipsum ut arcu pellentesque, ut sagittis sapien volutpat. In lectus est, ultricies ut dolor et, molestie commodo dui. Maecenas porta sit amet elit et sodales. Duis elit purus, tincidunt ac eros vitae, gravida rutrum urna. Etiam euismod dolor eget quam pellentesque sagittis. Aenean accumsan eu sem a ultricies. Ut nunc</string>
     <string name="title_activity_modify_request_unused">Modify_request_unused</string>
     <string-array name="condition">
-        <item>BAIK</item>
-        <item>JELEK</item>
+        <item>LAYAK</item>
+        <item>TIDAK LAYAK</item>
         <item>BARU</item>
     </string-array>
     <string-array name="Waste">
@@ -72,12 +72,12 @@
     <string name="title_activity_pick_details">pick_details</string>
     <string name="title_activity_view_article">view_article</string>
     <string name="sampleTitleText">Sample Title</string>
-    <string name="newsfeedText">NEWSFEED</string>
+    <string name="newsfeedText">ARTIKEL</string>
     <string name="title_activity_edit_profile">EditProfile</string>
-    <string name="phoneNumberText">nomer telepon</string>
+    <string name="phoneNumberText">nomor telepon</string>
     <string name="title_activity_view_map">viewMap</string>
     <string name="save">SIMPAN</string>
-    <string name="changeProfilePicture">RUBAH FOTO PROFIL</string>
+    <string name="changeProfilePicture">UBAH FOTO PROFIL</string>
     <string name="pick">AMBIL</string>
     <string name="modify">UBAH</string>
     <string name="delete">HAPUS</string>
@@ -86,9 +86,9 @@
     <string name="size">UKURAN</string>
     <string name="bin">TONG</string>
     <string name="title">JUDUL</string>
-    <string name="condition">CONDISI</string>
-    <string name="details">DETAIL</string>
-    <string name="submit">LANJUTKAN</string>
+    <string name="condition">KONDISI</string>
+    <string name="details">KETERANGAN</string>
+    <string name="submit">KIRIM</string>
     <string name="cancel">BATAL</string>
     <string name="success">SUKSES</string>
     <string name="reportMessage">Laporan Anda Sudah Diterima!</string>
@@ -103,15 +103,17 @@
     <string name="green">HIJAU</string>
     <string name="Throw">BUANG</string>
     <string name="report">LAPORAN</string>
-    <string name="getLocation">AMBIL LOKASI</string>
-    <string name="someonePick">someone picks up your request</string>
-    <string name="youWill">You will be notified when</string>
+    <string name="getLocation">CARI LOKASI</string>
+    <string name="someonePick">jika sampah anda diambil.</string>
+    <string name="youWill">Anda akan mendapatkan notifikasi</string>
     <string name="call">TELEPON</string>
     <string name="picklejar">PICKLE JAR</string>
-    <string name="signin">SIGN IN</string>
+    <string name="signin">MASUK</string>
     <string name="accountFalse">tidak punya akun?</string>
-    <string name="signinGoogle">SIGN IN WITH GOOGLE+</string>
+    <string name="signinGoogle">MASUK DENGAN GOOGLE+</string>
     <string name="available">Tersedia</string>
     <string name="picked">Telah Diambil</string>
     <string name="done">Selesai</string>
+    <string name="throwOrReportText">BUANG\n\nATAU\n\nLAPOR</string>
+    <string name="jarOrNewsText">PICKLE\nJAR\n\nARTIKEL</string>
 </resources>
