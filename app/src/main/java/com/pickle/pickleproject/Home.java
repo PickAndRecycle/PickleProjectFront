@@ -1,11 +1,16 @@
 package com.pickle.pickleproject;
 
 import android.app.Activity;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Gravity;
@@ -53,6 +58,29 @@ public class Home extends Activity   {
         // Register the listener with the Location Manager to receive location updates
         //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0,locationListener);
         */
+
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);
+        mBuilder.setSmallIcon(R.mipmap.logo);
+        mBuilder.setContentTitle("New Notification");
+        mBuilder.setContentText("Successful Notification");
+
+
+        Intent resultIntent = new Intent(this, PickList.class);
+
+        int mId = 001;
+
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+        stackBuilder.addParentStack(PickList.class);
+
+        stackBuilder.addNextIntent(resultIntent);
+
+        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        mBuilder.setContentIntent(resultPendingIntent);
+
+        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        mNotificationManager.notify(mId, mBuilder.build());
 
         Button profileButton = (Button) findViewById(R.id.profileButton);
         Button jarNewsButton = (Button) findViewById(R.id.jarNewsButton);
