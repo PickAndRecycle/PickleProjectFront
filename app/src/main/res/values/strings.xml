@@ -110,4 +110,7 @@
     <string name="signin">SIGN IN</string>
     <string name="accountFalse">don\t have account?</string>
     <string name="signinGoogle">SIGN IN WITH GOOGLE+</string>
+    <string name="available">Available</string>
+    <string name="picked">Picked</string>
+    <string name="done">Done</string>
 </resources>

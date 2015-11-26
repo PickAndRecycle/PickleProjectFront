@@ -111,4 +111,7 @@
     <string name="signin">SIGN IN</string>
     <string name="accountFalse">tidak punya akun?</string>
     <string name="signinGoogle">SIGN IN WITH GOOGLE+</string>
+    <string name="available">Tersedia</string>
+    <string name="picked">Telah Diambil</string>
+    <string name="done">Selesai</string>
 </resources>

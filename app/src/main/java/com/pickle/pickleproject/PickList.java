@@ -17,10 +17,10 @@ public class PickList extends AppCompatActivity {
         setContentView(R.layout.activity_pick_list);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("UNUSED"));
-        tabLayout.addTab(tabLayout.newTab().setText("GENERAL"));
-        tabLayout.addTab(tabLayout.newTab().setText("RECYCLED"));
-        tabLayout.addTab(tabLayout.newTab().setText("GREEN"));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.unused));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.general));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.recycle));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.green));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         ImageButton back = (ImageButton) findViewById(R.id.backHome);

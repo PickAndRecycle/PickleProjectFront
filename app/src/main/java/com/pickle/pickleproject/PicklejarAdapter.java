@@ -73,13 +73,13 @@ public class PicklejarAdapter extends ArrayAdapter<Trash> {
             time.setText(Integer.toString(objects[position].getsize()) + " bin");
         }
         if (objects[position].getStatus() == 1){
-            stat.setText("Picked");
+            stat.setText(R.string.picked);
         }
         else if (objects[position].getStatus() == 0){
-            stat.setText("Available");
+            stat.setText(R.string.available);
         }
         else{
-            stat.setText("Done");
+            stat.setText(R.string.done);
         }
         row.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import java.util.Locale;
+import java.util.concurrent.locks.Condition;
 
 public class ConfigurationActivity extends AppCompatActivity {
 
@@ -47,18 +48,22 @@ public class ConfigurationActivity extends AppCompatActivity {
         language.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //if (config.locale == Locale.ENGLISH){
+                if (config.locale.equals(Locale.ENGLISH)){
                     Locale indonesia = new Locale("in");
                     Locale.setDefault(indonesia);
                     config.locale = indonesia;
                     getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
-               // }
-                /*else {
+                }
+                else {
                     Locale english = new Locale("en");
                     Locale.setDefault(english);
                     config.locale = english;
                     getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
-                }*/
+                }
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
+
 
             }
         });
@@ -77,5 +82,9 @@ public class ConfigurationActivity extends AppCompatActivity {
     private void changeProfile(){
         Intent intent = new Intent(this, ProfileActivity.class);
         startActivity(intent);
+    }
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
     }
 }
