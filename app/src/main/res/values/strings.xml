@@ -91,11 +91,11 @@
     <string name="cancel">CANCEL</string>
     <string name="success">SUCCESS</string>
     <string name="reportMessage">Your report was successfully submitted!</string>
-    <string name="backHome">BACKTOHOME</string>
+    <string name="backHome">BACK TO HOME</string>
     <string name="unusedGoods">UNUSED GOODS</string>
     <string name="recyclableWaste">RECYCLABLE WASTE</string>
     <string name="greenWaste">GREEEN WASTE</string>
-    <string name="generalWaste">GENERALWASTE</string>
+    <string name="generalWaste">GENERAL WASTE</string>
     <string name="unused">UNUSED</string>
     <string name="general">GENERAL</string>
     <string name="recycle">RECYCLE</string>

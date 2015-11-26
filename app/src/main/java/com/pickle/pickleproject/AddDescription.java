@@ -1,6 +1,7 @@
 package com.pickle.pickleproject;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 
 public class AddDescription extends AppCompatActivity {
+    public static final String PREFS_NAME = "PicklePrefs";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,12 +70,17 @@ public class AddDescription extends AppCompatActivity {
     }
 
     private void changeNext(){
+        //Get username from preferences
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        String user = settings.getString("username", "");
+
         EditText descForm;
         descForm = (EditText) findViewById(R.id.editText);
         Intent intent = new Intent(this, ThrowOrReport.class);
         //To pass descForm into the next page
         intent.putExtras(getIntent().getExtras());
         intent.putExtra("description", descForm.getText().toString());
+        intent.putExtra("username", user);
 
         //TOAST FOR DEBUGGING
 
