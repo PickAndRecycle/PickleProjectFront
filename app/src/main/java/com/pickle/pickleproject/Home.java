@@ -3,6 +3,7 @@ package com.pickle.pickleproject;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 
 
@@ -194,6 +196,16 @@ public class Home extends Activity   {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         String path = "sdcard/Pickle/cam_image.jpg";
+
+        if (requestCode == RESULT_OK) {
+            if (resultCode == CAM_REQUEST) {
+                //Bundle extras = data.getExtras();
+                //Bitmap photo = (Bitmap) extras.get("data");
+                Bitmap cameraImage = (Bitmap) data.getExtras().get("data");
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                cameraImage.compress(Bitmap.CompressFormat.JPEG, 65, bos);
+            }
+        }
 
         //Double latitude = 0.0;
         //Double longitude = 0.0;
