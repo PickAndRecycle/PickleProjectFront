@@ -17,14 +17,14 @@
     <string name="usernameText">nama pengguna</string>
     <string name="description">DESKRIPSI</string>
     <string name="next">LANJUT</string>
-    <string name="emailText">email</string>
+    <string name="emailText">e-mail</string>
     <string name="passwordText">sandi</string>
     <string name="passwordConfirmationText">konfirmasi sandi</string>
     <string name="signUpText">DAFTAR</string>
     <string name="joinPickleText">GABUNG PICKLE</string>
-    <string name="phone">Telepon</string>
-    <string name="title_activity_individual_trash_info">individual_trash_info</string>
-    <string name="title_activity_thrower_info">Thrower_Info</string>
+    <string name="phone">telepon</string>
+    <string name="title_activity_individual_trash_info">informasi_sampah_individual</string>
+    <string name="title_activity_thrower_info">informasi_pembuang</string>
     <string name="back">KEMBALI</string>
     <string name="editProfile">UBAH PROFIL</string>
     <string name="title_activity_profile">ProfileActivity</string>
@@ -35,11 +35,11 @@
     <string name="LeaderBoardText">LEADERBOARD</string>
     <string name="EditProfileText">UBAH PROFIL</string>
     <string name="SignOutText">KELUAR</string>
-    <string name="title_activity_throw_category">throwCategory</string>
-    <string name="title_activity_report_success">reportSuccess</string>
-    <string name="title_activity_unused_goods_dialog">unusedGoodsDialog</string>
-    <string name="title_activity_add_description">add_description</string>
-    <string name="title_activity_throw_or_report">Throw_or_Report</string>
+    <string name="title_activity_throw_category">kategoriSampah</string>
+    <string name="title_activity_report_success">laporanSukses</string>
+    <string name="title_activity_unused_goods_dialog">dialogBarangBekas</string>
+    <string name="title_activity_add_description">deskripsi</string>
+    <string name="title_activity_throw_or_report">buangAtauLapor</string>
     <string name="title_activity_login">login</string>
     <string name="LocationText">LOKASI</string>
     <string name="profileText">PROFIL</string>
@@ -53,7 +53,7 @@
     <string name="ClearPickleJarText">HAPUS PICKLEJAR</string>
     <string name="ChangeLanguage">UBAH BAHASA</string>
     <string name="LoremIpsumText">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a metus elit. Fusce congue feugiat risus, sed tempor mi ultrices nec. Ut id tempus mi. Aliquam rhoncus, orci eget convallis fermentum, augue ipsum aliquam tellus, nec semper arcu arcu blandit diam. Aliquam in nibh commodo, tempus ligula non, placerat elit. Sed semper erat felis, ut lobortis libero posuere vitae. Phasellus tristique interdum rhoncus. Phasellus porttitor malesuada ultricies. Suspendisse tempus ipsum ut arcu pellentesque, ut sagittis sapien volutpat. In lectus est, ultricies ut dolor et, molestie commodo dui. Maecenas porta sit amet elit et sodales. Duis elit purus, tincidunt ac eros vitae, gravida rutrum urna. Etiam euismod dolor eget quam pellentesque sagittis. Aenean accumsan eu sem a ultricies. Ut nunc</string>
-    <string name="title_activity_modify_request_unused">Modify_request_unused</string>
+    <string name="title_activity_modify_request_unused">ubah_barang_bekas</string>
     <string-array name="condition">
         <item>LAYAK</item>
         <item>TIDAK LAYAK</item>
@@ -69,13 +69,13 @@
         sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         </string>
-    <string name="title_activity_pick_details">pick_details</string>
-    <string name="title_activity_view_article">view_article</string>
-    <string name="sampleTitleText">Sample Title</string>
+    <string name="title_activity_pick_details">keterangan_ambil_sampah</string>
+    <string name="title_activity_view_article">isi_artikel</string>
+    <string name="sampleTitleText">Contoh Judul</string>
     <string name="newsfeedText">ARTIKEL</string>
-    <string name="title_activity_edit_profile">EditProfile</string>
+    <string name="title_activity_edit_profile">UbahProfil</string>
     <string name="phoneNumberText">nomor telepon</string>
-    <string name="title_activity_view_map">viewMap</string>
+    <string name="title_activity_view_map">tampilkanPeta</string>
     <string name="save">SIMPAN</string>
     <string name="changeProfilePicture">UBAH FOTO PROFIL</string>
     <string name="pick">AMBIL</string>
