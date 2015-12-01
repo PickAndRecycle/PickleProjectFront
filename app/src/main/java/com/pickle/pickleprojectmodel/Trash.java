@@ -17,7 +17,7 @@ public class Trash implements Serializable {
     public String description, photo_url;
     public String title;
     public String photo_data;
-    public int latitude,longitude;
+    public String latitude,longitude;
     public int timestamp;
     public boolean report;
     public int distance;
@@ -27,7 +27,7 @@ public class Trash implements Serializable {
     public String username;
     public String thumbnailUrl;
 
-    public Trash(String id, String description, String title, int status, String photo_data, int latitude, int longitude,
+    public Trash(String id, String description, String title, int status, String photo_data, String latitude, String longitude,
                  int timestamp, boolean report, int distance, int size, TrashCategories categories, UnusedCondition trash_condition,
                  String username, String thumbnailUrl){
         this.id = id;
@@ -91,19 +91,19 @@ public class Trash implements Serializable {
         this.photo_data = newphoto;
     }
 
-    public int getLatitude() {
+    public String getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(int latitude) {
+    public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
 
-    public int getLongitude() {
+    public String getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(int longitude) {
+    public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
 
@@ -177,7 +177,7 @@ public class Trash implements Serializable {
     public void setThumbnailUrl(String thumbnailUrl) {
         this.thumbnailUrl = thumbnailUrl;
     }
-
+/*
     public int CalculateDist(Double lat, Double lon){
         double theta = this.longitude - lon;
         double dist = Math.sin(deg2rad(this.latitude)) * Math.sin(deg2rad(lat)) +
@@ -188,6 +188,7 @@ public class Trash implements Serializable {
         dist = dist * 1.609344;
         return (int) dist;
     }
+    */
     private static double deg2rad(double deg) {
         return (deg * Math.PI / 180.0);
     }
