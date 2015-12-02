@@ -18,6 +18,8 @@ import com.pickle.pickleprojectmodel.Trash;
 import com.pickle.pickleprojectmodel.TrashCategories;
 import com.pickle.pickleproject.CircleImageView;
 
+import java.util.Arrays;
+
 /**
  * Created by Yanuar Wicaksana on 10/22/15.
  */
@@ -84,6 +86,7 @@ public class ListAdapter extends ArrayAdapter<Trash> {
         int total = objects[position].CalculateDist(latitude, longitude);
         distance.setText(Integer.toString(total));
         objects[position].setDistance(total);
+        Arrays.sort(objects);
         if(objects[position].getCategories().equals(TrashCategories.UNUSED)){
             //Log.d("position", Integer.toString(position));
             //Log.d("id", Integer.toString(objects[position].id));

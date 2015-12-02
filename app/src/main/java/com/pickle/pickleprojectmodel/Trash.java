@@ -11,7 +11,7 @@ import java.sql.Time;
 import java.util.*;
 
 
-public class Trash implements Serializable {
+public class Trash implements Serializable,Comparable<Trash> {
     public String id;
     public int status;
     public String description, photo_url;
@@ -197,6 +197,7 @@ public class Trash implements Serializable {
         return (rad * 180 / Math.PI);
     }
 
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("Trash{");
@@ -214,5 +215,10 @@ public class Trash implements Serializable {
         sb.append(", size='").append(size);
         sb.append(", thumbnail url='").append(thumbnailUrl).append('\'');
         return sb.toString();
+    }
+
+    @Override
+    public int compareTo(Trash another) {
+        return this.getDistance() - another.getDistance();
     }
 }
