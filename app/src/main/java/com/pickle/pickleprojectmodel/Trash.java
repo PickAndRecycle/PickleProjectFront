@@ -25,11 +25,11 @@ public class Trash implements Serializable,Comparable<Trash> {
     public TrashCategories categories;
     public UnusedCondition trash_condition;
     public String username;
-    public String thumbnailUrl;
+    public String pickerUsername;
 
     public Trash(String id, String description, String title, int status, String photo_data, String latitude, String longitude,
-                 int timestamp, boolean report, int distance, int size, TrashCategories categories, UnusedCondition trash_condition,
-                 String username, String thumbnailUrl){
+                 int timestamp, boolean report, int size, TrashCategories categories, UnusedCondition trash_condition,
+                 String username, String pickerUsername){
         this.id = id;
         this.description = description;
         this.title = title;
@@ -39,13 +39,13 @@ public class Trash implements Serializable,Comparable<Trash> {
         this.longitude = longitude;
         this.timestamp = timestamp;
         this.report = report;
-        this.distance = distance;
+        this.distance = 0;
         this.size = size;
         this.categories = categories;
         this.trash_condition = trash_condition;
         this.photo_url = "";
         this.username = username;
-        this.thumbnailUrl = thumbnailUrl;
+        this.pickerUsername = pickerUsername;
     }
     public Trash(){
 
@@ -170,12 +170,12 @@ public class Trash implements Serializable,Comparable<Trash> {
         this.username = username;
     }
 
-    public String getThumbnailUrl() {
-        return thumbnailUrl;
+    public void setPickerUsername(String pickerUsername) {
+        this.pickerUsername = pickerUsername;
     }
 
-    public void setThumbnailUrl(String thumbnailUrl) {
-        this.thumbnailUrl = thumbnailUrl;
+    public String getPickerUsername() {
+        return pickerUsername;
     }
 
     public int CalculateDist(double lat, double lon){
@@ -213,7 +213,7 @@ public class Trash implements Serializable,Comparable<Trash> {
         sb.append(", title='").append(title).append('\'');
         sb.append(", trash_condition='").append(trash_condition).append('\'');
         sb.append(", size='").append(size);
-        sb.append(", thumbnail url='").append(thumbnailUrl).append('\'');
+        sb.append(", picker username='").append(pickerUsername);
         return sb.toString();
     }
 

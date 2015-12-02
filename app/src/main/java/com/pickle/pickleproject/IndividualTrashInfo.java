@@ -1,6 +1,7 @@
 package com.pickle.pickleproject;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -35,6 +36,7 @@ import java.util.Map;
 public class IndividualTrashInfo extends AppCompatActivity {
     private RequestQueue mRequestQueue, mQueue;
     private ImageLoader mImageLoader;
+    public static final String PREFS_NAME = "PicklePrefs";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,9 +70,15 @@ public class IndividualTrashInfo extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 trash.setStatus(1);
+                SharedPreferences preferences = getSharedPreferences(PREFS_NAME, 0);
+                String username = preferences.getString("username", "");
+                Log.d("username",username);
+                trash.setPickerUsername(username);
+
                 mQueue = CustomVolleyRequestQueue.getInstance(getApplicationContext()).getRequestQueue();
 
                 String url = "http://104.155.237.238:8080/trash/" + secureID;
+                //String url = "http://192.168.0.107:8080/trash/" + secureID;
                 GsonBuilder gsonBuilder = new GsonBuilder();
 
                 gsonBuilder.registerTypeAdapter(Trash.class, new TrashSerializer());
@@ -126,7 +134,7 @@ public class IndividualTrashInfo extends AppCompatActivity {
             object.addProperty("username",src.getUsername());
             object.addProperty("status",src.getStatus());
             object.addProperty("description",src.getDesc());
-            object.addProperty("distance",src.getDistance());
+            object.addProperty("pickerUsername",src.getPickerUsername());
             object.addProperty("photo_url",src.getPhoto_url());
             object.addProperty("latitude",src.getLatitude());
             object.addProperty("longitude",src.getLongitude());
