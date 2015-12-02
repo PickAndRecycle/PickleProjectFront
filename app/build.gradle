@@ -9,6 +9,7 @@ buildscript {
 }
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
+apply plugin: 'com.google.gms.google-services'
 
 repositories {
     maven { url 'https://maven.fabric.io/public' }
@@ -57,4 +58,5 @@ dependencies {
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'com.mcxiaoke.volley:library:1.+'
     compile 'de.hdodenhof:circleimageview:2.0.0'
+    compile "com.google.android.gms:play-services:8.3.0"
 }
