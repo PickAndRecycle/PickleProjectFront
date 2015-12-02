@@ -177,18 +177,18 @@ public class Trash implements Serializable {
     public void setThumbnailUrl(String thumbnailUrl) {
         this.thumbnailUrl = thumbnailUrl;
     }
-/*
-    public int CalculateDist(Double lat, Double lon){
-        double theta = this.longitude - lon;
-        double dist = Math.sin(deg2rad(this.latitude)) * Math.sin(deg2rad(lat)) +
-                Math.cos(deg2rad(this.latitude)) * Math.cos(deg2rad(lat)) * Math.cos(deg2rad(theta));
+
+    public int CalculateDist(double lat, double lon){
+        double theta = Double.parseDouble(this.longitude) - lon;
+        double dist = Math.sin(deg2rad(Double.valueOf(this.latitude))) * Math.sin(deg2rad(lat)) +
+                Math.cos(deg2rad(Double.valueOf(this.latitude))) * Math.cos(deg2rad(lat)) * Math.cos(deg2rad(theta));
         dist = Math.acos(dist);
         dist = rad2deg(dist);
         dist = dist * 60 * 1.1515;
         dist = dist * 1.609344;
         return (int) dist;
     }
-    */
+
     private static double deg2rad(double deg) {
         return (deg * Math.PI / 180.0);
     }

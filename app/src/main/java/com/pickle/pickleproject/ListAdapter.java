@@ -28,6 +28,7 @@ public class ListAdapter extends ArrayAdapter<Trash> {
     private Trash[] objects;
     private RequestQueue mRequestQueue;
     private ImageLoader mImageLoader;
+    GPSTracker gps;
 
     public ListAdapter(Context context, int resource,Trash[] objects) {
 
@@ -70,7 +71,19 @@ public class ListAdapter extends ArrayAdapter<Trash> {
         CircleImageView thumbnail = (CircleImageView) row.findViewById(R.id.thumbnail);
         thumbnail.setImageUrl(objects[position].getPhoto_url(), mImageLoader);
 
-        distance.setText(Integer.toString(objects[position].distance));
+        gps = new GPSTracker(context);
+        if(!gps.canGetLocation()) {
+            gps.showSettingsAlert();
+        }
+        double latitude = gps.getLatitude();
+        double longitude = gps.getLongitude();
+        if (objects[position].getLongitude().equals("")){
+            objects[position].setLongitude("0");
+            objects[position].setLatitude("0");
+        }
+        int total = objects[position].CalculateDist(latitude, longitude);
+        distance.setText(Integer.toString(total));
+        objects[position].setDistance(total);
         if(objects[position].getCategories().equals(TrashCategories.UNUSED)){
             //Log.d("position", Integer.toString(position));
             //Log.d("id", Integer.toString(objects[position].id));
