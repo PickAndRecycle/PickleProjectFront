@@ -91,8 +91,8 @@ public class OtherTrashDialog extends AppCompatActivity {
         final String url = "http://104.155.237.238:8080/trash/";
 
         Trash trash = new Trash();
-        //trash.setLatitude((int) intent.getDoubleExtra("latitude",0.0) );
-        //trash.setLongitude((int) intent.getDoubleExtra("longitude",0.0));
+        trash.setLatitude(intent.getStringExtra("latitude") );
+        trash.setLongitude(intent.getStringExtra("longitude"));
         trash.setUsername(intent.getStringExtra("username"));
         trash.setDesc(intent.getStringExtra("description"));
         Log.d("description", trash.getDesc());

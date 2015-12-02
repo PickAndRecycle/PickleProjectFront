@@ -11,13 +11,13 @@ import java.sql.Time;
 import java.util.*;
 
 
-public class Trash implements Serializable {
+public class Trash implements Serializable,Comparable<Trash> {
     public String id;
     public int status;
     public String description, photo_url;
     public String title;
     public String photo_data;
-    public int latitude,longitude;
+    public String latitude,longitude;
     public int timestamp;
     public boolean report;
     public int distance;
@@ -27,7 +27,7 @@ public class Trash implements Serializable {
     public String username;
     public String thumbnailUrl;
 
-    public Trash(String id, String description, String title, int status, String photo_data, int latitude, int longitude,
+    public Trash(String id, String description, String title, int status, String photo_data, String latitude, String longitude,
                  int timestamp, boolean report, int distance, int size, TrashCategories categories, UnusedCondition trash_condition,
                  String username, String thumbnailUrl){
         this.id = id;
@@ -91,19 +91,19 @@ public class Trash implements Serializable {
         this.photo_data = newphoto;
     }
 
-    public int getLatitude() {
+    public String getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(int latitude) {
+    public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
 
-    public int getLongitude() {
+    public String getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(int longitude) {
+    public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
 
@@ -178,16 +178,17 @@ public class Trash implements Serializable {
         this.thumbnailUrl = thumbnailUrl;
     }
 
-    public int CalculateDist(Double lat, Double lon){
-        double theta = this.longitude - lon;
-        double dist = Math.sin(deg2rad(this.latitude)) * Math.sin(deg2rad(lat)) +
-                Math.cos(deg2rad(this.latitude)) * Math.cos(deg2rad(lat)) * Math.cos(deg2rad(theta));
+    public int CalculateDist(double lat, double lon){
+        double theta = Double.parseDouble(this.longitude) - lon;
+        double dist = Math.sin(deg2rad(Double.valueOf(this.latitude))) * Math.sin(deg2rad(lat)) +
+                Math.cos(deg2rad(Double.valueOf(this.latitude))) * Math.cos(deg2rad(lat)) * Math.cos(deg2rad(theta));
         dist = Math.acos(dist);
         dist = rad2deg(dist);
         dist = dist * 60 * 1.1515;
         dist = dist * 1.609344;
         return (int) dist;
     }
+
     private static double deg2rad(double deg) {
         return (deg * Math.PI / 180.0);
     }
@@ -195,6 +196,7 @@ public class Trash implements Serializable {
     private static double rad2deg(double rad) {
         return (rad * 180 / Math.PI);
     }
+
 
     @Override
     public String toString() {
@@ -213,5 +215,10 @@ public class Trash implements Serializable {
         sb.append(", size='").append(size);
         sb.append(", thumbnail url='").append(thumbnailUrl).append('\'');
         return sb.toString();
+    }
+
+    @Override
+    public int compareTo(Trash another) {
+        return this.getDistance() - another.getDistance();
     }
 }

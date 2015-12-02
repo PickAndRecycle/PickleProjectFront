@@ -144,7 +144,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".viewMap"
+            android:name=".ViewMap"
             android:label="@string/title_activity_view_map" >
         </activity>
         <receiver

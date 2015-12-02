@@ -156,10 +156,12 @@ public class Home extends Activity   {
             Intent intent = new Intent(this, AddDescription.class);
             //GET THE CURRENT LATITUDE AND LONGITUDE
             double latitude = gps.getLatitude();
+            String latString = String.valueOf(latitude);
             double longitude = gps.getLongitude();
+            String longString = String.valueOf(longitude);
             //PUT LATITUDE AND LONGITUDE INTO THE NEXT PAGE
-            intent.putExtra("latitude", latitude);
-            intent.putExtra("longitude", longitude);
+            intent.putExtra("latitude", latString);
+            intent.putExtra("longitude", longString);
 
             //TOAST FOR DEBUGGING
             Bundle parseInfo = intent.getExtras();
@@ -181,10 +183,12 @@ public class Home extends Activity   {
             Intent intent = new Intent(this, AddDescription.class);
             //GET THE CURRENT LATITUDE AND LONGITUDE
             double latitude = gps.getLatitude();
+            String latString = String.valueOf(latitude);
             double longitude = gps.getLongitude();
+            String longString = String.valueOf(longitude);
             //PUT LATITUDE AND LONGITUDE INTO THE NEXT PAGE
-            intent.putExtra("latitude", latitude);
-            intent.putExtra("longitude", longitude);
+            intent.putExtra("latitude", latString);
+            intent.putExtra("longitude", longString);
             //TOAST FOR DEBUGGING
             Bundle parseInfo = intent.getExtras();
             Toast boom = new Toast(getApplicationContext());

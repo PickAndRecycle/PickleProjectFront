@@ -60,7 +60,9 @@ public class ThrowerInfo extends AppCompatActivity implements Response.ErrorList
     }
 
     private void changeMap() {
-        Intent intent = new Intent(this, viewMap.class);
+        Intent intent = new Intent(this, ViewMap.class);
+        final Trash trash = (Trash) getIntent().getSerializableExtra("object");
+        intent.putExtra("object", trash);
         startActivity(intent);
     }
 

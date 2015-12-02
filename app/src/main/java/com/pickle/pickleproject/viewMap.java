@@ -9,8 +9,9 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.pickle.pickleprojectmodel.Trash;
 
-public class viewMap extends FragmentActivity implements OnMapReadyCallback {
+public class ViewMap extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
 
@@ -24,7 +25,6 @@ public class viewMap extends FragmentActivity implements OnMapReadyCallback {
         mapFragment.getMapAsync(this);
     }
 
-
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -37,10 +37,14 @@ public class viewMap extends FragmentActivity implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        final Trash trash = (Trash) getIntent().getSerializableExtra("object");
+        Double latitude = Double.parseDouble(String.valueOf(trash.getLatitude()));
+        Double longitude = Double.parseDouble(String.valueOf(trash.getLongitude()));
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        LatLng location = new LatLng(latitude, longitude);
+        mMap.addMarker(new MarkerOptions().position(location).title("Trash located here!"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
     }
+
+
 }
