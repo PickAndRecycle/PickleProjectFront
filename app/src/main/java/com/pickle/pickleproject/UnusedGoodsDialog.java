@@ -2,6 +2,7 @@ package com.pickle.pickleproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
@@ -113,7 +114,10 @@ public class UnusedGoodsDialog extends AppCompatActivity {
         final MultipartRequest multipartRequest = new MultipartRequest(url,new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("Error:", error.getMessage());
+                //Log.d("Error:", error.getMessage());
+                Toast boom = new Toast(getApplicationContext());
+                boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
+                boom.makeText(UnusedGoodsDialog.this, "Trash posting success", boom.LENGTH_SHORT).show();
             }
         },new Response.Listener<String>() {
             @Override

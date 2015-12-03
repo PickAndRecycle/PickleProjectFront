@@ -118,7 +118,10 @@ public class OtherTrashDialog extends AppCompatActivity {
         final MultipartRequest multipartRequest = new MultipartRequest(url,new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("Error:", error.getMessage());
+                //Log.d("Error:", error.getMessage());
+                Toast boom = new Toast(getApplicationContext());
+                boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
+                boom.makeText(OtherTrashDialog.this, "Trash posting success", boom.LENGTH_SHORT).show();
             }
         },new Response.Listener<String>() {
             @Override
