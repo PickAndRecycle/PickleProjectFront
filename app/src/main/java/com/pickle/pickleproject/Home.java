@@ -156,10 +156,12 @@ public class Home extends Activity   {
             Intent intent = new Intent(this, AddDescription.class);
             //GET THE CURRENT LATITUDE AND LONGITUDE
             double latitude = gps.getLatitude();
+            String latString = String.valueOf(latitude);
             double longitude = gps.getLongitude();
+            String longString = String.valueOf(longitude);
             //PUT LATITUDE AND LONGITUDE INTO THE NEXT PAGE
-            intent.putExtra("latitude", latitude);
-            intent.putExtra("longitude", longitude);
+            intent.putExtra("latitude", latString);
+            intent.putExtra("longitude", longString);
 
             //TOAST FOR DEBUGGING
             Bundle parseInfo = intent.getExtras();
@@ -177,6 +179,9 @@ public class Home extends Activity   {
             // GPS or Network is not enabled
             // Ask user to enable GPS/network in settings
             gps.showSettingsAlert();
+            Toast boom = new Toast(getApplicationContext());
+            boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
+            boom.makeText(Home.this, "CANNOT GET LOCATION", boom.LENGTH_SHORT).show();
             /*
             //If GPS can get location
             Intent intent = new Intent(this, AddDescription.class);
