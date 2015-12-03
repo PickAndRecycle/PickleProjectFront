@@ -60,7 +60,7 @@ public class Home extends Activity   {
         // Register the listener with the Location Manager to receive location updates
         //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0,locationListener);
         */
-        /*
+
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);
         mBuilder.setSmallIcon(R.mipmap.logo);
         mBuilder.setContentTitle("New Notification");
@@ -83,7 +83,7 @@ public class Home extends Activity   {
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         mNotificationManager.notify(mId, mBuilder.build());
-*/
+
         Button profileButton = (Button) findViewById(R.id.profileButton);
         Button jarNewsButton = (Button) findViewById(R.id.jarNewsButton);
         Button pickButton = (Button) findViewById(R.id.pickButton);
@@ -156,12 +156,10 @@ public class Home extends Activity   {
             Intent intent = new Intent(this, AddDescription.class);
             //GET THE CURRENT LATITUDE AND LONGITUDE
             double latitude = gps.getLatitude();
-            String latString = String.valueOf(latitude);
             double longitude = gps.getLongitude();
-            String longString = String.valueOf(longitude);
             //PUT LATITUDE AND LONGITUDE INTO THE NEXT PAGE
-            intent.putExtra("latitude", latString);
-            intent.putExtra("longitude", longString);
+            intent.putExtra("latitude", latitude);
+            intent.putExtra("longitude", longitude);
 
             //TOAST FOR DEBUGGING
             Bundle parseInfo = intent.getExtras();
@@ -179,16 +177,15 @@ public class Home extends Activity   {
             // GPS or Network is not enabled
             // Ask user to enable GPS/network in settings
             gps.showSettingsAlert();
+            /*
             //If GPS can get location
             Intent intent = new Intent(this, AddDescription.class);
             //GET THE CURRENT LATITUDE AND LONGITUDE
             double latitude = gps.getLatitude();
-            String latString = String.valueOf(latitude);
             double longitude = gps.getLongitude();
-            String longString = String.valueOf(longitude);
             //PUT LATITUDE AND LONGITUDE INTO THE NEXT PAGE
-            intent.putExtra("latitude", latString);
-            intent.putExtra("longitude", longString);
+            intent.putExtra("latitude", latitude);
+            intent.putExtra("longitude", longitude);
             //TOAST FOR DEBUGGING
             Bundle parseInfo = intent.getExtras();
             Toast boom = new Toast(getApplicationContext());
@@ -196,6 +193,7 @@ public class Home extends Activity   {
             boom.makeText(Home.this, parseInfo.toString(), boom.LENGTH_SHORT).show();
 
             startActivity(intent);
+            */
         }
 
     }
