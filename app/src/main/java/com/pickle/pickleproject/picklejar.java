@@ -113,67 +113,46 @@ public class Picklejar extends AppCompatActivity implements Response.ErrorListen
                 boolean bool = Boolean.parseBoolean(finalObject.getString("report"));
                 if(bool == false) {
                     if (finalObject.getString("username").equals(username)) {
+                        trashObj = gson.fromJson(String.valueOf(finalObject), Trash.class);
+                        if (finalObject.getString("categories").equals("Unused Goods")) {
+                            trashObj.setCategories(TrashCategories.UNUSED);
+                        } else if (finalObject.getString("categories").equals("General Waste")) {
+                            trashObj.setCategories(TrashCategories.GENERAL);
+                        } else if (finalObject.getString("categories").equals("Recycleable Waste")) {
+                            trashObj.setCategories(TrashCategories.RECYCLED);
+                        } else if (finalObject.getString("categories").equals("Green Waste")) {
+                            trashObj.setCategories(TrashCategories.GREEN);
+                        }
                         if (Integer.parseInt(finalObject.getString("status")) == 0) {
-                            trashObj = gson.fromJson(String.valueOf(finalObject), Trash.class);
-                            if (finalObject.getString("categories").equals("Unused Goods")) {
-                                trashObj.setCategories(TrashCategories.UNUSED);
-                            }
-                            else if (finalObject.getString("categories").equals("General Waste")) {
-                                trashObj.setCategories(TrashCategories.GENERAL);
-                            }
-                            else if (finalObject.getString("categories").equals("Recycleable Waste")) {
-                                trashObj.setCategories(TrashCategories.RECYCLED);
-                            }
-                            else if (finalObject.getString("categories").equals("Green Waste")){
-                                trashObj.setCategories(TrashCategories.GREEN);
-                            }
                             Trashlist.add(0, trashObj);
                         }
                         else if(Integer.parseInt(finalObject.getString("status")) == 1){
-                            for (int j=0; j<Trashlist.size(); j++){
-                                int status = Trashlist.get(j).getStatus();
-                                if (status == 1|| status == 2){
-                                    trashObj = gson.fromJson(String.valueOf(finalObject), Trash.class);
-                                    if (finalObject.getString("categories").equals("Unused Goods")) {
-                                        trashObj.setCategories(TrashCategories.UNUSED);
+                            if (Trashlist.size() == 0){
+                                Trashlist.add(trashObj);
+                            }
+                            else {
+                                for (int j = 0; j < Trashlist.size(); j++) {
+                                    int status = Trashlist.get(j).getStatus();
+                                    if (status == 1 || status == 2) {
+                                        if (j > 1) {
+                                            Trashlist.add(j - 1, trashObj);
+                                        } else {
+                                            Trashlist.add(0, trashObj);
+                                        }
+                                        break;
                                     }
-                                    else if (finalObject.getString("categories").equals("General Waste")) {
-                                        trashObj.setCategories(TrashCategories.GENERAL);
-                                    }
-                                    else if (finalObject.getString("categories").equals("Recycleable Waste")) {
-                                        trashObj.setCategories(TrashCategories.RECYCLED);
-                                    }
-                                    else if (finalObject.getString("categories").equals("Green Waste")){
-                                        trashObj.setCategories(TrashCategories.GREEN);
-                                    }
-                                    if (j>1){
-                                        Trashlist.add(j-1 ,trashObj);}
-                                    else{Trashlist.add(0,trashObj);}
-                                    break;
                                 }
                             }
 
                         }
                         else {
-                            trashObj = gson.fromJson(String.valueOf(finalObject), Trash.class);
-                            if (finalObject.getString("categories").equals("Unused Goods")) {
-                                trashObj.setCategories(TrashCategories.UNUSED);
-                            }
-                            else if (finalObject.getString("categories").equals("General Waste")) {
-                                trashObj.setCategories(TrashCategories.GENERAL);
-                            }
-                            else if (finalObject.getString("categories").equals("Recycleable Waste")) {
-                                trashObj.setCategories(TrashCategories.RECYCLED);
-                            }
-                            else if (finalObject.getString("categories").equals("Green Waste")){
-                                trashObj.setCategories(TrashCategories.GREEN);
-                            }
                             Trashlist.add(trashObj);
                         }
                     }
                 }
 
                 final Trash[] trashArray = Trashlist.toArray(new Trash[0]);
+                Log.d("trashArray",Trashlist.toString());
                 final PicklejarAdapter myAdapter=new PicklejarAdapter(Picklejar.this, R.layout.rowpicklejar, trashArray);
                 final ListView myList = (ListView)
                         findViewById(R.id.ListPickleJar);
