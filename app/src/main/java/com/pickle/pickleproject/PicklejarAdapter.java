@@ -51,7 +51,10 @@ public class PicklejarAdapter extends ArrayAdapter<Trash> {
     public View getView(final int position,
                         View convertView,
                         ViewGroup parent) {
-        LayoutInflater inflater= ((Activity) context).getLayoutInflater();
+
+        LayoutInflater inflater = (LayoutInflater) context
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
         View row=inflater.inflate(resource, parent, false);
         TextView title= (TextView) row.findViewById(R.id.Title);
         TextView desc=(TextView) row.findViewById(R.id.description);
@@ -81,15 +84,6 @@ public class PicklejarAdapter extends ArrayAdapter<Trash> {
         else{
             stat.setText(R.string.done);
         }
-        row.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //row.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
-                Intent intent = new Intent(context, ModifyConfirmation.class);
-                intent.putExtra("object", objects[position]);
-                context.startActivity(intent);
-            }
-        });
 
         return row;
     }

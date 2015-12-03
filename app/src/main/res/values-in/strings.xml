@@ -116,4 +116,6 @@
     <string name="done">Selesai</string>
     <string name="throwOrReportText">BUANG\n\nATAU\n\nLAPOR</string>
     <string name="jarOrNewsText">PICKLE\nJAR\n\nARTIKEL</string>
+    <string name="Picker">PICKER</string>
+    <string name="Thrower">THROWER</string>
 </resources>

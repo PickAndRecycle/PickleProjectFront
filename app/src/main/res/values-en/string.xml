@@ -115,4 +115,6 @@
     <string name="done">Done</string>
     <string name="throwOrReportText">THROW\n\nOR\n\nREPORT</string>
     <string name="jarOrNewsText">PICKLE\nJAR\n\nNEWS\nFEED</string>
+    <string name="Picker">PICKER</string>
+    <string name="Thrower">THROWER</string>
 </resources>

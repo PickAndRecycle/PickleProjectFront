@@ -2,6 +2,8 @@ package com.pickle.pickleproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -33,7 +35,94 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Picklejar extends AppCompatActivity implements Response.ErrorListener, Response.Listener<JSONObject> {
+public class Picklejar extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_picklejar);
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabPicklejar);
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.Thrower));
+
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.Picker));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        final ViewPager viewPager = (ViewPager) findViewById(R.id.pagerPicklejar);
+        final PagerAdapterPicklejar adapter = new PagerAdapterPicklejar
+                (getSupportFragmentManager(), tabLayout.getTabCount());
+        viewPager.setAdapter(adapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+        ImageButton homeButton = (ImageButton) findViewById(R.id.homeButton);
+        ImageButton newsfeedButton = (ImageButton) findViewById(R.id.newsfeedButton);
+        homeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeHome();
+            }
+        });
+        newsfeedButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeNewsfeed();
+            }
+        });
+
+    }
+
+    private void changeNewsfeed() {
+        Intent intent = new Intent(this, Newsfeed.class);
+        startActivity(intent);
+        this.overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
+    }
+
+    private void changeHome() {
+        Intent intent = new Intent(this, Home.class);
+        startActivity(intent);
+        this.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*public class Picklejar extends AppCompatActivity implements Response.ErrorListener, Response.Listener<JSONObject> {
     private GestureDetector gestureDetector;
     private RequestQueue mQueue;
     public static final String PREFS_NAME = "PicklePrefs";
@@ -249,4 +338,4 @@ public class Picklejar extends AppCompatActivity implements Response.ErrorListen
             return false;
         }
     }
-}
+}*/

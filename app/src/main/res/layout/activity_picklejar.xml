@@ -57,12 +57,21 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
-        <ListView
+        <android.support.design.widget.TabLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tabPicklejar"
+            android:layout_alignParentTop="true"
+            android:background="#3E4651"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            />
+
+        <android.support.v4.view.ViewPager
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/ListPickleJar"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentEnd="true" />
+            android:id="@+id/pagerPicklejar"
+            android:layout_below="@+id/tabPicklejar"
+            android:layout_centerHorizontal="true" />
     </RelativeLayout>
 
 </RelativeLayout>
