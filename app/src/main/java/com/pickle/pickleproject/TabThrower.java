@@ -121,10 +121,16 @@ public class TabThrower extends Fragment implements Response.ErrorListener, Resp
             myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Intent intent = new Intent(getActivity().getApplicationContext(), IndividualTrashInfo.class);
-                    Trash trash =  myAdapter.getItem(position);
-                    intent.putExtra("object", trash);
-                    startActivity(intent);
+                    if(trashArray[position].getStatus()!=2){
+                        Intent intent = new Intent(getActivity().getApplicationContext(), ModifyConfirmation.class);
+                        Trash trash =  myAdapter.getItem(position);
+                        intent.putExtra("object", trash);
+                        startActivity(intent);
+
+                    }
+                    else{
+
+                    }
                     //intent putExtra("object", listView.getChildAt(position));
                 }
             });

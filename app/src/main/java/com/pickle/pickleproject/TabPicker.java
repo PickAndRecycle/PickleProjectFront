@@ -78,7 +78,7 @@ public class TabPicker extends Fragment implements Response.ErrorListener, Respo
                 Gson gson = gsonBuilder.create();
                 boolean bool = Boolean.parseBoolean(finalObject.getString("report"));
                 if (bool == false) {
-                    if (finalObject.getString("pickerusername").equals(username)) {
+                    if (finalObject.getString("pickerUsername").equals(username)) {
                         trashObj = gson.fromJson(String.valueOf(finalObject), Trash.class);
                         if (finalObject.getString("categories").equals("Unused Goods")) {
                             trashObj.setCategories(TrashCategories.UNUSED);
@@ -121,7 +121,7 @@ public class TabPicker extends Fragment implements Response.ErrorListener, Respo
             myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Intent intent = new Intent(getActivity().getApplicationContext(), IndividualTrashInfo.class);
+                    Intent intent = new Intent(getActivity().getApplicationContext(), ThrowerInfo.class);
                     Trash trash =  myAdapter.getItem(position);
                     intent.putExtra("object", trash);
                     startActivity(intent);
