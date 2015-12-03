@@ -35,7 +35,7 @@ import java.lang.reflect.Type;
 import java.net.URL;
 
 public class ModifyConfirmation extends AppCompatActivity {
-    private RequestQueue mRequestQueue;
+    private RequestQueue mRequestQueue,aQueue;
     private ImageLoader mImageLoader;
 
     @Override
@@ -44,12 +44,14 @@ public class ModifyConfirmation extends AppCompatActivity {
         setContentView(R.layout.activity_modify_confirmation);
 
         final Trash trash = (Trash) getIntent().getSerializableExtra("object");
-        Button modifyButton = (Button) findViewById(R.id.modify);
+        final Button modifyButton = (Button) findViewById(R.id.modify);
         Button backButton = (Button) findViewById(R.id.backToModify);
         if (trash == null) {
             Toast.makeText(getApplicationContext(), "Null Object", Toast.LENGTH_SHORT).show();
         }
-
+        if (trash.getStatus() ==1){
+            modifyButton.setText(R.string.done);
+        }
         final String secureID = trash.getId();
         MontserratTextView description = (MontserratTextView) findViewById(R.id.descModify);
         description.setText(trash.getDesc());
@@ -105,7 +107,10 @@ public class ModifyConfirmation extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     try {
-                        if (trash.getCategories().toString().equals("Unused Goods")) {
+                        if (trash.getStatus() ==1){
+                            changeStatus(trash);
+                        }
+                        else if (trash.getCategories().toString().equals("Unused Goods")) {
                             ModifyUnused(trash);
                         } else {
                             ModifyOther(trash);
@@ -124,6 +129,40 @@ public class ModifyConfirmation extends AppCompatActivity {
                     goBack();
                 }
             });
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+    private void changeStatus(Trash trash) {
+        trash.setStatus(2);
+        GsonBuilder gsonBuilder = new GsonBuilder();
+
+        aQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext()).getRequestQueue();
+        final String url = "http://104.155.237.238:8080/trash/" + trash.getId();
+
+        gsonBuilder.registerTypeAdapter(Trash.class, new TrashSerializer());
+        Gson gson = gsonBuilder.create();
+        String json = gson.toJson(trash);
+        try {
+            final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.PUT, url, new JSONObject(json), new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+                        Log.d("result", response.getString("result"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.d("Error:", error.getMessage());
+                }
+            });
+            jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+            aQueue.add(jsonRequest);
+            goBack();
 
         } catch (JSONException e) {
             e.printStackTrace();

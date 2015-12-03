@@ -94,14 +94,17 @@ public class TabThrower extends Fragment implements Response.ErrorListener, Resp
                         } else if (Integer.parseInt(finalObject.getString("status")) == 1) {
                             if (Trashlist.size() == 0) {
                                 Trashlist.add(trashObj);
-                            } else {
+                            }
+                            else if(Trashlist.get(Trashlist.size()-1).getStatus() == 0){
+                                Trashlist.add(0, trashObj);
+                            }
+
+                            else {
                                 for (int j = 0; j < Trashlist.size(); j++) {
                                     int status = Trashlist.get(j).getStatus();
                                     if (status == 1 || status == 2) {
                                         if (j > 1) {
                                             Trashlist.add(j - 1, trashObj);
-                                        } else {
-                                            Trashlist.add(0, trashObj);
                                         }
                                         break;
                                     }
