@@ -18,6 +18,13 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.pickle.pickleprojectmodel.Account;
@@ -30,16 +37,34 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SignIn extends AppCompatActivity {
+public class SignIn extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,
+        View.OnClickListener {
     private RequestQueue mQueue;
     EditText usernameForm;
     EditText passwordForm;
+    private GoogleApiClient mGoogleApiClient;
+    private TextView mStatusTextView;
+    private static final int RC_SIGN_IN = 9001;
     public static final String PREFS_NAME = "PicklePrefs";
+    private static final String TAG = "SignInActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
+        // Configure sign-in to request the user's ID, email address, and basic
+        // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        // Build a GoogleApiClient with access to the Google Sign-In API and the
+        // options specified by gso.
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+
+
 
         //EDIT
         /*
@@ -71,7 +96,7 @@ public class SignIn extends AppCompatActivity {
                             Log.d("json:", response.getString("result"));
                             JSONArray parentArray = parentObject.getJSONArray("result");
                             List<Account> accountList = new ArrayList<Account>();
-                            boolean validator =false;
+                            boolean validator = false;
                             final String username = usernameForm.getText().toString();
                             final String password = passwordForm.getText().toString();
                             Log.d("username", username);
@@ -92,7 +117,7 @@ public class SignIn extends AppCompatActivity {
                                     Integer getPoint = accountObj.getPoint();
                                     String getEmail = accountObj.getEmail();
 
-                                    String x = "secure id= "+ getSecure_id +", "+"username= " + getUsername +", "+"point= " + getPoint+ ", " +"email= "+getEmail;
+                                    String x = "secure id= " + getSecure_id + ", " + "username= " + getUsername + ", " + "point= " + getPoint + ", " + "email= " + getEmail;
 
                                     //put secure_id into SharedPreferences
                                     SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
@@ -103,7 +128,6 @@ public class SignIn extends AppCompatActivity {
                                     editor.putString("email", getEmail);
                                     editor.putString("valid", "1");
                                     editor.commit();
-
 
 
                                     //TOAST
@@ -117,10 +141,9 @@ public class SignIn extends AppCompatActivity {
                                     break;
                                 }
                             }
-                            if (validator){
+                            if (validator) {
                                 signIn();
-                            }
-                            else{
+                            } else {
                                 //TOAST
                                 Toast boom = new Toast(getApplicationContext());
                                 boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
@@ -148,6 +171,22 @@ public class SignIn extends AppCompatActivity {
             }
         });
 
+        SignInButton googleSignInButton = (SignInButton) findViewById(R.id.googleSignInButton);
+        googleSignInButton.setSize(SignInButton.SIZE_STANDARD);
+        googleSignInButton.setScopes(gso.getScopeArray());
+        signInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (v.getId()) {
+                    case R.id.googleSignInButton:
+                        googleSignIn();
+                        break;
+                    // ...
+                }
+
+            }
+        });
+
         TextView noAccount = (TextView) findViewById(R.id.textView20);
         noAccount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,6 +194,9 @@ public class SignIn extends AppCompatActivity {
                 register();
             }
         });
+
+
+
     }
 
     private void signIn(){
@@ -186,4 +228,43 @@ public class SignIn extends AppCompatActivity {
         startActivity(intent);
     }
 
+
+    private void googleSignIn(){
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            handleSignInResult(result);
+        }
+    }
+
+    private void handleSignInResult(GoogleSignInResult result) {
+        Log.d(TAG, "handleSignInResult:" + result.isSuccess());
+        if (result.isSuccess()) {
+            // Signed in successfully, show authenticated UI.
+            GoogleSignInAccount acct = result.getSignInAccount();
+            //mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
+            //updateUI(true);
+        } else {
+            // Signed out, show unauthenticated UI.
+            //updateUI(false);
+        }
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        
+    }
 }
