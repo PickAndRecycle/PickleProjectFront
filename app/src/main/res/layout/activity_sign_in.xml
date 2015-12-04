@@ -114,7 +114,7 @@
             android:textStyle="bold"
             android:textSize="20sp" />
 
-        <com.google.android.gms.common.SignInButton
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/googleSignInButton"

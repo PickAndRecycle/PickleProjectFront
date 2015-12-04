@@ -37,16 +37,11 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SignIn extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,
-        View.OnClickListener {
+public class SignIn extends AppCompatActivity {
     private RequestQueue mQueue;
     EditText usernameForm;
     EditText passwordForm;
-    private GoogleApiClient mGoogleApiClient;
-    private TextView mStatusTextView;
-    private static final int RC_SIGN_IN = 9001;
     public static final String PREFS_NAME = "PicklePrefs";
-    private static final String TAG = "SignInActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,16 +49,6 @@ public class SignIn extends AppCompatActivity implements GoogleApiClient.OnConne
         setContentView(R.layout.activity_sign_in);
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-        // Build a GoogleApiClient with access to the Google Sign-In API and the
-        // options specified by gso.
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
-
 
 
         //EDIT
@@ -171,22 +156,6 @@ public class SignIn extends AppCompatActivity implements GoogleApiClient.OnConne
             }
         });
 
-        SignInButton googleSignInButton = (SignInButton) findViewById(R.id.googleSignInButton);
-        googleSignInButton.setSize(SignInButton.SIZE_STANDARD);
-        googleSignInButton.setScopes(gso.getScopeArray());
-        signInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switch (v.getId()) {
-                    case R.id.googleSignInButton:
-                        googleSignIn();
-                        break;
-                    // ...
-                }
-
-            }
-        });
-
         TextView noAccount = (TextView) findViewById(R.id.textView20);
         noAccount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -195,8 +164,21 @@ public class SignIn extends AppCompatActivity implements GoogleApiClient.OnConne
             }
         });
 
+        Button googleSignInButton = (Button) findViewById(R.id.googleSignInButton);
+        googleSignInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeGoogleSignIn();
+            }
+        });
 
 
+
+    }
+
+    private void changeGoogleSignIn(){
+        Intent googleIntent = new Intent(this,SignInActivity.class);
+        startActivity(googleIntent);
     }
 
     private void signIn(){
@@ -229,42 +211,4 @@ public class SignIn extends AppCompatActivity implements GoogleApiClient.OnConne
     }
 
 
-    private void googleSignIn(){
-        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-        startActivityForResult(signInIntent, RC_SIGN_IN);
-    }
-
-    @Override
-    public void onConnectionFailed(ConnectionResult connectionResult) {
-
-    }
-
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN) {
-            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            handleSignInResult(result);
-        }
-    }
-
-    private void handleSignInResult(GoogleSignInResult result) {
-        Log.d(TAG, "handleSignInResult:" + result.isSuccess());
-        if (result.isSuccess()) {
-            // Signed in successfully, show authenticated UI.
-            GoogleSignInAccount acct = result.getSignInAccount();
-            //mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
-            //updateUI(true);
-        } else {
-            // Signed out, show unauthenticated UI.
-            //updateUI(false);
-        }
-    }
-
-
-    @Override
-    public void onClick(View v) {
-        
-    }
 }
