@@ -60,7 +60,7 @@ public class Home extends Activity   {
         // Register the listener with the Location Manager to receive location updates
         //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0,locationListener);
         */
-
+        /*
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);
         mBuilder.setSmallIcon(R.mipmap.logo);
         mBuilder.setContentTitle("New Notification");
@@ -83,7 +83,7 @@ public class Home extends Activity   {
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         mNotificationManager.notify(mId, mBuilder.build());
-
+*/
         Button profileButton = (Button) findViewById(R.id.profileButton);
         Button jarNewsButton = (Button) findViewById(R.id.jarNewsButton);
         Button pickButton = (Button) findViewById(R.id.pickButton);
