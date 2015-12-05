@@ -33,6 +33,7 @@ public class RegistrationIntentService extends IntentService {
 
     private static final String TAG = "RegIntentService";
     private static final String[] TOPICS = {"global"};
+    public static final String PREFS_NAME = "PicklePrefs";
 
     public RegistrationIntentService() {
         super(TAG);
@@ -56,8 +57,8 @@ public class RegistrationIntentService extends IntentService {
             Log.i(TAG, "GCM Registration Token: " + token);
 
             // TODO: Implement this method to send any registration to your app's servers.
-            sendRegistrationToServer(token);
-
+            //sendRegistrationToServer(token);
+            sharedPreferences.edit().putString(QuickstartPreferences.GCM_TOKEN, token).apply();
             // Subscribe to topic channels
             subscribeTopics(token);
 

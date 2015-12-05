@@ -3,6 +3,7 @@ package com.pickle.pickleproject;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,6 +29,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.pickle.pickleprojectmodel.Account;
+import com.pickle.pickleprojectmodel.Notification;
 import com.pickle.pickleprojectmodel.Trash;
 
 import org.json.JSONArray;
@@ -69,7 +71,7 @@ public class SignIn extends AppCompatActivity {
             public void onClick(View v) {
                 //GCP
                 String url = "http://104.155.237.238:8080/account/";
-
+                String url2 = "http://104.155.237.238:8080/notification/";
                 //Localhost
                 //String id  = "b86174cb-93c6-4b73-844c-be3f2070ea31";
                 //String url = "http://192.168.56.1:8080/account/" + id;
@@ -151,7 +153,46 @@ public class SignIn extends AppCompatActivity {
                     }
                 });
                 jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+                SharedPreferences sharedPreferences =
+                        PreferenceManager.getDefaultSharedPreferences(SignIn.this);
+                String token = sharedPreferences.getString(QuickstartPreferences.GCM_TOKEN, "");
+                Notification notification = new Notification(usernameForm.getText().toString(),token);
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                Gson gson = gsonBuilder.create();
+                String json = gson.toJson(notification);
+                Log.d("notification", json);
+
+                try {
+                    CustomJSONObjectRequest jsonRequest2 = new CustomJSONObjectRequest(Request.Method.POST, url2, new JSONObject(json), new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                String tokenId = response.getString("result");
+                                Log.d("notif_id",tokenId);
+                                SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+                                SharedPreferences.Editor editor = settings.edit();
+                                editor.putString("notifId",tokenId);
+                                editor.commit();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.d("Error_Request2", error.toString());
+                        }
+                    });
+                    mQueue.add(jsonRequest2);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
                 mQueue.add(jsonRequest);
+
 
             }
         });

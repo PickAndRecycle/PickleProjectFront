@@ -27,9 +27,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class ProfileActivity extends AppCompatActivity implements Response.ErrorListener, Response.Listener<JSONObject> {
+public class ProfileActivity extends AppCompatActivity {
     private GestureDetector gestureDetector;
-    private RequestQueue mQueue;
+    private RequestQueue mQueue,aQueue;
     public static final String PREFS_NAME = "PicklePrefs";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,26 +44,89 @@ public class ProfileActivity extends AppCompatActivity implements Response.Error
         //GCP
         //String id = "46d83e4c-93b9-4d88-a500-85a0809dc275";
         String id = preferences.getString("secure_id", "0");
+        String notifId = preferences.getString("notifId","0");
         String url = "http://104.155.237.238:8080/account/" + id;
+        final String url2 = "http://104.155.237.238:8080/notification/" + notifId;
 
-        //Localhost
-        //String id  = "b86174cb-93c6-4b73-844c-be3f2070ea31";
-        //String url = "http://192.168.56.1:8080/account/" + id;
 
-        final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.GET, url, new JSONObject(), this, this);
-        jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        mQueue.add(jsonRequest);
-        /*
-        //TEMPORARY BUTTON FOR SIGN IN
-        Button signInButton = (Button) findViewById(R.id.signInButton);
-        signInButton.setOnClickListener(new View.OnClickListener() {
+        final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.GET, url, new JSONObject(), new Response.Listener<JSONObject>() {
             @Override
-            public void onClick(View v) {
-                signIn();
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONObject parentObject = response.getJSONObject("result");
+                    Log.d("json:", response.getString("result"));
+
+                    final Account account;
+
+                    GsonBuilder gsonBuilder = new GsonBuilder();
+                    Gson gson = gsonBuilder.create();
+
+                    account = gson.fromJson(String.valueOf(parentObject), Account.class);
+
+                    MontserratTextView username = (MontserratTextView) findViewById(R.id.username);
+                    MontserratTextView email = (MontserratTextView) findViewById(R.id.email);
+                    MontserratTextView point = (MontserratTextView) findViewById(R.id.totalPoint);
+
+                    username.setText(account.getUsername());
+                    email.setText(account.getEmail());
+                    point.setText(String.valueOf(account.getPoint()));
+
+                    MontserratButton editProfile = (MontserratButton) findViewById(R.id.editProfileButton);
+                    editProfile.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            changeEditProfile(account);
+                        }
+                    });
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Error:",error.toString());
             }
         });
-        */
+        jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        mQueue.add(jsonRequest);
 
+        MontserratButton signOut = (MontserratButton) findViewById(R.id.signOutButton);
+        signOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CustomJSONObjectRequest jsonRequestNotif = new CustomJSONObjectRequest(Request.Method.DELETE, url2, new JSONObject(), new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            Log.d("Notif Deleted", String.valueOf(response.getBoolean("result")));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("Error Notif:", error.toString());
+                    }
+                });
+                mQueue.add(jsonRequestNotif);
+                SharedPreferences preferences = getSharedPreferences(PREFS_NAME, 0);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.clear();
+                editor.commit();
+                //TOAST
+                Toast boom = new Toast(getApplicationContext());
+                boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
+                boom.makeText(ProfileActivity.this, "Logged Out", boom.LENGTH_SHORT).show();
+                signOut();
+            }
+
+        });
+        
         ImageButton backButton = (ImageButton) findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -81,69 +144,6 @@ public class ProfileActivity extends AppCompatActivity implements Response.Error
         });
     }
 
-    @Override
-    public void onErrorResponse(VolleyError error) {
-        Log.d("Error:",error.toString());
-    }
-
-    @Override
-    public void onResponse(JSONObject response) {
-        try {
-            JSONObject parentObject = response.getJSONObject("result");
-            Log.d("json:", response.getString("result"));
-
-            final Account account;
-
-            GsonBuilder gsonBuilder = new GsonBuilder();
-            Gson gson = gsonBuilder.create();
-
-            account = gson.fromJson(String.valueOf(parentObject), Account.class);
-
-            MontserratTextView username = (MontserratTextView) findViewById(R.id.username);
-            MontserratTextView email = (MontserratTextView) findViewById(R.id.email);
-            MontserratTextView point = (MontserratTextView) findViewById(R.id.totalPoint);
-
-            username.setText(account.getUsername());
-            email.setText(account.getEmail());
-            point.setText(String.valueOf(account.getPoint()));
-
-            MontserratButton editProfile = (MontserratButton) findViewById(R.id.editProfileButton);
-            editProfile.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    changeEditProfile(account);
-                }
-            });
-
-            MontserratButton signOut = (MontserratButton) findViewById(R.id.signOutButton);
-            signOut.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    SharedPreferences preferences = getSharedPreferences(PREFS_NAME, 0);
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.clear();
-                    editor.commit();
-                    //TOAST
-                    Toast boom = new Toast(getApplicationContext());
-                    boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
-                    boom.makeText(ProfileActivity.this, "Logged Out", boom.LENGTH_SHORT).show();
-                    signOut();
-                }
-            });
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-    }
-    /*
-        // TEMPORARY BUTTON FOR SIGN IN
-        private void signIn(){
-            Intent intent = new Intent(this, SignIn.class);
-            startActivity(intent);
-
-        }
-    */
     private void signOut(){
         Intent intent = new Intent(this, SignIn.class);
         startActivity(intent);
