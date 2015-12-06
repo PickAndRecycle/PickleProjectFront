@@ -43,7 +43,8 @@ public class ViewMap extends FragmentActivity implements OnMapReadyCallback {
 
         LatLng location = new LatLng(latitude, longitude);
         mMap.addMarker(new MarkerOptions().position(location).title("Trash located here!"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
+        float zoomLevel = (float) 13.0;
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, zoomLevel));
     }
 
 
