@@ -3,6 +3,8 @@ package com.pickle.pickleproject;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Network;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -10,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.util.LruCache;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Button;
@@ -19,6 +22,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.pickle.pickleprojectmodel.Trash;
@@ -29,6 +34,8 @@ import org.json.JSONObject;
 
 public class ThrowerInfo extends AppCompatActivity implements Response.ErrorListener, Response.Listener<JSONObject>{
     private RequestQueue mQueue;
+    private ImageLoader mImageLoader;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,12 +50,29 @@ public class ThrowerInfo extends AppCompatActivity implements Response.ErrorList
             }
         });
 
-        //final Trash trash = (Trash) getIntent().getSerializableExtra("object");
-        //final String username = trash.getId();
+        final Trash trash = (Trash) getIntent().getSerializableExtra("object");
+        MontserratTextView titleContent = (MontserratTextView) findViewById(R.id.titleContent);
+        titleContent.setText(trash.getTitle());
+        MontserratTextView descriptionContent = (MontserratTextView) findViewById(R.id.descriptionContent);
+        descriptionContent.setText(trash.getDesc());
+        MontserratTextView throwerContent = (MontserratTextView) findViewById(R.id.throwerContent);
+        throwerContent.setText(trash.getUsername());
+
         mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext()).getRequestQueue();
         String url = "http://104.155.237.238:8080/account/";
         final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.GET, url, new JSONObject(), this, this);
         jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        mImageLoader = new ImageLoader(mQueue, new ImageLoader.ImageCache() {
+            private final LruCache<String, Bitmap> mCache = new LruCache<String, Bitmap>(10);
+            public void putBitmap(String url, Bitmap bitmap) {
+                mCache.put(url, bitmap);
+            }
+            public Bitmap getBitmap(String url) {
+                return mCache.get(url);
+            }
+        });
+        NetworkImageView photo = (NetworkImageView) findViewById(R.id.imageContent);
+        photo.setImageUrl(trash.getPhoto_url(), mImageLoader);
         mQueue.add(jsonRequest);
 
 
@@ -87,7 +111,6 @@ public class ThrowerInfo extends AppCompatActivity implements Response.ErrorList
             JSONObject parentObject = response;
             Log.d("json:", response.getString("result"));
             JSONArray parentArray = parentObject.getJSONArray("result");
-
 
             for (int i=0; i<parentArray.length(); i++) {
                 JSONObject finalObject = parentArray.getJSONObject(i);

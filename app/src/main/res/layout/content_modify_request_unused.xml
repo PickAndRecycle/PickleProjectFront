@@ -167,16 +167,6 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/doneButton"
-            android:src="@mipmap/successicon"
-            android:background="#00FFFFFF"
-            android:layout_alignTop="@+id/backButton"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginRight="10dp" />
     </RelativeLayout>
 
 </RelativeLayout>
