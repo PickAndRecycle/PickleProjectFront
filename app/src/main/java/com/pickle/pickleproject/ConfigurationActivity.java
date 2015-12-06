@@ -44,6 +44,16 @@ public class ConfigurationActivity extends AppCompatActivity {
                 changeProfile();
             }
         });
+
+        Button aboutUsButton = (Button) findViewById(R.id.AboutUsButton);
+
+        aboutUsButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                changeAboutUs();
+            }
+        });
+
         final Configuration config = new Configuration();
         final Locale locale = Locale.getDefault();
         Button language = (Button) findViewById(R.id.ChangeLanguageButton);
@@ -83,6 +93,11 @@ public class ConfigurationActivity extends AppCompatActivity {
 
     private void changeProfile(){
         Intent intent = new Intent(this, ProfileActivity.class);
+        startActivity(intent);
+    }
+
+    private void changeAboutUs(){
+        Intent intent = new Intent(this, AboutUs.class);
         startActivity(intent);
     }
     @Override

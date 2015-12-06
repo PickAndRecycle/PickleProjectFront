@@ -118,4 +118,14 @@
     <string name="jarOrNewsText">PICKLE\nJAR\n\nARTIKEL</string>
     <string name="Picker">AMBIL SAMPAH</string>
     <string name="Thrower">BUANG SAMPAH</string>
+    <string name = "aboutUsText">
+        <p align = "justify">PICKLE, yang merupakan singkatan dari Pick and Recycle, merupakan sebuah <i>startup</i> yang dikembangkan oleh
+        mahasiswa Kelas Khusus Internasional Fakultas Ilmu Komputer Universitas Indonesia, yang juga merupakan afiliasi dari Nostra
+        Technology. Sampah merupakan salah satu faktor penyebab masalah di Jakarta, dan sampai saat ini belum ada suatu solusi yang
+        dapat mengurangi dampak sampah terhadap lingkungan sekitar. Dengan itu, kami meluncurkan aplikasi Pickle, sebuah terobosan
+        untuk menyelesaikan pemanfaatan dan penanggulangan sampah khususnya di daerah Jakarta. Ide dari aplikasi ini adalah untuk
+        menumbuhkan rasa kepedulian masyarakat terhadap pemanfaatan sampah.</p><br></br>
+        <p align = "justify">Pickle percaya bahwa aplikasi ini dapat membuka wawasan akan masyarakat Jakarta, bahwa limbah sangatlah berbahaya jika dibiarkan,
+        dan juga meningkatkan kontribusi masyarakat dalam menjaga lingkungan agar tetap bersih dan nyaman.</p>
+    </string>
 </resources>
