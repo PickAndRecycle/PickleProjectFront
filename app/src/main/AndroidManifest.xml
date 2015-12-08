@@ -131,6 +131,10 @@
             android:theme="@style/AppTheme" >
         </activity>
         <activity
+            android:name=".SignInActivity" >
+        </activity>
+
+        <activity
             android:name=".Home"
             android:theme="@style/AppTheme" >
         </activity>

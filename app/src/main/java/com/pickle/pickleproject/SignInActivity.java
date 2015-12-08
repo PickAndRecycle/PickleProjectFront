@@ -133,6 +133,7 @@ public class SignInActivity extends AppCompatActivity implements
             acct.getPhotoUrl();
             acct.getId();
             acct.getIdToken();
+            Log.d("Account lists", "email: "+acct.getEmail()+" "+ "photo url: "+acct.getPhotoUrl()+" "+"ID: "+acct.getId()+" "+"ID Token: "+acct.getIdToken());
 
             if(alreadySignIn){
                 // Session Storage ganti jadi account kita
