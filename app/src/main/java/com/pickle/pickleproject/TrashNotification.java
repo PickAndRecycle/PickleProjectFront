@@ -42,11 +42,29 @@ public class TrashNotification extends AppCompatActivity{
                 Home();
             }
         });
+        Button shareButton = (Button) findViewById(R.id.shareButton);
+        shareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeShare();
+            }
+        });
+
 
         Bundle parseInfo = getIntent().getExtras();
 
 
     }
+
+    private void changeShare(){
+        Intent sendIntent = new Intent();
+        String successShare = "I have succeed throw a trash. Throw your trash only at Pickle";
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT,successShare);
+        sendIntent.setType("text/plain");
+        startActivity(sendIntent);
+    }
+
 
     public void Home(){
         Intent home = new Intent(this,Home.class);

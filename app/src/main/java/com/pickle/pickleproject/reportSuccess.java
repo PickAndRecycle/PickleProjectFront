@@ -19,6 +19,22 @@ public class ReportSuccess extends AppCompatActivity {
                 Home();
             }
         });
+        Button shareButton = (Button) findViewById(R.id.shareButton);
+        shareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeShare();
+            }
+        });
+    }
+
+    private void changeShare(){
+        Intent sendIntent = new Intent();
+        String successShare = "I have succeed create a report. Report trash condition of your environment only at Pickle";
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, successShare);
+        sendIntent.setType("text/plain");
+        startActivity(sendIntent);
     }
 
     public void Home(){
