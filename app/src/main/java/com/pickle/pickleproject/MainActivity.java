@@ -2,6 +2,7 @@ package com.pickle.pickleproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
@@ -66,13 +67,12 @@ public class MainActivity extends AppCompatActivity {
             startService(intent);
         }
 
-        Button Start=(Button) findViewById(start_button);
-        Start.setOnClickListener(new View.OnClickListener() {
+        new Handler().postDelayed(new Runnable() {
             @Override
-            public void onClick(View v) {
+            public void run() {
                 goToHome();
             }
-        });
+        }, 2000);
     }
 
     @Override
