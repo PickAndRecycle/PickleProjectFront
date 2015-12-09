@@ -113,7 +113,7 @@
         android:layout_width="192dp"
         android:layout_height="fill_parent"
         android:text="@string/delete"
-        android:id="@+id/button2"
+        android:id="@+id/deleteButtonOther"
         android:textColor="#FFFFFF"
         android:background="#F1654C"
         android:layout_alignTop="@+id/button3"
