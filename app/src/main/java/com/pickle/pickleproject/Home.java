@@ -84,14 +84,28 @@ public class Home extends Activity   {
         pickButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                changePick();
+                SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+                String id = settings.getString("valid", "0");
+                if(id.equals("0")){
+                    signIn();
+                }
+                else {
+                    changePick();
+                }
             }
         });
 
         jarNewsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                historyJar();
+                SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+                String id = settings.getString("valid", "0");
+                if(id.equals("0")){
+                    signIn();
+                }
+                else {
+                    historyJar();
+                }
             }
         });
 
