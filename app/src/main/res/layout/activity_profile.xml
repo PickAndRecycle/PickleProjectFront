@@ -59,41 +59,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/pointsArea"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-
-        <com.pickle.pickleproject.MontserratTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/PoinText"
-            android:id="@+id/pointsText"
-            android:layout_centerHorizontal="true" />
-
-        <com.pickle.pickleproject.MontserratTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/totalPoint"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/pointsText" />
-
-        <com.pickle.pickleproject.MontserratTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/TotalPointLeftText"
-            android:id="@+id/totalPointLeft"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/totalPoint" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/menuButtonArea"
         android:layout_alignParentEnd="false"
         android:layout_alignParentBottom="true">
@@ -101,17 +66,8 @@
         <com.pickle.pickleproject.MontserratButton
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:text="@string/LeaderBoardText"
-            android:id="@+id/leaderBoardButton"
-            android:background="#3e4651"
-            android:textColor="#ffffff" />
-
-        <com.pickle.pickleproject.MontserratButton
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
             android:text="@string/EditProfileText"
             android:id="@+id/editProfileButton"
-            android:layout_below="@+id/leaderBoardButton"
             android:background="#00b5b5"
             android:textColor="#ffffff" />
 

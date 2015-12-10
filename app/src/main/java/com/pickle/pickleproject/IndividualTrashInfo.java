@@ -98,7 +98,7 @@ public class IndividualTrashInfo extends AppCompatActivity {
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Log.d("Error:", error.getMessage());
+                            //Log.d("Error:", error.getMessage());
                         }
                     });
                     jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));

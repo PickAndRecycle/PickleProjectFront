@@ -44,6 +44,7 @@ public class SignIn extends AppCompatActivity {
     EditText usernameForm;
     EditText passwordForm;
     public static final String PREFS_NAME = "PicklePrefs";
+    boolean validator = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +72,7 @@ public class SignIn extends AppCompatActivity {
             public void onClick(View v) {
                 //GCP
                 String url = "http://104.155.237.238:8080/account/";
-                String url2 = "http://104.155.237.238:8080/notification/";
+                final String url2 = "http://104.155.237.238:8080/notification/";
                 //Localhost
                 //String id  = "b86174cb-93c6-4b73-844c-be3f2070ea31";
                 //String url = "http://192.168.56.1:8080/account/" + id;
@@ -83,7 +84,7 @@ public class SignIn extends AppCompatActivity {
                             Log.d("json:", response.getString("result"));
                             JSONArray parentArray = parentObject.getJSONArray("result");
                             List<Account> accountList = new ArrayList<Account>();
-                            boolean validator = false;
+
                             final String username = usernameForm.getText().toString();
                             final String password = passwordForm.getText().toString();
                             Log.d("username", username);
@@ -101,17 +102,15 @@ public class SignIn extends AppCompatActivity {
                                 if ((accountObj.getUsername().equals(username)) && (accountObj.getPassword().equals(password))) {
                                     String getSecure_id = accountObj.getId();
                                     String getUsername = accountObj.getUsername();
-                                    Integer getPoint = accountObj.getPoint();
                                     String getEmail = accountObj.getEmail();
 
-                                    String x = "secure id= " + getSecure_id + ", " + "username= " + getUsername + ", " + "point= " + getPoint + ", " + "email= " + getEmail;
+                                    String x = "secure id= " + getSecure_id + ", " + "username= " + getUsername + ", " +  ", " + "email= " + getEmail;
 
                                     //put secure_id into SharedPreferences
                                     SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
                                     SharedPreferences.Editor editor = settings.edit();
                                     editor.putString("secure_id", getSecure_id);
                                     editor.putString("username", getUsername);
-                                    editor.putInt("point", getPoint);
                                     editor.putString("email", getEmail);
                                     editor.putString("valid", "1");
                                     editor.commit();
@@ -125,25 +124,63 @@ public class SignIn extends AppCompatActivity {
                                     */
 
                                     validator = true;
+                                    if(validator) {
+                                        SharedPreferences sharedPreferences =
+                                                PreferenceManager.getDefaultSharedPreferences(SignIn.this);
+                                        String token = sharedPreferences.getString(QuickstartPreferences.GCM_TOKEN, "");
+                                        Notification notification = new Notification(usernameForm.getText().toString(), token);
+                                        GsonBuilder gsonBuilder2 = new GsonBuilder();
+                                        Gson gson2 = gsonBuilder.create();
+                                        String json2 = gson2.toJson(notification);
+                                        Log.d("notification", json2);
+
+                                        try {
+                                            CustomJSONObjectRequest jsonRequest2 = new CustomJSONObjectRequest(Request.Method.POST, url2, new JSONObject(json2), new Response.Listener<JSONObject>() {
+                                                @Override
+                                                public void onResponse(JSONObject response) {
+                                                    try {
+                                                        String tokenId = response.getString("result");
+                                                        Log.d("notif_id", tokenId);
+                                                        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+                                                        SharedPreferences.Editor editor = settings.edit();
+                                                        editor.putString("notifId", tokenId);
+                                                        editor.commit();
+                                                    } catch (JSONException e) {
+                                                        e.printStackTrace();
+                                                    }
+
+
+                                                }
+                                            }, new Response.ErrorListener() {
+                                                @Override
+                                                public void onErrorResponse(VolleyError error) {
+                                                    Log.d("Error_Request2", error.toString());
+                                                }
+                                            });
+                                            mQueue.add(jsonRequest2);
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                    if (validator) {
+                                        signIn();
+                                    } else {
+                                        //TOAST
+                                        Toast boom = new Toast(getApplicationContext());
+                                        boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
+                                        boom.makeText(SignIn.this, "Invalid token", boom.LENGTH_SHORT).show();
+                                    }
                                     break;
                                 }
                             }
-                            if (validator) {
-                                signIn();
-                            } else {
-                                //TOAST
-                                Toast boom = new Toast(getApplicationContext());
-                                boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
-                                boom.makeText(SignIn.this, "Invalid username or password", boom.LENGTH_SHORT).show();
-                            }
-
 
                         } catch (JSONException e) {
                             //TOAST
                             Toast boom = new Toast(getApplicationContext());
                             boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
-                            boom.makeText(SignIn.this, "Invalid username or password.", boom.LENGTH_SHORT).show();
+                            boom.makeText(SignIn.this, e.toString(), boom.LENGTH_SHORT).show();
                             e.printStackTrace();
+                            Log.d("kenapa",e.toString());
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -154,44 +191,9 @@ public class SignIn extends AppCompatActivity {
                 });
                 jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
-                SharedPreferences sharedPreferences =
-                        PreferenceManager.getDefaultSharedPreferences(SignIn.this);
-                String token = sharedPreferences.getString(QuickstartPreferences.GCM_TOKEN, "");
-                Notification notification = new Notification(usernameForm.getText().toString(),token);
-                GsonBuilder gsonBuilder = new GsonBuilder();
-                Gson gson = gsonBuilder.create();
-                String json = gson.toJson(notification);
-                Log.d("notification", json);
-
-                try {
-                    CustomJSONObjectRequest jsonRequest2 = new CustomJSONObjectRequest(Request.Method.POST, url2, new JSONObject(json), new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            try {
-                                String tokenId = response.getString("result");
-                                Log.d("notif_id",tokenId);
-                                SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-                                SharedPreferences.Editor editor = settings.edit();
-                                editor.putString("notifId",tokenId);
-                                editor.commit();
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-
-
-                        }
-                    }, new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Log.d("Error_Request2", error.toString());
-                        }
-                    });
-                    mQueue.add(jsonRequest2);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
 
                 mQueue.add(jsonRequest);
+
 
 
             }

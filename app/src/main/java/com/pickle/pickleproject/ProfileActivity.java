@@ -65,11 +65,9 @@ public class ProfileActivity extends AppCompatActivity {
 
                     MontserratTextView username = (MontserratTextView) findViewById(R.id.username);
                     MontserratTextView email = (MontserratTextView) findViewById(R.id.email);
-                    MontserratTextView point = (MontserratTextView) findViewById(R.id.totalPoint);
 
                     username.setText(account.getUsername());
                     email.setText(account.getEmail());
-                    point.setText(String.valueOf(account.getPoint()));
 
                     MontserratButton editProfile = (MontserratButton) findViewById(R.id.editProfileButton);
                     editProfile.setOnClickListener(new View.OnClickListener() {

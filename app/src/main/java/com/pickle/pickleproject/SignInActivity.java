@@ -194,17 +194,15 @@ public class SignInActivity extends AppCompatActivity implements
                             if ((accountObj.getUsername().equals(username))) {
                                 String getSecure_id = accountObj.getId();
                                 String getUsername = accountObj.getUsername();
-                                Integer getPoint = accountObj.getPoint();
                                 String getEmail = accountObj.getEmail();
 
-                                String x = "secure id= " + getSecure_id + ", " + "username= " + getUsername + ", " + "point= " + getPoint + ", " + "email= " + getEmail;
+                                String x = "secure id= " + getSecure_id + ", " + "username= " + getUsername + ", " + ", " + "email= " + getEmail;
 
                                 //put secure_id into SharedPreferences
                                 SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
                                 SharedPreferences.Editor editor = settings.edit();
                                 editor.putString("secure_id", getSecure_id);
                                 editor.putString("username", getUsername);
-                                editor.putInt("point", getPoint);
                                 editor.putString("email", getEmail);
                                 editor.putString("valid", "1");
                                 editor.commit();
@@ -396,7 +394,6 @@ public class SignInActivity extends AppCompatActivity implements
             object.addProperty("email",src.getEmail());
             object.addProperty("password",src.getPassword());
             object.addProperty("phone_number",src.getPhone_number());
-            object.addProperty("photo_url",src.getProfile_picture_url());
 
             return object;
         }
