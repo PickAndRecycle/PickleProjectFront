@@ -32,7 +32,7 @@ import java.lang.reflect.Type;
 
 public class ModifyRequestOther extends AppCompatActivity {
     private Context context;
-    private RequestQueue requestQueue, mQueue,aQueue;
+    private RequestQueue requestQueue, mQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +51,6 @@ public class ModifyRequestOther extends AppCompatActivity {
 
         Button saveButton = (Button) findViewById(R.id.button3);
         ImageButton backButton = (ImageButton) findViewById(R.id.backButton);
-        Button deleteButton = (Button) findViewById(R.id.deleteButtonOther);
-
 
         mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext()).getRequestQueue();
 
@@ -104,12 +102,6 @@ public class ModifyRequestOther extends AppCompatActivity {
                 goBack();
             }
         });
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                delete(trash);
-            }
-        });
 
     }
 
@@ -119,28 +111,6 @@ public class ModifyRequestOther extends AppCompatActivity {
     private void changeJar(){
         Intent intent = new Intent(this,Picklejar.class);
         startActivity(intent);
-    }
-    private void delete(Trash trash){
-        aQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext()).getRequestQueue();
-        final String url = "http://104.155.237.238:8080/trash/" + trash.getId();
-        final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.DELETE, url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    Log.d("result", response.getString("result"));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("Error:", error.getMessage());
-            }
-        });
-        jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        aQueue.add(jsonRequest);
-        changeJar();
     }
 
 

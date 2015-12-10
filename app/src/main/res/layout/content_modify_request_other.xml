@@ -94,7 +94,7 @@
         android:layout_width="190dp"
         android:layout_height="80dp"
         android:text="@string/delete"
-        android:id="@+id/deleteButtonOther"
+        android:id="@+id/button2"
         android:textColor="#FFFFFF"
         android:background="#F1654C"
         android:layout_alignParentBottom="true"
@@ -108,9 +108,9 @@
         android:id="@+id/button3"
         android:textColor="#FFFFFF"
         android:background="#00B5B5"
-        android:layout_alignTop="@+id/deleteButtonOther"
-        android:layout_toRightOf="@+id/deleteButtonOther"
-        android:layout_toEndOf="@+id/deleteButtonOther" />
+        android:layout_alignTop="@+id/button2"
+        android:layout_toRightOf="@+id/button2"
+        android:layout_toEndOf="@+id/button2" />
 
     <RelativeLayout
         android:layout_width="match_parent"
