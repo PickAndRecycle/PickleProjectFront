@@ -1,10 +1,11 @@
 package com.pickle.pickleproject;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
+import android.widget.ImageButton;
 
 public class PrivacyPolicyActivity extends AppCompatActivity {
 
@@ -13,18 +14,21 @@ public class PrivacyPolicyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_privacy_policy);
 
-        Button backToMyProfileButton = (Button) findViewById(R.id.BackToMyProfileButton);
+        ImageButton backButton = (ImageButton) findViewById(R.id.backButton);
 
-        backToMyProfileButton.setOnClickListener(new View.OnClickListener() {
+        backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeProfile();
+                finish();
             }
         });
+
+        WebView web = (WebView) findViewById(R.id.privacypolicycontent);
+        web.getSettings().setJavaScriptEnabled(true);
+        web.setWebChromeClient(new WebChromeClient());
+
+        String filePath = "file:///android_asset/privacypolicy.html";
+        web.loadUrl(filePath);
     }
 
-    private void changeProfile(){
-        Intent intent = new Intent(this, ProfileActivity.class);
-        startActivity(intent);
-    }
 }
