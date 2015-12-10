@@ -69,6 +69,7 @@ public class SignInActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
+        mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext()).getRequestQueue();
 
         // Views
         mStatusTextView = (TextView) findViewById(R.id.status);
@@ -162,42 +163,33 @@ public class SignInActivity extends AppCompatActivity implements
             acct.getId();
             acct.getIdToken();
             final String email = acct.getEmail();
-            String nameOnly = email.substring(0,email.indexOf('@'));
-            Log.d("Account lists", "email: " + acct.getEmail() + " " + "photo url: " + acct.getPhotoUrl() + " " + "ID: " + acct.getId() + " " + "ID Token: " + acct.getIdToken());
+            final String nameOnly = email.substring(0,email.indexOf('@'));
+            Log.d("Account lists", "username: " + nameOnly + " " + "email: " + acct.getEmail() + " " + "photo url: " + acct.getPhotoUrl() + " " + "ID: " + acct.getId() + " " + "ID Token: " + acct.getIdToken());
+            String url = "http://104.155.237.238:8080/account/";
 
-            //GCP
-            final String url = "http://104.155.237.238:8080/account/";
-            //CHECK if email is in database
             final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.GET, url, new JSONObject(), new Response.Listener<JSONObject>() {
-
-
                 @Override
                 public void onResponse(JSONObject response) {
-                    try {
+                    try{
+                        Log.d("Account lists", "username: "+nameOnly+" "+"email: " + acct.getEmail() + " " + "photo url: " + acct.getPhotoUrl() + " " + "ID: " + acct.getId() + " " + "ID Token: " + acct.getIdToken());
                         JSONObject parentObject = response;
                         Log.d("json:", response.getString("result"));
                         JSONArray parentArray = parentObject.getJSONArray("result");
                         List<Account> accountList = new ArrayList<Account>();
-                        alreadySignIn = false;
-                        final String username = email;
-                        Log.d("username", username);
                         for (int i = 0; i < parentArray.length(); i++) {
                             JSONObject finalObject = parentArray.getJSONObject(i);
                             Account accountObj;
                             GsonBuilder gsonBuilder = new GsonBuilder();
-
                             final Gson gson = gsonBuilder.create();
                             accountObj = gson.fromJson(String.valueOf(finalObject), Account.class);
-                            Log.d("username", accountObj.getUsername());
+                            Log.d("email", accountObj.getEmail());
                             Log.d("password", accountObj.getPassword());
-
-                            if ((accountObj.getUsername().equals(username))) {
+                            if ((accountObj.getEmail().equals(email)) && (accountObj.getPassword().equals(acct.getIdToken()))) {
                                 String getSecure_id = accountObj.getId();
                                 String getUsername = accountObj.getUsername();
+                                //Points is now deprecated
+                                //Integer getPoint = accountObj.getPoint();
                                 String getEmail = accountObj.getEmail();
-
-                                String x = "secure id= " + getSecure_id + ", " + "username= " + getUsername + ", " + ", " + "email= " + getEmail;
-
                                 //put secure_id into SharedPreferences
                                 SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
                                 SharedPreferences.Editor editor = settings.edit();
@@ -206,85 +198,74 @@ public class SignInActivity extends AppCompatActivity implements
                                 editor.putString("email", getEmail);
                                 editor.putString("valid", "1");
                                 editor.commit();
-                                //TOAST
-                                    /*
-                                    Toast boom = new Toast(getApplicationContext());
-                                    boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
-                                    boom.makeText(SignIn.this, x, boom.LENGTH_SHORT).show();
-                                    */
 
-                                alreadySignIn = true;
-                                break;
-                            }
-                        }
-                        if (alreadySignIn) {
-                            signIn();
-                        } else {
-                            Account account = new Account();
-                            account.setUsername(email);
-                            account.setEmail(acct.getEmail());
-                            account.setPassword(acct.getIdToken());
-                            mQueue = CustomVolleyRequestQueue.getInstance(SignInActivity.this).getRequestQueue();
-                            GsonBuilder gsonBuilder = new GsonBuilder();
+                                String x = "secure id= " + getSecure_id + ", " + "username= " + getUsername + ", " + "email= " + getEmail;
 
-                            gsonBuilder.registerTypeAdapter(Account.class, new AccountSerializer());
-                            Gson gson = gsonBuilder.create();
-                            String json = gson.toJson(account);
-                            Log.d("json", json);
-                            try {
-                                final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.POST, url, new JSONObject(json), new Response.Listener<JSONObject>() {
-                                    @Override
-                                    public void onResponse(JSONObject response) {
-                                        try {
-                                            Log.d("result", response.getString("result"));
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                        }
-                                    }
-                                }, new Response.ErrorListener() {
-                                    @Override
-                                    public void onErrorResponse(VolleyError error) {
-                                        Log.d("Error:", error.getMessage());
-                                    }
-                                });
-                                jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-                                mQueue.add(jsonRequest);
-                                //TOAST
                                 Toast boom = new Toast(getApplicationContext());
                                 boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
-                                boom.makeText(SignInActivity.this, "Your e-mail finally registered.", boom.LENGTH_SHORT).show();
-
-
-                            }
-                            catch (JSONException e) {
-                                e.printStackTrace();
+                                boom.makeText(SignInActivity.this, x, boom.LENGTH_SHORT).show();
+                                alreadySignIn = true;
                             }
                         }
-
-
                     } catch (JSONException e) {
-                        //TOAST
-                        Toast boom = new Toast(getApplicationContext());
-                        boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
-                        boom.makeText(SignInActivity.this, "Invalid username or password.", boom.LENGTH_SHORT).show();
                         e.printStackTrace();
                     }
+
                 }
-            }, new Response.ErrorListener() {
+            }, new Response.ErrorListener(){
+
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     Log.d("Error", error.toString());
                 }
             });
-            jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-/*
+
+            mQueue.add(jsonRequest);
             if(alreadySignIn){
                 // Session Storage ganti jadi account kita
+
+                Intent intent = new Intent(this, Home.class);
+                startActivity(intent);
             }
             else{
                 // Masukin database
+                Account account = new Account();
+                account.setUsername(nameOnly);
+                account.setEmail(acct.getEmail());
+                account.setPassword(acct.getIdToken());
+
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                gsonBuilder.registerTypeAdapter(Account.class, new AccountSerializer());
+                Gson gson = gsonBuilder.create();
+                String json = gson.toJson(account);
+                Log.d("json", json);
+
+                try {
+                    final CustomJSONObjectRequest jsonRequest2 = new CustomJSONObjectRequest(Request.Method.POST, url, new JSONObject(json), new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                Log.d("result", response.getString("result"));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.d("Error:", error.getMessage());
+                        }
+                    });
+                    jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+                    mQueue.add(jsonRequest2);
+                    mQueue.add(jsonRequest);
+
+                }
+                catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
-*/
+
 
 
 
@@ -301,9 +282,6 @@ public class SignInActivity extends AppCompatActivity implements
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
-
-        //PUT EMAIL AND SECURE_ID
-
     }
     // [END signIn]
 
