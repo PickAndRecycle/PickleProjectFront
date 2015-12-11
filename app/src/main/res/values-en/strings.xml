@@ -127,4 +127,5 @@
         <p align = "justify">Pickle believes that by the help of this application, local citizens can have a new insight towards the danger of waste and help to contribute by managing waste properly.
             We also hoped that this project can help the life of people who contributed and makes our environment better.</p>
     </string>
+    <string name="registrationSuccess">Congratulation you already join pickle</string>
 </resources>

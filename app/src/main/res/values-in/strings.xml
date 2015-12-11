@@ -128,4 +128,5 @@
         <p align = "justify">Pickle percaya bahwa aplikasi ini dapat membuka wawasan akan masyarakat Jakarta, bahwa limbah sangatlah berbahaya jika dibiarkan,
         dan juga meningkatkan kontribusi masyarakat dalam menjaga lingkungan agar tetap bersih dan nyaman.</p>
     </string>
+    <string name="registrationSuccess">Selamat anda telah bergabung dengan pickle</string>
 </resources>

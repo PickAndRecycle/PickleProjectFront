@@ -86,7 +86,7 @@ public class RegistrationActivity extends AppCompatActivity {
         password = (EditText) findViewById(R.id.password);
         phoneNumber = (EditText) findViewById(R.id.phoneNumber);
 
-        Intent intent = new Intent(this, ReportSuccess.class);
+        Intent intent = new Intent(this, RegistrationSuccess.class);
 
         mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext()).getRequestQueue();
 
@@ -135,7 +135,6 @@ public class RegistrationActivity extends AppCompatActivity {
         catch (JSONException e) {
             e.printStackTrace();
         }
-
 
         startActivity(intent);
     }

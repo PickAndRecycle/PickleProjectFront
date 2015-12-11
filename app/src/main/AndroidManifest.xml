@@ -197,6 +197,8 @@
         <activity
             android:name=".TermsOfService">
         </activity>
+
+        <activity android:name=".RegistrationSuccess"></activity>
     </application>
 
 </manifest>
