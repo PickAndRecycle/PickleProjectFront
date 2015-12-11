@@ -3,6 +3,8 @@ package com.pickle.pickleproject;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
 import android.widget.ImageButton;
 
 public class AboutUs extends AppCompatActivity {
@@ -19,6 +21,13 @@ public class AboutUs extends AppCompatActivity {
                 finish();
             }
         });
-    }
 
+        WebView web = (WebView) findViewById(R.id.aboutuscontent);
+        web.getSettings().setJavaScriptEnabled(true);
+        web.setWebChromeClient(new WebChromeClient());
+
+        String filePath = "file:///android_asset/aboutus.html";
+        web.loadUrl(filePath);
+
+    }
 }
