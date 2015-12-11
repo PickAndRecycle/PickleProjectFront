@@ -60,6 +60,7 @@ public class SignInActivity extends AppCompatActivity implements
     private ProgressDialog mProgressDialog;
 
     private boolean alreadySignIn;
+    boolean registered = false;
 
     public static final String PREFS_NAME = "PicklePrefs";
 
@@ -165,12 +166,16 @@ public class SignInActivity extends AppCompatActivity implements
             final String email = acct.getEmail();
             final String nameOnly = email.substring(0,email.indexOf('@'));
             Log.d("Account lists", "username: " + nameOnly + " " + "email: " + acct.getEmail() + " " + "photo url: " + acct.getPhotoUrl() + " " + "ID: " + acct.getId() + " " + "ID Token: " + acct.getIdToken());
-            String url = "http://104.155.237.238:8080/account/";
+            final String url = "http://104.155.237.238:8080/account/";
 
             final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.GET, url, new JSONObject(), new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
                     try{
+                        Toast boom = new Toast(getApplicationContext());
+                        boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
+                        boom.makeText(SignInActivity.this, "Checking if email available in database...", boom.LENGTH_SHORT).show();
+
                         Log.d("Account lists", "username: "+nameOnly+" "+"email: " + acct.getEmail() + " " + "photo url: " + acct.getPhotoUrl() + " " + "ID: " + acct.getId() + " " + "ID Token: " + acct.getIdToken());
                         JSONObject parentObject = response;
                         Log.d("json:", response.getString("result"));
@@ -201,10 +206,56 @@ public class SignInActivity extends AppCompatActivity implements
 
                                 String x = "secure id= " + getSecure_id + ", " + "username= " + getUsername + ", " + "email= " + getEmail;
 
-                                Toast boom = new Toast(getApplicationContext());
-                                boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
-                                boom.makeText(SignInActivity.this, x, boom.LENGTH_SHORT).show();
                                 alreadySignIn = true;
+                                if(alreadySignIn) {
+                                    boom = new Toast(getApplicationContext());
+                                    boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
+                                    boom.makeText(SignInActivity.this, "AVAILABLE", boom.LENGTH_SHORT).show();
+                                    //signIn();
+                                    signOut();
+                                    toHome();
+
+                                }
+                            }
+                        }
+                        if(!alreadySignIn) {
+                            boom = new Toast(getApplicationContext());
+                            boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
+                            boom.makeText(SignInActivity.this, "NOT AVAILABLE", boom.LENGTH_SHORT).show();
+                            Account account = new Account();
+                            account.setUsername(nameOnly);
+                            account.setEmail(acct.getEmail());
+                            account.setPassword(acct.getIdToken());
+
+                            GsonBuilder gsonBuilder = new GsonBuilder();
+                            gsonBuilder.registerTypeAdapter(Account.class, new AccountSerializer());
+                            Gson gson = gsonBuilder.create();
+                            String json = gson.toJson(account);
+                            Log.d("json", json);
+
+                            try {
+                                final CustomJSONObjectRequest jsonRequest2 = new CustomJSONObjectRequest(Request.Method.POST, url, new JSONObject(json), new Response.Listener<JSONObject>() {
+                                    @Override
+                                    public void onResponse(JSONObject response) {
+                                        try {
+                                            Log.d("result", response.getString("result"));
+                                            registered = true;
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                }, new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        Log.d("Error:", error.getMessage());
+                                    }
+                                });
+                                jsonRequest2.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+                                mQueue.add(jsonRequest2);
+
+                            }
+                            catch (JSONException e) {
+                                e.printStackTrace();
                             }
                         }
                     } catch (JSONException e) {
@@ -219,20 +270,32 @@ public class SignInActivity extends AppCompatActivity implements
                     Log.d("Error", error.toString());
                 }
             });
-
             mQueue.add(jsonRequest);
+            if (registered){
+                mQueue.add(jsonRequest);
+            }
+
+/*
             if(alreadySignIn){
+                Toast boom = new Toast(getApplicationContext());
+                boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
+                boom.makeText(SignInActivity.this, "SIGNED IN", boom.LENGTH_SHORT).show();
                 // Session Storage ganti jadi account kita
 
                 Intent intent = new Intent(this, Home.class);
                 startActivity(intent);
             }
             else{
+                Toast boom = new Toast(getApplicationContext());
+                boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
+                boom.makeText(SignInActivity.this, "Gmail not available, POST to database...", boom.LENGTH_SHORT).show();
+
                 // Masukin database
                 Account account = new Account();
                 account.setUsername(nameOnly);
                 account.setEmail(acct.getEmail());
                 account.setPassword(acct.getIdToken());
+                Log.d("Account List: ", "Username: "+account.getUsername()+" "+"Email: "+account.getEmail()+" "+"Password: "+account.getPassword());
 
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 gsonBuilder.registerTypeAdapter(Account.class, new AccountSerializer());
@@ -253,7 +316,11 @@ public class SignInActivity extends AppCompatActivity implements
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Log.d("Error:", error.getMessage());
+                            Toast boom = new Toast(getApplicationContext());
+                            boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
+                            boom.makeText(SignInActivity.this, "FAILED, BUT WHY?", boom.LENGTH_SHORT).show();
+
+                            //Log.d("Error:", error.getMessage());
                         }
                     });
                     jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
@@ -265,7 +332,7 @@ public class SignInActivity extends AppCompatActivity implements
                     e.printStackTrace();
                 }
             }
-
+*/
 
 
 
@@ -361,6 +428,11 @@ public class SignInActivity extends AppCompatActivity implements
                 revokeAccess();
                 break;
         }
+    }
+
+    private void toHome(){
+        Intent intent = new Intent(this, Home.class);
+        startActivity(intent);
     }
 
     private class AccountSerializer implements JsonSerializer<Account> {
