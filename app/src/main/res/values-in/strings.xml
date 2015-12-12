@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">PickleProject</string>
+    <string name="app_name">Pickle</string>
 
     <string name="hello_world">Hello Dunia!</string>
     <string name="action_settings">Pengaturan</string>

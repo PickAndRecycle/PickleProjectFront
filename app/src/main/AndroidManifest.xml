@@ -29,7 +29,8 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,83 +39,109 @@
         </activity>
         <activity
             android:name=".RegistrationActivity"
-            android:label="@string/title_activity_registration" >
+            android:label="@string/title_activity_registration"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".IndividualTrashInfo"
             android:label="@string/title_activity_individual_trash_info"
-            android:theme="@style/AppTheme" >
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".ThrowerInfo"
             android:label="@string/title_activity_thrower_info"
-            android:theme="@style/AppTheme" >
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".ThrowCategory"
             android:label="@string/title_activity_throw_category"
-            android:theme="@style/AppTheme" >
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".ReportSuccess"
             android:label="@string/title_activity_report_success"
-            android:theme="@style/AppTheme" >
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".UnusedGoodsDialog"
             android:label="@string/title_activity_unused_goods_dialog"
-            android:theme="@style/AppTheme" >
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".AddDescription"
             android:label="@string/title_activity_add_description"
-            android:theme="@style/AppTheme" >
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".ThrowOrReport"
             android:label="@string/title_activity_throw_or_report"
-            android:theme="@style/AppTheme" >
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".ConfigurationActivity" >
+        <activity
+            android:name=".ConfigurationActivity"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".OtherTrashDialog"
             android:label="@string/title_activity_other_trash_dialog"
-            android:theme="@style/AppTheme" >
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".ProfileActivity" >
+        <activity
+            android:name=".ProfileActivity"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".TrashNotification" >
+        <activity
+            android:name=".TrashNotification"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".ModifyRequestUnused"
             android:label="@string/title_activity_modify_request_unused"
-            android:theme="@style/AppTheme" >
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".ModifyRequestOther" />
-        <activity android:name=".Picklejar" >
+        <activity
+            android:name=".ModifyRequestOther"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Picklejar"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".Newsfeed" >
+        <activity
+            android:name=".Newsfeed"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".PickDetails"
             android:label="@string/title_activity_pick_details"
-            android:theme="@style/AppTheme" >
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".ViewArticle"
             android:label="@string/title_activity_view_article"
-            android:theme="@style/AppTheme" >
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".ModifyConfirmation"
             android:label="modify_confirmation"
-            android:theme="@style/AppTheme" >
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".EditProfile"
             android:label="@string/title_activity_edit_profile"
-            android:theme="@style/AppTheme" >
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
         </activity>
 
         <meta-data
@@ -124,19 +151,23 @@
         <activity
             android:name=".PickList"
             android:label="@string/title_activity_pick_list"
-            android:theme="@style/AppTheme" >
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".SignIn"
-            android:theme="@style/AppTheme" >
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".SignInActivity" >
+            android:name=".SignInActivity"
+            android:screenOrientation="portrait">
         </activity>
 
         <activity
             android:name=".Home"
-            android:theme="@style/AppTheme" >
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
         </activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -152,7 +183,8 @@
 
         <activity
             android:name=".ViewMap"
-            android:label="@string/title_activity_view_map" >
+            android:label="@string/title_activity_view_map"
+            android:screenOrientation="portrait">
         </activity>
 
         <receiver
@@ -188,17 +220,22 @@
         <activity
             android:name=".AboutUs"
             android:label="@string/title_activity_about_us"
-            android:theme="@style/AppTheme" >
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
         </activity>
 
         <activity
-            android:name=".PrivacyPolicyActivity">
+            android:name=".PrivacyPolicyActivity"
+            android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".TermsOfService">
+            android:name=".TermsOfService"
+            android:screenOrientation="portrait">
         </activity>
 
-        <activity android:name=".RegistrationSuccess"></activity>
+        <activity
+            android:name=".RegistrationSuccess"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
