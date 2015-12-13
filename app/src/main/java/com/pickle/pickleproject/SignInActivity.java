@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
@@ -35,6 +36,7 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import com.pickle.pickleproject.R;
 import com.pickle.pickleprojectmodel.Account;
+import com.pickle.pickleprojectmodel.Notification;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -167,6 +169,7 @@ public class SignInActivity extends AppCompatActivity implements
             final String nameOnly = email.substring(0,email.indexOf('@'));
             Log.d("Account lists", "username: " + nameOnly + " " + "email: " + acct.getEmail() + " " + "photo url: " + acct.getPhotoUrl() + " " + "ID: " + acct.getId() + " " + "ID Token: " + acct.getIdToken());
             final String url = "http://104.155.237.238:8080/account/";
+            final String url2 = "http://104.155.237.238:8080/notification/";
 
             final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.GET, url, new JSONObject(), new Response.Listener<JSONObject>() {
                 @Override
@@ -189,7 +192,7 @@ public class SignInActivity extends AppCompatActivity implements
                             accountObj = gson.fromJson(String.valueOf(finalObject), Account.class);
                             Log.d("email", accountObj.getEmail());
                             Log.d("password", accountObj.getPassword());
-                            if ((accountObj.getEmail().equals(email)) && (accountObj.getPassword().equals(acct.getIdToken()))) {
+                            if ((accountObj.getEmail().equals(email))) {
                                 String getSecure_id = accountObj.getId();
                                 String getUsername = accountObj.getUsername();
                                 //Points is now deprecated
@@ -208,12 +211,56 @@ public class SignInActivity extends AppCompatActivity implements
 
                                 alreadySignIn = true;
                                 if(alreadySignIn) {
+                                    /*
                                     boom = new Toast(getApplicationContext());
                                     boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
                                     boom.makeText(SignInActivity.this, "AVAILABLE", boom.LENGTH_SHORT).show();
+                                    */
+                                    //TOKEN FOR NOTIFICATION
+                                    SharedPreferences sharedPreferences =
+                                            PreferenceManager.getDefaultSharedPreferences(SignInActivity.this);
+                                    String token = sharedPreferences.getString(QuickstartPreferences.GCM_TOKEN, "");
+                                    Notification notification = new Notification(nameOnly, token);
+                                    GsonBuilder gsonBuilder2 = new GsonBuilder();
+                                    Gson gson2 = gsonBuilder.create();
+                                    String json2 = gson2.toJson(notification);
+                                    Log.d("notification", json2);
+
+                                    try {
+                                        CustomJSONObjectRequest jsonRequest2 = new CustomJSONObjectRequest(Request.Method.POST, url2, new JSONObject(json2), new Response.Listener<JSONObject>() {
+                                            @Override
+                                            public void onResponse(JSONObject response) {
+                                                try {
+                                                    String tokenId = response.getString("result");
+                                                    Log.d("notif_id", tokenId);
+                                                    SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+                                                    SharedPreferences.Editor editor = settings.edit();
+                                                    editor.putString("notifId", tokenId);
+                                                    editor.commit();
+                                                } catch (JSONException e) {
+                                                    e.printStackTrace();
+                                                }
+
+
+                                            }
+                                        }, new Response.ErrorListener() {
+                                            @Override
+                                            public void onErrorResponse(VolleyError error) {
+                                                Log.d("Error_Request2", error.toString());
+                                            }
+                                        });
+                                        mQueue.add(jsonRequest2);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+
                                     //signIn();
                                     signOut();
-                                    toHome();
+                                    if(accountObj.getPhone_number().equals("")){
+                                        changeEditProfile(accountObj);
+                                    }else{
+                                        toHome();
+                                    }
 
                                 }
                             }
@@ -221,7 +268,7 @@ public class SignInActivity extends AppCompatActivity implements
                         if(!alreadySignIn) {
                             boom = new Toast(getApplicationContext());
                             boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
-                            boom.makeText(SignInActivity.this, "NOT AVAILABLE", boom.LENGTH_SHORT).show();
+                            boom.makeText(SignInActivity.this, "Email not available, registering email.", boom.LENGTH_SHORT).show();
                             Account account = new Account();
                             account.setUsername(nameOnly);
                             account.setEmail(acct.getEmail());
@@ -239,7 +286,6 @@ public class SignInActivity extends AppCompatActivity implements
                                     public void onResponse(JSONObject response) {
                                         try {
                                             Log.d("result", response.getString("result"));
-                                            registered = true;
                                         } catch (JSONException e) {
                                             e.printStackTrace();
                                         }
@@ -252,7 +298,9 @@ public class SignInActivity extends AppCompatActivity implements
                                 });
                                 jsonRequest2.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
                                 mQueue.add(jsonRequest2);
-
+                                boom = new Toast(getApplicationContext());
+                                boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
+                                boom.makeText(SignInActivity.this, "Registered, you can sign in now.", boom.LENGTH_SHORT).show();
                             }
                             catch (JSONException e) {
                                 e.printStackTrace();
@@ -271,9 +319,7 @@ public class SignInActivity extends AppCompatActivity implements
                 }
             });
             mQueue.add(jsonRequest);
-            if (registered){
-                mQueue.add(jsonRequest);
-            }
+
 
 /*
             if(alreadySignIn){
@@ -432,6 +478,12 @@ public class SignInActivity extends AppCompatActivity implements
 
     private void toHome(){
         Intent intent = new Intent(this, Home.class);
+        startActivity(intent);
+    }
+
+    private void changeEditProfile(Account account){
+        Intent intent = new Intent(this, EditProfile.class);
+        intent.putExtra("object", account);
         startActivity(intent);
     }
 
