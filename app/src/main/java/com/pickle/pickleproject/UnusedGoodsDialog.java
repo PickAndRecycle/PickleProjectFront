@@ -95,7 +95,15 @@ public class UnusedGoodsDialog extends AppCompatActivity {
         trash.setReport(intent.getBooleanExtra("report",false));
         trash.setCategories(TrashCategories.UNUSED);
         trash.setTitle(intent.getStringExtra("title"));
-        trash.setCondition(UnusedCondition.valueOf(intent.getStringExtra("condition").toUpperCase()));
+        String conditionTrash = intent.getStringExtra("condition").toUpperCase();
+        if(conditionTrash.equals("LAYAK")){
+            conditionTrash = "GOOD";
+        } else if(conditionTrash.equals("TIDAK LAYAK")){
+            conditionTrash = "BAD";
+        } else{
+            conditionTrash = "NEW";
+        }
+        trash.setCondition(UnusedCondition.valueOf(conditionTrash));
 
 
         GsonBuilder gsonBuilder = new GsonBuilder();
