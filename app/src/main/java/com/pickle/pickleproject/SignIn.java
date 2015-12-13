@@ -62,11 +62,11 @@ public class SignIn extends AppCompatActivity {
         final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.GET, url, new JSONObject(), this, this);
         mQueue.add(jsonRequest);
         */
-        usernameForm = (EditText) findViewById(R.id.editText8);
-        passwordForm = (EditText) findViewById(R.id.editText9);
+        usernameForm = (EditText) findViewById(R.id.usernameinput);
+        passwordForm = (EditText) findViewById(R.id.passwordinput);
         mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext()).getRequestQueue();
 
-        Button signInButton = (Button) findViewById(R.id.signInButton);
+        MontserratButton signInButton = (MontserratButton) findViewById(R.id.signinbutton);
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -199,7 +199,7 @@ public class SignIn extends AppCompatActivity {
             }
         });
 
-        TextView noAccount = (TextView) findViewById(R.id.textView20);
+        TextView noAccount = (TextView) findViewById(R.id.noAccount);
         noAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -207,7 +207,7 @@ public class SignIn extends AppCompatActivity {
             }
         });
 
-        Button googleSignInButton = (Button) findViewById(R.id.googleSignInButton);
+        Button googleSignInButton = (Button) findViewById(R.id.signingoogleplusbutton);
         googleSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -226,8 +226,8 @@ public class SignIn extends AppCompatActivity {
 
     private void signIn(){
         Intent intent = new Intent(this, Home.class);
-        usernameForm = (EditText) findViewById(R.id.editText8);
-        passwordForm = (EditText) findViewById(R.id.editText9);
+        usernameForm = (EditText) findViewById(R.id.usernameinput);
+        passwordForm = (EditText) findViewById(R.id.passwordinput);
         //to pass usernameForm and passwordForm
         intent.putExtra("username", usernameForm.getText().toString());
         intent.putExtra("password", passwordForm.getText().toString());

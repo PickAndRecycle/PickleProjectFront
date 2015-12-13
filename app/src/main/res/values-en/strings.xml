@@ -108,7 +108,7 @@
     <string name="call">CALL</string>
     <string name="picklejar">PICKLE JAR</string>
     <string name="signin">SIGN IN</string>
-    <string name="accountFalse">don\'t have account?</string>
+    <string name="accountFalse">don\'t have an account yet?</string>
     <string name="signinGoogle">SIGN IN WITH GOOGLE+</string>
     <string name="available">Available</string>
     <string name="picked">Picked</string>
@@ -117,15 +117,5 @@
     <string name="jarOrNewsText">PICKLE\nJAR\n\nNEWS\nFEED</string>
     <string name="Picker">PICKER</string>
     <string name="Thrower">THROWER</string>
-    <string name = "aboutUsText">
-        <p align = "justify">PICKLE, which stands for Pick and Recycle, is a startup created by Computer Science students of
-            University Of Indonesia with the help and association with Nostra Technology Company.
-            Seeing that trash has became one major problem in Jakarta and it remains an unsolved one, we want to tried to make a
-            new solution for this problem. To solve this problem, we want the society also to contribute to our project
-            for a better Jakarta. </p>
-        <br></br>
-        <p align = "justify">Pickle believes that by the help of this application, local citizens can have a new insight towards the danger of waste and help to contribute by managing waste properly.
-            We also hoped that this project can help the life of people who contributed and makes our environment better.</p>
-    </string>
-    <string name="registrationSuccess">Congratulation you already join pickle</string>
+    <string name="registrationSuccess">Congratulation you\'ve already joined pickle!</string>
 </resources>
