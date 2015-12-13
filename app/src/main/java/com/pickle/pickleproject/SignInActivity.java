@@ -1,11 +1,14 @@
 package com.pickle.pickleproject;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
@@ -225,6 +228,7 @@ public class SignInActivity extends AppCompatActivity implements
                                     Gson gson2 = gsonBuilder.create();
                                     String json2 = gson2.toJson(notification);
                                     Log.d("notification", json2);
+                                    Log.d("PHONY: ", accountObj.getPhone_number());
 
                                     try {
                                         CustomJSONObjectRequest jsonRequest2 = new CustomJSONObjectRequest(Request.Method.POST, url2, new JSONObject(json2), new Response.Listener<JSONObject>() {
@@ -253,10 +257,9 @@ public class SignInActivity extends AppCompatActivity implements
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
-
-                                    //signIn();
                                     signOut();
-                                    if(accountObj.getPhone_number().equals("")){
+                                    //signIn();
+                                    if(accountObj.getPhone_number().isEmpty() || accountObj.getPhone_number()=="NULL"){
                                         changeEditProfile(accountObj);
                                     }else{
                                         toHome();
@@ -273,6 +276,7 @@ public class SignInActivity extends AppCompatActivity implements
                             account.setUsername(nameOnly);
                             account.setEmail(acct.getEmail());
                             account.setPassword(acct.getIdToken());
+                            account.setPhone_number("");
 
                             GsonBuilder gsonBuilder = new GsonBuilder();
                             gsonBuilder.registerTypeAdapter(Account.class, new AccountSerializer());
@@ -298,6 +302,21 @@ public class SignInActivity extends AppCompatActivity implements
                                 });
                                 jsonRequest2.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
                                 mQueue.add(jsonRequest2);
+                                AlertDialog.Builder alertDialog = new AlertDialog.Builder(SignInActivity.this);
+
+                                // Setting Dialog Title
+                                alertDialog.setTitle("Welcome to Pickle");
+                                // Setting Dialog Message
+                                alertDialog.setMessage("You can now sign in.");
+                                // On pressing Settings button
+                                alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+
+                                // Showing Alert Message
+                                alertDialog.show();
                                 boom = new Toast(getApplicationContext());
                                 boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
                                 boom.makeText(SignInActivity.this, "Registered, you can sign in now.", boom.LENGTH_SHORT).show();
@@ -383,11 +402,11 @@ public class SignInActivity extends AppCompatActivity implements
 
 
             //mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
-            updateUI(true);
-        } else {
+            //updateUI(true);
+        } /*else {
             // Signed out, show unauthenticated UI.
             updateUI(false);
-        }
+        }*/
     }
     // [END handleSignInResult]
 

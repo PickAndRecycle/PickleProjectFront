@@ -171,6 +171,12 @@ public class ProfileActivity extends AppCompatActivity {
         this.overridePendingTransition(R.anim.push_up_in,R.anim.push_up_out);
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, Home.class);
+        startActivity(intent);
+    }
+
 
     private class SwipeGestureDetector
             extends GestureDetector.SimpleOnGestureListener {
