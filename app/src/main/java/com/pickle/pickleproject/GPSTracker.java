@@ -17,7 +17,7 @@ import android.provider.Settings;
 import android.util.Log;
 
 /**
- * Created by kamar on 14/11/2015.
+ * Created by Ravi Tamada on 1/7/2012, modified by kamar on 14/11/2015.
  */
 public class GPSTracker extends Service implements LocationListener {
     private final Context mContext;
@@ -187,16 +187,17 @@ public class GPSTracker extends Service implements LocationListener {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
 
         // Setting Dialog Title
-        alertDialog.setTitle("GPS is settings");
+        alertDialog.setTitle("Pickle cannot get your location");
 
         // Setting Dialog Message
         alertDialog.setMessage("GPS is not enabled. Do you want to go to settings menu?");
 
         // On pressing Settings button
         alertDialog.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog,int which) {
+            public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 mContext.startActivity(intent);
+                dialog.dismiss();
             }
         });
 

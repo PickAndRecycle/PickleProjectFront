@@ -5,11 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.util.LruCache;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
@@ -75,7 +77,10 @@ public class ListAdapter extends ArrayAdapter<Trash> {
 
         gps = new GPSTracker(context);
         if(!gps.canGetLocation()) {
-            gps.showSettingsAlert();
+            //gps.showSettingsAlert();
+            Toast boom = new Toast(context);
+            boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
+            boom.makeText(context, "GPS is turned off", boom.LENGTH_SHORT).show();
         }
         double latitude = gps.getLatitude();
         double longitude = gps.getLongitude();
