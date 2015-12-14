@@ -64,7 +64,7 @@ public class SignInActivity extends AppCompatActivity implements
     private TextView mStatusTextView;
     private ProgressDialog mProgressDialog;
 
-    private boolean alreadySignIn;
+    private boolean alreadySignIn = false;
     boolean registered = false;
 
     public static final String PREFS_NAME = "PicklePrefs";
@@ -74,16 +74,16 @@ public class SignInActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_activity);
+        setContentView(R.layout.activity_sign_in);
         mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext()).getRequestQueue();
 
         // Views
-        mStatusTextView = (TextView) findViewById(R.id.status);
+        //mStatusTextView = (TextView) findViewById(R.id.status);
 
         // Button listeners
         findViewById(R.id.sign_in_button).setOnClickListener(this);
-        findViewById(R.id.sign_out_button).setOnClickListener(this);
-        findViewById(R.id.disconnect_button).setOnClickListener(this);
+        //findViewById(R.id.sign_out_button).setOnClickListener(this);
+        //findViewById(R.id.disconnect_button).setOnClickListener(this);
 
         // [START configure_signin]
         // Configure sign-in to request the user's ID, email address, and basic
@@ -112,9 +112,9 @@ public class SignInActivity extends AppCompatActivity implements
         // may be displayed when only basic profile is requested. Try adding the
         // Scopes.PLUS_LOGIN scope to the GoogleSignInOptions to see the
         // difference.
-        SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
-        signInButton.setSize(SignInButton.SIZE_STANDARD);
-        signInButton.setScopes(gso.getScopeArray());
+        //SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
+        //signInButton.setSize(SignInButton.SIZE_STANDARD);
+        //signInButton.setScopes(gso.getScopeArray());
         // [END customize_button]
     }
 
@@ -188,6 +188,7 @@ public class SignInActivity extends AppCompatActivity implements
                         JSONArray parentArray = parentObject.getJSONArray("result");
                         List<Account> accountList = new ArrayList<Account>();
                         for (int i = 0; i < parentArray.length(); i++) {
+
                             JSONObject finalObject = parentArray.getJSONObject(i);
                             Account accountObj;
                             GsonBuilder gsonBuilder = new GsonBuilder();
@@ -195,6 +196,7 @@ public class SignInActivity extends AppCompatActivity implements
                             accountObj = gson.fromJson(String.valueOf(finalObject), Account.class);
                             Log.d("email", accountObj.getEmail());
                             Log.d("password", accountObj.getPassword());
+
                             if ((accountObj.getEmail().equals(email))) {
                                 String getSecure_id = accountObj.getId();
                                 String getUsername = accountObj.getUsername();
@@ -213,6 +215,7 @@ public class SignInActivity extends AppCompatActivity implements
                                 String x = "secure id= " + getSecure_id + ", " + "username= " + getUsername + ", " + "email= " + getEmail;
 
                                 alreadySignIn = true;
+
                                 if(alreadySignIn) {
                                     /*
                                     boom = new Toast(getApplicationContext());
@@ -257,6 +260,7 @@ public class SignInActivity extends AppCompatActivity implements
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
+
                                     signOut();
                                     //signIn();
                                     if(accountObj.getPhone_number().isEmpty() || accountObj.getPhone_number()=="NULL"){
