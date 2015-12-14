@@ -6,4 +6,5 @@
     <color name = "green">#00B5B5</color>
     <color name = "lightgray">#D4D4D4</color>
     <color name = "transparent">#00FFFFFF</color>
+    <color name = "black">#000000</color>
 </resources>

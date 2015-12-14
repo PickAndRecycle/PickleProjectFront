@@ -40,7 +40,7 @@
     <string name="title_activity_add_description">add_description</string>
     <string name="title_activity_throw_or_report">Throw_or_Report</string>
     <string name="title_activity_login">login</string>
-    <string name="LocationText">LOCATION</string>
+    <string name="LocationText">LOCATION SETTINGS</string>
     <string name="profileText">PROFILE</string>
     <string name="configurationButton">configurationButton</string>
     <string name="title_activity_other_trash_dialog" />
@@ -94,7 +94,7 @@
     <string name="backHome">BACK TO HOME</string>
     <string name="unusedGoods">UNUSED GOODS</string>
     <string name="recyclableWaste">RECYCLABLE WASTE</string>
-    <string name="greenWaste">GREEEN WASTE</string>
+    <string name="greenWaste">GREEN WASTE</string>
     <string name="generalWaste">GENERAL WASTE</string>
     <string name="unused">UNUSED</string>
     <string name="general">GENERAL</string>

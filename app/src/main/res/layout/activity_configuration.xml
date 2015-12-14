@@ -2,243 +2,166 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.pickle.pickleproject.ConfigurationActivity">
+    tools:context="com.pickle.pickleproject.ConfigurationActivity"
+    android:background="@color/darkgray">
+
+    <com.pickle.pickleproject.MontserratTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/SettingText"
+        android:id="@+id/SettingsText"
+        android:textColor="@color/white"
+        android:textSize="28sp"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:layout_marginTop="50dp" />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="false"
-        android:layout_alignParentStart="true"
-        android:background="#3e4651"
-        android:id="@+id/ActionBar">
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:id="@+id/settingscontent">
 
-        <com.pickle.pickleproject.MontserratTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/SettingText"
-            android:id="@+id/SettingsText"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:textColor="#ffffff" />
-    </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/lightgray"
+            android:id="@+id/LocationArea"
+            android:layout_below="@+id/ActionBar"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" >
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="#d4d4d4"
-        android:id="@+id/LocationArea"
-        android:layout_below="@+id/ActionBar"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" >
+            <com.pickle.pickleproject.MontserratButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/LocationButton"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:longClickable="false"
+                android:background="@color/lightgray"
+                android:text="@string/LocationText"
+                android:textSize="20sp" />
 
-        <com.pickle.pickleproject.MontserratTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/LocationText"
-            android:id="@+id/LocationText"
-            android:layout_centerVertical="true"
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="#d4d4d4"
+            android:id="@+id/ChangeLanguage"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginLeft="25dp"
-            android:layout_marginStart="25dp" />
+            android:layout_below="@+id/LocationArea">
 
-        <ToggleButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="New ToggleButton"
-            android:id="@+id/toggleButton"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginRight="31dp"
-            android:layout_marginEnd="31dp" />
-    </RelativeLayout>
+            <com.pickle.pickleproject.MontserratButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ChangeLanguageButton"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:background="@color/white"
+                android:text="@string/ChangeLanguage"
+                android:textSize="20sp" />
+        </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="#ffffff"
-        android:id="@+id/ClearPickleJarArea"
-        android:layout_below="@+id/LocationArea"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" >
-
-        <com.pickle.pickleproject.MontserratTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/ClearPickleJarText"
-            android:id="@+id/ClearPickleJarText"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/ClearPickleJarButton"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="#ffffff"
+            android:id="@+id/AboutUsArea"
             android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:longClickable="false"
-            android:background="#00ffffff" />
-    </RelativeLayout>
+            android:layout_below="@+id/ChangeLanguage"
+            android:layout_alignParentLeft="true" >
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="#d4d4d4"
-        android:id="@+id/ChangeLanguage"
-        android:layout_below="@+id/ClearPickleJarArea"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" >
+            <com.pickle.pickleproject.MontserratButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/AboutUsButton"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:background="@color/lightgray"
+                android:textSize="20sp"
+                android:text="@string/AboutUsText" />
+        </RelativeLayout>
 
-        <com.pickle.pickleproject.MontserratTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/ChangeLanguage"
-            android:id="@+id/ChangeLanguageText"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/ChangeLanguageButton"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="#d4d4d4"
+            android:id="@+id/TermsOfServiceArea"
             android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:background="#00ffffff" />
-    </RelativeLayout>
+            android:layout_below="@+id/AboutUsArea"
+            android:layout_alignParentLeft="true" >
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="#ffffff"
-        android:id="@+id/AboutUsArea"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/ChangeLanguage"
-        android:layout_alignParentLeft="true" >
+            <com.pickle.pickleproject.MontserratButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/TermsOfServiceButton"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:background="@color/white"
+                android:textSize="20sp"
+                android:text="@string/TermsOfServiceText" />
 
-        <com.pickle.pickleproject.MontserratTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/AboutUsText"
-            android:id="@+id/AboutUsText"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
+        </RelativeLayout>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/AboutUsButton"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="#ffffff"
+            android:id="@+id/PrivacyPolicyArea"
             android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:background="#00ffffff" />
-    </RelativeLayout>
+            android:layout_below="@+id/TermsOfServiceArea"
+            android:layout_alignParentLeft="true" >
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="#d4d4d4"
-        android:id="@+id/TermsOfServiceArea"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/AboutUsArea"
-        android:layout_alignParentLeft="true" >
-
-        <com.pickle.pickleproject.MontserratTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/TermsOfServiceText"
-            android:id="@+id/TermsOfServiceText"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/TermsOfServiceButton"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:background="#00ffffff" />
+            <com.pickle.pickleproject.MontserratButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/PrivacyPolicyButton"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:background="@color/lightgray"
+                android:text="@string/PrivacyPolicyText"
+                android:textSize="20sp" />
+        </RelativeLayout>
 
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:background="#ffffff"
-        android:id="@+id/PrivacyPolicyArea"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/TermsOfServiceArea"
-        android:layout_alignParentLeft="true" >
-
-        <com.pickle.pickleproject.MontserratTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/PrivacyPolicyText"
-            android:id="@+id/PrivacyPolicyText"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/PrivacyPolicyButton"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:background="#00ffffff" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="#f1654c"
         android:id="@+id/BackToMyProfileArea"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="false"
         android:layout_below="@+id/PrivacyPolicyArea"
-        android:layout_alignParentTop="false">
+        android:layout_alignParentTop="false"
+        android:layout_alignParentEnd="false">
 
-        <com.pickle.pickleproject.MontserratTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/BackToMyProfileText"
-            android:id="@+id/BackToMyProfileText"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:textColor="#ffffff" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <com.pickle.pickleproject.MontserratButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:id="@+id/BackToMyProfileButton"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
@@ -246,6 +169,10 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
-            android:background="#00ffffff" />
+            android:background="@color/red"
+            android:text="@string/BackToMyProfileText"
+            android:textSize="20sp"
+            android:textColor="@color/white" />
     </RelativeLayout>
+
 </RelativeLayout>

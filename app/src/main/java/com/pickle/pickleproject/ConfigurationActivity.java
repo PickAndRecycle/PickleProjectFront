@@ -2,11 +2,11 @@ package com.pickle.pickleproject;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 
 import java.util.Locale;
 import java.util.concurrent.locks.Condition;
@@ -18,7 +18,16 @@ public class ConfigurationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuration);
 
-        Button TermsOfServiceButton = (Button) findViewById(R.id.TermsOfServiceButton);
+        MontserratButton LocationButton = (MontserratButton) findViewById(R.id.LocationButton);
+
+        LocationButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                changeLocationSettings();
+            }
+        });
+
+        MontserratButton TermsOfServiceButton = (MontserratButton) findViewById(R.id.TermsOfServiceButton);
 
         TermsOfServiceButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -27,7 +36,7 @@ public class ConfigurationActivity extends AppCompatActivity {
             }
         });
 
-        Button PrivacyPolicyButton = (Button) findViewById(R.id.PrivacyPolicyButton);
+        MontserratButton PrivacyPolicyButton = (MontserratButton) findViewById(R.id.PrivacyPolicyButton);
 
         PrivacyPolicyButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,16 +45,16 @@ public class ConfigurationActivity extends AppCompatActivity {
             }
         });
 
-        Button backToMyProfileButton = (Button) findViewById(R.id.BackToMyProfileButton);
+        MontserratButton backToMyProfileButton = (MontserratButton) findViewById(R.id.BackToMyProfileButton);
 
         backToMyProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeProfile();
+                finish();
             }
         });
 
-        Button aboutUsButton = (Button) findViewById(R.id.AboutUsButton);
+        MontserratButton aboutUsButton = (MontserratButton) findViewById(R.id.AboutUsButton);
 
         aboutUsButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -56,7 +65,7 @@ public class ConfigurationActivity extends AppCompatActivity {
 
         final Configuration config = new Configuration();
         final Locale locale = Locale.getDefault();
-        Button language = (Button) findViewById(R.id.ChangeLanguageButton);
+        MontserratButton language = (MontserratButton) findViewById(R.id.ChangeLanguageButton);
         language.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,6 +90,11 @@ public class ConfigurationActivity extends AppCompatActivity {
         });
     }
 
+    private void changeLocationSettings(){
+        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+        startActivity(intent);
+    }
+
     private void changeTermsOfService(){
         Intent intent = new Intent(this, TermsOfService.class);
         startActivity(intent);
@@ -91,15 +105,11 @@ public class ConfigurationActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void changeProfile(){
-        Intent intent = new Intent(this, ProfileActivity.class);
-        startActivity(intent);
-    }
-
     private void changeAboutUs(){
         Intent intent = new Intent(this, AboutUs.class);
         startActivity(intent);
     }
+
     @Override
     public void onBackPressed() {
         moveTaskToBack(true);

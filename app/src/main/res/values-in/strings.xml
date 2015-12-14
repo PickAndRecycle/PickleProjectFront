@@ -41,7 +41,7 @@
     <string name="title_activity_add_description">deskripsi</string>
     <string name="title_activity_throw_or_report">buangAtauLapor</string>
     <string name="title_activity_login">login</string>
-    <string name="LocationText">LOKASI</string>
+    <string name="LocationText">PENGATURAN LOKASI</string>
     <string name="profileText">PROFIL</string>
     <string name="configurationButton">configurationButton</string>
     <string name="title_activity_other_trash_dialog" />
@@ -116,7 +116,7 @@
     <string name="done">Selesai</string>
     <string name="throwOrReportText">BUANG\n\nATAU\n\nLAPOR</string>
     <string name="jarOrNewsText">PICKLE\nJAR\n\nARTIKEL</string>
-    <string name="Picker">AMBIL SAMPAH</string>
-    <string name="Thrower">BUANG SAMPAH</string>
+    <string name="Picked">AMBIL SAMPAH</string>
+    <string name="Thrown">BUANG SAMPAH</string>
     <string name="registrationSuccess">Selamat anda telah bergabung dengan pickle!</string>
 </resources>

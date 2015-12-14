@@ -43,9 +43,9 @@ public class Picklejar extends AppCompatActivity {
         setContentView(R.layout.activity_picklejar);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabPicklejar);
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.Thrower));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.Thrown));
 
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.Picker));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.Picked));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pagerPicklejar);
         final PagerAdapterPicklejar adapter = new PagerAdapterPicklejar
