@@ -64,10 +64,15 @@ public class Home extends Activity   {
                     signIn();
                 }
                 else{
-                    Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    File file = getFile();
-                    camera_intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
-                    startActivityForResult(camera_intent, CAM_REQUEST);
+                    gps = new GPSTracker(Home.this);
+                    if (gps.canGetLocation()){
+                        Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        File file = getFile();
+                        camera_intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
+                        startActivityForResult(camera_intent, CAM_REQUEST);
+                    } else{
+                        gps.showSettingsAlert();
+                    }
                 }
 
 
@@ -90,7 +95,12 @@ public class Home extends Activity   {
                     signIn();
                 }
                 else {
-                    changePick();
+                    gps = new GPSTracker(Home.this);
+                    if(gps.canGetLocation()){
+                        changePick();
+                    }else{
+                        gps.showSettingsAlert();
+                    }
                 }
             }
         });
