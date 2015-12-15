@@ -447,6 +447,8 @@ public class SignIn extends AppCompatActivity implements GoogleApiClient.OnConne
                                 });
                                 jsonRequest2.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
                                 mQueue.add(jsonRequest2);
+                                changeGoogleSignIn();
+                                /*
                                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(SignIn.this);
 
                                 // Setting Dialog Title
@@ -458,10 +460,12 @@ public class SignIn extends AppCompatActivity implements GoogleApiClient.OnConne
                                     public void onClick(DialogInterface dialog,int which) {
                                         dialog.dismiss();
                                     }
+
                                 });
 
                                 // Showing Alert Message
                                 alertDialog.show();
+                                */
                                 boom = new Toast(getApplicationContext());
                                 boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
                                 boom.makeText(SignIn.this, "Registered, you can sign in now.", boom.LENGTH_SHORT).show();
