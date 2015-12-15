@@ -31,10 +31,13 @@ import com.pickle.pickleprojectmodel.Trash;
 import com.pickle.pickleprojectmodel.TrashCategories;
 import com.pickle.pickleprojectmodel.UnusedCondition;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RegistrationActivity extends AppCompatActivity {
     private EditText username;
@@ -91,14 +94,7 @@ public class RegistrationActivity extends AppCompatActivity {
         mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext()).getRequestQueue();
 
         final String url = "http://104.155.237.238:8080/account/";
-/*
-        Account account = new Account();
-        account.setUsername(username.getText().toString());
-        account.setEmail(email.getText().toString());
-        account.setPassword(password.getText().toString());
-        account.setPhone_number(phoneNumber.getText().toString());
-*/
-        //SLIGHT MODIFICATION
+
         Account account = new Account();
         account.setUsername(username.getText().toString());
         account.setEmail(email.getText().toString());
@@ -109,34 +105,82 @@ public class RegistrationActivity extends AppCompatActivity {
 
         gsonBuilder.registerTypeAdapter(Account.class, new AccountSerializer());
         Gson gson = gsonBuilder.create();
-        String json = gson.toJson(account);
+        final String json = gson.toJson(account);
         Log.d("json", json);
-        try {
-            final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.POST, url, new JSONObject(json), new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
-                    try {
-                        Log.d("result", response.getString("result"));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+
+        final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.GET, url, new JSONObject(), new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONObject parentObject = response;
+                    Log.d("json:", response.getString("result"));
+                    JSONArray parentArray = parentObject.getJSONArray("result");
+                    List<Account> accountList = new ArrayList<Account>();
+                    final String usernameString = username.getText().toString();
+                    Log.d("username", usernameString);
+
+                    int duplicateCounter = 0;
+                    for (int i = 0; i < parentArray.length(); i++) {
+                        JSONObject finalObject = parentArray.getJSONObject(i);
+                        Account accountObj;
+                        GsonBuilder gsonBuilder = new GsonBuilder();
+                        final Gson gson = gsonBuilder.create();
+                        accountObj = gson.fromJson(String.valueOf(finalObject), Account.class);
+                        Log.d("username", accountObj.getUsername());
+
+                        System.out.println(duplicateCounter);
+
+                        if (!accountObj.getUsername().equals(usernameString)) {
+                            if (i == parentArray.length()-1) {
+                                if (duplicateCounter == 0) {
+
+                                    try {
+                                        final CustomJSONObjectRequest jsonRequest2 = new CustomJSONObjectRequest(Request.Method.POST, url, new JSONObject(json), new Response.Listener<JSONObject>() {
+                                            @Override
+                                            public void onResponse(JSONObject response) {
+                                                try {
+                                                    Log.d("result", response.getString("result"));
+                                                } catch (JSONException e) {
+                                                    e.printStackTrace();
+                                                }
+                                            }
+                                        }, new Response.ErrorListener() {
+                                            @Override
+                                            public void onErrorResponse(VolleyError error) {
+                                                Log.d("Error:", error.getMessage());
+                                            }
+                                        });
+                                        jsonRequest2.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+                                        mQueue.add(jsonRequest2);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                } else {
+                                    Toast boom = new Toast(getApplicationContext());
+                                    boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
+                                    boom.makeText(RegistrationActivity.this, "username already taken", boom.LENGTH_SHORT).show();
+                                }
+                            }
+                        } else {
+                            duplicateCounter++;
+                        }
                     }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Log.d("Error:", error.getMessage());
-                }
-            });
-            jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-            mQueue.add(jsonRequest);
-
-
-        }
-        catch (JSONException e) {
-            e.printStackTrace();
-        }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Error", error.toString());
+            }
+        });
+        jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        mQueue.add(jsonRequest);
 
         startActivity(intent);
+
     }
 
     private class AccountSerializer implements JsonSerializer<Account> {
