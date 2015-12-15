@@ -1,6 +1,7 @@
 package com.pickle.pickleproject;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -8,6 +9,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -43,7 +45,11 @@ public class OtherTrashDialog extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_unused_goods_dialog);
 
-    Button submitUnusedButton = (Button) findViewById(R.id.submitButtonUnusedGoods);
+        String path = "sdcard/Pickle/cam_image.jpg";
+        RelativeLayout background = (RelativeLayout) findViewById(R.id.backgroundLayout);
+        background.setBackground(Drawable.createFromPath(path));
+
+    MontserratButton submitUnusedButton = (MontserratButton) findViewById(R.id.submitButtonUnusedGoods);
     //Button backHomeButton = (Button) findViewById(R.id.trash_notification_home);
 
     submitUnusedButton.setOnClickListener(new View.OnClickListener() {

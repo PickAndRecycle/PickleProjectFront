@@ -9,6 +9,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -27,10 +28,11 @@ public class AddDescription extends AppCompatActivity {
         setContentView(R.layout.activity_add_description);
 
         String path = "sdcard/Pickle/cam_image.jpg";
-        RelativeLayout trashPhoto = (RelativeLayout) findViewById(R.id.trashPhoto);
+
+        LinearLayout trashPhoto = (LinearLayout) findViewById(R.id.trashPhoto);
         trashPhoto.setBackground(Drawable.createFromPath(path));
 
-        Button NextButton = (Button) findViewById(R.id.nextButton);
+        MontserratButton NextButton = (MontserratButton) findViewById(R.id.nextButton);
         NextButton.setOnClickListener(new View.OnClickListener() {
 
             /*
@@ -59,8 +61,7 @@ public class AddDescription extends AppCompatActivity {
             }
         });
 
-
-        Button HomeButton = (Button) findViewById(R.id.backButton);
+        MontserratButton HomeButton = (MontserratButton) findViewById(R.id.backButton);
         HomeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,157 +1,177 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_throw_category"
     tools:context="com.pickle.pickleproject.ThrowCategory"
-    android:background="#b1000000">
+    android:orientation="vertical"
+    android:id="@+id/backgroundLayout">
 
-    <RelativeLayout
-        android:layout_width="180dp"
-        android:layout_height="250dp"
-        android:id="@+id/unusedGoodsLayout"
-        android:layout_alignTop="@+id/generalWasteLayout"
-        android:layout_alignLeft="@+id/recyclableWasteLayout"
-        android:layout_alignStart="@+id/recyclableWasteLayout">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.9"
+        android:background="@color/blackoverlay"
+        android:id="@+id/categoryContent">
 
-        <ImageButton
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:id="@+id/UnusedButton"
-            android:background="@drawable/button"
-            android:backgroundTint="#d8d8d8"
-            android:foreground="@mipmap/unused_goods_icon"
-            android:tint="#d8d8d8"
-            android:layout_above="@+id/unusedGoodsText"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/unusedGoods"
-            android:id="@+id/unusedGoodsText"
-            android:layout_marginBottom="27dp"
-            android:textColor="#FFFFFF"
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/unusedGoodsLayout"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <ImageButton
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:id="@+id/UnusedButton"
+                    android:background="@drawable/unusedgoods"
+                    android:layout_centerInParent="true" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/unusedGoods"
+                    android:id="@+id/unusedGoodsText"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center"
+                    android:layout_marginBottom="27dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/recyclableWasteLayout"
+                android:layout_below="@+id/unusedGoodsLayout"
+                android:layout_toLeftOf="@+id/greenWasteLayout"
+                android:layout_toStartOf="@+id/greenWasteLayout"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <ImageButton
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:id="@+id/RecycleButton"
+                    android:background="@drawable/recyclablewaste"
+                    android:layout_centerInParent="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/recyclableWaste"
+                    android:id="@+id/recyclableWasteText"
+                    android:layout_marginBottom="27dp"
+                    android:textColor="#FFFFFF"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="16sp" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/generalWasteLayout"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <ImageButton
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:id="@+id/GeneralButton"
+                    android:background="@drawable/generalwaste"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/generalWaste"
+                    android:id="@+id/generalWasteText"
+                    android:layout_marginBottom="27dp"
+                    android:textColor="#FFFFFF"
+                    android:layout_alignParentBottom="true"
+                    android:textSize="16sp"
+                    android:layout_centerInParent="true" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/greenWasteLayout"
+                android:layout_below="@+id/unusedGoodsLayout"
+                android:layout_alignLeft="@+id/generalWasteLayout"
+                android:layout_alignStart="@+id/generalWasteLayout"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <ImageButton
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:id="@+id/GreenButton"
+                    android:background="@drawable/greenwaste"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/greenWaste"
+                    android:id="@+id/greenWasteText"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="27dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="vertical"
+        android:layout_weight="0.1"
+        android:id="@+id/backButtonLayout">
+
+        <com.pickle.pickleproject.MontserratButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/back"
+            android:id="@+id/backButton"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:textSize="16sp" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="180dp"
-        android:layout_height="250dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:id="@+id/generalWasteLayout">
-
-        <ImageButton
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:id="@+id/GeneralButton"
-            android:background="@drawable/button"
-            android:backgroundTint="#d72223"
-            android:foreground="@mipmap/general_waste_icon"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:tint="#d72223" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/generalWaste"
-            android:id="@+id/generalWasteText"
-            android:layout_marginBottom="27dp"
+            android:background="#f1654c"
             android:textColor="#FFFFFF"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:textSize="16sp" />
-    </RelativeLayout>
+            android:textSize="24sp"
+            android:gravity="center" />
 
-    <RelativeLayout
-        android:layout_width="180dp"
-        android:layout_height="250dp"
-        android:id="@+id/greenWasteLayout"
-        android:layout_below="@+id/unusedGoodsLayout"
-        android:layout_alignLeft="@+id/generalWasteLayout"
-        android:layout_alignStart="@+id/generalWasteLayout">
+    </LinearLayout>
 
-        <ImageButton
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:id="@+id/GreenButton"
-            android:background="@drawable/button"
-            android:backgroundTint="#32c183"
-            android:foreground="@mipmap/green_waste_icon"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:tint="#32c183" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/greenWaste"
-            android:id="@+id/greenWasteText"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:layout_marginBottom="27dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="180dp"
-        android:layout_height="250dp"
-        android:id="@+id/recyclableWasteLayout"
-        android:layout_below="@+id/unusedGoodsLayout"
-        android:layout_toLeftOf="@+id/greenWasteLayout"
-        android:layout_toStartOf="@+id/greenWasteLayout">
-
-        <ImageButton
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:id="@+id/RecycleButton"
-            android:background="@drawable/button"
-            android:backgroundTint="#f0be49"
-            android:foreground="@mipmap/recyclable_waste_icon"
-            android:layout_centerVertical="true"
-            android:layout_alignRight="@+id/recyclableWasteText"
-            android:layout_alignEnd="@+id/recyclableWasteText"
-            android:tint="#f0be49" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/recyclableWaste"
-            android:id="@+id/recyclableWasteText"
-            android:layout_marginBottom="27dp"
-            android:textColor="#FFFFFF"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:textSize="16sp" />
-
-    </RelativeLayout>
-
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="70dp"
-        android:text="@string/back"
-        android:id="@+id/button"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/greenWasteLayout"
-        android:layout_alignEnd="@+id/greenWasteLayout"
-        android:background="#f1654c"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-</RelativeLayout>
+</LinearLayout>

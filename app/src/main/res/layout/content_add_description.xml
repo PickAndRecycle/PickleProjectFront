@@ -3,22 +3,21 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#77ffffff"
-        android:id="@+id/trashPhoto">
+        android:layout_height="wrap_content"
+        android:id="@+id/trashPhoto"
+        android:layout_weight="1">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="match_parent"
             android:id="@+id/textform"
-            android:background="#b1010101">
+            android:background="@color/blackoverlay">
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="70dp"
-                android:inputType="textMultiLine"
                 android:ems="10"
                 android:id="@+id/editText"
                 android:background="#b1ffffff"
@@ -30,8 +29,10 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:textColor="#010101"
-                android:hint="Add description here" />
+                android:textColor="@color/black"
+                android:hint="Add description here"
+                android:inputType="text"
+                android:singleLine="true" />
 
             <RelativeLayout
                 android:layout_width="200dp"
@@ -48,37 +49,33 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="@string/addDescription"
-                    android:id="@+id/textView6"
+                    android:id="@+id/addDescriptionTitle"
                     android:layout_centerVertical="true"
                     android:layout_centerHorizontal="true"
-                    android:textColor="#ffffff" />
+                    android:textColor="@color/white" />
             </RelativeLayout>
 
         </RelativeLayout>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_weight="0.1">
+
         <RelativeLayout
-            android:layout_width="175dp"
-            android:layout_height="70dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="top"
-            android:background="#f1654c"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:id="@+id/backButtonLayout">
+            android:id="@+id/backButtonLayout"
+            android:layout_weight="1">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/back"
-                android:id="@+id/textView7"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold"
-                android:textSize="20sp" />
-
-            <Button
+            <com.pickle.pickleproject.MontserratButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/backButton"
@@ -88,34 +85,25 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentTop="true"
-                android:background="#00ffffff" />
+                android:background="@color/red"
+                android:textColor="@color/white"
+                android:text="@string/back"
+                android:textSize="18sp" />
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="175dp"
-            android:layout_height="70dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="top"
-            android:background="#00b4b4"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_toRightOf="@+id/backButtonLayout"
             android:layout_toEndOf="@+id/backButtonLayout"
-            android:id="@+id/nextbutton">
+            android:id="@+id/nextbutton"
+            android:layout_weight="1">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/next"
-                android:id="@+id/textView8"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold"
-                android:textSize="20sp" />
-
-            <Button
+            <com.pickle.pickleproject.MontserratButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/nextButton"
@@ -125,9 +113,11 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentTop="true"
-                android:background="#00ffffff" />
+                android:background="@color/green"
+                android:text="@string/next"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
         </RelativeLayout>
-
-    </RelativeLayout>
+    </LinearLayout>
 
 </LinearLayout>

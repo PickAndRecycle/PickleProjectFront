@@ -5,20 +5,26 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.pickle.pickleproject.UnusedGoodsDialog"
-    android:background="#b1000000"
-    tools:showIn="@layout/activity_unused_goods_dialog">
+    tools:showIn="@layout/activity_unused_goods_dialog"
+    android:id="@+id/backgroundLayout">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/blackoverlay"></RelativeLayout>
 
     <RelativeLayout
         android:layout_width="290dp"
         android:layout_height="290dp"
         android:background="#FFFFFF"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:id="@+id/detailsContent">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:background="#3E4651"
+            android:background="@color/darkgray"
             android:id="@+id/relativeLayout4">
 
             <com.pickle.pickleproject.MontserratTextView
@@ -30,7 +36,7 @@
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
                 android:textSize="24sp"
-                android:textColor="#FFFFFF" />
+                android:textColor="@color/white" />
         </RelativeLayout>
 
         <EditText
@@ -50,11 +56,11 @@
             android:layout_height="70dp"
             android:text="@string/submit"
             android:id="@+id/submitButtonUnusedGoods"
-            android:background="#00B5b5"
+            android:background="@color/green"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/white"
             android:textSize="25dp" />
 
         <com.pickle.pickleproject.MontserratTextView

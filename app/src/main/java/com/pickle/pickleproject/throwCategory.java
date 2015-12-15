@@ -1,14 +1,17 @@
 package com.pickle.pickleproject;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.pickle.pickleprojectmodel.Trash;
 import com.pickle.pickleprojectmodel.TrashCategories;
 
 public class ThrowCategory extends AppCompatActivity {
@@ -18,12 +21,16 @@ public class ThrowCategory extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_throw_category);
 
+        String path = "sdcard/Pickle/cam_image.jpg";
+        LinearLayout background = (LinearLayout) findViewById(R.id.backgroundLayout);
+        background.setBackground(Drawable.createFromPath(path));
+
     ImageButton unusedButton = (ImageButton) findViewById(R.id.UnusedButton);
     ImageButton generalButton = (ImageButton) findViewById(R.id.GeneralButton);
     ImageButton recycleButton = (ImageButton) findViewById(R.id.RecycleButton);
     ImageButton greenButton = (ImageButton) findViewById(R.id.GreenButton);
 
-        Button backButton = (Button) findViewById(R.id.button);
+        Button backButton = (Button) findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
