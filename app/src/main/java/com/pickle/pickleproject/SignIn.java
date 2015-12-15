@@ -1,6 +1,5 @@
 package com.pickle.pickleproject;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -19,18 +18,10 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.SignInButton;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.pickle.pickleprojectmodel.Account;
 import com.pickle.pickleprojectmodel.Notification;
-import com.pickle.pickleprojectmodel.Trash;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -206,23 +197,12 @@ public class SignIn extends AppCompatActivity {
                 register();
             }
         });
-
-        Button googleSignInButton = (Button) findViewById(R.id.signingoogleplusbutton);
-        googleSignInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                changeGoogleSignIn();
-            }
-        });
+        
 
 
 
     }
 
-    private void changeGoogleSignIn(){
-        Intent googleIntent = new Intent(this,SignInActivity.class);
-        startActivity(googleIntent);
-    }
 
     private void signIn(){
         Intent intent = new Intent(this, Home.class);
