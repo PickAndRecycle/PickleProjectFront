@@ -9,8 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -22,9 +20,6 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import com.pickle.pickleprojectmodel.Trash;
 import com.pickle.pickleprojectmodel.UnusedCondition;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.File;
 import java.lang.reflect.Type;
