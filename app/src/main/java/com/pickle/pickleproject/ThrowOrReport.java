@@ -75,7 +75,7 @@ public class ThrowOrReport extends AppCompatActivity {
     private void Report() {
         loadingIcon.setVisibility(View.VISIBLE);
         Boolean report = true;
-        Intent intent = new Intent(this, ReportSuccess.class);
+        final Intent intent = new Intent(this, ReportSuccess.class);
         intent.putExtras(getIntent().getExtras());
         intent.putExtra("report", report.booleanValue());
         String pathPhoto = "sdcard/Pickle/cam_image.jpg";
@@ -127,13 +127,13 @@ public class ThrowOrReport extends AppCompatActivity {
         },new Response.Listener<String>() {
             @Override
             public void onResponse(String uploadResponse) {
-                Log.d("result", response);
+                Log.d("result", uploadResponse);
                 loadingIcon.setVisibility(View.GONE);
+                startActivity(intent);
             }
         },picture,map);
 
         mQueue.add(multipartRequest);
-        startActivity(intent);
 
         /*
 
