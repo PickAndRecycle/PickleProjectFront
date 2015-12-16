@@ -100,6 +100,7 @@ public class RegistrationActivity extends AppCompatActivity {
         account.setEmail(email.getText().toString());
         account.setPassword(password.getText().toString());
         account.setPhone_number(phoneNumber.getText().toString());
+        account.setGoogle(false);
 
         GsonBuilder gsonBuilder = new GsonBuilder();
 
