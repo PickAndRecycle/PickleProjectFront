@@ -32,6 +32,7 @@ import java.util.Map;
 public class ThrowOrReport extends AppCompatActivity {
     private RequestQueue mQueue;
     private ProgressBar loadingIcon;
+    private String response;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +73,7 @@ public class ThrowOrReport extends AppCompatActivity {
         startActivity(intent);
     }
     private void Report() {
+        loadingIcon.setVisibility(View.VISIBLE);
         Boolean report = true;
         Intent intent = new Intent(this, ReportSuccess.class);
         intent.putExtras(getIntent().getExtras());
@@ -124,17 +126,13 @@ public class ThrowOrReport extends AppCompatActivity {
             }
         },new Response.Listener<String>() {
             @Override
-            public void onResponse(String response) {
-                while(!(response.equals("Uploaded"))){
-                    loadingIcon.setVisibility(View.VISIBLE);
-                }
-                loadingIcon.setVisibility(View.GONE);
+            public void onResponse(String uploadResponse) {
                 Log.d("result", response);
+                loadingIcon.setVisibility(View.GONE);
             }
         },picture,map);
 
         mQueue.add(multipartRequest);
-
         startActivity(intent);
 
         /*
