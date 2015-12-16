@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -21,6 +22,8 @@ import com.google.gson.JsonSerializer;
 import com.pickle.pickleprojectmodel.Trash;
 import com.pickle.pickleprojectmodel.UnusedCondition;
 
+import org.json.JSONObject;
+
 import java.io.File;
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -28,6 +31,7 @@ import java.util.Map;
 
 public class ThrowOrReport extends AppCompatActivity {
     private RequestQueue mQueue;
+    private ProgressBar loadingIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +51,9 @@ public class ThrowOrReport extends AppCompatActivity {
                 Report();
             }
         });
+        loadingIcon = (ProgressBar) findViewById(R.id.progressBar);
+        loadingIcon.setVisibility(View.GONE);
+
     }
     private void Throw(){
         Boolean report = false;
@@ -86,7 +93,7 @@ public class ThrowOrReport extends AppCompatActivity {
         final String url = "http://104.155.237.238:8080/trash/";
 
         Trash trash = new Trash();
-        trash.setLatitude(intent.getStringExtra("latitude") );
+        trash.setLatitude(intent.getStringExtra("latitude"));
         trash.setLongitude(intent.getStringExtra("longitude"));
         trash.setUsername(intent.getStringExtra("username"));
         trash.setDesc(intent.getStringExtra("description"));
@@ -118,6 +125,10 @@ public class ThrowOrReport extends AppCompatActivity {
         },new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                while(!(response.equals("Uploaded"))){
+                    loadingIcon.setVisibility(View.VISIBLE);
+                }
+                loadingIcon.setVisibility(View.GONE);
                 Log.d("result", response);
             }
         },picture,map);
