@@ -89,7 +89,7 @@ public class RegistrationActivity extends AppCompatActivity {
         password = (EditText) findViewById(R.id.password);
         phoneNumber = (EditText) findViewById(R.id.phoneNumber);
 
-        Intent intent = new Intent(this, RegistrationSuccess.class);
+        final Intent intent = new Intent(this, RegistrationSuccess.class);
 
         mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext()).getRequestQueue();
 
@@ -112,65 +112,75 @@ public class RegistrationActivity extends AppCompatActivity {
         final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.GET, url, new JSONObject(), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                try {
-                    JSONObject parentObject = response;
-                    Log.d("json:", response.getString("result"));
-                    JSONArray parentArray = parentObject.getJSONArray("result");
-                    List<Account> accountList = new ArrayList<Account>();
-                    final String usernameString = username.getText().toString();
-                    Log.d("username", usernameString);
+                    try {
+                        JSONObject parentObject = response;
+                        Log.d("json:", response.getString("result"));
+                        JSONArray parentArray = parentObject.getJSONArray("result");
+                        List<Account> accountList = new ArrayList<Account>();
+                        final String usernameString = username.getText().toString();
+                        Log.d("username", usernameString);
+                        final String emailString = email.getText().toString();
+                        Log.d("email", emailString);
 
-                    int duplicateCounter = 0;
-                    for (int i = 0; i < parentArray.length(); i++) {
-                        JSONObject finalObject = parentArray.getJSONObject(i);
-                        Account accountObj;
-                        GsonBuilder gsonBuilder = new GsonBuilder();
-                        final Gson gson = gsonBuilder.create();
-                        accountObj = gson.fromJson(String.valueOf(finalObject), Account.class);
-                        Log.d("username", accountObj.getUsername());
+                        int emailCounter = 0;
+                        int usernameCounter = 0;
 
-                        System.out.println(duplicateCounter);
+                            for (int i = 0; i < parentArray.length(); i++) {
+                                JSONObject finalObject = parentArray.getJSONObject(i);
+                                Account accountObj;
+                                GsonBuilder gsonBuilder = new GsonBuilder();
+                                final Gson gson = gsonBuilder.create();
+                                accountObj = gson.fromJson(String.valueOf(finalObject), Account.class);
+                                Log.d("username", accountObj.getUsername());
+                                Log.d("email", accountObj.getEmail());
+                                Log.d("google", String.valueOf(accountObj.getGoogle()));
 
-                        if (!accountObj.getUsername().equals(usernameString)) {
-                            if (i == parentArray.length()-1) {
-                                if (duplicateCounter == 0) {
+                                if (!accountObj.getEmail().equals(emailString)) {
+                                    if (!accountObj.getUsername().equals(usernameString)) {
+                                        if (i == parentArray.length()-1) {
+                                            if (emailCounter == 0) {
+                                                if (usernameCounter == 0) {
+                                                    try {
+                                                        final CustomJSONObjectRequest jsonRequest2 = new CustomJSONObjectRequest(Request.Method.POST, url, new JSONObject(json), new Response.Listener<JSONObject>() {
+                                                            @Override
+                                                            public void onResponse(JSONObject response) {
+                                                                try {
+                                                                    Log.d("result", response.getString("result"));
+                                                                } catch (JSONException e) {
+                                                                    e.printStackTrace();
+                                                                }
+                                                            }
+                                                        }, new Response.ErrorListener() {
+                                                            @Override
+                                                            public void onErrorResponse(VolleyError error) {
+                                                                Log.d("Error:", error.getMessage());
+                                                            }
+                                                        });
+                                                        jsonRequest2.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+                                                        mQueue.add(jsonRequest2);
+                                                        startActivity(intent);
+                                                    } catch (JSONException e) {
+                                                        e.printStackTrace();
+                                                    }
 
-                                    try {
-                                        final CustomJSONObjectRequest jsonRequest2 = new CustomJSONObjectRequest(Request.Method.POST, url, new JSONObject(json), new Response.Listener<JSONObject>() {
-                                            @Override
-                                            public void onResponse(JSONObject response) {
-                                                try {
-                                                    Log.d("result", response.getString("result"));
-                                                } catch (JSONException e) {
-                                                    e.printStackTrace();
+                                                } else {
+                                                    Toast boom = new Toast(getApplicationContext());
+                                                    boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
+                                                    boom.makeText(RegistrationActivity.this, "username already taken", boom.LENGTH_SHORT).show();
                                                 }
+                                            } else {
+                                                Toast boom = new Toast(getApplicationContext());
+                                                boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
+                                                boom.makeText(RegistrationActivity.this, "email already registered", boom.LENGTH_SHORT).show();
                                             }
-                                        }, new Response.ErrorListener() {
-                                            @Override
-                                            public void onErrorResponse(VolleyError error) {
-                                                Log.d("Error:", error.getMessage());
-                                            }
-                                        });
-                                        jsonRequest2.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-                                        mQueue.add(jsonRequest2);
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-
-                                } else {
-                                    Toast boom = new Toast(getApplicationContext());
-                                    boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
-                                    boom.makeText(RegistrationActivity.this, "username already taken", boom.LENGTH_SHORT).show();
-                                }
+                                        }
+                                    } else { usernameCounter++; }
+                                } else { emailCounter++; }
                             }
-                        } else {
-                            duplicateCounter++;
-                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
-            }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -180,7 +190,7 @@ public class RegistrationActivity extends AppCompatActivity {
         jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         mQueue.add(jsonRequest);
 
-        startActivity(intent);
+        //startActivity(intent);
 
     }
 
