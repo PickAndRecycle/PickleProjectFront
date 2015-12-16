@@ -10,6 +10,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -44,6 +45,7 @@ public class UnusedGoodsDialog extends AppCompatActivity {
     private EditText titleForm;
     private Spinner conditionForm;
     private RequestQueue mQueue;
+    private ProgressBar loadingIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,10 +56,13 @@ public class UnusedGoodsDialog extends AppCompatActivity {
         RelativeLayout background = (RelativeLayout) findViewById(R.id.backgroundLayout);
         background.setBackground(Drawable.createFromPath(path));
 
+        loadingIcon = (ProgressBar) findViewById(R.id.progressBar);
+        loadingIcon.setVisibility(View.GONE);
 
-    MontserratButton submitOtherButton = (MontserratButton) findViewById(R.id.submitButtonOtherWaste);
 
-    submitOtherButton.setOnClickListener(new View.OnClickListener() {
+        MontserratButton submitOtherButton = (MontserratButton) findViewById(R.id.submitButtonOtherWaste);
+
+        submitOtherButton.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             changeSubmitButton();
@@ -67,6 +72,7 @@ public class UnusedGoodsDialog extends AppCompatActivity {
     }
 
     private void changeSubmitButton() {
+        loadingIcon.setVisibility(View.VISIBLE);
         titleForm = (EditText) findViewById(R.id.editText4);
         conditionForm = (Spinner) findViewById(R.id.conditionSpinner);
         String condition = conditionForm.getSelectedItem().toString();
@@ -76,7 +82,7 @@ public class UnusedGoodsDialog extends AppCompatActivity {
         String pathPhoto = "sdcard/Pickle/cam_image.jpg";
         File picture = new File(pathPhoto);
 
-        Intent intent = new Intent(this, TrashNotification.class);
+        final Intent intent = new Intent(this, TrashNotification.class);
         intent.putExtras(getIntent().getExtras());
         intent.putExtra("title", titleForm.getText().toString());
         intent.putExtra("condition", condition);
@@ -137,6 +143,8 @@ public class UnusedGoodsDialog extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 Log.d("result", response);
+                loadingIcon.setVisibility(View.GONE);
+                startActivity(intent);
             }
         },picture,map);
 

@@ -9,6 +9,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -39,6 +40,7 @@ import java.util.Map;
 public class OtherTrashDialog extends AppCompatActivity {
     private EditText sizeForm;
     private RequestQueue mQueue;
+    private ProgressBar loadingIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,28 +51,32 @@ public class OtherTrashDialog extends AppCompatActivity {
         RelativeLayout background = (RelativeLayout) findViewById(R.id.backgroundLayout);
         background.setBackground(Drawable.createFromPath(path));
 
-    MontserratButton submitUnusedButton = (MontserratButton) findViewById(R.id.submitButtonUnusedGoods);
-    //Button backHomeButton = (Button) findViewById(R.id.trash_notification_home);
+        loadingIcon = (ProgressBar) findViewById(R.id.progressBar);
+        loadingIcon.setVisibility(View.GONE);
 
-    submitUnusedButton.setOnClickListener(new View.OnClickListener() {
+        MontserratButton submitUnusedButton = (MontserratButton) findViewById(R.id.submitButtonUnusedGoods);
+        //Button backHomeButton = (Button) findViewById(R.id.trash_notification_home);
+
+        submitUnusedButton.setOnClickListener(new View.OnClickListener() {
 
 
-        @Override
-        public void onClick(View v) {
-            changeSubmitButton();
-        }
-    });
+            @Override
+            public void onClick(View v) {
+                changeSubmitButton();
+            }
+        });
 
-    /*backHomeButton.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            changeBackHomeButton();
-        }
-    });*/
+        /*backHomeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeBackHomeButton();
+            }
+        });*/
 
     }
 
     private void changeSubmitButton(){
+        loadingIcon.setVisibility(View.VISIBLE);
         sizeForm = (EditText) findViewById(R.id.editText3);
         //get current date and time and convert it into milliseconds
         Date date = new Date();
@@ -78,7 +84,7 @@ public class OtherTrashDialog extends AppCompatActivity {
         String pathPhoto = "sdcard/Pickle/cam_image.jpg";
         File picture = new File(pathPhoto);
 
-        Intent intent = new Intent(this, TrashNotification.class);
+        final Intent intent = new Intent(this, TrashNotification.class);
         intent.putExtras(getIntent().getExtras());
         intent.putExtra("size", Integer.parseInt(sizeForm.getText().toString()));
         intent.putExtra("timestamp", currentTime);
@@ -133,6 +139,8 @@ public class OtherTrashDialog extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 Log.d("result", response);
+                loadingIcon.setVisibility(View.GONE);
+                startActivity(intent);
             }
         },picture,map);
 

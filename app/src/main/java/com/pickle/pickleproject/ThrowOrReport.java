@@ -32,7 +32,6 @@ import java.util.Map;
 public class ThrowOrReport extends AppCompatActivity {
     private RequestQueue mQueue;
     private ProgressBar loadingIcon;
-    private String response;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,8 +125,8 @@ public class ThrowOrReport extends AppCompatActivity {
             }
         },new Response.Listener<String>() {
             @Override
-            public void onResponse(String uploadResponse) {
-                Log.d("result", uploadResponse);
+            public void onResponse(String response) {
+                Log.d("result", response);
                 loadingIcon.setVisibility(View.GONE);
                 startActivity(intent);
             }
