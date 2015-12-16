@@ -150,8 +150,6 @@ public class UnusedGoodsDialog extends AppCompatActivity {
 
         mQueue.add(multipartRequest);
 
-        startActivity(intent);
-
 
 
         /*

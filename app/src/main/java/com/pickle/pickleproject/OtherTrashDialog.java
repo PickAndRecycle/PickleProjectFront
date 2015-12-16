@@ -146,8 +146,6 @@ public class OtherTrashDialog extends AppCompatActivity {
 
         mQueue.add(multipartRequest);
 
-        startActivity(intent);
-
         /*
         try {
             final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.POST, url, new JSONObject(json), new Response.Listener<JSONObject>() {
