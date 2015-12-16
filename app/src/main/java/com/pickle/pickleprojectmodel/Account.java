@@ -11,6 +11,7 @@ public class Account implements Serializable {
     private String email;
     private String password;
     private String phone_number;
+    private Boolean google;
 
     public String getId() {
         return id;
@@ -32,6 +33,10 @@ public class Account implements Serializable {
         return phone_number;
     }
 
+    public Boolean getGoogle() {
+        return google;
+    }
+
     public void setUsername(String username) {
         this.username = username;
     }
@@ -49,6 +54,9 @@ public class Account implements Serializable {
         this.phone_number = phone_number;
     }
 
+    public void setGoogle(Boolean google) {
+        this.google = google;
+    }
 
     public String toString() {
         final StringBuffer sb = new StringBuffer("Account{");
