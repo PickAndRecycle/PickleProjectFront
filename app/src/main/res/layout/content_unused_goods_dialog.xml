@@ -51,24 +51,38 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
-        <ProgressBar
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/progressBar"
-            android:layout_gravity="center" />
-
-        <com.pickle.pickleproject.MontserratButton
+        <RelativeLayout
             android:layout_width="290dp"
             android:layout_height="70dp"
-            android:text="@string/submit"
-            android:id="@+id/submitButtonUnusedGoods"
             android:background="@color/green"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:textColor="@color/white"
-            android:textSize="25dp" />
+            android:id="@+id/submitArea">
+
+            <com.pickle.pickleproject.MontserratButton
+                android:layout_width="290dp"
+                android:layout_height="70dp"
+                android:text="@string/submit"
+                android:id="@+id/submitButtonUnusedGoods"
+                android:background="@color/green"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:textColor="@color/white"
+                android:textSize="25dp" />
+
+            <ProgressBar
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/progressBar"
+                android:layout_gravity="center"
+                android:indeterminate="true"
+                android:indeterminateTint="@color/lightgray"
+                android:indeterminateTintMode="src_atop"
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
 
         <com.pickle.pickleproject.MontserratTextView
             android:layout_width="wrap_content"

@@ -41,6 +41,7 @@ public class OtherTrashDialog extends AppCompatActivity {
     private EditText sizeForm;
     private RequestQueue mQueue;
     private ProgressBar loadingIcon;
+    private MontserratButton submitUnusedButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +55,7 @@ public class OtherTrashDialog extends AppCompatActivity {
         loadingIcon = (ProgressBar) findViewById(R.id.progressBar);
         loadingIcon.setVisibility(View.GONE);
 
-        MontserratButton submitUnusedButton = (MontserratButton) findViewById(R.id.submitButtonUnusedGoods);
+        submitUnusedButton = (MontserratButton) findViewById(R.id.submitButtonUnusedGoods);
         //Button backHomeButton = (Button) findViewById(R.id.trash_notification_home);
 
         submitUnusedButton.setOnClickListener(new View.OnClickListener() {
@@ -76,6 +77,7 @@ public class OtherTrashDialog extends AppCompatActivity {
     }
 
     private void changeSubmitButton(){
+        submitUnusedButton.setVisibility(View.GONE);
         loadingIcon.setVisibility(View.VISIBLE);
         sizeForm = (EditText) findViewById(R.id.editText3);
         //get current date and time and convert it into milliseconds

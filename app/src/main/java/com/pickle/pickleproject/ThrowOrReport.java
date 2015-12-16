@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -32,6 +33,7 @@ import java.util.Map;
 public class ThrowOrReport extends AppCompatActivity {
     private RequestQueue mQueue;
     private ProgressBar loadingIcon;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,8 @@ public class ThrowOrReport extends AppCompatActivity {
         loadingIcon = (ProgressBar) findViewById(R.id.progressBar);
         loadingIcon.setVisibility(View.GONE);
 
+        imageView = (ImageView) findViewById(R.id.imageView3);
+
     }
     private void Throw(){
         Boolean report = false;
@@ -73,6 +77,7 @@ public class ThrowOrReport extends AppCompatActivity {
     }
     private void Report() {
         loadingIcon.setVisibility(View.VISIBLE);
+        imageView.setVisibility(View.GONE);
         Boolean report = true;
         final Intent intent = new Intent(this, ReportSuccess.class);
         intent.putExtras(getIntent().getExtras());

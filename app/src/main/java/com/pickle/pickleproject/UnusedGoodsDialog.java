@@ -10,6 +10,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -46,6 +47,7 @@ public class UnusedGoodsDialog extends AppCompatActivity {
     private Spinner conditionForm;
     private RequestQueue mQueue;
     private ProgressBar loadingIcon;
+    private MontserratButton submitOtherButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +62,7 @@ public class UnusedGoodsDialog extends AppCompatActivity {
         loadingIcon.setVisibility(View.GONE);
 
 
-        MontserratButton submitOtherButton = (MontserratButton) findViewById(R.id.submitButtonOtherWaste);
+        submitOtherButton = (MontserratButton) findViewById(R.id.submitButtonOtherWaste);
 
         submitOtherButton.setOnClickListener(new View.OnClickListener() {
         @Override
@@ -72,6 +74,7 @@ public class UnusedGoodsDialog extends AppCompatActivity {
     }
 
     private void changeSubmitButton() {
+        submitOtherButton.setVisibility(View.GONE);
         loadingIcon.setVisibility(View.VISIBLE);
         titleForm = (EditText) findViewById(R.id.editText4);
         conditionForm = (Spinner) findViewById(R.id.conditionSpinner);
