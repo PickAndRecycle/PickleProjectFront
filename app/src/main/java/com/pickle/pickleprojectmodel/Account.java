@@ -65,6 +65,7 @@ public class Account implements Serializable {
         sb.append(", email='").append(getEmail()).append('\'');
         sb.append(", password='").append(getPassword()).append('\'');
         sb.append(", phone number='").append(getPhone_number()).append('\'');
+        sb.append(", google=" );
         return sb.toString();
     }
 }
