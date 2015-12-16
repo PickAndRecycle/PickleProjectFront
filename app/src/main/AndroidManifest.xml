@@ -160,10 +160,6 @@
             android:theme="@style/AppTheme" >
         </activity>
         <activity
-            android:name=".SignInActivity"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
             android:name=".Home"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" >
