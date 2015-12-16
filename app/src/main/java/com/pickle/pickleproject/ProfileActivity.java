@@ -73,7 +73,7 @@ public class ProfileActivity extends AppCompatActivity {
                     editProfile.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            //TODO: GOOGLE
+                            //TODO: GOOGLE.
                             if(account.getGoogle()){
                                 changeEditGoogleProfile(account);
                             }else{
