@@ -422,6 +422,7 @@ public class SignIn extends AppCompatActivity implements GoogleApiClient.OnConne
                             account.setEmail(acct.getEmail());
                             account.setPassword(acct.getIdToken());
                             account.setPhone_number("");
+                            account.setGoogle(true);
 
                             GsonBuilder gsonBuilder = new GsonBuilder();
                             gsonBuilder.registerTypeAdapter(Account.class, new AccountSerializer());
@@ -509,7 +510,7 @@ public class SignIn extends AppCompatActivity implements GoogleApiClient.OnConne
     }
 
     private void changeEditProfile(Account account){
-        Intent intent = new Intent(this, EditProfile.class);
+        Intent intent = new Intent(this, EditGoogleProfile.class);
         intent.putExtra("object", account);
         startActivity(intent);
     }
