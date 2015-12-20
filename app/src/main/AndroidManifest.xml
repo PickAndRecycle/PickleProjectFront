@@ -120,12 +120,6 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".PickDetails"
-            android:label="@string/title_activity_pick_details"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" >
-        </activity>
-        <activity
             android:name=".ViewArticle"
             android:label="@string/title_activity_view_article"
             android:screenOrientation="portrait"
