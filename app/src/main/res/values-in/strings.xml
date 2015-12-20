@@ -104,8 +104,7 @@
     <string name="Throw">BUANG</string>
     <string name="report">LAPORAN</string>
     <string name="getLocation">CARI LOKASI</string>
-    <string name="someonePick">jika sampah anda diambil.</string>
-    <string name="youWill">Anda akan mendapatkan notifikasi</string>
+    <string name="notifytrash">Anda akan mendapatkan notifikasi\njika sampah anda diambil</string>
     <string name="call">TELEPON</string>
     <string name="picklejar">PICKLE JAR</string>
     <string name="signin">MASUK</string>
@@ -119,4 +118,6 @@
     <string name="Picked">AMBIL SAMPAH</string>
     <string name="Thrown">BUANG SAMPAH</string>
     <string name="registrationSuccess">Selamat anda telah bergabung dengan pickle!</string>
+    <string name = "share">SEBAR KE TEMAN</string>
+
 </resources>

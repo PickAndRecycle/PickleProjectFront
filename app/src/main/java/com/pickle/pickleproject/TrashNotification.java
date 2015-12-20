@@ -35,14 +35,14 @@ public class TrashNotification extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trash_notification);
-        Button Back_Home = (Button) findViewById(R.id.Back_Home);
+        MontserratButton Back_Home = (MontserratButton) findViewById(R.id.Back_Home);
         Back_Home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Home();
             }
         });
-        Button shareButton = (Button) findViewById(R.id.shareButton);
+        MontserratButton shareButton = (MontserratButton) findViewById(R.id.shareButton);
         shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,7 +58,7 @@ public class TrashNotification extends AppCompatActivity{
 
     private void changeShare(){
         Intent sendIntent = new Intent();
-        String successShare = "I have succeed throw a trash. Throw your trash only at Pickle";
+        String successShare = "I have successfully throw a trash. Throw your trash only at Pickle!";
         sendIntent.setAction(Intent.ACTION_SEND);
         sendIntent.putExtra(Intent.EXTRA_TEXT,successShare);
         sendIntent.setType("text/plain");

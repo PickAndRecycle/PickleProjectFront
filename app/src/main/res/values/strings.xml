@@ -103,8 +103,7 @@
     <string name="Throw">THROW</string>
     <string name="report">REPORT</string>
     <string name="getLocation">GET LOCATION</string>
-    <string name="someonePick">someone picks up your request</string>
-    <string name="youWill">You will be notified when</string>
+    <string name="notifytrash">You will be notified when\nsomeone picks up your request</string>
     <string name="call">CALL</string>
     <string name="picklejar">PICKLE JAR</string>
     <string name="signin">SIGN IN</string>
@@ -120,4 +119,5 @@
     <string name="title_activity_about_us">AboutUs</string>
     <string name="server_client_id">407341781526-n07e19717mjin1t4ibomc44kdrocqef7.apps.googleusercontent.com</string>
     <string name="registrationSuccess">Congratulation you\'ve already joined pickle!</string>
+    <string name ="share">SHARE</string>
 </resources>

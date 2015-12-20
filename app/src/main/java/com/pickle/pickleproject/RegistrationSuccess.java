@@ -16,21 +16,21 @@ public class RegistrationSuccess  extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report_success);
-        Button backToHomeBut = (Button) findViewById(R.id.backToHomeButton);
+        MontserratButton backToHomeBut = (MontserratButton) findViewById(R.id.backToHomeButton);
         backToHomeBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Home();
             }
         });
-        Button shareButton = (Button) findViewById(R.id.shareButton);
+        MontserratButton shareButton = (MontserratButton) findViewById(R.id.shareButton);
         shareButton.setVisibility(View.INVISIBLE);
 
         ImageView image = (ImageView) findViewById(R.id.reportImage);
-        image.setImageResource(R.mipmap.circlecheck);
-        image.getLayoutParams().height = 250;
-        image.getLayoutParams().width =250;
-        image.setMaxWidth(100);
+        image.setImageResource(R.drawable.registersuccess);
+        image.getLayoutParams().height = 200;
+        image.getLayoutParams().width =200;
+        //image.setMaxWidth(100);
         TextView textView = (TextView) findViewById(R.id.successReportText);
         textView.setText(R.string.registrationSuccess);
     }

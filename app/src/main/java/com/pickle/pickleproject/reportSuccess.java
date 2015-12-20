@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 
 public class ReportSuccess extends AppCompatActivity {
 
@@ -13,14 +11,14 @@ public class ReportSuccess extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report_success);
-        Button backToHomeBut = (Button) findViewById(R.id.backToHomeButton);
+        MontserratButton backToHomeBut = (MontserratButton) findViewById(R.id.backToHomeButton);
         backToHomeBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Home();
             }
         });
-        Button shareButton = (Button) findViewById(R.id.shareButton);
+        MontserratButton shareButton = (MontserratButton) findViewById(R.id.shareButton);
         shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -31,7 +29,7 @@ public class ReportSuccess extends AppCompatActivity {
 
     private void changeShare(){
         Intent sendIntent = new Intent();
-        String successShare = "I have succeed create a report. Report trash condition of your environment only at Pickle";
+        String successShare = "I have successfully created a trash report. Report the trash condition of your environment only at Pickle!";
         sendIntent.setAction(Intent.ACTION_SEND);
         sendIntent.putExtra(Intent.EXTRA_TEXT, successShare);
         sendIntent.setType("text/plain");
