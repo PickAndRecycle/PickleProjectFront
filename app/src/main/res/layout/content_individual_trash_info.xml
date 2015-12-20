@@ -10,62 +10,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:id="@+id/relativeLayout6"
-        android:background="#FFFFFF"
-        android:layout_above="@+id/relativeLayout3"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-
-        <com.pickle.pickleproject.MontserratTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="lorep ipsum dolor sit amet"
-            android:id="@+id/descriptionText"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:textSize="20sp" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/relativeLayout3">
-
-        <Button
-            android:layout_width="195dp"
-            android:layout_height="match_parent"
-            android:text="@string/back"
-            android:id="@+id/back_button_2"
-            android:background="#F1654C"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_toLeftOf="@+id/pick_button"
-            android:layout_toStartOf="@+id/pick_button" />
-
-        <Button
-            android:layout_width="190dp"
-            android:layout_height="match_parent"
-            android:text="@string/pick"
-            android:id="@+id/pick_button"
-            android:background="#00B5B5"
-            android:textSize="20sp"
-            android:textColor="#FFFFFF"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/relativeLayout6">
+        android:layout_above="@+id/descriptionLayout">
 
         <com.android.volley.toolbox.NetworkImageView
             android:layout_width="match_parent"
@@ -74,5 +20,89 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
     </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:id="@+id/descriptionLayout"
+        android:background="@color/white"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentStart="false"
+        android:layout_above="@+id/submitLayout">
+
+        <com.pickle.pickleproject.MontserratTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/LoremIpsumText"
+            android:id="@+id/descriptionText"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_weight="0.1"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/submitLayout">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/backButtonLayout"
+            android:layout_weight="1">
+
+            <com.pickle.pickleproject.MontserratButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/backButton"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentTop="true"
+                android:background="@color/red"
+                android:textColor="@color/white"
+                android:text="@string/back"
+                android:textSize="18sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_toRightOf="@+id/backButtonLayout"
+            android:layout_toEndOf="@+id/backButtonLayout"
+            android:id="@+id/nextbutton"
+            android:layout_weight="1">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/nextButton"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentTop="true"
+                android:background="@color/green"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:text="@string/pick"/>
+        </RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>
