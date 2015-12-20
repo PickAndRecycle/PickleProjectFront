@@ -27,6 +27,7 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.pickle.pickleprojectmodel.Trash;
+import com.pickle.pickleprojectmodel.TrashCategories;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -51,8 +52,20 @@ public class ThrowerInfo extends AppCompatActivity implements Response.ErrorList
         });
 
         final Trash trash = (Trash) getIntent().getSerializableExtra("object");
+        MontserratTextView titleText = (MontserratTextView) findViewById(R.id.titleText);
         MontserratTextView titleContent = (MontserratTextView) findViewById(R.id.titleContent);
-        titleContent.setText(trash.getTitle());
+        if (trash.getCategories().equals(TrashCategories.UNUSED))
+        {
+            titleText.setText("TITLE");
+            titleContent.setText(trash.getTitle());
+        }
+        else
+        {
+            titleText.setText("CATEGORIES");
+            titleContent.setText(trash.getCategories().toString());
+
+        }
+
         MontserratTextView descriptionContent = (MontserratTextView) findViewById(R.id.descriptionContent);
         descriptionContent.setText(trash.getDesc());
         MontserratTextView throwerContent = (MontserratTextView) findViewById(R.id.throwerContent);

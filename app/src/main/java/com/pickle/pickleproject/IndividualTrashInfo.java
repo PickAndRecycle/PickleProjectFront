@@ -43,8 +43,8 @@ public class IndividualTrashInfo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_individual_trash_info);
 
-        Button pickButton = (Button) findViewById(R.id.pick_button);
-        Button backButton = (Button) findViewById(R.id.back_button_2);
+        Button pickButton = (Button) findViewById(R.id.pickButton);
+        Button backButton = (Button) findViewById(R.id.backButton);
 
         mRequestQueue = Volley.newRequestQueue(this);
         mImageLoader = new ImageLoader(mRequestQueue, new ImageLoader.ImageCache() {

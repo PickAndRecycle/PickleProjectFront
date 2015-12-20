@@ -5,9 +5,11 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -56,39 +58,47 @@ public class EditGoogleProfile extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                account.setUsername(username.getText().toString());
-                account.setPhone_number(phone.getText().toString());
 
-                GsonBuilder gsonBuilder = new GsonBuilder();
-                Gson gson = gsonBuilder.create();
-                String json = gson.toJson(account);
-                Log.d("json", json);
-                final CustomJSONObjectRequest jsonRequest;
-                try {
-                    jsonRequest = new CustomJSONObjectRequest(Request.Method.PUT, url, new JSONObject(json), new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            try {
-                                Log.d("result", response.getString("result"));
-                            } catch (JSONException e) {
-                                e.printStackTrace();
+                if (username.getText().toString().isEmpty() || phone.getText().toString().isEmpty()) {
+                    Toast boom = new Toast(getApplicationContext());
+                    boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
+                    boom.makeText(EditGoogleProfile.this, "please don't empty the box", boom.LENGTH_SHORT).show();
+                } else {
+
+
+                    account.setUsername(username.getText().toString());
+                    account.setPhone_number(phone.getText().toString());
+
+                    GsonBuilder gsonBuilder = new GsonBuilder();
+                    Gson gson = gsonBuilder.create();
+                    String json = gson.toJson(account);
+                    Log.d("json", json);
+                    final CustomJSONObjectRequest jsonRequest;
+                    try {
+                        jsonRequest = new CustomJSONObjectRequest(Request.Method.PUT, url, new JSONObject(json), new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                try {
+                                    Log.d("result", response.getString("result"));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
                             }
-                        }
-                    }, new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Log.d("Error:", error.getMessage());
-                        }
-                    });
-                    jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-                    mQueue.add(jsonRequest);
-                    changeProfile();
+                        }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Log.d("Error:", error.getMessage());
+                            }
+                        });
+                        jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+                        mQueue.add(jsonRequest);
+                        changeProfile();
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
                 }
-
-
             }
         });
     }

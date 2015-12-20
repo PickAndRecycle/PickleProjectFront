@@ -85,13 +85,13 @@
             android:layout_alignParentEnd="true"
             android:layout_toRightOf="@+id/backButtonLayout"
             android:layout_toEndOf="@+id/backButtonLayout"
-            android:id="@+id/nextbutton"
+            android:id="@+id/pickButtonLayout"
             android:layout_weight="1">
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/nextButton"
+                android:id="@+id/pickButton"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentLeft="true"
