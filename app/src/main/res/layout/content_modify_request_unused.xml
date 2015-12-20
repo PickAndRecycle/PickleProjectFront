@@ -116,21 +116,7 @@
         android:layout_alignParentStart="true">
 
         <com.pickle.pickleproject.MontserratButton
-            android:layout_width="190dp"
-            android:layout_height="80dp"
-            android:text="@string/save"
-            android:id="@+id/button3"
-            android:textColor="@color/white"
-            android:background="@color/green"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:textSize="18sp"
-            android:layout_weight="0.50"
-            android:gravity="center_vertical|center_horizontal" />
-
-        <com.pickle.pickleproject.MontserratButton
-            android:layout_width="192dp"
+            android:layout_width="match_parent"
             android:layout_height="fill_parent"
             android:text="@string/delete"
             android:id="@+id/button2"
@@ -144,6 +130,20 @@
             android:layout_weight="0.50"
             android:textSize="18sp"
             android:textAlignment="center"
+            android:gravity="center_vertical|center_horizontal" />
+
+        <com.pickle.pickleproject.MontserratButton
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:text="@string/save"
+            android:id="@+id/button3"
+            android:textColor="@color/white"
+            android:background="@color/green"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:textSize="18sp"
+            android:layout_weight="0.50"
             android:gravity="center_vertical|center_horizontal" />
     </LinearLayout>
 

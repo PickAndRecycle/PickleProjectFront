@@ -36,7 +36,7 @@
         android:id="@+id/relativeLayout8">
 
         <com.pickle.pickleproject.MontserratButton
-            android:layout_width="192dp"
+            android:layout_width="match_parent"
             android:layout_height="fill_parent"
             android:text="@string/back"
             android:id="@+id/backToModify"
@@ -47,7 +47,7 @@
             android:layout_weight="0.50" />
 
         <com.pickle.pickleproject.MontserratButton
-            android:layout_width="192dp"
+            android:layout_width="match_parent"
             android:layout_height="fill_parent"
             android:text="@string/modify"
             android:id="@+id/modify"
