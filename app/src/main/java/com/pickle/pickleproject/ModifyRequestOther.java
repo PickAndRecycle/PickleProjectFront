@@ -49,9 +49,9 @@ public class ModifyRequestOther extends AppCompatActivity {
         description.setText(trash.getDesc());
         size.setText(String.valueOf(trash.getsize()));
 
-        Button saveButton = (Button) findViewById(R.id.button3);
+        Button saveButton = (Button) findViewById(R.id.saveButton);
         ImageButton backButton = (ImageButton) findViewById(R.id.backButton);
-        Button deleteButton = (Button) findViewById(R.id.deleteButtonOther);
+        Button deleteButton = (Button) findViewById(R.id.deleteButton);
 
 
         mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext()).getRequestQueue();

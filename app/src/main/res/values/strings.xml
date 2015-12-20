@@ -114,6 +114,8 @@
     <string name="done">Done</string>
     <string name="throwOrReportText">THROW\n\nOR\n\nREPORT</string>
     <string name="jarOrNewsText">PICKLE\nJAR\n\nNEWS\nFEED</string>
+    <string name="Picked">PICKED</string>
+    <string name="Thrown">THROWN</string>
     <string name="Picker">PICKER</string>
     <string name="Thrower">THROWER</string>
     <string name="title_activity_about_us">AboutUs</string>
