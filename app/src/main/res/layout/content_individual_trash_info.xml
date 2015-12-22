@@ -86,9 +86,17 @@
             android:layout_toRightOf="@+id/backButtonLayout"
             android:layout_toEndOf="@+id/backButtonLayout"
             android:id="@+id/pickButtonLayout"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="@color/green">
 
-            <Button
+            <ProgressBar
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/loadingBar"
+                android:layout_centerInParent="true" />
+
+            <com.pickle.pickleproject.MontserratButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/pickButton"

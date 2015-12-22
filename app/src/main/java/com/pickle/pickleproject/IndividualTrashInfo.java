@@ -25,6 +25,7 @@ import com.google.gson.JsonSerializer;
 import com.pickle.pickleprojectmodel.Trash;
 
 import android.util.LruCache;
+import android.widget.ProgressBar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,14 +38,18 @@ public class IndividualTrashInfo extends AppCompatActivity {
     private RequestQueue mRequestQueue, mQueue;
     private ImageLoader mImageLoader;
     public static final String PREFS_NAME = "PicklePrefs";
+    private ProgressBar loadingBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_individual_trash_info);
 
-        Button pickButton = (Button) findViewById(R.id.pickButton);
+        final Button pickButton = (Button) findViewById(R.id.pickButton);
         Button backButton = (Button) findViewById(R.id.backButton);
+
+        loadingBar = (ProgressBar) findViewById(R.id.loadingBar);
+        loadingBar.setVisibility(View.GONE);
 
         mRequestQueue = Volley.newRequestQueue(this);
         mImageLoader = new ImageLoader(mRequestQueue, new ImageLoader.ImageCache() {
@@ -69,6 +74,9 @@ public class IndividualTrashInfo extends AppCompatActivity {
         pickButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                loadingBar.setVisibility(View.VISIBLE);
+                pickButton.setVisibility(View.GONE);
+
                 trash.setStatus(1);
                 SharedPreferences preferences = getSharedPreferences(PREFS_NAME, 0);
                 String username = preferences.getString("username", "");
@@ -91,6 +99,8 @@ public class IndividualTrashInfo extends AppCompatActivity {
                         public void onResponse(JSONObject response) {
                             try {
                                 Log.d("result", response.getString("result"));
+                                loadingBar.setVisibility(View.GONE);
+                                changeThrowerInfo();
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -103,7 +113,7 @@ public class IndividualTrashInfo extends AppCompatActivity {
                     });
                     jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
                     mQueue.add(jsonRequest);
-                    changeThrowerInfo();
+
                 }
                 catch (JSONException e) {
                     e.printStackTrace();
