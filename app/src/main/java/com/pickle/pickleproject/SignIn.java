@@ -270,10 +270,12 @@ public class SignIn extends AppCompatActivity implements GoogleApiClient.OnConne
         intent.putExtra("username", usernameForm.getText().toString());
         intent.putExtra("password", passwordForm.getText().toString());
         //TOAST FOR DEBUGGING
+        /*
         Bundle parseInfo = intent.getExtras();
         Toast boom = new Toast(getApplicationContext());
         boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
         boom.makeText(SignIn.this, parseInfo.toString(), boom.LENGTH_SHORT).show();
+        */
 
         startActivity(intent);
 
@@ -325,7 +327,7 @@ public class SignIn extends AppCompatActivity implements GoogleApiClient.OnConne
                     try{
                         Toast boom = new Toast(getApplicationContext());
                         boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
-                        boom.makeText(SignIn.this, "Checking if email available in database...", boom.LENGTH_SHORT).show();
+                        boom.makeText(SignIn.this, "Signing in", boom.LENGTH_SHORT).show();
 
                         Log.d("Account lists", "username: "+nameOnly+" "+"email: " + acct.getEmail() + " " + "photo url: " + acct.getPhotoUrl() + " " + "ID: " + acct.getId() + " " + "ID Token: " + acct.getIdToken());
                         JSONObject parentObject = response;
@@ -469,7 +471,7 @@ public class SignIn extends AppCompatActivity implements GoogleApiClient.OnConne
                                 */
                                 boom = new Toast(getApplicationContext());
                                 boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
-                                boom.makeText(SignIn.this, "Registered, you can sign in now.", boom.LENGTH_SHORT).show();
+                                boom.makeText(SignIn.this, "Registered, welcome to Pickle.", boom.LENGTH_SHORT).show();
                             }
                             catch (JSONException e) {
                                 e.printStackTrace();
