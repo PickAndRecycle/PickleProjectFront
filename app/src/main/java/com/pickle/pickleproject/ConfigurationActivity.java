@@ -112,6 +112,7 @@ public class ConfigurationActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        moveTaskToBack(true);
+        //moveTaskToBack(true);
+        finish();
     }
 }

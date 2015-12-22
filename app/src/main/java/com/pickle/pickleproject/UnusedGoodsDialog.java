@@ -137,46 +137,12 @@ public class UnusedGoodsDialog extends AppCompatActivity {
             public void onResponse(String response) {
                 Log.d("result", response);
                 loadingIcon.setVisibility(View.GONE);
+                finish();
                 startActivity(intent);
             }
         },picture,map);
 
         mQueue.add(multipartRequest);
-
-
-
-        /*
-
-
-        try {
-            final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.POST, url, new JSONObject(json), new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
-                    try {
-                        Log.d("result", response.getString("result"));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Log.d("Error:", error.getMessage());
-                }
-            });
-            jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-            mQueue.add(jsonRequest);
-            startActivity(intent);
-
-
-        }
-        catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        */
-
-
 
     }
 

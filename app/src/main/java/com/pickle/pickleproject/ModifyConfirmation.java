@@ -181,8 +181,7 @@ public class ModifyConfirmation extends AppCompatActivity {
     }
 
     private void goBack(){
-        Intent intent = new Intent(this,Picklejar.class);
-        startActivity(intent);
+        finish();
     }
 
     public static Drawable LoadImageFromWebOperations(String url) {

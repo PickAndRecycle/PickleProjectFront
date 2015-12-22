@@ -63,7 +63,15 @@ public class ModifyRequestUnused extends AppCompatActivity {
             public void onClick(View v) {
                 trash.setTitle(title.getText().toString());
                 trash.setDesc(description.getText().toString());
-                trash.setCondition(UnusedCondition.valueOf(spinner.getSelectedItem().toString().toUpperCase()));
+                String conditionTrash = spinner.getSelectedItem().toString().toUpperCase();
+                if(conditionTrash.equals("LAYAK")){
+                    conditionTrash = "GOOD";
+                } else if(conditionTrash.equals("TIDAK LAYAK")){
+                    conditionTrash = "BAD";
+                } else{
+                    conditionTrash = "NEW";
+                }
+                trash.setCondition(UnusedCondition.valueOf(conditionTrash));
 
                 GsonBuilder gsonBuilder = new GsonBuilder();
 
@@ -142,6 +150,7 @@ public class ModifyRequestUnused extends AppCompatActivity {
 
     private void changeJar(){
         Intent intent = new Intent(this,Picklejar.class);
+        finish();
         startActivity(intent);
     }
 
