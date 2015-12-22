@@ -8,6 +8,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -60,19 +62,34 @@ public class Home extends Activity   {
             public void onClick(View v) {
                 SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
                 String id = settings.getString("valid", "0");
-                if(id.equals("0")){
-                    signIn();
+                boolean connected = false;
+                ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+                if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                        connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+                    //we are connected to a network
+                    connected = true;
                 }
-                else{
-                    gps = new GPSTracker(Home.this);
-                    if (gps.canGetLocation()){
-                        Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        File file = getFile();
-                        camera_intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
-                        startActivityForResult(camera_intent, CAM_REQUEST);
-                    } else{
-                        gps.showSettingsAlert();
+                else
+                    connected = false;
+                if(connected){
+                    if(id.equals("0")){
+                        signIn();
                     }
+                    else{
+                        gps = new GPSTracker(Home.this);
+                        if (gps.canGetLocation()){
+                            Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                            File file = getFile();
+                            camera_intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
+                            startActivityForResult(camera_intent, CAM_REQUEST);
+                        } else{
+                            gps.showSettingsAlert();
+                        }
+                }
+                }else{
+                    Toast boom = new Toast(getApplicationContext());
+                    boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
+                    boom.makeText(Home.this, "No connectivity", boom.LENGTH_SHORT).show();
                 }
 
 
@@ -91,16 +108,31 @@ public class Home extends Activity   {
             public void onClick(View v){
                 SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
                 String id = settings.getString("valid", "0");
-                if(id.equals("0")){
-                    signIn();
+                boolean connected = false;
+                ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+                if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                        connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+                    //we are connected to a network
+                    connected = true;
                 }
-                else {
-                    gps = new GPSTracker(Home.this);
-                    if(gps.canGetLocation()){
-                        changePick();
-                    }else{
-                        gps.showSettingsAlert();
+                else
+                    connected = false;
+                if(connected){
+                    if(id.equals("0")){
+                        signIn();
                     }
+                    else {
+                        gps = new GPSTracker(Home.this);
+                        if(gps.canGetLocation()){
+                            changePick();
+                        }else{
+                            gps.showSettingsAlert();
+                        }
+                    }
+                }else{
+                    Toast boom = new Toast(getApplicationContext());
+                    boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
+                    boom.makeText(Home.this, "No connectivity", boom.LENGTH_SHORT).show();
                 }
             }
         });
@@ -110,11 +142,26 @@ public class Home extends Activity   {
             public void onClick(View v) {
                 SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
                 String id = settings.getString("valid", "0");
-                if(id.equals("0")){
-                    signIn();
+                boolean connected = false;
+                ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+                if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                        connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+                    //we are connected to a network
+                    connected = true;
                 }
-                else {
-                    historyJar();
+                else
+                    connected = false;
+                if(connected){
+                    if(id.equals("0")){
+                        signIn();
+                    }
+                    else {
+                        historyJar();
+                    }
+                } else{
+                    Toast boom = new Toast(getApplicationContext());
+                    boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
+                    boom.makeText(Home.this, "No Connectivity", boom.LENGTH_SHORT).show();
                 }
             }
         });
@@ -196,15 +243,30 @@ public class Home extends Activity   {
     private void changeProfileActivity(){
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         String id = settings.getString("valid", "0");
-        if(id.equals("0")){
-            Intent intent = new Intent(this, SignIn.class);
-            startActivity(intent);
+        boolean connected = false;
+        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            //we are connected to a network
+            connected = true;
         }
-        else{
-            Intent intent = new Intent(this, ProfileActivity.class);
-            startActivity(intent);
-            this.overridePendingTransition(R.anim.push_down_in, R.anim.push_down_out);
+        else
+            connected = false;
+        if(connected){
+            if(id.equals("0")){
+                Intent intent = new Intent(this, SignIn.class);
+                startActivity(intent);
             }
+            else{
+                Intent intent = new Intent(this, ProfileActivity.class);
+                startActivity(intent);
+                this.overridePendingTransition(R.anim.push_down_in, R.anim.push_down_out);
+            }
+        }else{
+            Toast boom = new Toast(getApplicationContext());
+            boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
+            boom.makeText(Home.this, "No Connectivity", boom.LENGTH_SHORT).show();
+        }
     }
 
     private File getFile(){
