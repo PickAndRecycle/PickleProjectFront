@@ -8,6 +8,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -46,12 +48,7 @@ public class Home extends Activity   {
         SharedPreferences sharedPreferences =
                 PreferenceManager.getDefaultSharedPreferences(this);
         String token = sharedPreferences.getString(QuickstartPreferences.GCM_TOKEN,"");
-
-        Toast boom = new Toast(getApplicationContext());
-        boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
-        boom.makeText(Home.this, token, boom.LENGTH_SHORT).show();
-
-
+        
         Button profileButton = (Button) findViewById(R.id.profileButton);
         Button jarNewsButton = (Button) findViewById(R.id.jarNewsButton);
         Button pickButton = (Button) findViewById(R.id.pickButton);
@@ -284,6 +281,39 @@ public class Home extends Activity   {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         String path = "sdcard/Pickle/cam_image.jpg";
 
+        int rotate = 0;
+        int orientation = 0;
+        try {
+            File imageFile = new File(path);
+            ExifInterface exif = new ExifInterface(
+                    imageFile.getAbsolutePath());
+            orientation = exif.getAttributeInt(
+                    ExifInterface.TAG_ORIENTATION,
+                    ExifInterface.ORIENTATION_NORMAL);
+
+            switch (orientation) {
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    rotate = 270;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    rotate = 180;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    rotate = 90;
+                    break;
+            }
+            //Log.v(Common.TAG, "Exif orientation: " + orientation);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        /****** Image rotation ****/
+        Matrix matrix = new Matrix();
+        matrix.postRotate(orientation);
+        //Bitmap cropped = Bitmap.createBitmap(scaled, x, y, width, height, matrix, true);
+        //Double latitude = 0.0;
+        //Double longitude = 0.0;
+
         if (requestCode == RESULT_OK) {
             if (resultCode == CAM_REQUEST) {
                 //Bundle extras = data.getExtras();
@@ -293,13 +323,8 @@ public class Home extends Activity   {
                 cameraImage.compress(Bitmap.CompressFormat.JPEG, 65, bos);
             }
         }
-
-        //Double latitude = 0.0;
-        //Double longitude = 0.0;
-
-
         //changeAddDescription(latitude,longitude);
-        if(resultCode == -1){
+        if (resultCode == -1) {
             changeAddDescription();
         }
     }
