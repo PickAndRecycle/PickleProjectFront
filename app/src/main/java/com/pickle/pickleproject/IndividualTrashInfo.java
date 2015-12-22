@@ -151,7 +151,7 @@ public class IndividualTrashInfo extends AppCompatActivity {
             object.addProperty("longitude",src.getLongitude());
             object.addProperty("report",src.isReport());
             object.addProperty("title",src.getTitle());
-            object.addProperty("trash_condition","");
+            object.addProperty("trash_condition",src.getCondition().toString());
             object.addProperty("size",src.getsize());
             return object;
         }
