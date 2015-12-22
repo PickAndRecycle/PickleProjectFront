@@ -137,7 +137,8 @@ public class UnusedGoodsDialog extends AppCompatActivity {
             public void onResponse(String response) {
                 Log.d("result", response);
                 loadingIcon.setVisibility(View.GONE);
-                finish();
+                //finish();
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
         },picture,map);

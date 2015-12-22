@@ -135,6 +135,8 @@ public class OtherTrashDialog extends AppCompatActivity {
             public void onResponse(String response) {
                 Log.d("result", response);
                 loadingIcon.setVisibility(View.GONE);
+                //finish();
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
         },picture,map);

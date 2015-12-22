@@ -68,7 +68,12 @@ public class TrashNotification extends AppCompatActivity{
 
     public void Home(){
         Intent home = new Intent(this,Home.class);
+        finish();
         startActivity(home);
+    }
+
+    public void onBackPressed(){
+        Home();
     }
 
 }
