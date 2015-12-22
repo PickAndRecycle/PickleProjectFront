@@ -29,7 +29,6 @@ import com.crashlytics.android.Crashlytics;
 
 import io.fabric.sdk.android.Fabric;
 
-import static com.pickle.pickleproject.R.id.action_settings;
 import static com.pickle.pickleproject.R.id.start_button;
 import static com.pickle.pickleproject.R.layout.activity_main;
 
@@ -110,19 +109,4 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }
