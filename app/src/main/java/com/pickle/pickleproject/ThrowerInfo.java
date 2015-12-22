@@ -42,7 +42,7 @@ public class ThrowerInfo extends AppCompatActivity implements Response.ErrorList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thrower_info);
 
-        Button back_button = (Button) findViewById(R.id.back_button);
+        MontserratButton back_button = (MontserratButton) findViewById(R.id.back_button);
 
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override

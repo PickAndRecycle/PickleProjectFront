@@ -1,226 +1,249 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_individual__trash__info"
-    tools:context="com.pickle.pickleproject.ThrowerInfo">
+    tools:context="com.pickle.pickleproject.ThrowerInfo"
+    android:orientation="vertical">
 
-    <RelativeLayout
-        android:orientation="vertical"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="#f1654c"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="false"
-        android:id="@+id/RelativeLayoutBackButton">
-
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="70dp"
-            android:text="@string/back"
-            android:id="@+id/back_button"
-            android:background="#00ffffff"
-            android:textSize="20sp"
-            android:textAlignment="inherit"
-            android:textColor="#ffffff"
-            android:layout_alignParentBottom="true" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_above="@+id/RelativeLayoutBackButton"
-        android:layout_alignLeft="@+id/RelativeLayoutBackButton"
-        android:layout_alignStart="@+id/RelativeLayoutBackButton"
-        android:dividerPadding="0dp"
-        android:background="#3E4651"
-        android:id="@+id/RelativeLayout2"
-        android:weightSum="1">
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/contentArea"
+        android:orientation="horizontal"
+        android:layout_weight="0.50">
 
         <RelativeLayout
-            android:layout_width="177.5dp"
-            android:layout_height="match_parent"
-            android:id="@+id/relativeLayout2">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="@string/call"
-                    android:id="@+id/call_button_text"
-                    android:textColor="#FFFFFF"
-                    android:layout_marginBottom="32dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true" />
-
-            </RelativeLayout>
-
-            <ImageButton
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:id="@+id/call_button"
-                android:src="@mipmap/phone"
-                android:background="@drawable/button"
-                android:backgroundTint="#16a09e"
-                android:tint="#ffffff"
-                android:layout_marginTop="33dp"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_toRightOf="@+id/relativeLayout2"
-            android:layout_toEndOf="@+id/relativeLayout2">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/getLocation"
-                android:id="@+id/get_location_text"
-                android:textColor="#FFFFFF"
-                android:layout_below="@+id/get_location_button"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="32dp" />
-
-            <ImageButton
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:id="@+id/get_location_button"
-                android:src="@mipmap/location"
-                android:background="@drawable/button"
-                android:backgroundTint="#2ea8ed"
-                android:tint="#ffffff"
-                android:layout_marginTop="33dp"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true" />
-
-        </RelativeLayout>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/RelativeLayout2">
-
-        <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:id="@+id/linearLayout9">
+            android:id="@+id/photoContent">
 
             <com.android.volley.toolbox.NetworkImageView
-                android:layout_width="190dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/imageContent" />
 
-        </LinearLayout>
+        </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:orientation="horizontal"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#d8d8d8"
+            android:background="@color/lightgray"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_weight="1"
             android:layout_toRightOf="@+id/linearLayout9"
-            android:layout_toEndOf="@+id/linearLayout9">
+            android:layout_toEndOf="@+id/linearLayout9"
+            android:id="@+id/detailsContent"
+            android:layout_gravity="center"
+            android:gravity="center">
+
+            <com.pickle.pickleproject.MontserratTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/title"
+                android:id="@+id/titleText"
+                android:textColor="@color/green"
+                android:textStyle="bold"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+
+            <com.pickle.pickleproject.MontserratTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Medium Text"
+                android:id="@+id/titleContent"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/titleText"
+                android:layout_centerHorizontal="true" />
+
+            <com.pickle.pickleproject.MontserratTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/description"
+                android:id="@+id/descriptionText"
+                android:textStyle="bold"
+                android:textColor="@color/green"
+                android:layout_below="@+id/titleContent"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp" />
+
+            <com.pickle.pickleproject.MontserratTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Medium Text"
+                android:id="@+id/descriptionContent"
+                android:layout_below="@+id/descriptionText"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp" />
+
+            <com.pickle.pickleproject.MontserratTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/Thrower"
+                android:id="@+id/throwerText"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/descriptionContent"
+                android:layout_centerHorizontal="true"
+                android:textStyle="bold"
+                android:textColor="@color/green" />
+
+            <com.pickle.pickleproject.MontserratTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Medium Text"
+                android:id="@+id/throwerContent"
+                android:layout_below="@+id/throwerText"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/RelativeLayoutBackButton"
+        android:layout_alignLeft="@+id/RelativeLayoutBackButton"
+        android:layout_alignStart="@+id/RelativeLayoutBackButton"
+        android:background="@color/darkgray"
+        android:id="@+id/callandlocationarea"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:id="@+id/callLayout"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp">
 
             <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-                <com.pickle.pickleproject.MontserratTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="@string/title"
-                    android:id="@+id/titleText"
-                    android:textColor="#00B5B5"
-                    android:textStyle="bold"
-                    android:layout_alignParentTop="true"
+                <ImageButton
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:id="@+id/call_button"
+                    android:background="@drawable/greenbutton"
+                    android:layout_centerVertical="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="21dp" />
+                    android:layout_weight="1"
+                    android:layout_marginTop="10dp" />
 
-                <com.pickle.pickleproject.MontserratTextView
+                <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Medium Text"
-                    android:id="@+id/titleContent"
-                    android:layout_marginTop="20dp"
-                    android:layout_below="@+id/titleText"
-                    android:layout_centerHorizontal="true" />
-
-                <com.pickle.pickleproject.MontserratTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="@string/description"
-                    android:id="@+id/descriptionText"
-                    android:textStyle="bold"
-                    android:textColor="#00B5B5"
-                    android:layout_below="@+id/titleContent"
+                    android:id="@+id/call_button_image"
+                    android:layout_weight="1"
+                    android:src="@mipmap/phone"
+                    android:background="@color/transparent"
+                    android:layout_centerVertical="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="44dp" />
-
-                <com.pickle.pickleproject.MontserratTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Medium Text"
-                    android:id="@+id/descriptionContent"
-                    android:layout_below="@+id/descriptionText"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="20dp" />
-
-                <com.pickle.pickleproject.MontserratTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="@string/Thrower"
-                    android:id="@+id/throwerText"
-                    android:layout_marginTop="39dp"
-                    android:layout_below="@+id/descriptionContent"
-                    android:layout_centerHorizontal="true"
-                    android:textStyle="bold"
-                    android:textColor="#00B5B5" />
-
-                <com.pickle.pickleproject.MontserratTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Medium Text"
-                    android:id="@+id/throwerContent"
-                    android:layout_below="@+id/throwerText"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="20dp" />
-
+                    android:tint="@color/white" />
             </RelativeLayout>
+
+            <com.pickle.pickleproject.MontserratTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/call"
+                android:id="@+id/call_button_text"
+                android:textColor="@color/white"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentTop="false"
+                android:layout_weight="1"
+                android:layout_marginBottom="10dp" />
 
         </LinearLayout>
 
-    </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:id="@+id/locationLayout"
+            android:layout_weight="1"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp">
 
-</RelativeLayout>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageButton
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:id="@+id/get_location_button"
+                    android:background="@drawable/bluebutton"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_weight="1"
+                    android:layout_marginTop="10dp" />
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageButton2"
+                    android:src="@mipmap/location"
+                    android:background="@color/transparent"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true" />
+            </RelativeLayout>
+
+            <com.pickle.pickleproject.MontserratTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/getLocation"
+                android:id="@+id/get_location_text"
+                android:textColor="@color/white"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:layout_alignParentBottom="true"
+                android:layout_weight="1"
+                android:layout_marginBottom="10dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:id="@+id/RelativeLayoutBackButton">
+
+        <com.pickle.pickleproject.MontserratButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/back"
+            android:id="@+id/back_button"
+            android:background="@color/red"
+            android:textSize="20sp"
+            android:textColor="#ffffff" />
+    </LinearLayout>
+
+</LinearLayout>
