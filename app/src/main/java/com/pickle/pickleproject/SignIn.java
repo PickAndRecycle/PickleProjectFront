@@ -200,10 +200,16 @@ public class SignIn extends AppCompatActivity implements GoogleApiClient.OnConne
                                         //TOAST
                                         Toast boom = new Toast(getApplicationContext());
                                         boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
-                                        boom.makeText(SignIn.this, "Invalid token", boom.LENGTH_SHORT).show();
+                                        boom.makeText(SignIn.this, "Invalid Token.", boom.LENGTH_SHORT).show();
                                     }
                                     break;
                                 }
+                            }
+                            if(!validator){
+                                //TOAST
+                                Toast boom = new Toast(getApplicationContext());
+                                boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
+                                boom.makeText(SignIn.this, "Invalid username or password.", boom.LENGTH_SHORT).show();
                             }
 
                         } catch (JSONException e) {
