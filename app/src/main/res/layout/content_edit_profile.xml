@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:id="@+id/ActionBar"
-        android:background="#3e4651">
+        android:background="@color/darkgray">
 
         <com.pickle.pickleproject.MontserratTextView
             android:layout_width="wrap_content"
@@ -19,7 +19,7 @@
             android:id="@+id/EditProfileText"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
-            android:textColor="#ffffff" />
+            android:textColor="@color/white" />
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -29,7 +29,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:src="@mipmap/backicon"
-            android:background="#00FFFFFF" />
+            android:background="@color/transparent" />
 
     </RelativeLayout>
 
@@ -39,8 +39,7 @@
         android:id="@+id/contentArea"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/ActionBar"
-        android:layout_above="@+id/menuButtonArea">
+        android:layout_below="@+id/ActionBar">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -60,14 +59,14 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginLeft="20dp"
                 android:layout_marginStart="39dp"
-                android:textColor="#00b5b5" />
+                android:textColor="@color/green" />
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
                 android:ems="10"
-                android:id="@+id/editText8"
+                android:id="@+id/usernameEditText"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
@@ -92,14 +91,14 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginLeft="20dp"
                 android:layout_marginStart="39dp"
-                android:textColor="#00b5b5" />
+                android:textColor="@color/green" />
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:ems="10"
-                android:id="@+id/editText9"
+                android:id="@+id/passwordEditText"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
@@ -125,14 +124,14 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginLeft="20dp"
                 android:layout_marginStart="39dp"
-                android:textColor="#00b5b5" />
+                android:textColor="@color/green" />
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
                 android:ems="10"
-                android:id="@+id/editText10"
+                android:id="@+id/emailEditText"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
@@ -159,14 +158,14 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginLeft="20dp"
                 android:layout_marginStart="39dp"
-                android:textColor="#00b5b5" />
+                android:textColor="@color/green" />
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="phone"
                 android:ems="10"
-                android:id="@+id/editText12"
+                android:id="@+id/phoneEditText"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
@@ -179,15 +178,23 @@
             android:layout_height="wrap_content"
             android:id="@+id/menuButtonArea"
             android:layout_alignParentEnd="false"
-            android:layout_alignParentBottom="true">
+            android:layout_alignParentBottom="true"
+            android:background="@color/green">
 
             <com.pickle.pickleproject.MontserratButton
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:text="@string/save"
                 android:id="@+id/saveButton"
-                android:background="#00b5b5"
-                android:textColor="#ffffff" />
+                android:background="@color/green"
+                android:textColor="@color/white" />
+
+            <ProgressBar
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/loadingBar"
+                android:layout_centerInParent="true" />
 
         </RelativeLayout>
     </RelativeLayout>

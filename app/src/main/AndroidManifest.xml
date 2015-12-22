@@ -223,8 +223,6 @@
         <activity
             android:name=".RegistrationSuccess"
             android:screenOrientation="portrait" />
-        <activity android:name=".EditGoogleProfile" >
-        </activity>
     </application>
 
 </manifest>

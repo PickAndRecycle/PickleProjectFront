@@ -74,11 +74,7 @@ public class ProfileActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             //TODO: GOOGLE.
-                            if(account.getGoogle()){
-                                changeEditGoogleProfile(account);
-                            }else{
                                 changeEditProfile(account);
-                            }
                         }
                     });
 
@@ -160,12 +156,6 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void changeEditProfile(Account account){
         Intent intent = new Intent(this, EditProfile.class);
-        intent.putExtra("object", account);
-        startActivity(intent);
-    }
-    //TODO: GOOGLE
-    private void changeEditGoogleProfile(Account account){
-        Intent intent = new Intent(this, EditGoogleProfile.class);
         intent.putExtra("object", account);
         startActivity(intent);
     }

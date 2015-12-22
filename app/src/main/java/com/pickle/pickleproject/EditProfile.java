@@ -9,6 +9,8 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -27,7 +29,14 @@ public class EditProfile extends AppCompatActivity {
 
     private Context context;
     private RequestQueue mQueue;
-    private Boolean validation;
+    private EditText username;
+    private EditText password;
+    private EditText email;
+    private EditText phone;
+    private ProgressBar loadingBar;
+    private Boolean googleEditProfile;
+    private RelativeLayout emailLayout;
+    private RelativeLayout passwordLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,17 +44,30 @@ public class EditProfile extends AppCompatActivity {
         setContentView(R.layout.activity_edit_profiles);
         final Account account = (Account) getIntent().getSerializableExtra("object");
 
-        final EditText username = (EditText) findViewById(R.id.editText8);
-        final EditText password = (EditText) findViewById(R.id.editText9);
-        final EditText email = (EditText) findViewById(R.id.editText10);
-        final EditText phone = (EditText) findViewById(R.id.editText12);
+        username = (EditText) findViewById(R.id.usernameEditText);
+        password = (EditText) findViewById(R.id.passwordEditText);
+        email = (EditText) findViewById(R.id.emailEditText);
+        phone = (EditText) findViewById(R.id.phoneEditText);
+
+        emailLayout = (RelativeLayout) findViewById(R.id.emailLayout);
+        passwordLayout = (RelativeLayout) findViewById(R.id.passwordLayout);
+
+        loadingBar = (ProgressBar) findViewById(R.id.loadingBar);
+        loadingBar.setVisibility(View.GONE);
+
+        googleEditProfile = account.getGoogle();
+
+        if(googleEditProfile){
+            emailLayout.setVisibility(View.GONE);
+            passwordLayout.setVisibility(View.GONE);
+        }
 
         username.setText(account.getUsername());
         password.setText(account.getPassword());
         email.setText(account.getEmail());
         phone.setText(account.getPhone_number());
 
-        MontserratButton saveButton = (MontserratButton) findViewById(R.id.saveButton);
+        final MontserratButton saveButton = (MontserratButton) findViewById(R.id.saveButton);
         ImageButton backIcon = (ImageButton) findViewById(R.id.backIcon);
 
         backIcon.setOnClickListener(new View.OnClickListener(){
@@ -68,6 +90,8 @@ public class EditProfile extends AppCompatActivity {
                     boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
                     boom.makeText(EditProfile.this, "please don't empty the box", boom.LENGTH_SHORT).show();
                 } else {
+                    loadingBar.setVisibility(View.VISIBLE);
+                    saveButton.setVisibility(View.GONE);
                     account.setUsername(username.getText().toString());
                     account.setPassword(password.getText().toString());
                     account.setEmail(email.getText().toString());
@@ -84,6 +108,8 @@ public class EditProfile extends AppCompatActivity {
                             public void onResponse(JSONObject response) {
                                 try {
                                     Log.d("result", response.getString("result"));
+                                    loadingBar.setVisibility(View.GONE);
+                                    changeProfile();
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -96,7 +122,7 @@ public class EditProfile extends AppCompatActivity {
                         });
                         jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
                         mQueue.add(jsonRequest);
-                        changeProfile();
+
 
                     } catch (JSONException e) {
                         e.printStackTrace();
