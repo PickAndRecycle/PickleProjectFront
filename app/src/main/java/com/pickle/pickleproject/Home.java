@@ -237,7 +237,9 @@ public class Home extends Activity   {
 
 
         //changeAddDescription(latitude,longitude);
-        changeAddDescription();
+        if(resultCode == -1){
+            changeAddDescription();
+        }
     }
 
     @Override

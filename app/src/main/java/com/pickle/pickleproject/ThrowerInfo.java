@@ -92,8 +92,7 @@ public class ThrowerInfo extends AppCompatActivity implements Response.ErrorList
     }
 
     private void changeBack() {
-        Intent intent = new Intent(this, Home.class);
-        startActivity(intent);
+        finish();
     }
 
     private void changeMap() {
