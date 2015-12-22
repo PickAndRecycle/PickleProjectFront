@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -34,6 +35,10 @@ public class ModifyRequestUnused extends AppCompatActivity {
 
     private Context context;
     private RequestQueue mQueue,aQueue;
+    private ProgressBar saveLoadingBar;
+    private ProgressBar deleteLoadingBar;
+    private Button saveButton;
+    private Button deleteButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,17 +47,23 @@ public class ModifyRequestUnused extends AppCompatActivity {
         context = this.getApplicationContext();
         final Trash trash = (Trash) getIntent().getSerializableExtra("object");
 
-        final EditText title = (EditText) findViewById(R.id.editText5);
-        final EditText description = (EditText) findViewById(R.id.editText7);
-        final Spinner spinner = (Spinner) findViewById(R.id.spinner2);
+        final EditText title = (EditText) findViewById(R.id.titleEditText);
+        final EditText description = (EditText) findViewById(R.id.descriptionUnusedEditText);
+        final Spinner spinner = (Spinner) findViewById(R.id.conditionSpinner);
 
         title.setText(trash.getTitle());
         description.setText(trash.getDesc());
 
 
-        Button saveButton = (Button) findViewById(R.id.saveButton);
+        saveButton = (Button) findViewById(R.id.saveButton);
         ImageButton backButton = (ImageButton) findViewById(R.id.backButton);
-        Button deleteButton = (Button) findViewById(R.id.deleteButton);
+        deleteButton = (Button) findViewById(R.id.deleteButton);
+
+        saveLoadingBar = (ProgressBar) findViewById(R.id.saveLoadingBar);
+        deleteLoadingBar = (ProgressBar) findViewById(R.id.deleteLoadingBar);
+
+        saveLoadingBar.setVisibility(View.GONE);
+        deleteLoadingBar.setVisibility(View.GONE);
 
         mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext()).getRequestQueue();
 
@@ -61,12 +72,14 @@ public class ModifyRequestUnused extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                saveLoadingBar.setVisibility(View.VISIBLE);
+                saveButton.setVisibility(View.GONE);
                 trash.setTitle(title.getText().toString());
                 trash.setDesc(description.getText().toString());
                 String conditionTrash = spinner.getSelectedItem().toString().toUpperCase();
-                if(conditionTrash.equals("LAYAK")){
+                if(conditionTrash.equals("LAYAK") || conditionTrash.equals("GOOD")){
                     conditionTrash = "GOOD";
-                } else if(conditionTrash.equals("TIDAK LAYAK")){
+                } else if(conditionTrash.equals("TIDAK LAYAK") || conditionTrash.equals("BAD")){
                     conditionTrash = "BAD";
                 } else{
                     conditionTrash = "NEW";
@@ -85,6 +98,8 @@ public class ModifyRequestUnused extends AppCompatActivity {
                         public void onResponse(JSONObject response) {
                             try {
                                 Log.d("result",response.getString("result"));
+                                saveLoadingBar.setVisibility(View.GONE);
+                                changeJar();
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -97,7 +112,6 @@ public class ModifyRequestUnused extends AppCompatActivity {
                     });
                     jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
                     mQueue.add(jsonRequest);
-                    changeJar();
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -122,6 +136,8 @@ public class ModifyRequestUnused extends AppCompatActivity {
 
     }
     private void delete(Trash trash){
+        deleteLoadingBar.setVisibility(View.VISIBLE);
+        deleteButton.setVisibility(View.GONE);
         aQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext()).getRequestQueue();
         final String url = "http://104.155.237.238:8080/trash/" + trash.getId();
         final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.DELETE, url, null, new Response.Listener<JSONObject>() {
@@ -129,6 +145,8 @@ public class ModifyRequestUnused extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 try {
                     Log.d("result", response.getString("result"));
+                    deleteLoadingBar.setVisibility(View.GONE);
+                    changeJar();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -141,7 +159,6 @@ public class ModifyRequestUnused extends AppCompatActivity {
         });
         jsonRequest.setRetryPolicy(new DefaultRetryPolicy(60000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         aQueue.add(jsonRequest);
-        changeJar();
     }
 
     private void goBack(){

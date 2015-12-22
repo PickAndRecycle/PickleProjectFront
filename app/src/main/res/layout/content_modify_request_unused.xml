@@ -11,8 +11,8 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:id="@+id/linearLayout5"
-        android:layout_above="@+id/linearLayout6"
+        android:id="@+id/TitleLayout"
+        android:layout_above="@+id/DescriptionUnusedLayout"
         >
 
         <com.pickle.pickleproject.MontserratTextView
@@ -20,10 +20,10 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/title"
-            android:id="@+id/textView12"
+            android:id="@+id/titleText"
             android:textSize="24dp"
             android:textColor="@color/green"
-            android:layout_above="@+id/editText5"
+            android:layout_above="@+id/titleEditText"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_marginLeft="10dp" />
@@ -31,7 +31,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:id="@+id/editText5"
+            android:id="@+id/titleEditText"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
@@ -44,42 +44,43 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:id="@+id/linearLayout6"
+        android:id="@+id/DescriptionUnusedLayout"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="20dp">
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:id="@+id/editText7"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="false"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp" />
 
         <com.pickle.pickleproject.MontserratTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/description"
-            android:id="@+id/textView13"
+            android:id="@+id/DescriptionUnusedText"
             android:textSize="24sp"
             android:textColor="@color/green"
-            android:layout_above="@+id/editText7"
+            android:layout_above="@+id/descriptionUnusedEditText"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_marginLeft="10dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:id="@+id/descriptionUnusedEditText"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="false"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp" />
+
     </RelativeLayout>
 
     <RelativeLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:id="@+id/linearLayout8"
-        android:layout_below="@+id/linearLayout6"
+        android:id="@+id/ConditionLayout"
+        android:layout_below="@+id/DescriptionUnusedLayout"
 
         android:layout_marginTop="25dp">
 
@@ -88,7 +89,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/condition"
-            android:id="@+id/textView16"
+            android:id="@+id/ConditionText"
             android:textSize="24sp"
             android:textColor="@color/green"
             android:layout_marginLeft="10dp" />
@@ -97,10 +98,10 @@
             android:entries="@array/condition"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/spinner2"
+            android:id="@+id/conditionSpinner"
             android:layout_weight="1"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/textView16"
+            android:layout_toRightOf="@+id/ConditionText"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp" />
 
@@ -112,38 +113,66 @@
         android:layout_height="70dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:id="@+id/ConfirmationLayout">
 
-        <com.pickle.pickleproject.MontserratButton
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="fill_parent"
-            android:text="@string/delete"
-            android:id="@+id/deleteButton"
-            android:textColor="@color/white"
-            android:background="@color/red"
-            android:layout_alignTop="@+id/saveButton"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="false"
-            android:layout_toLeftOf="@+id/saveButton"
-            android:layout_toStartOf="@+id/saveButton"
-            android:layout_weight="0.50"
-            android:textSize="18sp"
-            android:textAlignment="center"
-            android:gravity="center_vertical|center_horizontal" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:id="@+id/deleteLayout"
+            android:layout_weight="1">
 
-        <com.pickle.pickleproject.MontserratButton
+            <ProgressBar
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/deleteLoadingBar"
+                android:layout_centerInParent="true" />
+
+            <com.pickle.pickleproject.MontserratButton
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:text="@string/delete"
+                android:id="@+id/deleteButton"
+                android:textColor="@color/white"
+                android:background="@color/red"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="false"
+                android:textSize="18sp"
+                android:textAlignment="center"
+                android:gravity="center_vertical|center_horizontal" />
+        </RelativeLayout>
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="fill_parent"
-            android:text="@string/save"
-            android:id="@+id/saveButton"
-            android:textColor="@color/white"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_weight="1"
             android:background="@color/green"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:textSize="18sp"
-            android:layout_weight="0.50"
-            android:gravity="center_vertical|center_horizontal" />
+            android:id="@+id/saveLayout">
+
+            <ProgressBar
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/saveLoadingBar"
+                android:layout_centerInParent="true" />
+
+            <com.pickle.pickleproject.MontserratButton
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:text="@string/save"
+                android:id="@+id/saveButton"
+                android:textColor="@color/white"
+                android:background="@color/green"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:textSize="18sp"
+                android:gravity="center_vertical|center_horizontal" />
+        </RelativeLayout>
+
     </LinearLayout>
 
     <RelativeLayout
@@ -152,14 +181,15 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:background="@color/darkgray">
+        android:background="@color/darkgray"
+        android:id="@+id/ActionBarLayout">
 
         <com.pickle.pickleproject.MontserratTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/modify"
-            android:id="@+id/textView17"
+            android:id="@+id/ModifyText"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             android:textSize="24sp"
@@ -169,7 +199,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/backButton"
-            android:background="#00FFFFFF"
+            android:background="@color/transparent"
             android:src="@mipmap/backicon"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"

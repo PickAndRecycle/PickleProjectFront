@@ -159,7 +159,7 @@
         android:layout_height="80dp"
         android:orientation="vertical"
         android:layout_weight="0.1"
-        android:id="@+id/backButtonLayout">
+        android:id="@+id/deleteLayout">
 
         <com.pickle.pickleproject.MontserratButton
             android:layout_width="match_parent"
