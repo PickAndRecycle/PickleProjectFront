@@ -357,60 +357,57 @@ public class SignIn extends AppCompatActivity implements GoogleApiClient.OnConne
 
                                 String x = "secure id= " + getSecure_id + ", " + "username= " + getUsername + ", " + "email= " + getEmail;
 
-                                alreadySignIn = true;
-                                if(alreadySignIn) {
-                                    /*
+                                /*
                                     boom = new Toast(getApplicationContext());
                                     boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
                                     boom.makeText(SignInActivity.this, "AVAILABLE", boom.LENGTH_SHORT).show();
                                     */
-                                    //TOKEN FOR NOTIFICATION
-                                    SharedPreferences sharedPreferences =
-                                            PreferenceManager.getDefaultSharedPreferences(SignIn.this);
-                                    String token = sharedPreferences.getString(QuickstartPreferences.GCM_TOKEN, "");
-                                    Notification notification = new Notification(nameOnly, token);
-                                    GsonBuilder gsonBuilder2 = new GsonBuilder();
-                                    Gson gson2 = gsonBuilder.create();
-                                    String json2 = gson2.toJson(notification);
-                                    Log.d("notification", json2);
-                                    Log.d("PHONY: ", accountObj.getPhone_number());
+                                //TOKEN FOR NOTIFICATION
+                                SharedPreferences sharedPreferences =
+                                        PreferenceManager.getDefaultSharedPreferences(SignIn.this);
+                                String token = sharedPreferences.getString(QuickstartPreferences.GCM_TOKEN, "");
+                                Notification notification = new Notification(nameOnly, token);
+                                GsonBuilder gsonBuilder2 = new GsonBuilder();
+                                Gson gson2 = gsonBuilder.create();
+                                String json2 = gson2.toJson(notification);
+                                Log.d("notification", json2);
+                                Log.d("PHONY: ", accountObj.getPhone_number());
+                                alreadySignIn = true;
 
-                                    try {
-                                        CustomJSONObjectRequest jsonRequest2 = new CustomJSONObjectRequest(Request.Method.POST, url2, new JSONObject(json2), new Response.Listener<JSONObject>() {
-                                            @Override
-                                            public void onResponse(JSONObject response) {
-                                                try {
-                                                    String tokenId = response.getString("result");
-                                                    Log.d("notif_id", tokenId);
-                                                    SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-                                                    SharedPreferences.Editor editor = settings.edit();
-                                                    editor.putString("notifId", tokenId);
-                                                    editor.commit();
-                                                } catch (JSONException e) {
-                                                    e.printStackTrace();
-                                                }
-
-
+                                try {
+                                    CustomJSONObjectRequest jsonRequest2 = new CustomJSONObjectRequest(Request.Method.POST, url2, new JSONObject(json2), new Response.Listener<JSONObject>() {
+                                        @Override
+                                        public void onResponse(JSONObject response) {
+                                            try {
+                                                String tokenId = response.getString("result");
+                                                Log.d("notif_id", tokenId);
+                                                SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+                                                SharedPreferences.Editor editor = settings.edit();
+                                                editor.putString("notifId", tokenId);
+                                                editor.commit();
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
                                             }
-                                        }, new Response.ErrorListener() {
-                                            @Override
-                                            public void onErrorResponse(VolleyError error) {
-                                                Log.d("Error_Request2", error.toString());
-                                            }
-                                        });
-                                        mQueue.add(jsonRequest2);
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                    signOut();
-                                    //signIn();
-                                    if(accountObj.getPhone_number().isEmpty() || accountObj.getPhone_number()=="NULL"){
-                                        //changeEditProfile(accountObj);
-                                        changeEditGoogleProfile(accountObj);
-                                    }else{
-                                        toHome();
-                                    }
 
+
+                                        }
+                                    }, new Response.ErrorListener() {
+                                        @Override
+                                        public void onErrorResponse(VolleyError error) {
+                                            Log.d("Error_Request2", error.toString());
+                                        }
+                                    });
+                                    mQueue.add(jsonRequest2);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                signOut();
+                                //signIn();
+                                if(accountObj.getPhone_number().isEmpty() || accountObj.getPhone_number()=="NULL"){
+                                    //changeEditProfile(accountObj);
+                                    changeEditGoogleProfile(accountObj);
+                                }else{
+                                    toHome();
                                 }
                             }
                         }
