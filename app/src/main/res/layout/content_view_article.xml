@@ -12,7 +12,7 @@
         android:layout_height="80dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:background="#6C7A89"
+        android:background="@color/newsfeedgray"
         android:id="@+id/relativeLayout7"
         android:layout_alignParentStart="false">
 
@@ -25,14 +25,14 @@
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             android:textSize="24sp"
-            android:textColor="#FFFFFF" />
+            android:textColor="@color/white" />
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/backArticleButton"
             android:src="@mipmap/backicon"
-            android:background="#00ffffff"
+            android:background="@color/transparent"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
@@ -64,13 +64,13 @@
                 android:layout_width="300dp"
                 android:layout_height="180dp"
                 android:id="@+id/articlePhoto"
-                android:background="#00FFFFFF"
+                android:background="@color/transparent"
                 android:layout_below="@+id/articleTitle"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="25dp" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/loremipsum"

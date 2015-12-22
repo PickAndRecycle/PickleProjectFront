@@ -143,7 +143,9 @@ public class ModifyConfirmation extends AppCompatActivity {
 
         gsonBuilder.registerTypeAdapter(Trash.class, new TrashSerializer());
         Gson gson = gsonBuilder.create();
+        Log.d("statusDone",trash.getPickerUsername());
         String json = gson.toJson(trash);
+        Log.d("finalJson",json);
         try {
             final CustomJSONObjectRequest jsonRequest = new CustomJSONObjectRequest(Request.Method.PUT, url, new JSONObject(json), new Response.Listener<JSONObject>() {
                 @Override
@@ -211,6 +213,7 @@ public class ModifyConfirmation extends AppCompatActivity {
             object.addProperty("title",src.getTitle());
             object.addProperty("trash_condition","");
             object.addProperty("size",src.getsize());
+            object.addProperty("pickerUsername",src.getPickerUsername());
             return object;
         }
     }

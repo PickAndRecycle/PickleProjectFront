@@ -92,16 +92,17 @@ public class TabThrower extends Fragment implements Response.ErrorListener, Resp
                         if (Integer.parseInt(finalObject.getString("status")) == 0) {
                             Trashlist.add(0, trashObj);
                         } else if (Integer.parseInt(finalObject.getString("status")) == 1) {
-                            if (Trashlist.size() == 0 || Trashlist.get(Trashlist.size()-1).getStatus() == 0) {
+                            if (Trashlist.size() == 0 ) {
+                                Trashlist.add(trashObj);
+                            }
+                            else if( Trashlist.get(Trashlist.size()-1).getStatus() == 0 || Trashlist.get(Trashlist.size()-1).getStatus() == 1){
                                 Trashlist.add(trashObj);
                             }
                             else {
                                 for (int j = 0; j < Trashlist.size(); j++) {
                                     int status = Trashlist.get(j).getStatus();
-                                    if (status == 1 || status == 2) {
-                                        if (j > 1) {
-                                            Trashlist.add(j - 1, trashObj);
-                                        }
+                                    if (status == 2) {
+                                        Trashlist.add(j, trashObj);
                                         break;
                                     }
                                 }
@@ -113,6 +114,7 @@ public class TabThrower extends Fragment implements Response.ErrorListener, Resp
                     }
                 }
             }
+            Log.d("list",Trashlist.toString());
             final Trash[] trashArray = Trashlist.toArray(new Trash[0]);
             final PicklejarAdapter myAdapter=new PicklejarAdapter(getActivity().getApplicationContext(), R.layout.rowpicklejar, trashArray);
             final ListView myList = (ListView) getView().findViewById(R.id.unusedList);

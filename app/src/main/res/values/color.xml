@@ -8,4 +8,5 @@
     <color name = "transparent">#00FFFFFF</color>
     <color name = "black">#000000</color>
     <color name = "blackoverlay">#b1000000</color>
+    <color name = "newsfeedgray">#6C7A89</color>
 </resources>

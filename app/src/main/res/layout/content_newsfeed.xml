@@ -11,7 +11,7 @@
         android:layout_height="80dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:background="#6C7A89"
+        android:background="@color/newsfeedgray"
         android:id="@+id/relativeLayout8">
 
         <com.pickle.pickleproject.MontserratTextView
@@ -22,7 +22,7 @@
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             android:textSize="24sp"
-            android:textColor="#FFFFFF" />
+            android:textColor="@color/white" />
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -32,7 +32,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:src="@mipmap/forwardicon"
-            android:background="#00FFFFFF" />
+            android:background="@color/transparent" />
 
     </RelativeLayout>
 
