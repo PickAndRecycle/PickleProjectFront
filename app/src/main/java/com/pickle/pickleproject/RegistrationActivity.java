@@ -143,6 +143,7 @@ public class RegistrationActivity extends AppCompatActivity {
                         int emailCounter = 0;
                         int usernameCounter = 0;
 
+                        /*for (int i = 0; i <= parentArray.length(); i++)*/
                         for (int i = 0; i < parentArray.length(); i++) {
                             JSONObject finalObject = parentArray.getJSONObject(i);
                             Account accountObj;
