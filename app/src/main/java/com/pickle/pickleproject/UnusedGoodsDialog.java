@@ -80,13 +80,14 @@ public class UnusedGoodsDialog extends AppCompatActivity {
         intent.putExtra("title", titleForm.getText().toString());
         intent.putExtra("condition", condition);
         intent.putExtra("timestamp", currentTime);
-
+        /*
         //TOAST FOR DEBUGGING
         Bundle parseInfo = intent.getExtras();
 
         Toast boom = new Toast(getApplicationContext());
         boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
         boom.makeText(UnusedGoodsDialog.this, parseInfo.toString(), boom.LENGTH_SHORT).show();
+        */
 
         mQueue = CustomVolleyRequestQueue.getInstance(this.getApplicationContext()).getRequestQueue();
 

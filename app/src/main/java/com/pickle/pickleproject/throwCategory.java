@@ -72,11 +72,13 @@ public class ThrowCategory extends AppCompatActivity {
         intent.putExtras(getIntent().getExtras());
         intent.putExtra("categories", "Unused");
 
+        /*
         //TOAST FOR DEBUGGING
         Bundle parseInfo = intent.getExtras();
         Toast boom = new Toast(getApplicationContext());
         boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
         boom.makeText(ThrowCategory.this, parseInfo.toString(), boom.LENGTH_SHORT).show();
+        */
 
         startActivity(intent);
     }
@@ -86,13 +88,13 @@ public class ThrowCategory extends AppCompatActivity {
         Intent intent = new Intent(this, OtherTrashDialog.class);
         intent.putExtras(getIntent().getExtras());
         intent.putExtra("categories", "General");
-
+        /*
         //TOAST FOR DEBUGGING
         Bundle parseInfo = intent.getExtras();
         Toast boom = new Toast(getApplicationContext());
         boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
         boom.makeText(ThrowCategory.this, parseInfo.toString(), boom.LENGTH_SHORT).show();
-
+        */
         startActivity(intent);
     }
 
@@ -101,13 +103,13 @@ public class ThrowCategory extends AppCompatActivity {
         Intent intent = new Intent(this, OtherTrashDialog.class);
         intent.putExtras(getIntent().getExtras());
         intent.putExtra("categories", "Recycled");
-
+        /*
         //TOAST FOR DEBUGGING
         Bundle parseInfo = intent.getExtras();
         Toast boom = new Toast(getApplicationContext());
         boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
         boom.makeText(ThrowCategory.this, parseInfo.toString(), boom.LENGTH_SHORT).show();
-
+        */
         startActivity(intent);
     }
 
@@ -116,13 +118,13 @@ public class ThrowCategory extends AppCompatActivity {
         Intent intent = new Intent(this, OtherTrashDialog.class);
         intent.putExtras(getIntent().getExtras());
         intent.putExtra("categories", "Green");
-
+        /*
         //TOAST FOR DEBUGGING
         Bundle parseInfo = intent.getExtras();
         Toast boom = new Toast(getApplicationContext());
         boom.setGravity(Gravity.TOP | Gravity.LEFT, 0, 0);
         boom.makeText(ThrowCategory.this, parseInfo.toString(), boom.LENGTH_SHORT).show();
-
+        */
         startActivity(intent);
     }
 
