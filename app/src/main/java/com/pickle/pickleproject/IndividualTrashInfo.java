@@ -136,10 +136,11 @@ public class IndividualTrashInfo extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private class TrashSerializer implements JsonSerializer<Trash> {
+        private class TrashSerializer implements JsonSerializer<Trash> {
         @Override
         public JsonElement serialize(Trash src, Type typeOfSrc, JsonSerializationContext context) {
             JsonObject object = new JsonObject();
+            String condition;
             object.addProperty("id",src.getId());
             object.addProperty("categories",src.getCategories().toString());
             object.addProperty("username",src.getUsername());
@@ -151,7 +152,12 @@ public class IndividualTrashInfo extends AppCompatActivity {
             object.addProperty("longitude",src.getLongitude());
             object.addProperty("report",src.isReport());
             object.addProperty("title",src.getTitle());
-            object.addProperty("trash_condition",src.getCondition().toString());
+            if(src.getCondition() == null){
+                condition = "";
+            } else {
+                condition = src.getCondition().toString();
+            }
+            object.addProperty("trash_condition",condition);
             object.addProperty("size",src.getsize());
             return object;
         }
